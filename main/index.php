@@ -1,4 +1,11 @@
 <?php
-    require_once 'Controllers/WebsiteCompiler.php';
+    require_once 'Controllers/Controllers.php';
 
-    $website = new WebsiteCompiler('Galileo controle financeiro', 'Usuário', 'index');
+    $loginController = new LoginController();
+
+    if($loginController->isLogged()){
+        $website = new WebsiteCompiler('Galileo controle financeiro', 'Usuário', 'index');
+    } else {
+        $loginController->goToLogin();
+    }
+
