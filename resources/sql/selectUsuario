@@ -1,0 +1,12 @@
+SELECT * 
+FROM usuario 
+INNER JOIN pessoa 
+ON pessoa.id = usuario.id_pessoa
+INNER JOIN cidade 
+ON pessoa.cod_cidade = cidade.codigo_ibge
+INNER JOIN estado
+ON cidade.codigo_uf_estado = estado.codigo_uf
+INNER JOIN email
+ON email.id_pessoa = pessoa.id
+INNER JOIN telefone
+ON telefone.id_pessoa = pessoa.id
