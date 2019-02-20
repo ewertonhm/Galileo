@@ -1,6018 +1,5630 @@
---
--- Estrutura da tabela "pais"
---
 
-DROP TABLE IF EXISTS "pais" CASCADE;
-CREATE TABLE pais (
-                    id       bigserial NOT NULL,
-                    nome     varchar(60),
-                    nome_pt  varchar(60),
-                    iso2     varchar(2),
-                    iso3     varchar(3),
-                    bacen    integer,
-  /* Keys */
-                    CONSTRAINT pais_pkey
-                      PRIMARY KEY (id)
+CREATE TABLE estado(
+                      codigo_uf INT NOT NULL PRIMARY KEY,
+                      uf VARCHAR(2) NOT NULL,
+                      nome VARCHAR(100) NOT NULL
 );
 
-COMMENT ON TABLE pais
-  IS 'Países e Nações';
 
-COMMENT ON COLUMN pais.iso2
-  IS 'ISO 3166-1 Alpha2';
 
-COMMENT ON COLUMN pais.iso3
-  IS 'ISO 3166-1 Alpha3';
+INSERT INTO "estado"(codigo_uf,uf,nome) VALUES
+(11, 'RO', 'Rondônia'),
+(12, 'AC', 'Acre'),
+(13, 'AM', 'Amazonas'),
+(14, 'RR', 'Roraima'),
+(15, 'PA', 'Pará'),
+(16, 'AP', 'Amapá'),
+(17, 'TO', 'Tocantins'),
+(21, 'MA', 'Maranhão'),
+(22, 'PI', 'Piauí'),
+(23, 'CE', 'Ceará'),
+(24, 'RN', 'Rio Grande do Norte'),
+(25, 'PB', 'Paraíba'),
+(26, 'PE', 'Pernambuco'),
+(27, 'AL', 'Alagoas'),
+(28, 'SE', 'Sergipe'),
+(29, 'BA', 'Bahia'),
+(31, 'MG', 'Minas Gerais'),
+(32, 'ES', 'Espírito Santo'),
+(33, 'RJ', 'Rio de Janeiro'),
+(35, 'SP', 'São Paulo'),
+(41, 'PR', 'Paraná'),
+(42, 'SC', 'Santa Catarina'),
+(43, 'RS', 'Rio Grande do Sul'),
+(50, 'MS', 'Mato Grosso do Sul'),
+(51, 'MT', 'Mato Grosso'),
+(52, 'GO', 'Goiás'),
+(53, 'DF', 'Distrito Federal');
 
---
--- Inserindo dados na tabela "pais"
---
-
-INSERT INTO "pais" (id, nome, nome_pt, iso2, bacen) VALUES
-(1, 'Brazil', 'Brasil', 'BR', 1058),
-(2, 'Afghanistan', 'Afeganistão', 'AF', 132),
-(3, 'Albania', 'Albânia, Republica da', 'AL', 175),
-(4, 'Algeria', 'Argélia', 'DZ', 590),
-(5, 'American Samoa', 'Samoa Americana', 'AS', 6912),
-(6, 'Andorra', 'Andorra', 'AD', 370),
-(7, 'Angola', 'Angola', 'AO', 400),
-(8, 'Anguilla', 'Anguilla', 'AI', 418),
-(9, 'Antarctica', 'Antártida', 'AQ', 3596),
-(10, 'Antigua and Barbuda', 'Antigua e Barbuda', 'AG', 434),
-(11, 'Argentina', 'Argentina', 'AR', 639),
-(12, 'Armenia', 'Armênia, Republica da', 'AM', 647),
-(13, 'Aruba', 'Aruba', 'AW', 655),
-(14, 'Australia', 'Austrália', 'AU', 698),
-(15, 'Austria', 'Áustria', 'AT', 728),
-(16, 'Azerbaijan', 'Azerbaijão, Republica do', 'AZ', 736),
-(17, 'Bahamas', 'Bahamas, Ilhas', 'BS', 779),
-(18, 'Bahrain', 'Bahrein, Ilhas', 'BH', 809),
-(19, 'Bangladesh', 'Bangladesh', 'BD', 817),
-(20, 'Barbados', 'Barbados', 'BB', 833),
-(21, 'Belarus', 'Belarus, Republica da', 'BY', 850),
-(22, 'Belgium', 'Bélgica', 'BE', 876),
-(23, 'Belize', 'Belize', 'BZ', 884),
-(24, 'Benin', 'Benin', 'BJ', 2291),
-(25, 'Bermuda', 'Bermudas', 'BM', 906),
-(26, 'Bhutan', 'Butão', 'BT', 1198),
-(27, 'Bolivia', 'Bolívia', 'BO', 973),
-(28, 'Bosnia and Herzegowina', 'Bósnia-herzegovina (Republica da)', 'BA', 981),
-(29, 'Botswana', 'Botsuana', 'BW', 1015),
-(30, 'Bouvet Island', 'Ilha Bouvet', 'BV', 1023),
-(31, 'British Indian Ocean Territory', 'Território Britânico do Oceano Indico', 'IO', 7820),
-(32, 'Brunei Darussalam', 'Brunei', 'BN', 1082),
-(33, 'Bulgaria', 'Bulgária, Republica da', 'BG', 1112),
-(34, 'Burkina Faso', 'Burkina Faso', 'BF', 310),
-(35, 'Burundi', 'Burundi', 'BI', 1155),
-(36, 'Cambodia', 'Camboja', 'KH', 1414),
-(37, 'Cameroon', 'Camarões', 'CM', 1457),
-(38, 'Canada', 'Canada', 'CA', 1490),
-(39, 'Cape Verde', 'Cabo Verde, Republica de', 'CV', 1279),
-(40, 'Cayman Islands', 'Cayman, Ilhas', 'KY', 1376),
-(41, 'Central African Republic', 'Republica Centro-Africana', 'CF', 6408),
-(42, 'Chad', 'Chade', 'TD', 7889),
-(43, 'Chile', 'Chile', 'CL', 1589),
-(44, 'China', 'China, Republica Popular', 'CN', 1600),
-(45, 'Christmas Island', 'Christmas, Ilha (Navidad)', 'CX', 5118),
-(46, 'Cocos (Keeling) Islands', 'Cocos (Keeling), Ilhas', 'CC', 1651),
-(47, 'Colombia', 'Colômbia', 'CO', 1694),
-(48, 'Comoros', 'Comores, Ilhas', 'KM', 1732),
-(49, 'Congo', 'Congo', 'CG', 1775),
-(50, 'Congo, the Democratic Republic of the', 'Congo, Republica Democrática do', 'CD', 8885),
-(51, 'Cook Islands', 'Cook, Ilhas', 'CK', 1830),
-(52, 'Costa Rica', 'Costa Rica', 'CR', 1961),
-(53, 'Cote d`Ivoire', 'Costa do Marfim', 'CI', 1937),
-(54, 'Croatia (Hrvatska)', 'Croácia (Republica da)', 'HR', 1953),
-(55, 'Cuba', 'Cuba', 'CU', 1996),
-(56, 'Cyprus', 'Chipre', 'CY', 1635),
-(57, 'Czech Republic', 'Tcheca, Republica', 'CZ', 7919),
-(58, 'Denmark', 'Dinamarca', 'DK', 2321),
-(59, 'Djibouti', 'Djibuti', 'DJ', 7838),
-(60, 'Dominica', 'Dominica, Ilha', 'DM', 2356),
-(61, 'Dominican Republic', 'Republica Dominicana', 'DO', 6475),
-(62, 'East Timor', 'Timor Leste', 'TL', 7951),
-(63, 'Ecuador', 'Equador', 'EC', 2399),
-(64, 'Egypt', 'Egito', 'EG', 2402),
-(65, 'El Salvador', 'El Salvador', 'SV', 6874),
-(66, 'Equatorial Guinea', 'Guine-Equatorial', 'GQ', 3310),
-(67, 'Eritrea', 'Eritreia', 'ER', 2437),
-(68, 'Estonia', 'Estônia, Republica da', 'EE', 2518),
-(69, 'Ethiopia', 'Etiópia', 'ET', 2534),
-(70, 'Falkland Islands (Malvinas)', 'Falkland (Ilhas Malvinas)', 'FK', 2550),
-(71, 'Faroe Islands', 'Feroe, Ilhas', 'FO', 2593),
-(72, 'Fiji', 'Fiji', 'FJ', 8702),
-(73, 'Finland', 'Finlândia', 'FI', 2712),
-(74, 'France', 'Franca', 'FR', 2755),
-(76, 'French Guiana', 'Guiana francesa', 'GF', 3255),
-(77, 'French Polynesia', 'Polinésia Francesa', 'PF', 5991),
-(78, 'French Southern Territories', 'Terras Austrais e Antárticas Francesas', 'TF', 3607),
-(79, 'Gabon', 'Gabão', 'GA', 2810),
-(80, 'Gambia', 'Gambia', 'GM', 2852),
-(81, 'Georgia', 'Georgia, Republica da', 'GE', 2917),
-(82, 'Germany', 'Alemanha', 'DE', 230),
-(83, 'Ghana', 'Gana', 'GH', 2895),
-(84, 'Gibraltar', 'Gibraltar', 'GI', 2933),
-(85, 'Greece', 'Grécia', 'GR', 3018),
-(86, 'Greenland', 'Groenlândia', 'GL', 3050),
-(87, 'Grenada', 'Granada', 'GD', 2976),
-(88, 'Guadeloupe', 'Guadalupe', 'GP', 3093),
-(89, 'Guam', 'Guam', 'GU', 3131),
-(90, 'Guatemala', 'Guatemala', 'GT', 3174),
-(91, 'Guinea', 'Guine', 'GN', 3298),
-(92, 'Guinea-Bissau', 'Guine-Bissau', 'GW', 3344),
-(93, 'Guyana', 'Guiana', 'GY', 3379),
-(94, 'Haiti', 'Haiti', 'HT', 3417),
-(95, 'Heard and Mc Donald Islands', 'Ilha Heard e Ilhas McDonald', 'HM', 3603),
-(96, 'Holy See (Vatican City State)', 'Vaticano, Estado da Cidade do', 'VA', 8486),
-(97, 'Honduras', 'Honduras', 'HN', 3450),
-(98, 'Hong Kong', 'Hong Kong', 'HK', 3514),
-(99, 'Hungary', 'Hungria, Republica da', 'HU', 3557),
-(100, 'Iceland', 'Islândia', 'IS', 3794),
-(101, 'India', 'Índia', 'IN', 3611),
-(102, 'Indonesia', 'Indonésia', 'ID', 3654),
-(103, 'Iran (Islamic Republic of)', 'Ira, Republica Islâmica do', 'IR', 3727),
-(104, 'Iraq', 'Iraque', 'IQ', 3697),
-(105, 'Ireland', 'Irlanda', 'IE', 3751),
-(106, 'Israel', 'Israel', 'IL', 3832),
-(107, 'Italy', 'Itália', 'IT', 3867),
-(108, 'Jamaica', 'Jamaica', 'JM', 3913),
-(109, 'Japan', 'Japão', 'JP', 3999),
-(110, 'Jordan', 'Jordânia', 'JO', 4030),
-(111, 'Kazakhstan', 'Cazaquistão, Republica do', 'KZ', 1538),
-(112, 'Kenya', 'Quênia', 'KE', 6238),
-(113, 'Kiribati', 'Kiribati', 'KI', 4111),
-(114, 'Korea, Democratic People`s Republic of', 'Coreia, Republica Popular Democrática da', 'KP', 1872),
-(115, 'Korea, Republic of', 'Coreia, Republica da', 'KR', 1902),
-(116, 'Kuwait', 'Kuwait', 'KW', 1988),
-(117, 'Kyrgyzstan', 'Quirguiz, Republica', 'KG', 6254),
-(118, 'Lao People`s Democratic Republic', 'Laos, Republica Popular Democrática do', 'LA', 4200),
-(119, 'Latvia', 'Letônia, Republica da', 'LV', 4278),
-(120, 'Lebanon', 'Líbano', 'LB', 4316),
-(121, 'Lesotho', 'Lesoto', 'LS', 4260),
-(122, 'Liberia', 'Libéria', 'LR', 4340),
-(123, 'Libyan Arab Jamahiriya', 'Líbia', 'LY', 4383),
-(124, 'Liechtenstein', 'Liechtenstein', 'LI', 4405),
-(125, 'Lithuania', 'Lituânia, Republica da', 'LT', 4421),
-(126, 'Luxembourg', 'Luxemburgo', 'LU', 4456),
-(127, 'Macau', 'Macau', 'MO', 4472),
-(128, 'Macedonia, The Former Yugoslav Republic of', 'Macedônia, Antiga Republica Iugoslava', 'MK', 4499),
-(129, 'Madagascar', 'Madagascar', 'MG', 4502),
-(130, 'Malawi', 'Malavi', 'MW', 4588),
-(131, 'Malaysia', 'Malásia', 'MY', 4553),
-(132, 'Maldives', 'Maldivas', 'MV', 4618),
-(133, 'Mali', 'Mali', 'ML', 4642),
-(134, 'Malta', 'Malta', 'MT', 4677),
-(135, 'Marshall Islands', 'Marshall, Ilhas', 'MH', 4766),
-(136, 'Martinique', 'Martinica', 'MQ', 4774),
-(137, 'Mauritania', 'Mauritânia', 'MR', 4880),
-(138, 'Mauritius', 'Mauricio', 'MU', 4855),
-(139, 'Mayotte', 'Mayotte (Ilhas Francesas)', 'YT', 4898),
-(140, 'Mexico', 'México', 'MX', 4936),
-(141, 'Micronesia, Federated States of', 'Micronesia', 'FM', 4995),
-(142, 'Moldova, Republic of', 'Moldávia, Republica da', 'MD', 4944),
-(143, 'Monaco', 'Mônaco', 'MC', 4952),
-(144, 'Mongolia', 'Mongólia', 'MN', 4979),
-(145, 'Montserrat', 'Montserrat, Ilhas', 'MS', 5010),
-(146, 'Morocco', 'Marrocos', 'MA', 4740),
-(147, 'Mozambique', 'Moçambique', 'MZ', 5053),
-(148, 'Myanmar', 'Mianmar (Birmânia)', 'MM', 930),
-(149, 'Namibia', 'Namíbia', 'NA', 5070),
-(150, 'Nauru', 'Nauru', 'NR', 5088),
-(151, 'Nepal', 'Nepal', 'NP', 5177),
-(152, 'Netherlands', 'Países Baixos (Holanda)', 'NL', 5738),
-(154, 'New Caledonia', 'Nova Caledonia', 'NC', 5428),
-(155, 'New Zealand', 'Nova Zelândia', 'NZ', 5487),
-(156, 'Nicaragua', 'Nicarágua', 'NI', 5215),
-(157, 'Niger', 'Níger', 'NE', 5258),
-(158, 'Nigeria', 'Nigéria', 'NG', 5282),
-(159, 'Niue', 'Niue, Ilha', 'NU', 5312),
-(160, 'Norfolk Island', 'Norfolk, Ilha', 'NF', 5355),
-(161, 'Northern Mariana Islands', 'Marianas do Norte', 'MP', 4723),
-(162, 'Norway', 'Noruega', 'NO', 5380),
-(163, 'Oman', 'Oma', 'OM', 5568),
-(164, 'Pakistan', 'Paquistão', 'PK', 5762),
-(165, 'Palau', 'Palau', 'PW', 5754),
-(166, 'Panama', 'Panamá', 'PA', 5800),
-(167, 'Papua New Guinea', 'Papua Nova Guine', 'PG', 5452),
-(168, 'Paraguay', 'Paraguai', 'PY', 5860),
-(169, 'Peru', 'Peru', 'PE', 5894),
-(170, 'Philippines', 'Filipinas', 'PH', 2674),
-(171, 'Pitcairn', 'Pitcairn, Ilha', 'PN', 5932),
-(172, 'Poland', 'Polônia, Republica da', 'PL', 6033),
-(173, 'Portugal', 'Portugal', 'PT', 6076),
-(174, 'Puerto Rico', 'Porto Rico', 'PR', 6114),
-(175, 'Qatar', 'Catar', 'QA', 1546),
-(176, 'Reunion', 'Reunião, Ilha', 'RE', 6602),
-(177, 'Romania', 'Romênia', 'RO', 6700),
-(178, 'Russian Federation', 'Rússia, Federação da', 'RU', 6769),
-(179, 'Rwanda', 'Ruanda', 'RW', 6750),
-(180, 'Saint Kitts and Nevis', 'São Cristovão e Neves, Ilhas', 'KN', 6955),
-(181, 'Saint LUCIA', 'Santa Lucia', 'LC', 7153),
-(182, 'Saint Vincent and the Grenadines', 'São Vicente e Granadinas', 'VC', 7056),
-(183, 'Samoa', 'Samoa', 'WS', 6904),
-(184, 'San Marino', 'San Marino', 'SM', 6971),
-(185, 'Sao Tome and Principe', 'São Tome e Príncipe, Ilhas', 'ST', 7200),
-(186, 'Saudi Arabia', 'Arábia Saudita', 'SA', 531),
-(187, 'Senegal', 'Senegal', 'SN', 7285),
-(188, 'Seychelles', 'Seychelles', 'SC', 7315),
-(189, 'Sierra Leone', 'Serra Leoa', 'SL', 7358),
-(190, 'Singapore', 'Cingapura', 'SG', 7412),
-(191, 'Slovakia (Slovak Republic)', 'Eslovaca, Republica', 'SK', 2470),
-(192, 'Slovenia', 'Eslovênia, Republica da', 'SI', 2461),
-(193, 'Solomon Islands', 'Salomão, Ilhas', 'SB', 6777),
-(194, 'Somalia', 'Somalia', 'SO', 7480),
-(195, 'South Africa', 'África do Sul', 'ZA', 7560),
-(196, 'South Georgia and the South Sandwich Islands', 'Ilhas Geórgia do Sul e Sandwich do Sul', 'GS', 2925),
-(197, 'Spain', 'Espanha', 'ES', 2453),
-(198, 'Sri Lanka', 'Sri Lanka', 'LK', 7501),
-(199, 'St. Helena', 'Santa Helena', 'SH', 7102),
-(200, 'St. Pierre and Miquelon', 'São Pedro e Miquelon', 'PM', 7005),
-(201, 'Sudan', 'Sudão', 'SD', 7595),
-(202, 'Suriname', 'Suriname', 'SR', 7706),
-(203, 'Svalbard and Jan Mayen Islands', 'Svalbard e Jan Mayen', 'SJ', 7552),
-(204, 'Swaziland', 'Suazilândia', 'SZ', 7544),
-(205, 'Sweden', 'Suécia', 'SE', 7641),
-(206, 'Switzerland', 'Suíça', 'CH', 7676),
-(207, 'Syrian Arab Republic', 'Síria, Republica Árabe da', 'SY', 7447),
-(208, 'Taiwan, Province of China', 'Formosa (Taiwan)', 'TW', 1619),
-(209, 'Tajikistan', 'Tadjiquistao, Republica do', 'TJ', 7722),
-(210, 'Tanzania, United Republic of', 'Tanzânia, Republica Unida da', 'TZ', 7803),
-(211, 'Thailand', 'Tailândia', 'TH', 7765),
-(212, 'Togo', 'Togo', 'TG', 8001),
-(213, 'Tokelau', 'Toquelau, Ilhas', 'TK', 8052),
-(214, 'Tonga', 'Tonga', 'TO', 8109),
-(215, 'Trinidad and Tobago', 'Trinidad e Tobago', 'TT', 8150),
-(216, 'Tunisia', 'Tunísia', 'TN', 8206),
-(217, 'Turkey', 'Turquia', 'TR', 8273),
-(218, 'Turkmenistan', 'Turcomenistão, Republica do', 'TM', 8249),
-(219, 'Turks and Caicos Islands', 'Turcas e Caicos, Ilhas', 'TC', 8230),
-(220, 'Tuvalu', 'Tuvalu', 'TV', 8281),
-(221, 'Uganda', 'Uganda', 'UG', 8338),
-(222, 'Ukraine', 'Ucrânia', 'UA', 8311),
-(223, 'United Arab Emirates', 'Emirados Árabes Unidos', 'AE', 2445),
-(224, 'United Kingdom', 'Reino Unido', 'GB', 6289),
-(225, 'United States', 'Estados Unidos', 'US', 2496),
-(226, 'United States Minor Outlying Islands', 'Ilhas Menores Distantes dos Estados Unidos', 'UM', 18664),
-(227, 'Uruguay', 'Uruguai', 'UY', 8451),
-(228, 'Uzbekistan', 'Uzbequistão, Republica do', 'UZ', 8478),
-(229, 'Vanuatu', 'Vanuatu', 'VU', 5517),
-(230, 'Venezuela', 'Venezuela', 'VE', 8508),
-(231, 'Viet Nam', 'Vietnã', 'VN', 8583),
-(232, 'Virgin Islands (British)', 'Virgens, Ilhas (Britânicas)', 'VG', 8630),
-(233, 'Virgin Islands (U.S.)', 'Virgens, Ilhas (E.U.A.)', 'VI', 8664),
-(234, 'Wallis and Futuna Islands', 'Wallis e Futuna, Ilhas', 'WF', 8753),
-(235, 'Western Sahara', 'Saara Ocidental', 'EH', 6858),
-(236, 'Yemen', 'Iémen', 'YE', 3573),
-(237, 'Yugoslavia', 'Iugoslávia, República Fed. da', 'YU', 3883),
-(238, 'Zambia', 'Zâmbia', 'ZM', 8907),
-(239, 'Zimbabwe', 'Zimbabue', 'ZW', 6653),
-(240, 'Bailiwick of Guernsey', 'Guernsey, Ilha do Canal (Inclui Alderney e Sark)', 'GG', 3212),
-(241, 'Bailiwick of Jersey', 'Jersey, Ilha do Canal', 'JE', 3930),
-(243, 'Isle of Man', 'Man, Ilha de', 'IM', 3595),
-(246, 'Crna Gora (Montenegro)', 'Montenegro', 'ME', 4985),
-(247, 'SÉRVIA', 'Republika Srbija', 'RS', 7370),
-(248, 'Republic of South Sudan', 'Sudao do Sul', 'SS', 7600),
-(249, 'Zona del Canal de Panamá', 'Zona do Canal do Panamá', NULL, 8958),
-(252, 'Dawlat Filasṭīn', 'Palestina', 'PS', 5780),
-(253, 'Åland Islands', 'Ilhas de Aland', 'AX', 153),
-(254, 'Saint Barthélemy', 'Coletividade de São Bartolomeu', 'BL', 3598),
-(255, 'Curaçao', 'Curaçao', 'CW', 2003),
-(256, 'Saint Martin', 'Ilha de São Martinho (França)', 'SM', 6980),
-(258, 'Bonaire', 'Bonaire', 'AN', 990),
-(259, 'Antartica', 'Antartica', 'AQ', 420),
-(260, 'Heard Island and McDonald Islands', 'Ilha Herad e Ilhas Macdonald', 'AU', 3433),
-(261, 'Collectivité de Saint-Barthélemy', 'Colectividade de São Bartolomeu', 'FR', 6939),
-(262, 'Saint Martin', 'Ilha de São Martinho (Países Baixos)', 'SM', 6998),
-(263, 'Territoire des Terres australes et antarctiques françaises', 'Território das Terras Austrais e Antárcticas Francesas', 'TF', 7811);
-
-ALTER SEQUENCE pais_id_seq
-  RESTART 263;
-
---
--- Estrutura da tabela "estado"
---
-
-DROP TABLE estado CASCADE;
-
-CREATE TABLE estado (
-                      id     bigserial NOT NULL,
-                      nome   varchar(60),
-                      uf  varchar(2),
-                      ibge   integer,
-                      id_pais   integer,
-                      ddd    json,
-  /* Keys */
-                      CONSTRAINT estado_pkey
-                        PRIMARY KEY (id)
+CREATE TABLE cidade(
+                         codigo_ibge INT NOT NULL PRIMARY KEY,
+                         nome VARCHAR(100) NOT NULL,
+                         latitude FLOAT(8) NOT NULL,
+                         longitude FLOAT(8) NOT NULL,
+                         capital BOOLEAN NOT NULL,
+                         codigo_uf_estado INT NOT NULL REFERENCES estado(codigo_uf)
 );
 
-COMMENT ON TABLE estado
-  IS 'Unidades Federativas';
---
--- Inserindo dados na tabela "estado"
---
+INSERT INTO "cidade" (codigo_ibge, nome, latitude, longitude, capital, codigo_uf_estado) VALUES
+(5200050, 'Abadia de Goiás', -16.7573, -49.4412, FALSE, 52),
+(3100104, 'Abadia dos Dourados', -18.4831, -47.3916, FALSE, 31),
+(5200100, 'Abadiânia', -16.197, -48.7057, FALSE, 52),
+(3100203, 'Abaeté', -19.1551, -45.4444, FALSE, 31),
+(1500107, 'Abaetetuba', -1.72183, -48.8788, FALSE, 15),
+(2300101, 'Abaiara', -7.34588, -39.0416, FALSE, 23),
+(2900108, 'Abaíra', -13.2488, -41.6619, FALSE, 29),
+(2900207, 'Abaré', -8.72073, -39.1162, FALSE, 29),
+(4100103, 'Abatiá', -23.3049, -50.3133, FALSE, 41),
+(4200051, 'Abdon Batista', -27.6126, -51.0233, FALSE, 42),
+(1500131, 'Abel Figueiredo', -4.95333, -48.3933, FALSE, 15),
+(4200101, 'Abelardo Luz', -26.5716, -52.3229, FALSE, 42),
+(3100302, 'Abre Campo', -20.2996, -42.4743, FALSE, 31),
+(2600054, 'Abreu e Lima', -7.90072, -34.8984, FALSE, 26),
+(1700251, 'Abreulândia', -9.62101, -49.1518, FALSE, 17),
+(3100401, 'Acaiaca', -20.359, -43.1439, FALSE, 31),
+(2100055, 'Açailândia', -4.94714, -47.5004, FALSE, 21),
+(2900306, 'Acajutiba', -11.6575, -38.0197, FALSE, 29),
+(1500206, 'Acará', -1.95383, -48.1985, FALSE, 15),
+(2300150, 'Acarape', -4.22083, -38.7055, FALSE, 23),
+(2300200, 'Acaraú', -2.88769, -40.1183, FALSE, 23),
+(2400109, 'Acari', -6.4282, -36.6347, FALSE, 24),
+(2200053, 'Acauã', -8.21954, -41.0831, FALSE, 22),
+(4300034, 'Aceguá', -31.8665, -54.1615, FALSE, 43),
+(2300309, 'Acopiara', -6.08911, -39.448, FALSE, 23),
+(5100102, 'Acorizal', -15.194, -56.3632, FALSE, 51),
+(1200013, 'Acrelândia', -9.82581, -66.8972, FALSE, 12),
+(5200134, 'Acreúna', -17.396, -50.3749, FALSE, 52),
+(2400208, 'Açu', -5.58362, -36.914, FALSE, 24),
+(3100500, 'Açucena', -19.0671, -42.5419, FALSE, 31),
+(3500105, 'Adamantina', -21.682, -51.0737, FALSE, 35),
+(5200159, 'Adelândia', -16.4127, -50.1657, FALSE, 52),
+(3500204, 'Adolfo', -21.2325, -49.6451, FALSE, 35),
+(4100202, 'Adrianópolis', -24.6606, -48.9922, FALSE, 41),
+(2900355, 'Adustina', -10.5437, -38.1113, FALSE, 29),
+(2600104, 'Afogados da Ingazeira', -7.74312, -37.631, FALSE, 26),
+(2400307, 'Afonso Bezerra', -5.49229, -36.5075, FALSE, 24),
+(3200102, 'Afonso Cláudio', -20.0778, -41.1261, FALSE, 32),
+(2100105, 'Afonso Cunha', -4.13631, -43.3275, FALSE, 21),
+(2600203, 'Afrânio', -8.51136, -41.0095, FALSE, 26),
+(1500305, 'Afuá', -0.154874, -50.3861, FALSE, 15),
+(2600302, 'Agrestina', -8.45966, -35.9447, FALSE, 26),
+(2200103, 'Agricolândia', -5.79676, -42.6664, FALSE, 22),
+(4200200, 'Agrolândia', -27.4087, -49.822, FALSE, 42),
+(4200309, 'Agronômica', -27.2662, -49.708, FALSE, 42),
+(1500347, 'Água Azul do Norte', -6.79053, -50.4791, FALSE, 15),
+(3100609, 'Água Boa', -17.9914, -42.3806, FALSE, 31),
+(5100201, 'Água Boa', -14.051, -52.1601, FALSE, 51),
+(2200202, 'Água Branca', -5.88856, -42.637, FALSE, 22),
+(2500106, 'Água Branca', -7.51144, -37.6357, FALSE, 25),
+(2700102, 'Água Branca', -9.262, -37.938, FALSE, 27),
+(5000203, 'Água Clara', -20.4452, -52.879, FALSE, 50),
+(3100708, 'Água Comprida', -20.0576, -48.1069, FALSE, 31),
+(4200408, 'Água Doce', -26.9985, -51.5528, FALSE, 42),
+(2100154, 'Água Doce do Maranhão', -2.84048, -42.1189, FALSE, 21),
+(3200169, 'Água Doce do Norte', -18.5482, -40.9854, FALSE, 32),
+(2900405, 'Água Fria', -11.8618, -38.7639, FALSE, 29),
+(5200175, 'Água Fria de Goiás', -14.9778, -47.7823, FALSE, 52),
+(5200209, 'Água Limpa', -18.0771, -48.7603, FALSE, 52),
+(2400406, 'Água Nova', -6.20351, -38.2941, FALSE, 24),
+(2600401, 'Água Preta', -8.70609, -35.5263, FALSE, 26),
+(4300059, 'Água Santa', -28.1672, -52.031, FALSE, 43),
+(3500303, 'Aguaí', -22.0572, -46.9735, FALSE, 35),
+(3100807, 'Aguanil', -20.9439, -45.3915, FALSE, 31),
+(2600500, 'Águas Belas', -9.11125, -37.1226, FALSE, 26),
+(3500402, 'Águas da Prata', -21.9319, -46.7176, FALSE, 35),
+(4200507, 'Águas de Chapecó', -27.0754, -52.9808, FALSE, 42),
+(3500501, 'Águas de Lindóia', -22.4733, -46.6314, FALSE, 35),
+(3500550, 'Águas de Santa Bárbara', -22.8812, -49.2421, FALSE, 35),
+(3500600, 'Águas de São Pedro', -22.5977, -47.8734, FALSE, 35),
+(3100906, 'Águas Formosas', -17.0802, -40.9384, FALSE, 31),
+(4200556, 'Águas Frias', -26.8794, -52.8568, FALSE, 42),
+(5200258, 'Águas Lindas de Goiás', -15.7617, -48.2816, FALSE, 52),
+(4200606, 'Águas Mornas', -27.6963, -48.8243, FALSE, 42),
+(3101003, 'Águas Vermelhas', -15.7431, -41.4571, FALSE, 31),
+(4300109, 'Agudo', -29.6447, -53.2515, FALSE, 43),
+(3500709, 'Agudos', -22.4694, -48.9863, FALSE, 35),
+(4100301, 'Agudos do Sul', -25.9899, -49.3343, FALSE, 41),
+(3200136, 'Águia Branca', -18.9846, -40.7437, FALSE, 32),
+(2500205, 'Aguiar', -7.0918, -38.1681, FALSE, 25),
+(1700301, 'Aguiarnópolis', -6.55409, -47.4702, FALSE, 17),
+(3101102, 'Aimorés', -19.5007, -41.0746, FALSE, 31),
+(2900603, 'Aiquara', -14.1269, -39.8937, FALSE, 29),
+(2300408, 'Aiuaba', -6.57122, -40.1178, FALSE, 23),
+(3101201, 'Aiuruoca', -21.9736, -44.6042, FALSE, 31),
+(4300208, 'Ajuricaba', -28.2342, -53.7757, FALSE, 43),
+(3101300, 'Alagoa', -22.171, -44.6413, FALSE, 31),
+(2500304, 'Alagoa Grande', -7.03943, -35.6206, FALSE, 25),
+(2500403, 'Alagoa Nova', -7.05377, -35.7591, FALSE, 25),
+(2500502, 'Alagoinha', -6.94657, -35.5332, FALSE, 25),
+(2600609, 'Alagoinha', -8.4665, -36.7788, FALSE, 26),
+(2200251, 'Alagoinha do Piauí', -7.00039, -40.9282, FALSE, 22),
+(2900702, 'Alagoinhas', -12.1335, -38.4208, FALSE, 29),
+(3500758, 'Alambari', -23.5503, -47.898, FALSE, 35),
+(3101409, 'Albertina', -22.2018, -46.6139, FALSE, 31),
+(2100204, 'Alcântara', -2.39574, -44.4062, FALSE, 21),
+(2300507, 'Alcântaras', -3.58537, -40.5479, FALSE, 23),
+(2500536, 'Alcantil', -7.73668, -36.0511, FALSE, 25),
+(5000252, 'Alcinópolis', -18.3255, -53.7042, FALSE, 50),
+(2900801, 'Alcobaça', -17.5195, -39.2036, FALSE, 29),
+(2100303, 'Aldeias Altas', -4.62621, -43.4689, FALSE, 21),
+(4300307, 'Alecrim', -27.6579, -54.7649, FALSE, 43),
+(3200201, 'Alegre', -20.758, -41.5382, FALSE, 32),
+(4300406, 'Alegrete', -29.7902, -55.7949, FALSE, 43),
+(2200277, 'Alegrete do Piauí', -7.24196, -40.8566, FALSE, 22),
+(4300455, 'Alegria', -27.8345, -54.0557, FALSE, 43),
+(3101508, 'Além Paraíba', -21.8797, -42.7176, FALSE, 31),
+(1500404, 'Alenquer', -1.94623, -54.7384, FALSE, 15),
+(2400505, 'Alexandria', -6.40533, -38.0142, FALSE, 24),
+(5200308, 'Alexânia', -16.0834, -48.5076, FALSE, 52),
+(3101607, 'Alfenas', -21.4256, -45.9477, FALSE, 31),
+(3200300, 'Alfredo Chaves', -20.6396, -40.7543, FALSE, 32),
+(3500808, 'Alfredo Marcondes', -21.9527, -51.414, FALSE, 35),
+(3101631, 'Alfredo Vasconcelos', -21.1535, -43.7718, FALSE, 31),
+(4200705, 'Alfredo Wagner', -27.7001, -49.3273, FALSE, 42),
+(2500577, 'Algodão de Jandaíra', -6.89292, -36.0129, FALSE, 25),
+(2500601, 'Alhandra', -7.42977, -34.9057, FALSE, 25),
+(2600708, 'Aliança', -7.60398, -35.2227, FALSE, 26),
+(1700350, 'Aliança do Tocantins', -11.3056, -48.9361, FALSE, 17),
+(2900900, 'Almadina', -14.7089, -39.6415, FALSE, 29),
+(1700400, 'Almas', -11.5706, -47.1792, FALSE, 17),
+(1500503, 'Almeirim', -1.52904, -52.5788, FALSE, 15),
+(3101706, 'Almenara', -16.1785, -40.6942, FALSE, 31),
+(2400604, 'Almino Afonso', -6.1475, -37.7636, FALSE, 24),
+(4100400, 'Almirante Tamandaré', -25.3188, -49.3037, FALSE, 41),
+(4300471, 'Almirante Tamandaré do Sul', -28.1149, -52.9142, FALSE, 43),
+(5200506, 'Aloândia', -17.7292, -49.4769, FALSE, 52),
+(3101805, 'Alpercata', -18.974, -41.97, FALSE, 31),
+(4300505, 'Alpestre', -27.2502, -53.0341, FALSE, 43),
+(3101904, 'Alpinópolis', -20.8631, -46.3878, FALSE, 31),
+(5100250, 'Alta Floresta', -9.86674, -56.0867, FALSE, 51),
+(1100015, 'Alta Floresta D''Oeste', -11.9283, -61.9953, FALSE, 11),
+(3500907, 'Altair', -20.5242, -49.0571, FALSE, 35),
+(1500602, 'Altamira', -3.20407, -52.21, FALSE, 15),
+(2100402, 'Altamira do Maranhão', -4.16598, -45.4706, FALSE, 21),
+(4100459, 'Altamira do Paraná', -24.7983, -52.7128, FALSE, 41),
+(2300606, 'Altaneira', -6.99837, -39.7356, FALSE, 23),
+(3102001, 'Alterosa', -21.2488, -46.1387, FALSE, 31),
+(2600807, 'Altinho', -8.48482, -36.0644, FALSE, 26),
+(3501004, 'Altinópolis', -21.0214, -47.3712, FALSE, 35),
+(3501103, 'Alto Alegre', -21.5811, -50.168, FALSE, 35),
+(1400050, 'Alto Alegre', 2.98858, -61.3072, FALSE, 14),
+(4300554, 'Alto Alegre', -28.7769, -52.9893, FALSE, 43),
+(2100436, 'Alto Alegre do Maranhão', -4.213, -44.446, FALSE, 21),
+(2100477, 'Alto Alegre do Pindaré', -3.66689, -45.8421, FALSE, 21),
+(1100379, 'Alto Alegre dos Parecis', -12.132, -61.835, FALSE, 11),
+(5100300, 'Alto Araguaia', -17.3153, -53.2181, FALSE, 51),
+(4200754, 'Alto Bela Vista', -27.4333, -51.9044, FALSE, 42),
+(5100359, 'Alto Boa Vista', -11.6732, -51.3883, FALSE, 51),
+(3102050, 'Alto Caparaó', -20.431, -41.8738, FALSE, 31),
+(2400703, 'Alto do Rodrigues', -5.28186, -36.75, FALSE, 24),
+(4300570, 'Alto Feliz', -29.3919, -51.3123, FALSE, 43),
+(5100409, 'Alto Garças', -16.9462, -53.5272, FALSE, 51),
+(5200555, 'Alto Horizonte', -14.1978, -49.3378, FALSE, 52),
+(3153509, 'Alto Jequitibá', -20.4208, -41.967, FALSE, 31),
+(2200301, 'Alto Longá', -5.25634, -42.2096, FALSE, 22),
+(5100508, 'Alto Paraguai', -14.5137, -56.4776, FALSE, 51),
+(4128625, 'Alto Paraíso', -26.1146, -52.7469, FALSE, 41),
+(1100403, 'Alto Paraíso', -9.71429, -63.3188, FALSE, 11),
+(5200605, 'Alto Paraíso de Goiás', -14.1305, -47.51, FALSE, 52),
+(4100608, 'Alto Paraná', -23.1312, -52.3189, FALSE, 41),
+(2100501, 'Alto Parnaíba', -9.10273, -45.9303, FALSE, 21),
+(4100707, 'Alto Piquiri', -24.0224, -53.44, FALSE, 41),
+(3102100, 'Alto Rio Doce', -21.0281, -43.4067, FALSE, 31),
+(3200359, 'Alto Rio Novo', -19.0618, -41.0209, FALSE, 32),
+(2300705, 'Alto Santo', -5.50894, -38.2743, FALSE, 23),
+(5100607, 'Alto Taquari', -17.8241, -53.2792, FALSE, 51),
+(4100509, 'Altônia', -23.8759, -53.8958, FALSE, 41),
+(2200400, 'Altos', -5.03888, -42.4612, FALSE, 22),
+(3501152, 'Alumínio', -23.5306, -47.2546, FALSE, 35),
+(1300029, 'Alvarães', -3.22727, -64.8007, FALSE, 13),
+(3102209, 'Alvarenga', -19.4174, -41.7317, FALSE, 31),
+(3501202, 'Álvares Florence', -20.3203, -49.9141, FALSE, 35),
+(3501301, 'Álvares Machado', -22.0764, -51.4722, FALSE, 35),
+(3501400, 'Álvaro de Carvalho', -22.0841, -49.719, FALSE, 35),
+(3501509, 'Alvinlândia', -22.4435, -49.7623, FALSE, 35),
+(3102308, 'Alvinópolis', -20.1098, -43.0535, FALSE, 31),
+(1700707, 'Alvorada', -12.4785, -49.1249, FALSE, 17),
+(4300604, 'Alvorada', -29.9914, -51.0809, FALSE, 43),
+(1100346, 'Alvorada D''Oeste', -11.3463, -62.2847, FALSE, 11),
+(3102407, 'Alvorada de Minas', -18.7334, -43.3638, FALSE, 31),
+(2200459, 'Alvorada do Gurguéia', -8.42418, -43.777, FALSE, 22),
+(5200803, 'Alvorada do Norte', -14.4797, -46.491, FALSE, 52),
+(4100806, 'Alvorada do Sul', -22.7813, -51.2297, FALSE, 41),
+(1400027, 'Amajari', 3.64571, -61.3692, FALSE, 14),
+(5000609, 'Amambai', -23.1058, -55.2253, FALSE, 50),
+(1600105, 'Amapá', 2.05267, -50.7957, FALSE, 16),
+(2100550, 'Amapá do Maranhão', -1.67524, -46.0024, FALSE, 21),
+(4100905, 'Amaporã', -23.0943, -52.7866, FALSE, 41),
+(2600906, 'Amaraji', -8.37691, -35.4501, FALSE, 26),
+(4300638, 'Amaral Ferrador', -30.8756, -52.2509, FALSE, 43),
+(5200829, 'Amaralina', -13.9236, -49.2962, FALSE, 52),
+(2200509, 'Amarante', -6.24304, -42.8433, FALSE, 22),
+(2100600, 'Amarante do Maranhão', -5.56913, -46.7473, FALSE, 21),
+(2901007, 'Amargosa', -13.0215, -39.602, FALSE, 29),
+(1300060, 'Amaturá', -3.37455, -68.2005, FALSE, 13),
+(2901106, 'Amélia Rodrigues', -12.3914, -38.7563, FALSE, 29),
+(2901155, 'América Dourada', -11.4429, -41.439, FALSE, 29),
+(3501608, 'Americana', -22.7374, -47.3331, FALSE, 35),
+(5200852, 'Americano do Brasil', -16.2514, -49.9831, FALSE, 52),
+(3501707, 'Américo Brasiliense', -21.7288, -48.1147, FALSE, 35),
+(3501806, 'Américo de Campos', -20.2985, -49.7359, FALSE, 35),
+(4300646, 'Ametista do Sul', -27.3607, -53.183, FALSE, 43),
+(2300754, 'Amontada', -3.36017, -39.8288, FALSE, 23),
+(5200902, 'Amorinópolis', -16.6151, -51.0919, FALSE, 52),
+(2500734, 'Amparo', -7.55502, -37.0628, FALSE, 25),
+(3501905, 'Amparo', -22.7088, -46.772, FALSE, 35),
+(2800100, 'Amparo de São Francisco', -10.1348, -36.935, FALSE, 28),
+(3102506, 'Amparo do Serra', -20.5051, -42.8009, FALSE, 31),
+(4101002, 'Ampére', -25.9168, -53.4686, FALSE, 41),
+(2700201, 'Anadia', -9.68489, -36.3078, FALSE, 27),
+(2901205, 'Anagé', -14.6151, -41.1356, FALSE, 29),
+(4101051, 'Anahy', -24.6449, -53.1332, FALSE, 41),
+(1500701, 'Anajás', -0.996811, -49.9354, FALSE, 15),
+(2100709, 'Anajatuba', -3.26269, -44.6126, FALSE, 21),
+(3502002, 'Analândia', -22.1289, -47.6619, FALSE, 35),
+(1300086, 'Anamã', -3.56697, -61.3963, FALSE, 13),
+(1701002, 'Ananás', -6.36437, -48.0735, FALSE, 17),
+(1500800, 'Ananindeua', -1.36391, -48.3743, FALSE, 15),
+(5201108, 'Anápolis', -16.3281, -48.953, FALSE, 52),
+(1500859, 'Anapu', -3.46985, -51.2003, FALSE, 15),
+(2100808, 'Anapurus', -3.67577, -43.1014, FALSE, 21),
+(5000708, 'Anastácio', -20.4823, -55.8104, FALSE, 50),
+(5000807, 'Anaurilândia', -22.1852, -52.7191, FALSE, 50),
+(4200804, 'Anchieta', -26.5382, -53.3319, FALSE, 42),
+(3200409, 'Anchieta', -20.7955, -40.6425, FALSE, 32),
+(2901304, 'Andaraí', -12.8049, -41.3297, FALSE, 29),
+(4101101, 'Andirá', -23.0533, -50.2304, FALSE, 41),
+(2901353, 'Andorinha', -10.3482, -39.8391, FALSE, 29),
+(3102605, 'Andradas', -22.0695, -46.5724, FALSE, 31),
+(3502101, 'Andradina', -20.8948, -51.3786, FALSE, 35),
+(4300661, 'André da Rocha', -28.6283, -51.5797, FALSE, 43),
+(3102803, 'Andrelândia', -21.7411, -44.3117, FALSE, 31),
+(3502200, 'Angatuba', -23.4917, -48.4139, FALSE, 35),
+(3102852, 'Angelândia', -17.7279, -42.2641, FALSE, 31),
+(5000856, 'Angélica', -22.1527, -53.7708, FALSE, 50),
+(2601003, 'Angelim', -8.88429, -36.2902, FALSE, 26),
+(4200903, 'Angelina', -27.5704, -48.9879, FALSE, 42),
+(2901403, 'Angical', -12.0063, -44.7003, FALSE, 29),
+(2200608, 'Angical do Piauí', -6.08786, -42.74, FALSE, 22),
+(1701051, 'Angico', -6.39179, -47.8611, FALSE, 17),
+(2400802, 'Angicos', -5.65792, -36.6094, FALSE, 24),
+(3300100, 'Angra dos Reis', -23.0011, -44.3196, FALSE, 33),
+(2901502, 'Anguera', -12.1462, -39.2462, FALSE, 29),
+(4101150, 'Ângulo', -23.1946, -51.9154, FALSE, 41),
+(5201207, 'Anhanguera', -18.3339, -48.2204, FALSE, 52),
+(3502309, 'Anhembi', -22.793, -48.1336, FALSE, 35),
+(3502408, 'Anhumas', -22.2934, -51.3895, FALSE, 35),
+(5201306, 'Anicuns', -16.4642, -49.9617, FALSE, 52),
+(2200707, 'Anísio de Abreu', -9.18564, -43.0494, FALSE, 22),
+(4201000, 'Anita Garibaldi', -27.6897, -51.1271, FALSE, 42),
+(4201109, 'Anitápolis', -27.9012, -49.1316, FALSE, 42),
+(1300102, 'Anori', -3.74603, -61.6575, FALSE, 13),
+(4300703, 'Anta Gorda', -28.9698, -52.0102, FALSE, 43),
+(2901601, 'Antas', -10.3856, -38.3401, FALSE, 29),
+(4101200, 'Antonina', -25.4386, -48.7191, FALSE, 41),
+(2300804, 'Antonina do Norte', -6.76919, -39.987, FALSE, 23),
+(2200806, 'Antônio Almeida', -7.21276, -44.1889, FALSE, 22),
+(2901700, 'Antônio Cardoso', -12.4335, -39.1176, FALSE, 29),
+(4201208, 'Antônio Carlos', -27.5191, -48.766, FALSE, 42),
+(3102902, 'Antônio Carlos', -21.321, -43.7451, FALSE, 31),
+(3103009, 'Antônio Dias', -19.6491, -42.8732, FALSE, 31),
+(2901809, 'Antônio Gonçalves', -10.5767, -40.2785, FALSE, 29),
+(5000906, 'Antônio João', -22.1927, -55.9517, FALSE, 50),
+(2400901, 'Antônio Martins', -6.21367, -37.8834, FALSE, 24),
+(4101309, 'Antônio Olinto', -25.9804, -50.1972, FALSE, 41),
+(4300802, 'Antônio Prado', -28.8565, -51.2883, FALSE, 43),
+(3103108, 'Antônio Prado de Minas', -21.0192, -42.1109, FALSE, 31),
+(2500775, 'Aparecida', -6.78466, -38.0803, FALSE, 25),
+(3502507, 'Aparecida', -22.8495, -45.2325, FALSE, 35),
+(3502606, 'Aparecida d''Oeste', -20.4487, -50.8835, FALSE, 35),
+(5201405, 'Aparecida de Goiânia', -16.8198, -49.2469, FALSE, 52),
+(5201454, 'Aparecida do Rio Doce', -18.2941, -51.1516, FALSE, 52),
+(1701101, 'Aparecida do Rio Negro', -9.94139, -47.9638, FALSE, 17),
+(5001003, 'Aparecida do Taboado', -20.0873, -51.0961, FALSE, 50),
+(3300159, 'Aperibé', -21.6252, -42.1017, FALSE, 33),
+(3200508, 'Apiacá', -21.1523, -41.5693, FALSE, 32),
+(5100805, 'Apiacás', -9.53981, -57.4587, FALSE, 51),
+(3502705, 'Apiaí', -24.5108, -48.8443, FALSE, 35),
+(2100832, 'Apicum-Açu', -1.45862, -45.0864, FALSE, 21),
+(4201257, 'Apiúna', -27.0375, -49.3885, FALSE, 42),
+(2401008, 'Apodi', -5.65349, -37.7946, FALSE, 24),
+(2901908, 'Aporá', -11.6577, -38.0814, FALSE, 29),
+(5201504, 'Aporé', -18.9607, -51.9232, FALSE, 52),
+(2901957, 'Apuarema', -13.8542, -39.7501, FALSE, 29),
+(4101408, 'Apucarana', -23.55, -51.4635, FALSE, 41),
+(1300144, 'Apuí', -7.19409, -59.896, FALSE, 13),
+(2300903, 'Apuiarés', -3.94506, -39.4359, FALSE, 23),
+(2800209, 'Aquidabã', -10.278, -37.0148, FALSE, 28),
+(5001102, 'Aquidauana', -20.4666, -55.7868, FALSE, 50),
+(2301000, 'Aquiraz', -3.89929, -38.3896, FALSE, 23),
+(4201273, 'Arabutã', -27.1587, -52.1423, FALSE, 42),
+(2500809, 'Araçagi', -6.84374, -35.3737, FALSE, 25),
+(3103207, 'Araçaí', -19.1955, -44.2493, FALSE, 31),
+(2800308, 'Aracaju', -10.9091, -37.0677, TRUE, 28),
+(3502754, 'Araçariguama', -23.4366, -47.0608, FALSE, 35),
+(2902054, 'Araças', -12.22, -38.2027, FALSE, 29),
+(2301109, 'Aracati', -4.55826, -37.7679, FALSE, 23),
+(2902005, 'Aracatu', -14.428, -41.4648, FALSE, 29),
+(3502804, 'Araçatuba', -21.2076, -50.4401, FALSE, 35),
+(2902104, 'Araci', -11.3253, -38.9584, FALSE, 29),
+(3103306, 'Aracitaba', -21.3446, -43.3736, FALSE, 31),
+(2601052, 'Araçoiaba', -7.78391, -35.0809, FALSE, 26),
+(2301208, 'Aracoiaba', -4.36872, -38.8125, FALSE, 23),
+(3502903, 'Araçoiaba da Serra', -23.5029, -47.6166, FALSE, 35),
+(3200607, 'Aracruz', -19.82, -40.2764, FALSE, 32),
+(5201603, 'Araçu', -16.3563, -49.6804, FALSE, 52),
+(3103405, 'Araçuaí', -16.8523, -42.0637, FALSE, 31),
+(5201702, 'Aragarças', -15.8955, -52.2372, FALSE, 52),
+(5201801, 'Aragoiânia', -16.9087, -49.4476, FALSE, 52),
+(1701309, 'Aragominas', -7.16005, -48.5291, FALSE, 17),
+(1701903, 'Araguacema', -8.80755, -49.5569, FALSE, 17),
+(1702000, 'Araguaçu', -12.9289, -49.8231, FALSE, 17),
+(5101001, 'Araguaiana', -15.7291, -51.8341, FALSE, 51),
+(1702109, 'Araguaína', -7.19238, -48.2044, FALSE, 17),
+(5101209, 'Araguainha', -16.857, -53.0318, FALSE, 51),
+(1702158, 'Araguanã', -6.58225, -48.6395, FALSE, 17),
+(2100873, 'Araguanã', -2.94644, -45.6589, FALSE, 21),
+(5202155, 'Araguapaz', -15.0909, -50.6315, FALSE, 52),
+(3103504, 'Araguari', -18.6456, -48.1934, FALSE, 31),
+(1702208, 'Araguatins', -5.64659, -48.1232, FALSE, 17),
+(2100907, 'Araioses', -2.89091, -41.905, FALSE, 21),
+(5001243, 'Aral Moreira', -22.9385, -55.6334, FALSE, 50),
+(2902203, 'Aramari', -12.0884, -38.4969, FALSE, 29),
+(4300851, 'Arambaré', -30.9092, -51.5046, FALSE, 43),
+(2100956, 'Arame', -4.88347, -46.0032, FALSE, 21),
+(3503000, 'Aramina', -20.0882, -47.7873, FALSE, 35),
+(3503109, 'Arandu', -23.1386, -49.0487, FALSE, 35),
+(3103603, 'Arantina', -21.9102, -44.2555, FALSE, 31),
+(3503158, 'Arapeí', -22.6717, -44.4441, FALSE, 35),
+(2700300, 'Arapiraca', -9.75487, -36.6615, FALSE, 27),
+(1702307, 'Arapoema', -7.65463, -49.0637, FALSE, 17),
+(3103702, 'Araponga', -20.6686, -42.5178, FALSE, 31),
+(4101507, 'Arapongas', -23.4153, -51.4259, FALSE, 41),
+(3103751, 'Araporã', -18.4357, -49.1847, FALSE, 31),
+(4101606, 'Arapoti', -24.1548, -49.8285, FALSE, 41),
+(4101655, 'Arapuã', -24.3132, -51.7856, FALSE, 41),
+(3103801, 'Arapuá', -19.0268, -46.1484, FALSE, 31),
+(5101258, 'Araputanga', -15.4641, -58.3425, FALSE, 51),
+(4201307, 'Araquari', -26.3754, -48.7188, FALSE, 42),
+(2500908, 'Arara', -6.82813, -35.7552, FALSE, 25),
+(4201406, 'Araranguá', -28.9356, -49.4918, FALSE, 42),
+(3503208, 'Araraquara', -21.7845, -48.178, FALSE, 35),
+(3503307, 'Araras', -22.3572, -47.3842, FALSE, 35),
+(2301257, 'Ararendá', -4.74567, -40.831, FALSE, 23),
+(2101004, 'Arari', -3.45214, -44.7665, FALSE, 21),
+(4300877, 'Araricá', -29.6168, -50.9291, FALSE, 43),
+(2301307, 'Araripe', -7.21319, -40.1359, FALSE, 23),
+(2601102, 'Araripina', -7.57073, -40.494, FALSE, 26),
+(3300209, 'Araruama', -22.8697, -42.3326, FALSE, 33),
+(4101705, 'Araruna', -23.9315, -52.5021, FALSE, 41),
+(2501005, 'Araruna', -6.54848, -35.7498, FALSE, 25),
+(2902252, 'Arataca', -15.2651, -39.419, FALSE, 29),
+(4300901, 'Aratiba', -27.3978, -52.2975, FALSE, 43),
+(2301406, 'Aratuba', -4.41229, -39.0471, FALSE, 23),
+(2902302, 'Aratuípe', -13.0716, -39.0038, FALSE, 29),
+(2800407, 'Arauá', -11.2614, -37.6201, FALSE, 28),
+(4101804, 'Araucária', -25.5859, -49.4047, FALSE, 41),
+(3103900, 'Araújos', -19.9405, -45.1671, FALSE, 31),
+(3104007, 'Araxá', -19.5902, -46.9438, FALSE, 31),
+(3104106, 'Arceburgo', -21.359, -46.9401, FALSE, 31),
+(3503356, 'Arco-Íris', -21.7728, -50.466, FALSE, 35),
+(3104205, 'Arcos', -20.2863, -45.5373, FALSE, 31),
+(2601201, 'Arcoverde', -8.41519, -37.0577, FALSE, 26),
+(3104304, 'Areado', -21.3572, -46.1421, FALSE, 31),
+(3300225, 'Areal', -22.2283, -43.1118, FALSE, 33),
+(3503406, 'Arealva', -22.031, -48.9135, FALSE, 35),
+(2501104, 'Areia', -6.96396, -35.6977, FALSE, 25),
+(2401107, 'Areia Branca', -4.95254, -37.1252, FALSE, 24),
+(2800506, 'Areia Branca', -10.758, -37.3251, FALSE, 28),
+(2501153, 'Areia de Baraúnas', -7.11702, -36.9404, FALSE, 25),
+(2501203, 'Areial', -7.04789, -35.9313, FALSE, 25),
+(3503505, 'Areias', -22.5786, -44.6992, FALSE, 35),
+(3503604, 'Areiópolis', -22.6672, -48.6681, FALSE, 35),
+(5101308, 'Arenápolis', -14.4472, -56.8437, FALSE, 51),
+(5202353, 'Arenópolis', -16.3837, -51.5563, FALSE, 52),
+(2401206, 'Arês', -6.18831, -35.1608, FALSE, 24),
+(3104403, 'Argirita', -21.6083, -42.8292, FALSE, 31),
+(3104452, 'Aricanduva', -17.8666, -42.5533, FALSE, 31),
+(3104502, 'Arinos', -15.9187, -46.1043, FALSE, 31),
+(5101407, 'Aripuanã', -10.1723, -59.4568, FALSE, 51),
+(1100023, 'Ariquemes', -9.90571, -63.0325, FALSE, 11),
+(3503703, 'Ariranha', -21.1872, -48.7904, FALSE, 35),
+(4101853, 'Ariranha do Ivaí', -24.3857, -51.5839, FALSE, 41),
+(3300233, 'Armação dos Búzios', -22.7528, -41.8846, FALSE, 33),
+(4201505, 'Armazém', -28.2448, -49.0215, FALSE, 42),
+(2301505, 'Arneiroz', -6.3165, -40.1653, FALSE, 23),
+(2200905, 'Aroazes', -6.11022, -41.7822, FALSE, 22),
+(2501302, 'Aroeiras', -7.54473, -35.7066, FALSE, 25),
+(2200954, 'Aroeiras do Itaim', -7.24502, -41.5325, FALSE, 22),
+(2201002, 'Arraial', -6.65075, -42.5418, FALSE, 22),
+(3300258, 'Arraial do Cabo', -22.9774, -42.0267, FALSE, 33),
+(1702406, 'Arraias', -12.9287, -46.9359, FALSE, 17),
+(4301008, 'Arroio do Meio', -29.4014, -51.9557, FALSE, 43),
+(4301073, 'Arroio do Padre', -31.4389, -52.4246, FALSE, 43),
+(4301057, 'Arroio do Sal', -29.5439, -49.8895, FALSE, 43),
+(4301206, 'Arroio do Tigre', -29.3348, -53.0966, FALSE, 43),
+(4301107, 'Arroio dos Ratos', -30.0875, -51.7275, FALSE, 43),
+(4301305, 'Arroio Grande', -32.2327, -53.0862, FALSE, 43),
+(4201604, 'Arroio Trinta', -26.9257, -51.3407, FALSE, 42),
+(3503802, 'Artur Nogueira', -22.5727, -47.1727, FALSE, 35),
+(5202502, 'Aruanã', -14.9166, -51.075, FALSE, 52),
+(3503901, 'Arujá', -23.3965, -46.32, FALSE, 35),
+(4201653, 'Arvoredo', -27.0748, -52.4543, FALSE, 42),
+(4301404, 'Arvorezinha', -28.8737, -52.1781, FALSE, 43),
+(4201703, 'Ascurra', -26.9548, -49.3783, FALSE, 42),
+(3503950, 'Aspásia', -20.16, -50.728, FALSE, 35),
+(4101903, 'Assaí', -23.3697, -50.8459, FALSE, 41),
+(2301604, 'Assaré', -6.8669, -39.8689, FALSE, 23),
+(3504008, 'Assis', -22.66, -50.4183, FALSE, 35),
+(1200054, 'Assis Brasil', -10.9298, -69.5738, FALSE, 12),
+(4102000, 'Assis Chateaubriand', -24.4168, -53.5213, FALSE, 41),
+(2501351, 'Assunção', -7.07231, -36.725, FALSE, 25),
+(2201051, 'Assunção do Piauí', -5.865, -41.0389, FALSE, 22),
+(3104601, 'Astolfo Dutra', -21.3184, -42.8572, FALSE, 31),
+(4102109, 'Astorga', -23.2318, -51.6668, FALSE, 41),
+(4102208, 'Atalaia', -23.1517, -52.0551, FALSE, 41),
+(2700409, 'Atalaia', -9.5119, -36.0086, FALSE, 27),
+(1300201, 'Atalaia do Norte', -4.37055, -70.1967, FALSE, 13),
+(4201802, 'Atalanta', -27.4219, -49.7789, FALSE, 42),
+(3104700, 'Ataléia', -18.0438, -41.1149, FALSE, 31),
+(3504107, 'Atibaia', -23.1171, -46.5563, FALSE, 35),
+(3200706, 'Atilio Vivacqua', -20.913, -41.1986, FALSE, 32),
+(1702554, 'Augustinópolis', -5.46863, -47.8863, FALSE, 17),
+(1500909, 'Augusto Corrêa', -1.05109, -46.6147, FALSE, 15),
+(3104809, 'Augusto de Lima', -18.0997, -44.2655, FALSE, 31),
+(4301503, 'Augusto Pestana', -28.5172, -53.9883, FALSE, 43),
+(2401305, 'Augusto Severo (Campo Grande)', -5.86206, -37.3135, FALSE, 24),
+(4301552, 'Áurea', -27.6936, -52.0505, FALSE, 43),
+(2902401, 'Aurelino Leal', -14.321, -39.329, FALSE, 29),
+(3504206, 'Auriflama', -20.6836, -50.5572, FALSE, 35),
+(5202601, 'Aurilândia', -16.6773, -50.4641, FALSE, 52),
+(2301703, 'Aurora', -6.93349, -38.9742, FALSE, 23),
+(4201901, 'Aurora', -27.3098, -49.6295, FALSE, 42),
+(1500958, 'Aurora do Pará', -2.14898, -47.5677, FALSE, 15),
+(1702703, 'Aurora do Tocantins', -12.7105, -46.4076, FALSE, 17),
+(1300300, 'Autazes', -3.58574, -59.1256, FALSE, 13),
+(3504305, 'Avaí', -22.1514, -49.3356, FALSE, 35),
+(3504404, 'Avanhandava', -21.4584, -49.9509, FALSE, 35),
+(3504503, 'Avaré', -23.1067, -48.9251, FALSE, 35),
+(1501006, 'Aveiro', -3.60841, -55.3199, FALSE, 15),
+(2201101, 'Avelino Lopes', -10.1345, -43.9563, FALSE, 22),
+(5202809, 'Avelinópolis', -16.4672, -49.7579, FALSE, 52),
+(2101103, 'Axixá', -2.83939, -44.062, FALSE, 21),
+(1702901, 'Axixá do Tocantins', -5.61275, -47.7701, FALSE, 17),
+(1703008, 'Babaçulândia', -7.20923, -47.7613, FALSE, 17),
+(2101202, 'Bacabal', -4.22447, -44.7832, FALSE, 21),
+(2101251, 'Bacabeira', -2.96452, -44.3164, FALSE, 21),
+(2101301, 'Bacuri', -1.6965, -45.1328, FALSE, 21),
+(2101350, 'Bacurituba', -2.71, -44.7329, FALSE, 21),
+(3504602, 'Bady Bassitt', -20.9197, -49.4385, FALSE, 35),
+(3104908, 'Baependi', -21.957, -44.8874, FALSE, 31),
+(4301602, 'Bagé', -31.3297, -54.0999, FALSE, 43),
+(1501105, 'Bagre', -1.90057, -50.1987, FALSE, 15),
+(2501401, 'Baía da Traição', -6.69209, -34.9381, FALSE, 25),
+(2401404, 'Baía Formosa', -6.37161, -35.0033, FALSE, 24),
+(2902500, 'Baianópolis', -12.3016, -44.5388, FALSE, 29),
+(1501204, 'Baião', -2.79021, -49.6694, FALSE, 15),
+(2902609, 'Baixa Grande', -11.9519, -40.169, FALSE, 29),
+(2201150, 'Baixa Grande do Ribeiro', -7.84903, -45.219, FALSE, 22),
+(2301802, 'Baixio', -6.71945, -38.7134, FALSE, 23),
+(3200805, 'Baixo Guandu', -19.5213, -41.0109, FALSE, 32),
+(3504701, 'Balbinos', -21.8963, -49.3619, FALSE, 35),
+(3105004, 'Baldim', -19.2832, -43.9613, FALSE, 31),
+(5203104, 'Baliza', -16.1966, -52.5393, FALSE, 52),
+(4201950, 'Balneário Arroio do Silva', -28.9806, -49.4237, FALSE, 42),
+(4202057, 'Balneário Barra do Sul', -26.4597, -48.6123, FALSE, 42),
+(4202008, 'Balneário Camboriú', -26.9926, -48.6352, FALSE, 42),
+(4202073, 'Balneário Gaivota', -29.1527, -49.5841, FALSE, 42),
+(4212809, 'Balneário Piçarras', -26.7639, -48.6717, FALSE, 42),
+(4301636, 'Balneário Pinhal', -30.2419, -50.2337, FALSE, 43),
+(4220000, 'Balneário Rincão', -28.8314, -49.2352, FALSE, 42),
+(4102307, 'Balsa Nova', -25.5804, -49.6291, FALSE, 41),
+(3504800, 'Bálsamo', -20.7348, -49.5865, FALSE, 35),
+(2101400, 'Balsas', -7.53214, -46.0372, FALSE, 21),
+(3105103, 'Bambuí', -20.0166, -45.9754, FALSE, 31),
+(2301851, 'Banabuiú', -5.30454, -38.9132, FALSE, 23),
+(3504909, 'Bananal', -22.6819, -44.3281, FALSE, 35),
+(2501500, 'Bananeiras', -6.74775, -35.6246, FALSE, 25),
+(3105202, 'Bandeira', -15.8783, -40.5622, FALSE, 31),
+(3105301, 'Bandeira do Sul', -21.7308, -46.3833, FALSE, 31),
+(4202081, 'Bandeirante', -26.7705, -53.6413, FALSE, 42),
+(5001508, 'Bandeirantes', -19.9275, -54.3585, FALSE, 50),
+(4102406, 'Bandeirantes', -23.1078, -50.3704, FALSE, 41),
+(1703057, 'Bandeirantes do Tocantins', -7.75612, -48.5836, FALSE, 17),
+(1501253, 'Bannach', -7.34779, -50.3959, FALSE, 15),
+(2902658, 'Banzaê', -10.5788, -38.6212, FALSE, 29),
+(4301651, 'Barão', -29.3725, -51.4949, FALSE, 43),
+(3505005, 'Barão de Antonina', -23.6284, -49.5634, FALSE, 35),
+(3105400, 'Barão de Cocais', -19.9389, -43.4755, FALSE, 31),
+(4301701, 'Barão de Cotegipe', -27.6208, -52.3798, FALSE, 43),
+(2101509, 'Barão de Grajaú', -6.74463, -43.0261, FALSE, 21),
+(5101605, 'Barão de Melgaço', -16.2067, -55.9623, FALSE, 51),
+(3105509, 'Barão de Monte Alto', -21.2444, -42.2372, FALSE, 31),
+(4301750, 'Barão do Triunfo', -30.3891, -51.7384, FALSE, 43),
+(2401453, 'Baraúna', -5.06977, -37.6129, FALSE, 24),
+(2501534, 'Baraúna', -6.63484, -36.2601, FALSE, 25),
+(3105608, 'Barbacena', -21.2214, -43.7703, FALSE, 31),
+(2301901, 'Barbalha', -7.2982, -39.3021, FALSE, 23),
+(3505104, 'Barbosa', -21.2657, -49.9518, FALSE, 35),
+(4102505, 'Barbosa Ferraz', -24.0334, -52.004, FALSE, 41),
+(1501303, 'Barcarena', -1.51187, -48.6195, FALSE, 15),
+(2401503, 'Barcelona', -5.94284, -35.9247, FALSE, 24),
+(1300409, 'Barcelos', -0.983373, -62.9311, FALSE, 13),
+(3505203, 'Bariri', -22.073, -48.7438, FALSE, 35),
+(2902708, 'Barra', -11.0859, -43.1459, FALSE, 29),
+(4202099, 'Barra Bonita', -26.654, -53.44, FALSE, 42),
+(3505302, 'Barra Bonita', -22.4909, -48.5583, FALSE, 35),
+(2201176, 'Barra D''Alcântara', -6.51645, -42.1146, FALSE, 22),
+(2902807, 'Barra da Estiva', -13.6237, -41.3347, FALSE, 29),
+(2601300, 'Barra de Guabiraba', -8.42075, -35.6585, FALSE, 26),
+(2501609, 'Barra de Santa Rosa', -6.71816, -36.0671, FALSE, 25),
+(2501575, 'Barra de Santana', -7.51809, -35.9913, FALSE, 25),
+(2700508, 'Barra de Santo Antônio', -9.4023, -35.5101, FALSE, 27),
+(3200904, 'Barra de São Francisco', -18.7548, -40.8965, FALSE, 32),
+(2501708, 'Barra de São Miguel', -7.74603, -36.3209, FALSE, 25),
+(2700607, 'Barra de São Miguel', -9.83842, -35.9057, FALSE, 27),
+(5101704, 'Barra do Bugres', -15.0702, -57.1878, FALSE, 51),
+(3505351, 'Barra do Chapéu', -24.4722, -49.0238, FALSE, 35),
+(2902906, 'Barra do Choça', -14.8654, -40.5791, FALSE, 29),
+(2101608, 'Barra do Corda', -5.49682, -45.2485, FALSE, 21),
+(5101803, 'Barra do Garças', -15.8804, -52.264, FALSE, 51),
+(4301859, 'Barra do Guarita', -27.1927, -53.7109, FALSE, 43),
+(4102703, 'Barra do Jacaré', -23.116, -50.1842, FALSE, 41),
+(2903003, 'Barra do Mendes', -11.81, -42.059, FALSE, 29),
+(1703073, 'Barra do Ouro', -7.69593, -47.6776, FALSE, 17),
+(3300308, 'Barra do Piraí', -22.4715, -43.8269, FALSE, 33),
+(4301875, 'Barra do Quaraí', -30.2029, -57.5497, FALSE, 43),
+(4301909, 'Barra do Ribeiro', -30.2939, -51.3014, FALSE, 43),
+(4301925, 'Barra do Rio Azul', -27.4069, -52.4084, FALSE, 43),
+(2903102, 'Barra do Rocha', -14.2, -39.5991, FALSE, 29),
+(3505401, 'Barra do Turvo', -24.759, -48.5013, FALSE, 35),
+(2800605, 'Barra dos Coqueiros', -10.8996, -37.0323, FALSE, 28),
+(4301958, 'Barra Funda', -27.9205, -53.0391, FALSE, 43),
+(3105707, 'Barra Longa', -20.2869, -43.0402, FALSE, 31),
+(3300407, 'Barra Mansa', -22.5481, -44.1752, FALSE, 33),
+(4202107, 'Barra Velha', -26.637, -48.6933, FALSE, 42),
+(4301800, 'Barracão', -27.6739, -51.4585, FALSE, 43),
+(4102604, 'Barracão', -26.2502, -53.6324, FALSE, 41),
+(2201200, 'Barras', -4.24468, -42.2922, FALSE, 22),
+(2301950, 'Barreira', -4.28921, -38.6429, FALSE, 23),
+(2903201, 'Barreiras', -12.1439, -44.9968, FALSE, 29),
+(2201309, 'Barreiras do Piauí', -9.9296, -45.4702, FALSE, 22),
+(1300508, 'Barreirinha', -2.79886, -57.0679, FALSE, 13),
+(2101707, 'Barreirinhas', -2.75863, -42.8232, FALSE, 21),
+(2601409, 'Barreiros', -8.81605, -35.1832, FALSE, 26),
+(3505500, 'Barretos', -20.5531, -48.5698, FALSE, 35),
+(3505609, 'Barrinha', -21.1864, -48.1636, FALSE, 35),
+(2302008, 'Barro', -7.17188, -38.7741, FALSE, 23),
+(2903235, 'Barro Alto', -11.7605, -41.9054, FALSE, 29),
+(5203203, 'Barro Alto', -14.9658, -48.9086, FALSE, 52),
+(2201408, 'Barro Duro', -5.81673, -42.5147, FALSE, 22),
+(2903300, 'Barro Preto', -14.7948, -39.476, FALSE, 29),
+(2903276, 'Barrocas', -11.5272, -39.0776, FALSE, 29),
+(1703107, 'Barrolândia', -9.83404, -48.7252, FALSE, 17),
+(2302057, 'Barroquinha', -3.02051, -41.1358, FALSE, 23),
+(4302006, 'Barros Cassal', -29.0947, -52.5836, FALSE, 43),
+(3105905, 'Barroso', -21.1907, -43.972, FALSE, 31),
+(3505708, 'Barueri', -23.5057, -46.879, FALSE, 35),
+(3505807, 'Bastos', -21.921, -50.7357, FALSE, 35),
+(5001904, 'Bataguassu', -21.7159, -52.4221, FALSE, 50),
+(2201507, 'Batalha', -4.0223, -42.0787, FALSE, 22),
+(2700706, 'Batalha', -9.6742, -37.133, FALSE, 27),
+(3505906, 'Batatais', -20.8929, -47.5921, FALSE, 35),
+(5002001, 'Batayporã', -22.2944, -53.2705, FALSE, 50),
+(2302107, 'Baturité', -4.32598, -38.8812, FALSE, 23),
+(3506003, 'Bauru', -22.3246, -49.0871, FALSE, 35),
+(2501807, 'Bayeux', -7.1238, -34.9293, FALSE, 25),
+(3506102, 'Bebedouro', -20.9491, -48.4791, FALSE, 35),
+(2302206, 'Beberibe', -4.17741, -38.1271, FALSE, 23),
+(2302305, 'Bela Cruz', -3.04996, -40.1671, FALSE, 23),
+(5002100, 'Bela Vista', -22.1073, -56.5263, FALSE, 50),
+(4102752, 'Bela Vista da Caroba', -25.8842, -53.6725, FALSE, 41),
+(5203302, 'Bela Vista de Goiás', -16.9693, -48.9513, FALSE, 52),
+(3106002, 'Bela Vista de Minas', -19.8302, -43.0922, FALSE, 31),
+(2101772, 'Bela Vista do Maranhão', -3.72618, -45.3075, FALSE, 21),
+(4102802, 'Bela Vista do Paraíso', -22.9937, -51.1927, FALSE, 41),
+(2201556, 'Bela Vista do Piauí', -7.98809, -41.8675, FALSE, 22),
+(4202131, 'Bela Vista do Toldo', -26.2746, -50.4664, FALSE, 42),
+(2101731, 'Belágua', -3.15485, -43.5122, FALSE, 21),
+(1501402, 'Belém', -1.4554, -48.4898, TRUE, 15),
+(2501906, 'Belém', -6.74261, -35.5166, FALSE, 25),
+(2700805, 'Belém', -9.57047, -36.4904, FALSE, 27),
+(2601508, 'Belém de Maria', -8.62504, -35.8335, FALSE, 26),
+(2502003, 'Belém do Brejo do Cruz', -6.18515, -37.5348, FALSE, 25),
+(2201572, 'Belém do Piauí', -7.36652, -40.9688, FALSE, 22),
+(2601607, 'Belém do São Francisco', -8.75046, -38.9623, FALSE, 26),
+(3300456, 'Belford Roxo', -22.764, -43.3992, FALSE, 33),
+(3106101, 'Belmiro Braga', -21.944, -43.4084, FALSE, 31),
+(4202156, 'Belmonte', -26.843, -53.5758, FALSE, 42),
+(2903409, 'Belmonte', -15.8608, -38.8758, FALSE, 29),
+(2903508, 'Belo Campo', -15.0334, -41.2652, FALSE, 29),
+(3106200, 'Belo Horizonte', -19.9102, -43.9266, TRUE, 31),
+(2601706, 'Belo Jardim', -8.3313, -36.4258, FALSE, 26),
+(2700904, 'Belo Monte', -9.82272, -37.277, FALSE, 27),
+(3106309, 'Belo Oriente', -19.2199, -42.4828, FALSE, 31),
+(3106408, 'Belo Vale', -20.4077, -44.0275, FALSE, 31),
+(1501451, 'Belterra', -2.63609, -54.9374, FALSE, 15),
+(2201606, 'Beneditinos', -5.45676, -42.3638, FALSE, 22),
+(2101806, 'Benedito Leite', -7.21037, -44.5577, FALSE, 21),
+(4202206, 'Benedito Novo', -26.781, -49.3593, FALSE, 42),
+(1501501, 'Benevides', -1.36183, -48.2434, FALSE, 15),
+(1300607, 'Benjamin Constant', -4.37768, -70.0342, FALSE, 13),
+(4302055, 'Benjamin Constant do Sul', -27.5086, -52.5995, FALSE, 43),
+(3506201, 'Bento de Abreu', -21.2686, -50.814, FALSE, 35),
+(2401602, 'Bento Fernandes', -5.69906, -35.813, FALSE, 24),
+(4302105, 'Bento Gonçalves', -29.1662, -51.5165, FALSE, 43),
+(2101905, 'Bequimão', -2.44162, -44.7842, FALSE, 21),
+(3106507, 'Berilo', -16.9567, -42.4606, FALSE, 31),
+(3106655, 'Berizal', -15.61, -41.7432, FALSE, 31),
+(2502052, 'Bernardino Batista', -6.44572, -38.5521, FALSE, 25),
+(3506300, 'Bernardino de Campos', -23.0164, -49.4679, FALSE, 35),
+(2101939, 'Bernardo do Mearim', -4.62666, -44.7608, FALSE, 21),
+(1703206, 'Bernardo Sayão', -7.87481, -48.8893, FALSE, 17),
+(3506359, 'Bertioga', -23.8486, -46.1396, FALSE, 35),
+(2201705, 'Bertolínia', -7.63338, -43.9498, FALSE, 22),
+(3106606, 'Bertópolis', -17.059, -40.58, FALSE, 31),
+(1300631, 'Beruri', -3.89874, -61.3616, FALSE, 13),
+(2601805, 'Betânia', -8.26787, -38.0345, FALSE, 26),
+(2201739, 'Betânia do Piauí', -8.14376, -40.7989, FALSE, 22),
+(3106705, 'Betim', -19.9668, -44.2008, FALSE, 31),
+(2601904, 'Bezerros', -8.2328, -35.796, FALSE, 26),
+(3106804, 'Bias Fortes', -21.602, -43.7574, FALSE, 31),
+(3106903, 'Bicas', -21.7232, -43.056, FALSE, 31),
+(4202305, 'Biguaçu', -27.496, -48.6598, FALSE, 42),
+(3506409, 'Bilac', -21.404, -50.4746, FALSE, 35),
+(3107000, 'Biquinhas', -18.7754, -45.4974, FALSE, 31),
+(3506508, 'Birigui', -21.291, -50.3432, FALSE, 35),
+(3506607, 'Biritiba-Mirim', -23.5698, -46.0407, FALSE, 35),
+(2903607, 'Biritinga', -11.6072, -38.8051, FALSE, 29),
+(4102901, 'Bituruna', -26.1607, -51.5518, FALSE, 41),
+(4202404, 'Blumenau', -26.9155, -49.0709, FALSE, 42),
+(4103008, 'Boa Esperança', -24.2467, -52.7876, FALSE, 41),
+(3107109, 'Boa Esperança', -21.0927, -45.5612, FALSE, 31),
+(3201001, 'Boa Esperança', -18.5395, -40.3025, FALSE, 32),
+(4103024, 'Boa Esperança do Iguaçu', -25.6324, -53.2108, FALSE, 41),
+(3506706, 'Boa Esperança do Sul', -21.9918, -48.3906, FALSE, 35),
+(2201770, 'Boa Hora', -4.41404, -42.1357, FALSE, 22),
+(2903706, 'Boa Nova', -14.3598, -40.2064, FALSE, 29),
+(2502102, 'Boa Ventura', -7.40982, -38.2113, FALSE, 25),
+(4103040, 'Boa Ventura de São Roque', -24.8688, -51.6276, FALSE, 41),
+(2302404, 'Boa Viagem', -5.11258, -39.7337, FALSE, 23),
+(1400100, 'Boa Vista', 2.82384, -60.6753, TRUE, 14),
+(2502151, 'Boa Vista', -7.26365, -36.2357, FALSE, 25),
+(4103057, 'Boa Vista da Aparecida', -25.4308, -53.4117, FALSE, 41),
+(4302154, 'Boa Vista das Missões', -27.6671, -53.3102, FALSE, 43),
+(4302204, 'Boa Vista do Buricá', -27.6693, -54.1082, FALSE, 43),
+(4302220, 'Boa Vista do Cadeado', -28.5791, -53.8108, FALSE, 43),
+(2101970, 'Boa Vista do Gurupi', -1.77614, -46.3002, FALSE, 21),
+(4302238, 'Boa Vista do Incra', -28.8185, -53.391, FALSE, 43),
+(1300680, 'Boa Vista do Ramos', -2.97409, -57.5873, FALSE, 13),
+(4302253, 'Boa Vista do Sul', -29.3544, -51.6687, FALSE, 43),
+(2903805, 'Boa Vista do Tupim', -12.6498, -40.6064, FALSE, 29),
+(2701001, 'Boca da Mata', -9.64308, -36.2125, FALSE, 27),
+(1300706, 'Boca do Acre', -8.74232, -67.3919, FALSE, 13),
+(2201804, 'Bocaina', -6.94124, -41.3168, FALSE, 22),
+(3506805, 'Bocaina', -22.1365, -48.523, FALSE, 35),
+(3107208, 'Bocaina de Minas', -22.1697, -44.3972, FALSE, 31),
+(4202438, 'Bocaina do Sul', -27.7455, -49.9423, FALSE, 42),
+(3107307, 'Bocaiúva', -17.1135, -43.8104, FALSE, 31),
+(4103107, 'Bocaiúva do Sul', -25.2066, -49.1141, FALSE, 41),
+(2401651, 'Bodó', -5.98027, -36.4167, FALSE, 24),
+(2602001, 'Bodocó', -7.77759, -39.9338, FALSE, 26),
+(5002159, 'Bodoquena', -20.537, -56.7127, FALSE, 50),
+(3506904, 'Bofete', -23.1055, -48.2582, FALSE, 35),
+(3507001, 'Boituva', -23.2855, -47.6786, FALSE, 35),
+(2602100, 'Bom Conselho', -9.16919, -36.6857, FALSE, 26),
+(3107406, 'Bom Despacho', -19.7386, -45.2622, FALSE, 31),
+(3300506, 'Bom Jardim', -22.1545, -42.4251, FALSE, 33),
+(2602209, 'Bom Jardim', -7.79695, -35.5784, FALSE, 26),
+(2102002, 'Bom Jardim', -3.54129, -45.606, FALSE, 21),
+(4202503, 'Bom Jardim da Serra', -28.3377, -49.6373, FALSE, 42),
+(5203401, 'Bom Jardim de Goiás', -16.2063, -52.1728, FALSE, 52),
+(3107505, 'Bom Jardim de Minas', -21.9479, -44.1885, FALSE, 31),
+(4202537, 'Bom Jesus', -26.7326, -52.3919, FALSE, 42),
+(4302303, 'Bom Jesus', -28.6697, -50.4295, FALSE, 43),
+(2201903, 'Bom Jesus', -9.07124, -44.359, FALSE, 22),
+(2401701, 'Bom Jesus', -5.98648, -35.5792, FALSE, 24),
+(2502201, 'Bom Jesus', -6.81601, -38.6453, FALSE, 25),
+(2903904, 'Bom Jesus da Lapa', -13.2506, -43.4108, FALSE, 29),
+(3107604, 'Bom Jesus da Penha', -21.0148, -46.5174, FALSE, 31),
+(2903953, 'Bom Jesus da Serra', -14.3663, -40.5126, FALSE, 29),
+(2102036, 'Bom Jesus das Selvas', -4.47638, -46.8641, FALSE, 21),
+(5203500, 'Bom Jesus de Goiás', -18.2173, -49.74, FALSE, 52),
+(3107703, 'Bom Jesus do Amparo', -19.7054, -43.4782, FALSE, 31),
+(5101852, 'Bom Jesus do Araguaia', -12.1706, -51.5032, FALSE, 51),
+(3107802, 'Bom Jesus do Galho', -19.836, -42.3165, FALSE, 31),
+(3300605, 'Bom Jesus do Itabapoana', -21.1449, -41.6822, FALSE, 33),
+(3201100, 'Bom Jesus do Norte', -21.1173, -41.6731, FALSE, 32),
+(4202578, 'Bom Jesus do Oeste', -26.6927, -53.0967, FALSE, 42),
+(4103156, 'Bom Jesus do Sul', -26.1958, -53.5955, FALSE, 41),
+(1501576, 'Bom Jesus do Tocantins', -5.0424, -48.6047, FALSE, 15),
+(1703305, 'Bom Jesus do Tocantins', -8.96306, -48.165, FALSE, 17),
+(3507100, 'Bom Jesus dos Perdões', -23.1356, -46.4675, FALSE, 35),
+(2102077, 'Bom Lugar', -4.37311, -45.0326, FALSE, 21),
+(4302352, 'Bom Princípio', -29.4856, -51.3548, FALSE, 43),
+(2201919, 'Bom Princípio do Piauí', -3.19631, -41.6403, FALSE, 22),
+(4302378, 'Bom Progresso', -27.5399, -53.8716, FALSE, 43),
+(3107901, 'Bom Repouso', -22.4675, -46.144, FALSE, 31),
+(4202602, 'Bom Retiro', -27.799, -49.487, FALSE, 42),
+(4302402, 'Bom Retiro do Sul', -29.6071, -51.9456, FALSE, 43),
+(3108008, 'Bom Sucesso', -21.0329, -44.7537, FALSE, 31),
+(4103206, 'Bom Sucesso', -23.7063, -51.7671, FALSE, 41),
+(2502300, 'Bom Sucesso', -6.44176, -37.9234, FALSE, 25),
+(3507159, 'Bom Sucesso de Itararé', -24.3155, -49.1451, FALSE, 35),
+(4103222, 'Bom Sucesso do Sul', -26.0731, -52.8353, FALSE, 41),
+(4202453, 'Bombinhas', -27.1382, -48.5146, FALSE, 42),
+(1400159, 'Bonfim', 3.36161, -59.8333, FALSE, 14),
+(3108107, 'Bonfim', -20.3302, -44.2366, FALSE, 31),
+(2201929, 'Bonfim do Piauí', -9.1605, -42.8865, FALSE, 22),
+(5203559, 'Bonfinópolis', -16.6173, -48.9616, FALSE, 52),
+(3108206, 'Bonfinópolis de Minas', -16.568, -45.9839, FALSE, 31),
+(2904001, 'Boninal', -12.7069, -41.8286, FALSE, 29),
+(2602308, 'Bonito', -8.47163, -35.7292, FALSE, 26),
+(2904050, 'Bonito', -11.9668, -41.2647, FALSE, 29),
+(1501600, 'Bonito', -1.36745, -47.3066, FALSE, 15),
+(5002209, 'Bonito', -21.1261, -56.4836, FALSE, 50),
+(3108255, 'Bonito de Minas', -15.3231, -44.7543, FALSE, 31),
+(2502409, 'Bonito de Santa Fé', -7.31341, -38.5133, FALSE, 25),
+(5203575, 'Bonópolis', -13.6329, -49.8106, FALSE, 52),
+(2502508, 'Boqueirão', -7.487, -36.1309, FALSE, 25),
+(4302451, 'Boqueirão do Leão', -29.3046, -52.4284, FALSE, 43),
+(2201945, 'Boqueirão do Piauí', -4.48181, -42.1212, FALSE, 22),
+(2800670, 'Boquim', -11.1397, -37.6195, FALSE, 28),
+(2904100, 'Boquira', -12.8205, -42.7324, FALSE, 29),
+(3507209, 'Borá', -22.2696, -50.5409, FALSE, 35),
+(3507308, 'Boracéia', -22.1926, -48.7808, FALSE, 35),
+(1300805, 'Borba', -4.39154, -59.5874, FALSE, 13),
+(2502706, 'Borborema', -6.80199, -35.6187, FALSE, 25),
+(3507407, 'Borborema', -21.6214, -49.0741, FALSE, 35),
+(3108305, 'Borda da Mata', -22.2707, -46.1653, FALSE, 31),
+(3507456, 'Borebi', -22.5728, -48.9707, FALSE, 35),
+(4103305, 'Borrazópolis', -23.9366, -51.5875, FALSE, 41),
+(4302501, 'Bossoroca', -28.7291, -54.9035, FALSE, 43),
+(3108404, 'Botelhos', -21.6412, -46.391, FALSE, 31),
+(3507506, 'Botucatu', -22.8837, -48.4437, FALSE, 35),
+(3108503, 'Botumirim', -16.8657, -43.0086, FALSE, 31),
+(2904209, 'Botuporã', -13.3772, -42.5163, FALSE, 29),
+(4202701, 'Botuverá', -27.2007, -49.0689, FALSE, 42),
+(4302584, 'Bozano', -28.3659, -53.772, FALSE, 43),
+(4202800, 'Braço do Norte', -28.2681, -49.1701, FALSE, 42),
+(4202859, 'Braço do Trombudo', -27.3586, -49.8821, FALSE, 42),
+(4302600, 'Braga', -27.6173, -53.7405, FALSE, 43),
+(1501709, 'Bragança', -1.06126, -46.7826, FALSE, 15),
+(3507605, 'Bragança Paulista', -22.9527, -46.5419, FALSE, 35),
+(4103354, 'Braganey', -24.8173, -53.1218, FALSE, 41),
+(2701100, 'Branquinha', -9.23342, -36.0162, FALSE, 27),
+(3108701, 'Brás Pires', -20.8419, -43.2406, FALSE, 31),
+(1501725, 'Brasil Novo', -3.29792, -52.534, FALSE, 15),
+(5002308, 'Brasilândia', -21.2544, -52.0365, FALSE, 50),
+(3108552, 'Brasilândia de Minas', -16.9999, -46.0081, FALSE, 31),
+(4103370, 'Brasilândia do Sul', -24.1978, -53.5275, FALSE, 41),
+(1703602, 'Brasilândia do Tocantins', -8.38918, -48.4822, FALSE, 17),
+(1200104, 'Brasiléia', -10.995, -68.7497, FALSE, 12),
+(2201960, 'Brasileira', -4.1337, -41.7859, FALSE, 22),
+(5300108, 'Brasília', -15.7795, -47.9297, TRUE, 53),
+(3108602, 'Brasília de Minas', -16.2104, -44.4299, FALSE, 31),
+(5101902, 'Brasnorte', -12.1474, -57.9833, FALSE, 51),
+(3507704, 'Braúna', -21.499, -50.3175, FALSE, 35),
+(3108800, 'Braúnas', -19.0562, -42.7099, FALSE, 31),
+(5203609, 'Brazabrantes', -16.4281, -49.3863, FALSE, 52),
+(3108909, 'Brazópolis', -22.4743, -45.6166, FALSE, 31),
+(2602407, 'Brejão', -9.02915, -36.566, FALSE, 26),
+(3201159, 'Brejetuba', -20.1395, -41.2954, FALSE, 32),
+(2401800, 'Brejinho', -6.18566, -35.3591, FALSE, 24),
+(2602506, 'Brejinho', -7.34694, -37.2865, FALSE, 26),
+(1703701, 'Brejinho de Nazaré', -11.0058, -48.5683, FALSE, 17),
+(2102101, 'Brejo', -3.67796, -42.7527, FALSE, 21),
+(3507753, 'Brejo Alegre', -21.1651, -50.1861, FALSE, 35),
+(2602605, 'Brejo da Madre de Deus', -8.14933, -36.3741, FALSE, 26),
+(2102150, 'Brejo de Areia', -4.334, -45.581, FALSE, 21),
+(2502805, 'Brejo do Cruz', -6.34185, -37.4943, FALSE, 25),
+(2201988, 'Brejo do Piauí', -8.20314, -42.8229, FALSE, 22),
+(2502904, 'Brejo dos Santos', -6.37065, -37.8253, FALSE, 25),
+(2800704, 'Brejo Grande', -10.4297, -36.4611, FALSE, 28),
+(1501758, 'Brejo Grande do Araguaia', -5.69822, -48.4103, FALSE, 15),
+(2302503, 'Brejo Santo', -7.48469, -38.9799, FALSE, 23),
+(2904308, 'Brejões', -13.1039, -39.7988, FALSE, 29),
+(2904407, 'Brejolândia', -12.4815, -43.9679, FALSE, 29),
+(1501782, 'Breu Branco', -3.77191, -49.5735, FALSE, 15),
+(1501808, 'Breves', -1.68036, -50.4791, FALSE, 15),
+(5203807, 'Britânia', -15.2428, -51.1602, FALSE, 52),
+(4302659, 'Brochier', -29.5501, -51.5945, FALSE, 43),
+(3507803, 'Brodowski', -20.9845, -47.6572, FALSE, 35),
+(3507902, 'Brotas', -22.2795, -48.1251, FALSE, 35),
+(2904506, 'Brotas de Macaúbas', -11.9915, -42.6326, FALSE, 29),
+(3109006, 'Brumadinho', -20.151, -44.2007, FALSE, 31),
+(2904605, 'Brumado', -14.2021, -41.6696, FALSE, 29),
+(4202875, 'Brunópolis', -27.3058, -50.8684, FALSE, 42),
+(4202909, 'Brusque', -27.0977, -48.9107, FALSE, 42),
+(3109105, 'Bueno Brandão', -22.4383, -46.3491, FALSE, 31),
+(3109204, 'Buenópolis', -17.8744, -44.1775, FALSE, 31),
+(2602704, 'Buenos Aires', -7.72449, -35.3182, FALSE, 26),
+(2904704, 'Buerarema', -14.9595, -39.3028, FALSE, 29),
+(3109253, 'Bugre', -19.4231, -42.2552, FALSE, 31),
+(2602803, 'Buíque', -8.61954, -37.1606, FALSE, 26),
+(1200138, 'Bujari', -9.81528, -67.955, FALSE, 12),
+(1501907, 'Bujaru', -1.51762, -48.0381, FALSE, 15),
+(3508009, 'Buri', -23.7977, -48.5958, FALSE, 35),
+(3508108, 'Buritama', -21.0661, -50.1475, FALSE, 35),
+(2102200, 'Buriti', -3.94169, -42.9179, FALSE, 21),
+(5203906, 'Buriti Alegre', -18.1378, -49.0404, FALSE, 52),
+(2102309, 'Buriti Bravo', -5.83239, -43.8353, FALSE, 21),
+(5203939, 'Buriti de Goiás', -16.1792, -50.4302, FALSE, 52),
+(1703800, 'Buriti do Tocantins', -5.31448, -48.2271, FALSE, 17),
+(2202000, 'Buriti dos Lopes', -3.18259, -41.8695, FALSE, 22),
+(2202026, 'Buriti dos Montes', -5.30584, -41.0933, FALSE, 22),
+(2102325, 'Buriticupu', -4.32375, -46.4409, FALSE, 21),
+(5203962, 'Buritinópolis', -14.4772, -46.4076, FALSE, 52),
+(2904753, 'Buritirama', -10.7171, -43.6302, FALSE, 29),
+(2102358, 'Buritirana', -5.59823, -47.0131, FALSE, 21),
+(1100452, 'Buritis', -10.1943, -63.8324, FALSE, 11),
+(3109303, 'Buritis', -15.6218, -46.4221, FALSE, 31),
+(3508207, 'Buritizal', -20.1911, -47.7096, FALSE, 35),
+(3109402, 'Buritizeiro', -17.3656, -44.9606, FALSE, 31),
+(4302709, 'Butiá', -30.1179, -51.9601, FALSE, 43),
+(1300839, 'Caapiranga', -3.31537, -61.2206, FALSE, 13),
+(2503001, 'Caaporã', -7.51351, -34.9055, FALSE, 25),
+(5002407, 'Caarapó', -22.6368, -54.8209, FALSE, 50),
+(2904803, 'Caatiba', -14.9699, -40.4092, FALSE, 29),
+(2503100, 'Cabaceiras', -7.48899, -36.287, FALSE, 25),
+(2904852, 'Cabaceiras do Paraguaçu', -12.5317, -39.1902, FALSE, 29),
+(3109451, 'Cabeceira Grande', -16.0335, -47.0862, FALSE, 31),
+(5204003, 'Cabeceiras', -15.7995, -46.9265, FALSE, 52),
+(2202059, 'Cabeceiras do Piauí', -4.4773, -42.3069, FALSE, 22),
+(2503209, 'Cabedelo', -6.98731, -34.8284, FALSE, 25),
+(1100031, 'Cabixi', -13.4945, -60.552, FALSE, 11),
+(2602902, 'Cabo de Santo Agostinho', -8.28218, -35.0253, FALSE, 26),
+(3300704, 'Cabo Frio', -22.8894, -42.0286, FALSE, 33),
+(3109501, 'Cabo Verde', -21.4699, -46.3919, FALSE, 31),
+(3508306, 'Cabrália Paulista', -22.4576, -49.3393, FALSE, 35),
+(3508405, 'Cabreúva', -23.3053, -47.1362, FALSE, 35),
+(2603009, 'Cabrobó', -8.50548, -39.3094, FALSE, 26),
+(4203006, 'Caçador', -26.7757, -51.012, FALSE, 42),
+(3508504, 'Caçapava', -23.0992, -45.7076, FALSE, 35),
+(4302808, 'Caçapava do Sul', -30.5144, -53.4827, FALSE, 43),
+(1100601, 'Cacaulândia', -10.349, -62.9043, FALSE, 11),
+(4302907, 'Cacequi', -29.8883, -54.822, FALSE, 43),
+(5102504, 'Cáceres', -16.0764, -57.6818, FALSE, 51),
+(2904902, 'Cachoeira', -12.5994, -38.9587, FALSE, 29),
+(5204102, 'Cachoeira Alta', -18.7618, -50.9432, FALSE, 52),
+(3109600, 'Cachoeira da Prata', -19.521, -44.4544, FALSE, 31),
+(5204201, 'Cachoeira de Goiás', -16.6635, -50.646, FALSE, 52),
+(3109709, 'Cachoeira de Minas', -22.3511, -45.7809, FALSE, 31),
+(3102704, 'Cachoeira de Pajeú', -15.9688, -41.4948, FALSE, 31),
+(1502004, 'Cachoeira do Arari', -1.01226, -48.9503, FALSE, 15),
+(1501956, 'Cachoeira do Piriá', -1.75974, -46.5459, FALSE, 15),
+(4303004, 'Cachoeira do Sul', -30.033, -52.8928, FALSE, 43),
+(2503308, 'Cachoeira dos Índios', -6.91353, -38.676, FALSE, 25),
+(5204250, 'Cachoeira Dourada', -18.4859, -49.4766, FALSE, 52),
+(3109808, 'Cachoeira Dourada', -18.5161, -49.5039, FALSE, 31),
+(2102374, 'Cachoeira Grande', -2.93074, -44.0528, FALSE, 21),
+(3508603, 'Cachoeira Paulista', -22.6665, -45.0154, FALSE, 35),
+(3300803, 'Cachoeiras de Macacu', -22.4658, -42.6523, FALSE, 33),
+(1703826, 'Cachoeirinha', -6.1156, -47.9234, FALSE, 17),
+(2603108, 'Cachoeirinha', -8.48668, -36.2402, FALSE, 26),
+(4303103, 'Cachoeirinha', -29.9472, -51.1016, FALSE, 43),
+(3201209, 'Cachoeiro de Itapemirim', -20.8462, -41.1198, FALSE, 32),
+(2503407, 'Cacimba de Areia', -7.12128, -37.1563, FALSE, 25),
+(2503506, 'Cacimba de Dentro', -6.6386, -35.7778, FALSE, 25),
+(2503555, 'Cacimbas', -7.20721, -37.0604, FALSE, 25),
+(2701209, 'Cacimbinhas', -9.40121, -36.9911, FALSE, 27),
+(4303202, 'Cacique Doble', -27.767, -51.6597, FALSE, 43),
+(1100049, 'Cacoal', -11.4343, -61.4562, FALSE, 11),
+(3508702, 'Caconde', -21.528, -46.6437, FALSE, 35),
+(5204300, 'Caçu', -18.5594, -51.1328, FALSE, 52),
+(2905008, 'Caculé', -14.5003, -42.2229, FALSE, 29),
+(2905107, 'Caém', -11.0677, -40.432, FALSE, 29),
+(3109907, 'Caetanópolis', -19.2971, -44.4189, FALSE, 31),
+(2905156, 'Caetanos', -14.3347, -40.9175, FALSE, 29),
+(3110004, 'Caeté', -19.8826, -43.6704, FALSE, 31),
+(2603207, 'Caetés', -8.7803, -36.6268, FALSE, 26),
+(2905206, 'Caetité', -14.0684, -42.4861, FALSE, 29),
+(2905305, 'Cafarnaum', -11.6914, -41.4688, FALSE, 29),
+(4103404, 'Cafeara', -22.789, -51.7142, FALSE, 41),
+(3508801, 'Cafelândia', -21.8031, -49.6092, FALSE, 35),
+(4103453, 'Cafelândia', -24.6189, -53.3207, FALSE, 41),
+(4103479, 'Cafezal do Sul', -23.9005, -53.5124, FALSE, 41),
+(3508900, 'Caiabu', -22.0127, -51.2394, FALSE, 35),
+(3110103, 'Caiana', -20.6956, -41.9292, FALSE, 31),
+(5204409, 'Caiapônia', -16.9539, -51.8091, FALSE, 52),
+(4303301, 'Caibaté', -28.2905, -54.6454, FALSE, 43),
+(4203105, 'Caibi', -27.0741, -53.2458, FALSE, 42),
+(4303400, 'Caiçara', -27.2791, -53.4257, FALSE, 43),
+(2503605, 'Caiçara', -6.62115, -35.4581, FALSE, 25),
+(2401859, 'Caiçara do Norte', -5.07091, -36.0717, FALSE, 24),
+(2401909, 'Caiçara do Rio do Vento', -5.76541, -35.9938, FALSE, 24),
+(2402006, 'Caicó', -6.45441, -37.1067, FALSE, 24),
+(3509007, 'Caieiras', -23.3607, -46.7397, FALSE, 35),
+(2905404, 'Cairu', -13.4904, -39.0465, FALSE, 29),
+(3509106, 'Caiuá', -21.8322, -51.9969, FALSE, 35),
+(3509205, 'Cajamar', -23.355, -46.8781, FALSE, 35),
+(2102408, 'Cajapió', -2.87326, -44.6741, FALSE, 21),
+(2102507, 'Cajari', -3.32742, -45.0145, FALSE, 21),
+(3509254, 'Cajati', -24.7324, -48.1223, FALSE, 35),
+(2503704, 'Cajazeiras', -6.88004, -38.5577, FALSE, 25),
+(2202075, 'Cajazeiras do Piauí', -6.79667, -42.3903, FALSE, 22),
+(2503753, 'Cajazeirinhas', -6.96016, -37.8009, FALSE, 25),
+(3509304, 'Cajobi', -20.8773, -48.8063, FALSE, 35),
+(2701308, 'Cajueiro', -9.3994, -36.1559, FALSE, 27),
+(2202083, 'Cajueiro da Praia', -2.93111, -41.3408, FALSE, 22),
+(3110202, 'Cajuri', -20.7903, -42.7925, FALSE, 31),
+(3509403, 'Cajuru', -21.2749, -47.303, FALSE, 35),
+(2603306, 'Calçado', -8.73108, -36.3366, FALSE, 26),
+(1600204, 'Calçoene', 2.50475, -50.9512, FALSE, 16),
+(3110301, 'Caldas', -21.9183, -46.3843, FALSE, 31),
+(2503803, 'Caldas Brandão', -7.1025, -35.3272, FALSE, 25),
+(5204508, 'Caldas Novas', -17.7441, -48.6246, FALSE, 52),
+(5204557, 'Caldazinha', -16.7117, -49.0013, FALSE, 52),
+(2905503, 'Caldeirão Grande', -11.0208, -40.2956, FALSE, 29),
+(2202091, 'Caldeirão Grande do Piauí', -7.3314, -40.6366, FALSE, 22),
+(4103503, 'Califórnia', -23.6566, -51.3574, FALSE, 41),
+(4203154, 'Calmon', -26.5942, -51.095, FALSE, 42),
+(2603405, 'Calumbi', -7.93551, -38.1482, FALSE, 26),
+(2905602, 'Camacan', -15.4142, -39.4919, FALSE, 29),
+(2905701, 'Camaçari', -12.6996, -38.3263, FALSE, 29),
+(3110400, 'Camacho', -20.6294, -45.1593, FALSE, 31),
+(2503902, 'Camalaú', -7.88503, -36.8242, FALSE, 25),
+(2905800, 'Camamu', -13.9398, -39.1071, FALSE, 29),
+(3110509, 'Camanducaia', -22.7515, -46.1494, FALSE, 31),
+(5002605, 'Camapuã', -19.5347, -54.0431, FALSE, 50),
+(4303509, 'Camaquã', -30.8489, -51.8043, FALSE, 43),
+(2603454, 'Camaragibe', -8.02351, -34.9782, FALSE, 26),
+(4303558, 'Camargo', -28.588, -52.2003, FALSE, 43),
+(4103602, 'Cambará', -23.0423, -50.0753, FALSE, 41),
+(4303608, 'Cambará do Sul', -29.0474, -50.1465, FALSE, 43),
+(4103701, 'Cambé', -23.2766, -51.2798, FALSE, 41),
+(4103800, 'Cambira', -23.589, -51.5792, FALSE, 41),
+(4203204, 'Camboriú', -27.0241, -48.6503, FALSE, 42),
+(3300902, 'Cambuci', -21.5691, -41.9187, FALSE, 33),
+(3110608, 'Cambuí', -22.6115, -46.0572, FALSE, 31),
+(3110707, 'Cambuquira', -21.854, -45.2896, FALSE, 31),
+(1502103, 'Cametá', -2.24295, -49.4979, FALSE, 15),
+(2302602, 'Camocim', -2.9005, -40.8544, FALSE, 23),
+(2603504, 'Camocim de São Félix', -8.35865, -35.7653, FALSE, 26),
+(3110806, 'Campanário', -18.2427, -41.7355, FALSE, 31),
+(3110905, 'Campanha', -21.836, -45.4004, FALSE, 31),
+(3111002, 'Campestre', -21.7079, -46.2381, FALSE, 31),
+(2701357, 'Campestre', -8.84723, -35.5685, FALSE, 27),
+(4303673, 'Campestre da Serra', -28.7926, -51.0941, FALSE, 43),
+(5204607, 'Campestre de Goiás', -16.7624, -49.695, FALSE, 52),
+(2102556, 'Campestre do Maranhão', -6.17075, -47.3625, FALSE, 21),
+(4103909, 'Campina da Lagoa', -24.5893, -52.7976, FALSE, 41),
+(4303707, 'Campina das Missões', -27.9888, -54.8416, FALSE, 43),
+(3509452, 'Campina do Monte Alegre', -23.5895, -48.4758, FALSE, 35),
+(4103958, 'Campina do Simão', -25.0802, -51.8237, FALSE, 41),
+(2504009, 'Campina Grande', -7.22196, -35.8731, FALSE, 25),
+(4104006, 'Campina Grande do Sul', -25.3044, -49.0551, FALSE, 41),
+(3111101, 'Campina Verde', -19.5382, -49.4862, FALSE, 31),
+(5204656, 'Campinaçu', -13.787, -48.5704, FALSE, 52),
+(5102603, 'Campinápolis', -14.5162, -52.893, FALSE, 51),
+(3509502, 'Campinas', -22.9053, -47.0659, FALSE, 35),
+(2202109, 'Campinas do Piauí', -7.6593, -41.8775, FALSE, 22),
+(4303806, 'Campinas do Sul', -27.7174, -52.6248, FALSE, 43),
+(5204706, 'Campinorte', -14.3137, -49.1511, FALSE, 52),
+(4203303, 'Campo Alegre', -26.195, -49.2676, FALSE, 42),
+(2701407, 'Campo Alegre', -9.78451, -36.3525, FALSE, 27),
+(5204805, 'Campo Alegre de Goiás', -17.6363, -47.7768, FALSE, 52),
+(2905909, 'Campo Alegre de Lourdes', -9.52221, -43.0126, FALSE, 29),
+(2202117, 'Campo Alegre do Fidalgo', -8.38236, -41.8344, FALSE, 22),
+(3111150, 'Campo Azul', -16.5028, -44.8096, FALSE, 31),
+(3111200, 'Campo Belo', -20.8932, -45.2699, FALSE, 31),
+(4203402, 'Campo Belo do Sul', -27.8975, -50.7595, FALSE, 42),
+(4303905, 'Campo Bom', -29.6747, -51.0606, FALSE, 43),
+(4104055, 'Campo Bonito', -25.0294, -52.9939, FALSE, 41),
+(2801009, 'Campo do Brito', -10.7392, -37.4954, FALSE, 28),
+(3111309, 'Campo do Meio', -21.1127, -45.8273, FALSE, 31),
+(4104105, 'Campo do Tenente', -25.98, -49.6844, FALSE, 41),
+(4203501, 'Campo Erê', -26.3931, -53.0856, FALSE, 42),
+(3111408, 'Campo Florido', -19.7631, -48.5716, FALSE, 31),
+(2906006, 'Campo Formoso', -10.5105, -40.32, FALSE, 29),
+(2701506, 'Campo Grande', -9.95542, -36.7926, FALSE, 27),
+(5002704, 'Campo Grande', -20.4486, -54.6295, TRUE, 50),
+(2202133, 'Campo Grande do Piauí', -7.12827, -41.0315, FALSE, 22),
+(4104204, 'Campo Largo', -25.4525, -49.529, FALSE, 41),
+(2202174, 'Campo Largo do Piauí', -3.80441, -42.64, FALSE, 22),
+(5204854, 'Campo Limpo de Goiás', -16.2971, -49.0895, FALSE, 52),
+(3509601, 'Campo Limpo Paulista', -23.2078, -46.7889, FALSE, 35),
+(4104253, 'Campo Magro', -25.3687, -49.4501, FALSE, 41),
+(2202208, 'Campo Maior', -4.8217, -42.1641, FALSE, 22),
+(4104303, 'Campo Mourão', -24.0463, -52.378, FALSE, 41),
+(4304002, 'Campo Novo', -27.6792, -53.8052, FALSE, 43),
+(1100700, 'Campo Novo de Rondônia', -10.5712, -63.6266, FALSE, 11),
+(5102637, 'Campo Novo do Parecis', -13.6587, -57.8907, FALSE, 51),
+(2402105, 'Campo Redondo', -6.23829, -36.1888, FALSE, 24),
+(5102678, 'Campo Verde', -15.545, -55.1626, FALSE, 51),
+(3111507, 'Campos Altos', -19.6914, -46.1725, FALSE, 31),
+(5204904, 'Campos Belos', -13.035, -46.7681, FALSE, 52),
+(4304101, 'Campos Borges', -28.8871, -53.0008, FALSE, 43),
+(5102686, 'Campos de Júlio', -13.7242, -59.2858, FALSE, 51),
+(3509700, 'Campos do Jordão', -22.7296, -45.5833, FALSE, 35),
+(3301009, 'Campos dos Goytacazes', -21.7622, -41.3181, FALSE, 33),
+(3111606, 'Campos Gerais', -21.237, -45.7569, FALSE, 31),
+(1703842, 'Campos Lindos', -7.98956, -46.8645, FALSE, 17),
+(4203600, 'Campos Novos', -27.4002, -51.2276, FALSE, 42),
+(3509809, 'Campos Novos Paulista', -22.602, -49.9987, FALSE, 35),
+(2302701, 'Campos Sales', -7.06761, -40.3687, FALSE, 23),
+(5204953, 'Campos Verdes', -14.2442, -49.6528, FALSE, 52),
+(2603603, 'Camutanga', -7.40545, -35.2664, FALSE, 26),
+(3111903, 'Cana Verde', -21.0232, -45.1801, FALSE, 31),
+(3111705, 'Canaã', -20.6869, -42.6167, FALSE, 31),
+(1502152, 'Canaã dos Carajás', -6.49659, -49.8776, FALSE, 15),
+(5102694, 'Canabrava do Norte', -11.0556, -51.8209, FALSE, 51),
+(3509908, 'Cananéia', -25.0144, -47.9341, FALSE, 35),
+(2701605, 'Canapi', -9.11932, -37.5967, FALSE, 27),
+(2906105, 'Canápolis', -13.0725, -44.201, FALSE, 29),
+(3111804, 'Canápolis', -18.7212, -49.2035, FALSE, 31),
+(2906204, 'Canarana', -11.6858, -41.7677, FALSE, 29),
+(5102702, 'Canarana', -13.5515, -52.2705, FALSE, 51),
+(3509957, 'Canas', -22.7003, -45.0521, FALSE, 35),
+(2202251, 'Canavieira', -7.68821, -43.7233, FALSE, 22),
+(2906303, 'Canavieiras', -15.6722, -38.9536, FALSE, 29),
+(2906402, 'Candeal', -11.8049, -39.1203, FALSE, 29),
+(2906501, 'Candeias', -12.6716, -38.5472, FALSE, 29),
+(3112000, 'Candeias', -20.7692, -45.2765, FALSE, 31),
+(1100809, 'Candeias do Jamari', -8.7907, -63.7005, FALSE, 11),
+(4304200, 'Candelária', -29.6684, -52.7895, FALSE, 43),
+(2906600, 'Candiba', -14.4097, -42.8667, FALSE, 29),
+(4104402, 'Cândido de Abreu', -24.5649, -51.3372, FALSE, 41),
+(4304309, 'Cândido Godói', -27.9515, -54.7517, FALSE, 43),
+(2102606, 'Cândido Mendes', -1.43265, -45.7161, FALSE, 21),
+(3510005, 'Cândido Mota', -22.7471, -50.3873, FALSE, 35),
+(3510104, 'Cândido Rodrigues', -21.3275, -48.6327, FALSE, 35),
+(2906709, 'Cândido Sales', -15.4993, -41.2414, FALSE, 29),
+(4304358, 'Candiota', -31.5516, -53.6773, FALSE, 43),
+(4104428, 'Candói', -25.5758, -52.0409, FALSE, 41),
+(4304408, 'Canela', -29.356, -50.8119, FALSE, 43),
+(4203709, 'Canelinha', -27.2616, -48.7658, FALSE, 42),
+(2402204, 'Canguaretama', -6.37193, -35.1281, FALSE, 24),
+(4304507, 'Canguçu', -31.396, -52.6783, FALSE, 43),
+(2801108, 'Canhoba', -10.1365, -36.9806, FALSE, 28),
+(2603702, 'Canhotinho', -8.87652, -36.1979, FALSE, 26),
+(2302800, 'Canindé', -4.35162, -39.3155, FALSE, 23),
+(2801207, 'Canindé de São Francisco', -9.64882, -37.7923, FALSE, 28),
+(3510153, 'Canitar', -23.004, -49.7839, FALSE, 35),
+(4304606, 'Canoas', -29.9128, -51.1857, FALSE, 43),
+(4203808, 'Canoinhas', -26.1766, -50.395, FALSE, 42),
+(2906808, 'Cansanção', -10.6647, -39.4944, FALSE, 29),
+(1400175, 'Cantá', 2.60994, -60.6058, FALSE, 14),
+(3301108, 'Cantagalo', -21.9797, -42.3664, FALSE, 33),
+(4104451, 'Cantagalo', -25.3734, -52.1198, FALSE, 41),
+(3112059, 'Cantagalo', -18.5248, -42.6223, FALSE, 31),
+(2102705, 'Cantanhede', -3.63757, -44.383, FALSE, 21),
+(2202307, 'Canto do Buriti', -8.1111, -42.9517, FALSE, 22),
+(2906824, 'Canudos', -9.90014, -39.1471, FALSE, 29),
+(4304614, 'Canudos do Vale', -29.3271, -52.2374, FALSE, 43),
+(1300904, 'Canutama', -6.52582, -64.3953, FALSE, 13),
+(1502202, 'Capanema', -1.20529, -47.1778, FALSE, 15),
+(4104501, 'Capanema', -25.6691, -53.8055, FALSE, 41),
+(4203253, 'Capão Alto', -27.9389, -50.5098, FALSE, 42),
+(3510203, 'Capão Bonito', -24.0113, -48.3482, FALSE, 35),
+(4304622, 'Capão Bonito do Sul', -28.1254, -51.3961, FALSE, 43),
+(4304630, 'Capão da Canoa', -29.7642, -50.0282, FALSE, 43),
+(4304655, 'Capão do Cipó', -28.9312, -54.5558, FALSE, 43),
+(4304663, 'Capão do Leão', -31.7565, -52.4889, FALSE, 43),
+(3112109, 'Caparaó', -20.5289, -41.9061, FALSE, 31),
+(2701704, 'Capela', -9.41504, -36.0826, FALSE, 27),
+(2801306, 'Capela', -10.5069, -37.0628, FALSE, 28),
+(4304689, 'Capela de Santana', -29.6961, -51.328, FALSE, 43),
+(3510302, 'Capela do Alto', -23.4685, -47.7388, FALSE, 35),
+(2906857, 'Capela do Alto Alegre', -11.6658, -39.8349, FALSE, 29),
+(3112208, 'Capela Nova', -20.9179, -43.622, FALSE, 31),
+(3112307, 'Capelinha', -17.6888, -42.5147, FALSE, 31),
+(3112406, 'Capetinga', -20.6163, -47.0571, FALSE, 31),
+(2504033, 'Capim', -6.91624, -35.1673, FALSE, 25),
+(3112505, 'Capim Branco', -19.5471, -44.1304, FALSE, 31),
+(2906873, 'Capim Grosso', -11.3797, -40.0089, FALSE, 29),
+(3112604, 'Capinópolis', -18.6862, -49.5706, FALSE, 31),
+(4203907, 'Capinzal', -27.3473, -51.6057, FALSE, 42),
+(2102754, 'Capinzal do Norte', -4.7236, -44.328, FALSE, 21),
+(2302909, 'Capistrano', -4.45569, -38.9048, FALSE, 23),
+(4304697, 'Capitão', -29.2674, -51.9853, FALSE, 43),
+(3112653, 'Capitão Andrade', -19.0748, -41.8614, FALSE, 31),
+(2202406, 'Capitão de Campos', -4.457, -41.944, FALSE, 22),
+(3112703, 'Capitão Enéas', -16.3265, -43.7084, FALSE, 31),
+(2202455, 'Capitão Gervásio Oliveira', -8.49655, -41.814, FALSE, 22),
+(4104600, 'Capitão Leônidas Marques', -25.4816, -53.6112, FALSE, 41),
+(1502301, 'Capitão Poço', -1.74785, -47.0629, FALSE, 15),
+(3112802, 'Capitólio', -20.6164, -46.0493, FALSE, 31),
+(3510401, 'Capivari', -22.9951, -47.5071, FALSE, 35),
+(4203956, 'Capivari de Baixo', -28.4498, -48.9631, FALSE, 42),
+(4304671, 'Capivari do Sul', -30.1383, -50.5152, FALSE, 43),
+(1200179, 'Capixaba', -10.566, -67.686, FALSE, 12),
+(2603801, 'Capoeiras', -8.73423, -36.6306, FALSE, 26),
+(3112901, 'Caputira', -20.1703, -42.2683, FALSE, 31),
+(4304713, 'Caraá', -29.7869, -50.4316, FALSE, 43),
+(1400209, 'Caracaraí', 1.82766, -61.1304, FALSE, 14),
+(2202505, 'Caracol', -9.27933, -43.329, FALSE, 22),
+(5002803, 'Caracol', -22.011, -57.0277, FALSE, 50),
+(3510500, 'Caraguatatuba', -23.6125, -45.4125, FALSE, 35),
+(3113008, 'Caraí', -17.1862, -41.7004, FALSE, 31),
+(2906899, 'Caraíbas', -14.7177, -41.2603, FALSE, 29),
+(4104659, 'Carambeí', -24.9152, -50.0986, FALSE, 41),
+(3113107, 'Caranaíba', -20.8707, -43.7417, FALSE, 31),
+(3113206, 'Carandaí', -20.9566, -43.811, FALSE, 31),
+(3113305, 'Carangola', -20.7343, -42.0313, FALSE, 31),
+(3300936, 'Carapebus', -22.1821, -41.663, FALSE, 33),
+(3510609, 'Carapicuíba', -23.5235, -46.8407, FALSE, 35),
+(3113404, 'Caratinga', -19.7868, -42.1292, FALSE, 31),
+(1301001, 'Carauari', -4.88161, -66.9086, FALSE, 13),
+(2402303, 'Caraúbas', -5.78387, -37.5586, FALSE, 24),
+(2504074, 'Caraúbas', -7.72049, -36.492, FALSE, 25),
+(2202539, 'Caraúbas do Piauí', -3.47525, -41.8425, FALSE, 22),
+(2906907, 'Caravelas', -17.7268, -39.2597, FALSE, 29),
+(4304705, 'Carazinho', -28.2958, -52.7933, FALSE, 43),
+(3113503, 'Carbonita', -17.5255, -43.0137, FALSE, 31),
+(2907004, 'Cardeal da Silva', -11.9472, -37.9469, FALSE, 29),
+(3510708, 'Cardoso', -20.08, -49.9183, FALSE, 35),
+(3301157, 'Cardoso Moreira', -21.4846, -41.6165, FALSE, 33),
+(3113602, 'Careaçu', -22.0424, -45.696, FALSE, 31),
+(1301100, 'Careiro', -3.76803, -60.369, FALSE, 13),
+(1301159, 'Careiro da Várzea', -3.314, -59.5557, FALSE, 13),
+(3201308, 'Cariacica', -20.2632, -40.4165, FALSE, 32),
+(2303006, 'Caridade', -4.22514, -39.1912, FALSE, 23),
+(2202554, 'Caridade do Piauí', -7.73435, -40.9848, FALSE, 22),
+(2907103, 'Carinhanha', -14.2985, -43.7724, FALSE, 29),
+(2801405, 'Carira', -10.3524, -37.7002, FALSE, 28),
+(2303105, 'Cariré', -3.94858, -40.476, FALSE, 23),
+(1703867, 'Cariri do Tocantins', -11.8881, -49.1609, FALSE, 17),
+(2303204, 'Caririaçu', -7.02808, -39.2828, FALSE, 23),
+(2303303, 'Cariús', -6.52428, -39.4916, FALSE, 23),
+(5102793, 'Carlinda', -9.94912, -55.8417, FALSE, 51),
+(4104709, 'Carlópolis', -23.4269, -49.7235, FALSE, 41),
+(4304804, 'Carlos Barbosa', -29.2969, -51.5028, FALSE, 43),
+(3113701, 'Carlos Chagas', -17.6973, -40.7723, FALSE, 31),
+(4304853, 'Carlos Gomes', -27.7167, -51.9121, FALSE, 43),
+(3113800, 'Carmésia', -19.0877, -43.1382, FALSE, 31),
+(3301207, 'Carmo', -21.931, -42.6046, FALSE, 33),
+(3113909, 'Carmo da Cachoeira', -21.4633, -45.2201, FALSE, 31),
+(3114006, 'Carmo da Mata', -20.5575, -44.8735, FALSE, 31),
+(3114105, 'Carmo de Minas', -22.1204, -45.1307, FALSE, 31),
+(3114204, 'Carmo do Cajuru', -20.1912, -44.7664, FALSE, 31),
+(3114303, 'Carmo do Paranaíba', -18.991, -46.3167, FALSE, 31),
+(3114402, 'Carmo do Rio Claro', -20.9736, -46.1149, FALSE, 31),
+(5205000, 'Carmo do Rio Verde', -15.3549, -49.708, FALSE, 52),
+(1703883, 'Carmolândia', -7.03262, -48.3978, FALSE, 17),
+(2801504, 'Carmópolis', -10.6449, -36.9887, FALSE, 28),
+(3114501, 'Carmópolis de Minas', -20.5396, -44.6336, FALSE, 31),
+(2603900, 'Carnaíba', -7.79342, -37.7946, FALSE, 26),
+(2402402, 'Carnaúba dos Dantas', -6.55015, -36.5868, FALSE, 24),
+(2402501, 'Carnaubais', -5.34181, -36.8335, FALSE, 24),
+(2303402, 'Carnaubal', -4.15985, -40.9413, FALSE, 23),
+(2603926, 'Carnaubeira da Penha', -8.31799, -38.7512, FALSE, 26),
+(3114550, 'Carneirinho', -19.6987, -50.6894, FALSE, 31),
+(2701803, 'Carneiros', -9.48476, -37.3773, FALSE, 27),
+(1400233, 'Caroebe', 0.884203, -59.6959, FALSE, 14),
+(2102804, 'Carolina', -7.33584, -47.4634, FALSE, 21),
+(2604007, 'Carpina', -7.84566, -35.2514, FALSE, 26),
+(3114600, 'Carrancas', -21.4898, -44.6446, FALSE, 31),
+(2504108, 'Carrapateira', -7.03414, -38.3399, FALSE, 25),
+(1703891, 'Carrasco Bonito', -5.31415, -48.0314, FALSE, 17),
+(2604106, 'Caruaru', -8.28455, -35.9699, FALSE, 26),
+(2102903, 'Carutapera', -1.19696, -46.0085, FALSE, 21),
+(3114709, 'Carvalhópolis', -21.7735, -45.8421, FALSE, 31),
+(3114808, 'Carvalhos', -22, -44.4632, FALSE, 31),
+(3510807, 'Casa Branca', -21.7708, -47.0852, FALSE, 35),
+(3114907, 'Casa Grande', -20.7925, -43.9343, FALSE, 31),
+(2907202, 'Casa Nova', -9.16408, -40.974, FALSE, 29),
+(4304903, 'Casca', -28.5605, -51.9815, FALSE, 43),
+(3115003, 'Cascalho Rico', -18.5772, -47.8716, FALSE, 31),
+(4104808, 'Cascavel', -24.9573, -53.459, FALSE, 41),
+(2303501, 'Cascavel', -4.12967, -38.2412, FALSE, 23),
+(1703909, 'Caseara', -9.27612, -49.9521, FALSE, 17),
+(4304952, 'Caseiros', -28.2582, -51.6861, FALSE, 43),
+(3301306, 'Casimiro de Abreu', -22.4812, -42.2066, FALSE, 33),
+(2604155, 'Casinhas', -7.74084, -35.7206, FALSE, 26),
+(2504157, 'Casserengue', -6.77954, -35.8179, FALSE, 25),
+(3115102, 'Cássia', -20.5831, -46.9201, FALSE, 31),
+(3510906, 'Cássia dos Coqueiros', -21.2801, -47.1643, FALSE, 35),
+(5002902, 'Cassilândia', -19.1179, -51.7313, FALSE, 50),
+(1502400, 'Castanhal', -1.29797, -47.9167, FALSE, 15),
+(5102850, 'Castanheira', -11.1251, -58.6081, FALSE, 51),
+(1100908, 'Castanheiras', -11.4253, -61.9482, FALSE, 11),
+(5205059, 'Castelândia', -18.0921, -50.203, FALSE, 52),
+(3201407, 'Castelo', -20.6033, -41.2031, FALSE, 32),
+(2202604, 'Castelo do Piauí', -5.31869, -41.5499, FALSE, 22),
+(3511003, 'Castilho', -20.8689, -51.4884, FALSE, 35),
+(4104907, 'Castro', -24.7891, -50.0108, FALSE, 41),
+(2907301, 'Castro Alves', -12.7579, -39.4248, FALSE, 29),
+(3115300, 'Cataguases', -21.3924, -42.6896, FALSE, 31),
+(5205109, 'Catalão', -18.1656, -47.944, FALSE, 52),
+(3511102, 'Catanduva', -21.1314, -48.977, FALSE, 35),
+(4105003, 'Catanduvas', -25.2044, -53.1548, FALSE, 41),
+(4204004, 'Catanduvas', -27.069, -51.6602, FALSE, 42),
+(2303600, 'Catarina', -6.12291, -39.8736, FALSE, 23),
+(3115359, 'Catas Altas', -20.0734, -43.4061, FALSE, 31),
+(3115409, 'Catas Altas da Noruega', -20.6901, -43.4939, FALSE, 31),
+(2604205, 'Catende', -8.67509, -35.7024, FALSE, 26),
+(3511201, 'Catiguá', -21.0519, -49.0616, FALSE, 35),
+(2504207, 'Catingueira', -7.12008, -37.6064, FALSE, 25),
+(2907400, 'Catolândia', -12.31, -44.8648, FALSE, 29),
+(2504306, 'Catolé do Rocha', -6.34062, -37.747, FALSE, 25),
+(2907509, 'Catu', -12.3513, -38.3791, FALSE, 29),
+(4305009, 'Catuípe', -28.2554, -54.0132, FALSE, 43),
+(3115458, 'Catuji', -17.3018, -41.5276, FALSE, 31),
+(2303659, 'Catunda', -4.64336, -40.2, FALSE, 23),
+(5205208, 'Caturaí', -16.4447, -49.4936, FALSE, 52),
+(2907558, 'Caturama', -13.3239, -42.2904, FALSE, 29),
+(2504355, 'Caturité', -7.41659, -36.0306, FALSE, 25),
+(3115474, 'Catuti', -15.3616, -42.9627, FALSE, 31),
+(2303709, 'Caucaia', -3.72797, -38.6619, FALSE, 23),
+(5205307, 'Cavalcante', -13.7976, -47.4566, FALSE, 52),
+(3115508, 'Caxambu', -21.9753, -44.9319, FALSE, 31),
+(4204103, 'Caxambu do Sul', -27.1624, -52.8807, FALSE, 42),
+(2103000, 'Caxias', -4.86505, -43.3617, FALSE, 21),
+(4305108, 'Caxias do Sul', -29.1629, -51.1792, FALSE, 43),
+(2202653, 'Caxingó', -3.41904, -41.8955, FALSE, 22),
+(2402600, 'Ceará-Mirim', -5.64323, -35.4247, FALSE, 24),
+(2103109, 'Cedral', -2.00027, -44.5281, FALSE, 21),
+(3511300, 'Cedral', -20.9009, -49.2664, FALSE, 35),
+(2303808, 'Cedro', -6.60034, -39.0609, FALSE, 23),
+(2604304, 'Cedro', -7.71179, -39.2367, FALSE, 26),
+(2801603, 'Cedro de São João', -10.2534, -36.8856, FALSE, 28),
+(3115607, 'Cedro do Abaeté', -19.1458, -45.712, FALSE, 31),
+(4204152, 'Celso Ramos', -27.6327, -51.335, FALSE, 42),
+(4305116, 'Centenário', -27.7615, -51.9984, FALSE, 43),
+(1704105, 'Centenário', -8.96103, -47.3304, FALSE, 17),
+(4105102, 'Centenário do Sul', -22.8188, -51.5973, FALSE, 41),
+(2907608, 'Central', -11.1376, -42.1116, FALSE, 29),
+(3115706, 'Central de Minas', -18.7612, -41.3143, FALSE, 31),
+(2103125, 'Central do Maranhão', -2.19831, -44.8254, FALSE, 21),
+(3115805, 'Centralina', -18.5852, -49.2014, FALSE, 31),
+(2103158, 'Centro do Guilherme', -2.44891, -46.0345, FALSE, 21),
+(2103174, 'Centro Novo do Maranhão', -2.12696, -46.1228, FALSE, 21),
+(1100056, 'Cerejeiras', -13.187, -60.8168, FALSE, 11),
+(5205406, 'Ceres', -15.3061, -49.6, FALSE, 52),
+(3511409, 'Cerqueira César', -23.038, -49.1655, FALSE, 35),
+(3511508, 'Cerquilho', -23.1665, -47.7459, FALSE, 35),
+(4305124, 'Cerrito', -31.8419, -52.8004, FALSE, 43),
+(4105201, 'Cerro Azul', -26.0891, -52.8691, FALSE, 41),
+(4305132, 'Cerro Branco', -29.657, -52.9406, FALSE, 43),
+(2402709, 'Cerro Corá', -6.03503, -36.3503, FALSE, 24),
+(4305157, 'Cerro Grande', -27.6106, -53.1672, FALSE, 43),
+(4305173, 'Cerro Grande do Sul', -30.5905, -51.7418, FALSE, 43),
+(4305207, 'Cerro Largo', -28.1463, -54.7428, FALSE, 43),
+(4204178, 'Cerro Negro', -27.7942, -50.8673, FALSE, 42),
+(3511607, 'Cesário Lange', -23.226, -47.9545, FALSE, 35),
+(4105300, 'Céu Azul', -25.1489, -53.8415, FALSE, 41),
+(5205455, 'Cezarina', -16.9718, -49.7758, FALSE, 52),
+(2604403, 'Chã de Alegria', -8.00679, -35.204, FALSE, 26),
+(2604502, 'Chã Grande', -8.23827, -35.4571, FALSE, 26),
+(2701902, 'Chã Preta', -9.2556, -36.2983, FALSE, 27),
+(3115904, 'Chácara', -21.6733, -43.215, FALSE, 31),
+(3116001, 'Chalé', -20.0453, -41.6897, FALSE, 31),
+(4305306, 'Chapada', -28.0559, -53.0665, FALSE, 43),
+(1705102, 'Chapada da Natividade', -11.6175, -47.7486, FALSE, 17),
+(1704600, 'Chapada de Areia', -10.1419, -49.1403, FALSE, 17),
+(3116100, 'Chapada do Norte', -17.0881, -42.5392, FALSE, 31),
+(5103007, 'Chapada dos Guimarães', -15.4643, -55.7499, FALSE, 51),
+(3116159, 'Chapada Gaúcha', -15.3014, -45.6116, FALSE, 31),
+(5205471, 'Chapadão do Céu', -18.4073, -52.549, FALSE, 52),
+(4204194, 'Chapadão do Lageado', -27.5905, -49.5539, FALSE, 42),
+(5002951, 'Chapadão do Sul', -18.788, -52.6263, FALSE, 50),
+(2103208, 'Chapadinha', -3.73875, -43.3538, FALSE, 21),
+(4204202, 'Chapecó', -27.1004, -52.6152, FALSE, 42),
+(3511706, 'Charqueada', -22.5096, -47.7755, FALSE, 35),
+(4305355, 'Charqueadas', -29.9625, -51.6289, FALSE, 43),
+(4305371, 'Charrua', -27.9493, -52.015, FALSE, 43),
+(2303907, 'Chaval', -3.03571, -41.2435, FALSE, 23),
+(3557204, 'Chavantes', -23.0366, -49.7096, FALSE, 35),
+(1502509, 'Chaves', -0.164154, -49.987, FALSE, 15),
+(3116209, 'Chiador', -21.9996, -43.0617, FALSE, 31),
+(4305405, 'Chiapetta', -27.923, -53.9419, FALSE, 43),
+(4105409, 'Chopinzinho', -25.8515, -52.5173, FALSE, 41),
+(2303931, 'Choró', -4.83906, -39.1344, FALSE, 23),
+(2303956, 'Chorozinho', -4.28873, -38.4986, FALSE, 23),
+(2907707, 'Chorrochó', -8.9695, -39.0979, FALSE, 29),
+(4305439, 'Chuí', -33.6866, -53.4594, FALSE, 43),
+(1100924, 'Chupinguaia', -12.5611, -60.8877, FALSE, 11),
+(4305447, 'Chuvisca', -30.7504, -51.9737, FALSE, 43),
+(4105508, 'Cianorte', -23.6599, -52.6054, FALSE, 41),
+(2907806, 'Cícero Dantas', -10.5897, -38.3794, FALSE, 29),
+(4105607, 'Cidade Gaúcha', -23.3772, -52.9436, FALSE, 41),
+(5205497, 'Cidade Ocidental', -16.0765, -47.9252, FALSE, 52),
+(2103257, 'Cidelândia', -5.17465, -47.7781, FALSE, 21),
+(4305454, 'Cidreira', -30.1604, -50.2337, FALSE, 43),
+(2907905, 'Cipó', -11.1032, -38.5179, FALSE, 29),
+(3116308, 'Cipotânea', -20.9026, -43.3629, FALSE, 31),
+(4305504, 'Ciríaco', -28.3419, -51.8741, FALSE, 43),
+(3116407, 'Claraval', -20.397, -47.2768, FALSE, 31),
+(3116506, 'Claro dos Poções', -17.082, -44.2061, FALSE, 31),
+(5103056, 'Cláudia', -11.5075, -54.8835, FALSE, 51),
+(3116605, 'Cláudio', -20.4437, -44.7673, FALSE, 31),
+(3511904, 'Clementina', -21.5604, -50.4525, FALSE, 35),
+(4105706, 'Clevelândia', -26.4043, -52.3508, FALSE, 41),
+(2908002, 'Coaraci', -14.637, -39.5556, FALSE, 29),
+(1301209, 'Coari', -4.09412, -63.1441, FALSE, 13),
+(2202703, 'Cocal', -3.47279, -41.5546, FALSE, 22),
+(2202711, 'Cocal de Telha', -4.5571, -41.9587, FALSE, 22),
+(4204251, 'Cocal do Sul', -28.5986, -49.3335, FALSE, 42),
+(2202729, 'Cocal dos Alves', -3.62047, -41.4402, FALSE, 22),
+(5103106, 'Cocalinho', -14.3903, -51.0001, FALSE, 51),
+(5205513, 'Cocalzinho de Goiás', -15.7914, -48.7747, FALSE, 52),
+(2908101, 'Cocos', -14.1814, -44.5352, FALSE, 29),
+(1301308, 'Codajás', -3.83053, -62.0658, FALSE, 13),
+(2103307, 'Codó', -4.45562, -43.8924, FALSE, 21),
+(2103406, 'Coelho Neto', -4.25245, -43.0108, FALSE, 21),
+(3116704, 'Coimbra', -20.8535, -42.8008, FALSE, 31),
+(2702009, 'Coité do Nóia', -9.63348, -36.5845, FALSE, 27),
+(2202737, 'Coivaras', -5.09224, -42.208, FALSE, 22),
+(1502608, 'Colares', -0.936423, -48.2803, FALSE, 15),
+(3201506, 'Colatina', -19.5493, -40.6269, FALSE, 32),
+(5103205, 'Colíder', -10.8135, -55.461, FALSE, 51),
+(3512001, 'Colina', -20.7114, -48.5387, FALSE, 35),
+(4305587, 'Colinas', -29.3948, -51.8556, FALSE, 43),
+(2103505, 'Colinas', -6.03199, -44.2543, FALSE, 21),
+(5205521, 'Colinas do Sul', -14.1528, -48.076, FALSE, 52),
+(1705508, 'Colinas do Tocantins', -8.05764, -48.4757, FALSE, 17),
+(1716703, 'Colméia', -8.72463, -48.7638, FALSE, 17),
+(5103254, 'Colniza', -9.46121, -59.2252, FALSE, 51),
+(3512100, 'Colômbia', -20.1768, -48.6865, FALSE, 35),
+(4105805, 'Colombo', -25.2925, -49.2262, FALSE, 41),
+(2202752, 'Colônia do Gurguéia', -8.1837, -43.794, FALSE, 22),
+(2202778, 'Colônia do Piauí', -7.22651, -42.1756, FALSE, 22),
+(2702108, 'Colônia Leopoldina', -8.91806, -35.7214, FALSE, 27),
+(4305603, 'Colorado', -28.5258, -52.9928, FALSE, 43),
+(4105904, 'Colorado', -22.8374, -51.9743, FALSE, 41),
+(1100064, 'Colorado do Oeste', -13.1174, -60.5454, FALSE, 11),
+(3116803, 'Coluna', -18.2311, -42.8352, FALSE, 31),
+(1705557, 'Combinado', -12.7917, -46.5388, FALSE, 17),
+(3116902, 'Comendador Gomes', -19.6973, -49.0789, FALSE, 31),
+(3300951, 'Comendador Levy Gasparian', -22.0404, -43.214, FALSE, 33),
+(3117009, 'Comercinho', -16.2963, -41.7945, FALSE, 31),
+(5103304, 'Comodoro', -13.6614, -59.7848, FALSE, 51),
+(2504405, 'Conceição', -7.55106, -38.5014, FALSE, 25),
+(3117108, 'Conceição da Aparecida', -21.096, -46.2049, FALSE, 31),
+(3201605, 'Conceição da Barra', -18.5883, -39.7362, FALSE, 32),
+(3115201, 'Conceição da Barra de Minas', -21.1316, -44.4729, FALSE, 31),
+(2908200, 'Conceição da Feira', -12.5078, -38.9978, FALSE, 29),
+(3117306, 'Conceição das Alagoas', -19.9172, -48.3839, FALSE, 31),
+(3117207, 'Conceição das Pedras', -22.1576, -45.4562, FALSE, 31),
+(3117405, 'Conceição de Ipanema', -19.9326, -41.6908, FALSE, 31),
+(3301405, 'Conceição de Macabu', -22.0834, -41.8719, FALSE, 33),
+(2908309, 'Conceição do Almeida', -12.7836, -39.1715, FALSE, 29),
+(1502707, 'Conceição do Araguaia', -8.26136, -49.2689, FALSE, 15),
+(2202802, 'Conceição do Canindé', -7.87638, -41.5942, FALSE, 22),
+(3201704, 'Conceição do Castelo', -20.3639, -41.2417, FALSE, 32),
+(2908408, 'Conceição do Coité', -11.56, -39.2808, FALSE, 29),
+(2908507, 'Conceição do Jacuípe', -12.3268, -38.7684, FALSE, 29),
+(2103554, 'Conceição do Lago-Açu', -3.85142, -44.8895, FALSE, 21),
+(3117504, 'Conceição do Mato Dentro', -19.0344, -43.4221, FALSE, 31),
+(3117603, 'Conceição do Pará', -19.7456, -44.8945, FALSE, 31),
+(3117702, 'Conceição do Rio Verde', -21.8778, -45.087, FALSE, 31),
+(1705607, 'Conceição do Tocantins', -12.2209, -47.2951, FALSE, 17),
+(3117801, 'Conceição dos Ouros', -22.4078, -45.7996, FALSE, 31),
+(3512209, 'Conchal', -22.3375, -47.1729, FALSE, 35),
+(3512308, 'Conchas', -23.0154, -48.0134, FALSE, 35),
+(4204301, 'Concórdia', -27.2335, -52.026, FALSE, 42),
+(1502756, 'Concórdia do Pará', -1.99238, -47.9422, FALSE, 15),
+(2504504, 'Condado', -6.89831, -37.606, FALSE, 25),
+(2604601, 'Condado', -7.58787, -35.0999, FALSE, 26),
+(2504603, 'Conde', -7.25746, -34.8999, FALSE, 25),
+(2908606, 'Conde', -11.8179, -37.6131, FALSE, 29),
+(2908705, 'Condeúba', -14.9022, -41.9718, FALSE, 29),
+(4305702, 'Condor', -28.2075, -53.4905, FALSE, 43),
+(3117836, 'Cônego Marinho', -15.2892, -44.4181, FALSE, 31),
+(3117876, 'Confins', -19.6282, -43.9931, FALSE, 31),
+(5103353, 'Confresa', -10.6437, -51.5699, FALSE, 51),
+(2504702, 'Congo', -7.79078, -36.6581, FALSE, 25),
+(3117900, 'Congonhal', -22.1488, -46.043, FALSE, 31),
+(3118007, 'Congonhas', -20.4958, -43.851, FALSE, 31),
+(3118106, 'Congonhas do Norte', -18.8021, -43.6767, FALSE, 31),
+(4106001, 'Congonhinhas', -23.5493, -50.5569, FALSE, 41),
+(3118205, 'Conquista', -19.9312, -47.5492, FALSE, 31),
+(5103361, 'Conquista D''Oeste', -14.5381, -59.5444, FALSE, 51),
+(3118304, 'Conselheiro Lafaiete', -20.6634, -43.7846, FALSE, 31),
+(4106100, 'Conselheiro Mairinck', -23.623, -50.1707, FALSE, 41),
+(3118403, 'Conselheiro Pena', -19.1789, -41.4736, FALSE, 31),
+(3118502, 'Consolação', -22.5493, -45.9255, FALSE, 31),
+(4305801, 'Constantina', -27.732, -52.9938, FALSE, 43),
+(3118601, 'Contagem', -19.9321, -44.0539, FALSE, 31),
+(4106209, 'Contenda', -25.6788, -49.535, FALSE, 41),
+(2908804, 'Contendas do Sincorá', -13.7537, -41.048, FALSE, 29),
+(3118700, 'Coqueiral', -21.1858, -45.4366, FALSE, 31),
+(4305835, 'Coqueiro Baixo', -29.1802, -52.0942, FALSE, 43),
+(2702207, 'Coqueiro Seco', -9.63715, -35.7994, FALSE, 27),
+(4305850, 'Coqueiros do Sul', -28.1194, -52.7842, FALSE, 43),
+(3118809, 'Coração de Jesus', -16.6841, -44.3635, FALSE, 31),
+(2908903, 'Coração de Maria', -12.2333, -38.7487, FALSE, 29),
+(4106308, 'Corbélia', -24.7971, -53.3006, FALSE, 41),
+(3301504, 'Cordeiro', -22.0267, -42.3648, FALSE, 33),
+(3512407, 'Cordeirópolis', -22.4778, -47.4519, FALSE, 35),
+(2909000, 'Cordeiros', -15.0356, -41.9308, FALSE, 29),
+(4204350, 'Cordilheira Alta', -26.9844, -52.6056, FALSE, 42),
+(3118908, 'Cordisburgo', -19.1224, -44.3224, FALSE, 31),
+(3119005, 'Cordislândia', -21.7891, -45.6999, FALSE, 31),
+(2304004, 'Coreaú', -3.5415, -40.6587, FALSE, 23),
+(2504801, 'Coremas', -7.00712, -37.9346, FALSE, 25),
+(5003108, 'Corguinho', -19.8243, -54.8281, FALSE, 50),
+(2909109, 'Coribe', -13.8232, -44.4586, FALSE, 29),
+(3119104, 'Corinto', -18.369, -44.4542, FALSE, 31),
+(4106407, 'Cornélio Procópio', -23.1829, -50.6498, FALSE, 41),
+(3119203, 'Coroaci', -18.6156, -42.2791, FALSE, 31),
+(3512506, 'Coroados', -21.3521, -50.2859, FALSE, 35),
+(2103604, 'Coroatá', -4.13442, -44.1244, FALSE, 21),
+(3119302, 'Coromandel', -18.4734, -47.1933, FALSE, 31),
+(4305871, 'Coronel Barros', -28.3921, -54.0686, FALSE, 43),
+(4305900, 'Coronel Bicaco', -27.7197, -53.7022, FALSE, 43),
+(4106456, 'Coronel Domingos Soares', -26.2277, -52.0356, FALSE, 41),
+(2402808, 'Coronel Ezequiel', -6.3748, -36.2223, FALSE, 24),
+(3119401, 'Coronel Fabriciano', -19.5179, -42.6276, FALSE, 31),
+(4204400, 'Coronel Freitas', -26.9057, -52.7011, FALSE, 42),
+(2402907, 'Coronel João Pessoa', -6.24974, -38.4441, FALSE, 24),
+(2909208, 'Coronel João Sá', -10.2847, -37.9198, FALSE, 29),
+(2202851, 'Coronel José Dias', -8.81397, -42.5232, FALSE, 22),
+(3512605, 'Coronel Macedo', -23.6261, -49.31, FALSE, 35),
+(4204459, 'Coronel Martins', -26.511, -52.6694, FALSE, 42),
+(3119500, 'Coronel Murta', -16.6148, -42.184, FALSE, 31),
+(3119609, 'Coronel Pacheco', -21.5898, -43.256, FALSE, 31),
+(4305934, 'Coronel Pilar', -29.2695, -51.6847, FALSE, 43),
+(5003157, 'Coronel Sapucaia', -23.2724, -55.5278, FALSE, 50),
+(4106506, 'Coronel Vivida', -25.9767, -52.5641, FALSE, 41),
+(3119708, 'Coronel Xavier Chaves', -21.0277, -44.2206, FALSE, 31),
+(3119807, 'Córrego Danta', -19.8198, -45.9032, FALSE, 31),
+(3119906, 'Córrego do Bom Jesus', -22.6269, -46.0241, FALSE, 31),
+(5205703, 'Córrego do Ouro', -16.2918, -50.5503, FALSE, 52),
+(3119955, 'Córrego Fundo', -20.4474, -45.5617, FALSE, 31),
+(3120003, 'Córrego Novo', -19.8361, -42.3988, FALSE, 31),
+(4204558, 'Correia Pinto', -27.5877, -50.3614, FALSE, 42),
+(2202901, 'Corrente', -10.4333, -45.1633, FALSE, 22),
+(2604700, 'Correntes', -9.12117, -36.3244, FALSE, 26),
+(2909307, 'Correntina', -13.3477, -44.6333, FALSE, 29),
+(2604809, 'Cortês', -8.47443, -35.5468, FALSE, 26),
+(5003207, 'Corumbá', -19.0077, -57.651, FALSE, 50),
+(5205802, 'Corumbá de Goiás', -15.9245, -48.8117, FALSE, 52),
+(5205901, 'Corumbaíba', -18.1415, -48.5626, FALSE, 52),
+(3512704, 'Corumbataí', -22.2213, -47.6215, FALSE, 35),
+(4106555, 'Corumbataí do Sul', -24.101, -52.1177, FALSE, 41),
+(1100072, 'Corumbiara', -12.9551, -60.8947, FALSE, 11),
+(4204509, 'Corupá', -26.4246, -49.246, FALSE, 42),
+(2702306, 'Coruripe', -10.1276, -36.1717, FALSE, 27),
+(3512803, 'Cosmópolis', -22.6419, -47.1926, FALSE, 35),
+(3512902, 'Cosmorama', -20.4755, -49.7827, FALSE, 35),
+(1100080, 'Costa Marques', -12.4367, -64.228, FALSE, 11),
+(5003256, 'Costa Rica', -18.5432, -53.1287, FALSE, 50),
+(2909406, 'Cotegipe', -12.0228, -44.2566, FALSE, 29),
+(3513009, 'Cotia', -23.6022, -46.919, FALSE, 35),
+(4305959, 'Cotiporã', -28.9891, -51.6971, FALSE, 43),
+(5103379, 'Cotriguaçu', -9.85656, -58.4192, FALSE, 51),
+(3120102, 'Couto de Magalhães de Minas', -18.0727, -43.4648, FALSE, 31),
+(1706001, 'Couto Magalhães', -8.28411, -49.2473, FALSE, 17),
+(4305975, 'Coxilha', -28.128, -52.3023, FALSE, 43),
+(5003306, 'Coxim', -18.5013, -54.751, FALSE, 50),
+(2504850, 'Coxixola', -7.62365, -36.6064, FALSE, 25),
+(2702355, 'Craíbas', -9.6178, -36.7697, FALSE, 27),
+(2304103, 'Crateús', -5.16768, -40.6536, FALSE, 23),
+(2304202, 'Crato', -7.2153, -39.4103, FALSE, 23),
+(3513108, 'Cravinhos', -21.338, -47.7324, FALSE, 35),
+(2909505, 'Cravolândia', -13.3531, -39.8031, FALSE, 29),
+(4204608, 'Criciúma', -28.6723, -49.3729, FALSE, 42),
+(3120151, 'Crisólita', -17.2381, -40.9184, FALSE, 31),
+(2909604, 'Crisópolis', -11.5059, -38.1515, FALSE, 29),
+(4306007, 'Crissiumal', -27.4999, -54.0994, FALSE, 43),
+(3120201, 'Cristais', -20.8733, -45.5167, FALSE, 31),
+(3513207, 'Cristais Paulista', -20.4036, -47.4209, FALSE, 35),
+(4306056, 'Cristal', -31.0046, -52.0436, FALSE, 43),
+(4306072, 'Cristal do Sul', -27.452, -53.2422, FALSE, 43),
+(1706100, 'Cristalândia', -10.5985, -49.1942, FALSE, 17),
+(2203008, 'Cristalândia do Piauí', -10.6443, -45.1893, FALSE, 22),
+(3120300, 'Cristália', -16.716, -42.8571, FALSE, 31),
+(5206206, 'Cristalina', -16.7676, -47.6131, FALSE, 52),
+(3120409, 'Cristiano Otoni', -20.8324, -43.8166, FALSE, 31),
+(5206305, 'Cristianópolis', -17.1987, -48.7034, FALSE, 52),
+(3120508, 'Cristina', -22.208, -45.2673, FALSE, 31),
+(2801702, 'Cristinápolis', -11.4668, -37.7585, FALSE, 28),
+(2203107, 'Cristino Castro', -8.82273, -44.223, FALSE, 22),
+(2909703, 'Cristópolis', -12.2249, -44.4214, FALSE, 29),
+(5206404, 'Crixás', -14.5412, -49.974, FALSE, 52),
+(1706258, 'Crixás do Tocantins', -11.0994, -48.9152, FALSE, 17),
+(2304236, 'Croatá', -4.40481, -40.9022, FALSE, 23),
+(5206503, 'Cromínia', -17.2883, -49.3798, FALSE, 52),
+(3120607, 'Crucilândia', -20.3923, -44.3334, FALSE, 31),
+(2304251, 'Cruz', -2.91813, -40.176, FALSE, 23),
+(4306106, 'Cruz Alta', -28.645, -53.6048, FALSE, 43),
+(2909802, 'Cruz das Almas', -12.6675, -39.1008, FALSE, 29),
+(2504900, 'Cruz do Espírito Santo', -7.13902, -35.0857, FALSE, 25),
+(4106803, 'Cruz Machado', -26.0166, -51.343, FALSE, 41),
+(3513306, 'Cruzália', -22.7373, -50.7909, FALSE, 35),
+(4306130, 'Cruzaltense', -27.6672, -52.6522, FALSE, 43),
+(3513405, 'Cruzeiro', -22.5728, -44.969, FALSE, 35),
+(3120706, 'Cruzeiro da Fortaleza', -18.944, -46.6669, FALSE, 31),
+(4106571, 'Cruzeiro do Iguaçu', -25.6192, -53.1285, FALSE, 41),
+(4106605, 'Cruzeiro do Oeste', -23.7799, -53.0774, FALSE, 41),
+(4106704, 'Cruzeiro do Sul', -22.9624, -52.1622, FALSE, 41),
+(4306205, 'Cruzeiro do Sul', -29.5148, -51.9928, FALSE, 43),
+(1200203, 'Cruzeiro do Sul', -7.62762, -72.6756, FALSE, 12),
+(2403004, 'Cruzeta', -6.40894, -36.7782, FALSE, 24),
+(3120805, 'Cruzília', -21.84, -44.8067, FALSE, 31),
+(4106852, 'Cruzmaltina', -24.0132, -51.4563, FALSE, 41),
+(3513504, 'Cubatão', -23.8911, -46.424, FALSE, 35),
+(2505006, 'Cubati', -6.86686, -36.3619, FALSE, 25),
+(5103403, 'Cuiabá', -15.601, -56.0974, TRUE, 51),
+(2505105, 'Cuité', -6.47647, -36.1515, FALSE, 25),
+(2505238, 'Cuité de Mamanguape', -6.91292, -35.2502, FALSE, 25),
+(2505204, 'Cuitegi', -6.89058, -35.5215, FALSE, 25),
+(1100940, 'Cujubim', -9.36065, -62.5846, FALSE, 11),
+(5206602, 'Cumari', -18.2644, -48.1511, FALSE, 52),
+(2604908, 'Cumaru', -8.00827, -35.6957, FALSE, 26),
+(1502764, 'Cumaru do Norte', -7.81097, -50.7698, FALSE, 15),
+(2801900, 'Cumbe', -10.352, -37.1846, FALSE, 28),
+(3513603, 'Cunha', -23.0731, -44.9576, FALSE, 35),
+(4204707, 'Cunha Porã', -26.895, -53.1662, FALSE, 42),
+(4204756, 'Cunhataí', -26.9709, -53.0895, FALSE, 42),
+(3120839, 'Cuparaque', -18.9648, -41.0986, FALSE, 31),
+(2605004, 'Cupira', -8.62432, -35.9518, FALSE, 26),
+(2909901, 'Curaçá', -8.98458, -39.8997, FALSE, 29),
+(2203206, 'Curimatá', -10.0326, -44.3002, FALSE, 22),
+(1502772, 'Curionópolis', -6.09965, -49.6068, FALSE, 15),
+(4106902, 'Curitiba', -25.4195, -49.2646, TRUE, 41),
+(4204806, 'Curitibanos', -27.2824, -50.5816, FALSE, 42),
+(4107009, 'Curiúva', -24.0362, -50.4576, FALSE, 41),
+(2203230, 'Currais', -9.01175, -44.4062, FALSE, 22),
+(2403103, 'Currais Novos', -6.25484, -36.5146, FALSE, 24),
+(2505279, 'Curral de Cima', -6.72325, -35.2639, FALSE, 25),
+(3120870, 'Curral de Dentro', -15.9327, -41.8557, FALSE, 31),
+(2203271, 'Curral Novo do Piauí', -7.8313, -40.8957, FALSE, 22),
+(2505303, 'Curral Velho', -7.53075, -38.1962, FALSE, 25),
+(1502806, 'Curralinho', -1.81179, -49.7952, FALSE, 15),
+(2203255, 'Curralinhos', -5.60825, -42.8376, FALSE, 22),
+(1502855, 'Curuá', -1.88775, -55.1168, FALSE, 15),
+(1502905, 'Curuçá', -0.733214, -47.8515, FALSE, 15),
+(2103703, 'Cururupu', -1.81475, -44.8644, FALSE, 21),
+(5103437, 'Curvelândia', -15.6084, -57.9133, FALSE, 51),
+(3120904, 'Curvelo', -18.7527, -44.4303, FALSE, 31),
+(2605103, 'Custódia', -8.08546, -37.6443, FALSE, 26),
+(1600212, 'Cutias', 0.970761, -50.8005, FALSE, 16),
+(5206701, 'Damianópolis', -14.5604, -46.178, FALSE, 52),
+(2505352, 'Damião', -6.63161, -35.9101, FALSE, 25),
+(5206800, 'Damolândia', -16.2544, -49.3631, FALSE, 52),
+(1706506, 'Darcinópolis', -6.71591, -47.7597, FALSE, 17),
+(2910008, 'Dário Meira', -14.4229, -39.9031, FALSE, 29),
+(3121001, 'Datas', -18.4478, -43.6591, FALSE, 31),
+(4306304, 'David Canabarro', -28.3849, -51.8482, FALSE, 43),
+(2103752, 'Davinópolis', -5.54637, -47.4217, FALSE, 21),
+(5206909, 'Davinópolis', -18.1501, -47.5568, FALSE, 52),
+(3121100, 'Delfim Moreira', -22.5036, -45.2792, FALSE, 31),
+(3121209, 'Delfinópolis', -20.3468, -46.8456, FALSE, 31),
+(2702405, 'Delmiro Gouveia', -9.38534, -37.9987, FALSE, 27),
+(3121258, 'Delta', -19.9721, -47.7841, FALSE, 31),
+(2203305, 'Demerval Lobão', -5.35875, -42.6776, FALSE, 22),
+(5103452, 'Denise', -14.7324, -57.0583, FALSE, 51),
+(5003454, 'Deodápolis', -22.2763, -54.1682, FALSE, 50),
+(2304269, 'Deputado Irapuan Pinheiro', -5.91485, -39.257, FALSE, 23),
+(4306320, 'Derrubadas', -27.2642, -53.8645, FALSE, 43),
+(3513702, 'Descalvado', -21.9002, -47.6181, FALSE, 35),
+(4204905, 'Descanso', -26.827, -53.5034, FALSE, 42),
+(3121308, 'Descoberto', -21.46, -42.9618, FALSE, 31),
+(2505402, 'Desterro', -7.287, -37.0925, FALSE, 25),
+(3121407, 'Desterro de Entre Rios', -20.665, -44.3334, FALSE, 31),
+(3121506, 'Desterro do Melo', -21.143, -43.5178, FALSE, 31),
+(4306353, 'Dezesseis de Novembro', -28.219, -55.0617, FALSE, 43),
+(3513801, 'Diadema', -23.6813, -46.6205, FALSE, 35),
+(2505600, 'Diamante', -7.41738, -38.2615, FALSE, 25),
+(4107157, 'Diamante D''Oeste', -24.9419, -54.1052, FALSE, 41),
+(4107108, 'Diamante do Norte', -22.655, -52.8617, FALSE, 41),
+(4107124, 'Diamante do Sul', -25.035, -52.6768, FALSE, 41),
+(3121605, 'Diamantina', -18.2413, -43.6031, FALSE, 31),
+(5103502, 'Diamantino', -14.4037, -56.4366, FALSE, 51),
+(1707009, 'Dianópolis', -11.624, -46.8198, FALSE, 17),
+(2910057, 'Dias d''Ávila', -12.6187, -38.2926, FALSE, 29),
+(4306379, 'Dilermando de Aguiar', -29.7054, -54.2122, FALSE, 43),
+(3121704, 'Diogo de Vasconcelos', -20.4879, -43.1953, FALSE, 31),
+(3121803, 'Dionísio', -19.8433, -42.7701, FALSE, 31),
+(4205001, 'Dionísio Cerqueira', -26.2648, -53.6351, FALSE, 42),
+(5207105, 'Diorama', -16.2329, -51.2543, FALSE, 52),
+(3513850, 'Dirce Reis', -20.4642, -50.6073, FALSE, 35),
+(2203354, 'Dirceu Arcoverde', -9.33939, -42.4348, FALSE, 22),
+(2802007, 'Divina Pastora', -10.6782, -37.1506, FALSE, 28),
+(3121902, 'Divinésia', -20.9917, -43.0003, FALSE, 31),
+(3122009, 'Divino', -20.6134, -42.1438, FALSE, 31),
+(3122108, 'Divino das Laranjeiras', -18.7755, -41.4781, FALSE, 31),
+(3201803, 'Divino de São Lourenço', -20.6229, -41.6937, FALSE, 32),
+(3513900, 'Divinolândia', -21.6637, -46.7361, FALSE, 35),
+(3122207, 'Divinolândia de Minas', -18.8004, -42.6103, FALSE, 31),
+(3122306, 'Divinópolis', -20.1446, -44.8912, FALSE, 31),
+(5208301, 'Divinópolis de Goiás', -13.2853, -46.3999, FALSE, 52),
+(1707108, 'Divinópolis do Tocantins', -9.80018, -49.2169, FALSE, 17),
+(3122355, 'Divisa Alegre', -15.7221, -41.3463, FALSE, 31),
+(3122405, 'Divisa Nova', -21.5092, -46.1904, FALSE, 31),
+(3122454, 'Divisópolis', -15.7254, -40.9997, FALSE, 31),
+(3514007, 'Dobrada', -21.5155, -48.3935, FALSE, 35),
+(3514106, 'Dois Córregos', -22.3673, -48.3819, FALSE, 35),
+(4306403, 'Dois Irmãos', -29.5836, -51.0898, FALSE, 43),
+(4306429, 'Dois Irmãos das Missões', -27.6621, -53.5304, FALSE, 43),
+(5003488, 'Dois Irmãos do Buriti', -20.6848, -55.2915, FALSE, 50),
+(1707207, 'Dois Irmãos do Tocantins', -9.25534, -49.0638, FALSE, 17),
+(4306452, 'Dois Lajeados', -28.983, -51.8396, FALSE, 43),
+(2702504, 'Dois Riachos', -9.38465, -37.0965, FALSE, 27),
+(4107207, 'Dois Vizinhos', -25.7407, -53.057, FALSE, 41),
+(3514205, 'Dolcinópolis', -20.124, -50.5149, FALSE, 35),
+(5103601, 'Dom Aquino', -15.8099, -54.9223, FALSE, 51),
+(2910107, 'Dom Basílio', -13.7565, -41.7677, FALSE, 29),
+(3122470, 'Dom Bosco', -16.652, -46.2597, FALSE, 31),
+(3122504, 'Dom Cavati', -19.3735, -42.1121, FALSE, 31),
+(1502939, 'Dom Eliseu', -4.19944, -47.8245, FALSE, 15),
+(2203404, 'Dom Expedito Lopes', -6.95332, -41.6396, FALSE, 22),
+(4306502, 'Dom Feliciano', -30.7004, -52.1026, FALSE, 43),
+(2203453, 'Dom Inocêncio', -9.00516, -41.9697, FALSE, 22),
+(3122603, 'Dom Joaquim', -18.961, -43.2544, FALSE, 31),
+(2910206, 'Dom Macedo Costa', -12.9016, -39.1923, FALSE, 29),
+(4306601, 'Dom Pedrito', -30.9756, -54.6694, FALSE, 43),
+(2103802, 'Dom Pedro', -5.03518, -44.4409, FALSE, 21),
+(4306551, 'Dom Pedro de Alcântara', -29.3639, -49.853, FALSE, 43),
+(3122702, 'Dom Silvério', -20.1627, -42.9627, FALSE, 31),
+(3122801, 'Dom Viçoso', -22.2511, -45.1643, FALSE, 31),
+(3201902, 'Domingos Martins', -20.3603, -40.6594, FALSE, 32),
+(2203420, 'Domingos Mourão', -4.2495, -41.2683, FALSE, 22),
+(4205100, 'Dona Emma', -26.981, -49.7261, FALSE, 42),
+(3122900, 'Dona Eusébia', -21.319, -42.807, FALSE, 31),
+(4306700, 'Dona Francisca', -29.6195, -53.3617, FALSE, 43),
+(2505709, 'Dona Inês', -6.61566, -35.6205, FALSE, 25),
+(3123007, 'Dores de Campos', -21.1139, -44.0207, FALSE, 31),
+(3123106, 'Dores de Guanhães', -19.0516, -42.9254, FALSE, 31),
+(3123205, 'Dores do Indaiá', -19.4628, -45.5927, FALSE, 31),
+(3202009, 'Dores do Rio Preto', -20.6931, -41.8405, FALSE, 32),
+(3123304, 'Dores do Turvo', -20.9785, -43.1834, FALSE, 31),
+(3123403, 'Doresópolis', -20.2868, -45.9007, FALSE, 31),
+(2605152, 'Dormentes', -8.44116, -40.7662, FALSE, 26),
+(5003504, 'Douradina', -22.0405, -54.6158, FALSE, 50),
+(4107256, 'Douradina', -23.3807, -53.2918, FALSE, 41),
+(3514304, 'Dourado', -22.1044, -48.3178, FALSE, 35),
+(3123502, 'Douradoquara', -18.4338, -47.5993, FALSE, 31),
+(5003702, 'Dourados', -22.2231, -54.812, FALSE, 50),
+(4107306, 'Doutor Camargo', -23.5582, -52.2178, FALSE, 41),
+(4306734, 'Doutor Maurício Cardoso', -27.5103, -54.3577, FALSE, 43),
+(4205159, 'Doutor Pedrinho', -26.7174, -49.4795, FALSE, 42),
+(4306759, 'Doutor Ricardo', -29.084, -51.9972, FALSE, 43),
+(2403202, 'Doutor Severiano', -6.08082, -38.3794, FALSE, 24),
+(4128633, 'Doutor Ulysses', -24.5665, -49.4219, FALSE, 41),
+(5207253, 'Doverlândia', -16.7188, -52.3189, FALSE, 52),
+(3514403, 'Dracena', -21.4843, -51.535, FALSE, 35),
+(3514502, 'Duartina', -22.4146, -49.4084, FALSE, 35),
+(3301603, 'Duas Barras', -22.0536, -42.5232, FALSE, 33),
+(2505808, 'Duas Estradas', -6.68499, -35.418, FALSE, 25),
+(1707306, 'Dueré', -11.3416, -49.2716, FALSE, 17),
+(3514601, 'Dumont', -21.2324, -47.9756, FALSE, 35),
+(2103901, 'Duque Bacelar', -4.15002, -42.9477, FALSE, 21),
+(3301702, 'Duque de Caxias', -22.7858, -43.3049, FALSE, 33),
+(3123528, 'Durandé', -20.2058, -41.7977, FALSE, 31),
+(3514700, 'Echaporã', -22.4326, -50.2038, FALSE, 35),
+(3202108, 'Ecoporanga', -18.3702, -40.836, FALSE, 32),
+(5207352, 'Edealina', -17.4239, -49.6644, FALSE, 52),
+(5207402, 'Edéia', -17.3406, -49.9295, FALSE, 52),
+(1301407, 'Eirunepé', -6.65677, -69.8662, FALSE, 13),
+(5003751, 'Eldorado', -23.7868, -54.2838, FALSE, 50),
+(3514809, 'Eldorado', -24.5281, -48.1141, FALSE, 35),
+(1502954, 'Eldorado do Carajás', -6.10389, -49.3553, FALSE, 15),
+(4306767, 'Eldorado do Sul', -30.0847, -51.6187, FALSE, 43),
+(2203503, 'Elesbão Veloso', -6.19947, -42.1355, FALSE, 22),
+(3514908, 'Elias Fausto', -23.0428, -47.3682, FALSE, 35),
+(2203602, 'Eliseu Martins', -8.09629, -43.6705, FALSE, 22),
+(3514924, 'Elisiário', -21.1678, -49.1146, FALSE, 35),
+(2910305, 'Elísio Medrado', -12.9417, -39.5191, FALSE, 29),
+(3123601, 'Elói Mendes', -21.6088, -45.5691, FALSE, 31),
+(2505907, 'Emas', -7.09964, -37.7163, FALSE, 25),
+(3514957, 'Embaúba', -20.9796, -48.8325, FALSE, 35),
+(3515004, 'Embu das Artes', -23.6437, -46.8579, FALSE, 35),
+(3515103, 'Embu-Guaçu', -23.8297, -46.8136, FALSE, 35),
+(3515129, 'Emilianópolis', -21.8314, -51.4832, FALSE, 35),
+(4306809, 'Encantado', -29.2351, -51.8703, FALSE, 43),
+(2403301, 'Encanto', -6.10691, -38.3033, FALSE, 24),
+(2910404, 'Encruzilhada', -15.5302, -40.9124, FALSE, 29),
+(4306908, 'Encruzilhada do Sul', -30.543, -52.5204, FALSE, 43),
+(4107405, 'Enéas Marques', -25.9445, -53.1659, FALSE, 41),
+(4107504, 'Engenheiro Beltrão', -23.797, -52.2659, FALSE, 41),
+(3123700, 'Engenheiro Caldas', -19.2065, -42.0503, FALSE, 31),
+(3515152, 'Engenheiro Coelho', -22.4836, -47.211, FALSE, 35),
+(3123809, 'Engenheiro Navarro', -17.2831, -43.947, FALSE, 31),
+(3301801, 'Engenheiro Paulo de Frontin', -22.5498, -43.6827, FALSE, 33),
+(4306924, 'Engenho Velho', -27.706, -52.9145, FALSE, 43),
+(3123858, 'Entre Folhas', -19.6218, -42.2306, FALSE, 31),
+(2910503, 'Entre Rios', -11.9392, -38.0871, FALSE, 29),
+(4205175, 'Entre Rios', -26.7225, -52.5585, FALSE, 42),
+(3123908, 'Entre Rios de Minas', -20.6706, -44.0654, FALSE, 31),
+(4107538, 'Entre Rios do Oeste', -24.7042, -54.2385, FALSE, 41),
+(4306957, 'Entre Rios do Sul', -27.5298, -52.7347, FALSE, 43),
+(4306932, 'Entre-Ijuís', -28.3686, -54.2686, FALSE, 43),
+(1301506, 'Envira', -7.43789, -70.0281, FALSE, 13),
+(1200252, 'Epitaciolândia', -11.0188, -68.7341, FALSE, 12),
+(2403400, 'Equador', -6.93835, -36.717, FALSE, 24),
+(4306973, 'Erebango', -27.8544, -52.3005, FALSE, 43),
+(4307005, 'Erechim', -27.6364, -52.2697, FALSE, 43),
+(2304277, 'Ererê', -6.02751, -38.3461, FALSE, 23),
+(2900504, 'Érico Cardoso', -13.4215, -42.1352, FALSE, 29),
+(4205191, 'Ermo', -28.9869, -49.643, FALSE, 42),
+(4307054, 'Ernestina', -28.4977, -52.5836, FALSE, 43),
+(4307203, 'Erval Grande', -27.3926, -52.574, FALSE, 43),
+(4307302, 'Erval Seco', -27.5443, -53.5005, FALSE, 43),
+(4205209, 'Erval Velho', -27.2743, -51.443, FALSE, 42),
+(3124005, 'Ervália', -20.8403, -42.6544, FALSE, 31),
+(2605202, 'Escada', -8.35672, -35.2241, FALSE, 26),
+(4307401, 'Esmeralda', -28.0518, -51.1933, FALSE, 43),
+(3124104, 'Esmeraldas', -19.764, -44.3065, FALSE, 31),
+(3124203, 'Espera Feliz', -20.6508, -41.9119, FALSE, 31),
+(2506004, 'Esperança', -7.02278, -35.8597, FALSE, 25),
+(4307450, 'Esperança do Sul', -27.3603, -53.9891, FALSE, 43),
+(4107520, 'Esperança Nova', -23.7238, -53.811, FALSE, 41),
+(1707405, 'Esperantina', -5.36593, -48.5378, FALSE, 17),
+(2203701, 'Esperantina', -3.88863, -42.2324, FALSE, 22),
+(2104008, 'Esperantinópolis', -4.87938, -44.6926, FALSE, 21),
+(4107546, 'Espigão Alto do Iguaçu', -25.4216, -52.8348, FALSE, 41),
+(1100098, 'Espigão D''Oeste', -11.5266, -61.0252, FALSE, 11),
+(3124302, 'Espinosa', -14.9249, -42.809, FALSE, 31),
+(2403509, 'Espírito Santo', -6.33563, -35.3052, FALSE, 24),
+(3124401, 'Espírito Santo do Dourado', -22.0454, -45.9548, FALSE, 31),
+(3515186, 'Espírito Santo do Pinhal', -22.1909, -46.7477, FALSE, 35),
+(3515194, 'Espírito Santo do Turvo', -22.6925, -49.4341, FALSE, 35),
+(2910602, 'Esplanada', -11.7942, -37.9432, FALSE, 29),
+(4307500, 'Espumoso', -28.7286, -52.8461, FALSE, 43),
+(4307559, 'Estação', -27.9135, -52.2635, FALSE, 43),
+(2802106, 'Estância', -11.2659, -37.4484, FALSE, 28),
+(4307609, 'Estância Velha', -29.6535, -51.1843, FALSE, 43),
+(4307708, 'Esteio', -29.852, -51.1841, FALSE, 43),
+(3124500, 'Estiva', -22.4577, -46.0191, FALSE, 31),
+(3557303, 'Estiva Gerbi', -22.2713, -46.9481, FALSE, 35),
+(2104057, 'Estreito', -6.56077, -47.4431, FALSE, 21),
+(4307807, 'Estrela', -29.5002, -51.9495, FALSE, 43),
+(3515202, 'Estrela d''Oeste', -20.2875, -50.4049, FALSE, 35),
+(3124609, 'Estrela Dalva', -21.7412, -42.4574, FALSE, 31),
+(2702553, 'Estrela de Alagoas', -9.39089, -36.7644, FALSE, 27),
+(3124708, 'Estrela do Indaiá', -19.5169, -45.7859, FALSE, 31),
+(5207501, 'Estrela do Norte', -13.8665, -49.0716, FALSE, 52),
+(3515301, 'Estrela do Norte', -22.4859, -51.6632, FALSE, 35),
+(3124807, 'Estrela do Sul', -18.7399, -47.6956, FALSE, 31),
+(4307815, 'Estrela Velha', -29.1713, -53.1639, FALSE, 43),
+(2910701, 'Euclides da Cunha', -10.5078, -39.0153, FALSE, 29),
+(3515350, 'Euclides da Cunha Paulista', -22.5545, -52.5928, FALSE, 35),
+(4307831, 'Eugênio de Castro', -28.5315, -54.1506, FALSE, 43),
+(3124906, 'Eugenópolis', -21.1002, -42.1878, FALSE, 31),
+(2910727, 'Eunápolis', -16.3715, -39.5821, FALSE, 29),
+(2304285, 'Eusébio', -3.8925, -38.4559, FALSE, 23),
+(3125002, 'Ewbank da Câmara', -21.5498, -43.5068, FALSE, 31),
+(3125101, 'Extrema', -22.854, -46.3178, FALSE, 31),
+(2403608, 'Extremoz', -5.70143, -35.3048, FALSE, 24),
+(2605301, 'Exu', -7.50364, -39.7238, FALSE, 26),
+(2506103, 'Fagundes', -7.34454, -35.7931, FALSE, 25),
+(4307864, 'Fagundes Varela', -28.8794, -51.7014, FALSE, 43),
+(5207535, 'Faina', -15.4473, -50.3622, FALSE, 52),
+(3125200, 'Fama', -21.4089, -45.8286, FALSE, 31),
+(3125309, 'Faria Lemos', -20.8097, -42.0213, FALSE, 31),
+(2304301, 'Farias Brito', -6.92146, -39.5651, FALSE, 23),
+(1503002, 'Faro', -2.16805, -56.7405, FALSE, 15),
+(4107553, 'Farol', -24.0958, -52.6217, FALSE, 41),
+(4307906, 'Farroupilha', -29.2227, -51.3419, FALSE, 43),
+(3515400, 'Fartura', -23.3916, -49.5124, FALSE, 35),
+(2203750, 'Fartura do Piauí', -9.48342, -42.7912, FALSE, 22),
+(1707553, 'Fátima', -10.7603, -48.9076, FALSE, 17),
+(2910750, 'Fátima', -10.616, -38.2239, FALSE, 29),
+(5003801, 'Fátima do Sul', -22.3789, -54.5131, FALSE, 50),
+(4107603, 'Faxinal', -24.0077, -51.3227, FALSE, 41),
+(4308003, 'Faxinal do Soturno', -29.5788, -53.4484, FALSE, 43),
+(4205308, 'Faxinal dos Guedes', -26.8451, -52.2596, FALSE, 42),
+(4308052, 'Faxinalzinho', -27.4238, -52.6789, FALSE, 43),
+(5207600, 'Fazenda Nova', -16.1834, -50.7781, FALSE, 52),
+(4107652, 'Fazenda Rio Grande', -25.6624, -49.3073, FALSE, 41),
+(4308078, 'Fazenda Vilanova', -29.5885, -51.8217, FALSE, 43),
+(1200302, 'Feijó', -8.17054, -70.351, FALSE, 12),
+(2910776, 'Feira da Mata', -14.2044, -44.2744, FALSE, 29),
+(2910800, 'Feira de Santana', -12.2664, -38.9663, FALSE, 29),
+(2702603, 'Feira Grande', -9.89859, -36.6815, FALSE, 27),
+(2605400, 'Feira Nova', -7.94704, -35.3801, FALSE, 26),
+(2802205, 'Feira Nova', -10.2616, -37.3147, FALSE, 28),
+(2104073, 'Feira Nova do Maranhão', -6.96508, -46.6786, FALSE, 21),
+(3125408, 'Felício dos Santos', -18.0755, -43.2422, FALSE, 31),
+(2403707, 'Felipe Guerra', -5.59274, -37.6875, FALSE, 24),
+(3125606, 'Felisburgo', -16.6348, -40.7605, FALSE, 31),
+(3125705, 'Felixlândia', -18.7507, -44.9004, FALSE, 31),
+(4308102, 'Feliz', -29.4527, -51.3032, FALSE, 43),
+(2702702, 'Feliz Deserto', -10.2935, -36.3028, FALSE, 27),
+(5103700, 'Feliz Natal', -12.385, -54.9227, FALSE, 51),
+(4107702, 'Fênix', -23.9135, -51.9805, FALSE, 41),
+(4107736, 'Fernandes Pinheiro', -25.4107, -50.5456, FALSE, 41),
+(3125804, 'Fernandes Tourinho', -19.1541, -42.0803, FALSE, 31),
+(2605459, 'Fernando de Noronha', -3.8396, -32.4107, FALSE, 26),
+(2104081, 'Fernando Falcão', -6.16207, -44.8979, FALSE, 21),
+(2403756, 'Fernando Pedroza', -5.69096, -36.5282, FALSE, 24),
+(3515608, 'Fernando Prestes', -21.2661, -48.6874, FALSE, 35),
+(3515509, 'Fernandópolis', -20.2806, -50.2471, FALSE, 35),
+(3515657, 'Fernão', -22.3607, -49.5187, FALSE, 35),
+(3515707, 'Ferraz de Vasconcelos', -23.5411, -46.371, FALSE, 35),
+(1600238, 'Ferreira Gomes', 0.857256, -51.1795, FALSE, 16),
+(2605509, 'Ferreiros', -7.44666, -35.2373, FALSE, 26),
+(3125903, 'Ferros', -19.2343, -43.0192, FALSE, 31),
+(3125952, 'Fervedouro', -20.726, -42.279, FALSE, 31),
+(4107751, 'Figueira', -23.8455, -50.4031, FALSE, 41),
+(5003900, 'Figueirão', -18.6782, -53.638, FALSE, 50),
+(1707652, 'Figueirópolis', -12.1312, -49.1748, FALSE, 17),
+(5103809, 'Figueirópolis D''Oeste', -15.4439, -58.7391, FALSE, 51),
+(1707702, 'Filadélfia', -7.33501, -47.4954, FALSE, 17),
+(2910859, 'Filadélfia', -10.7405, -40.1437, FALSE, 29),
+(2910909, 'Firmino Alves', -14.9823, -39.9269, FALSE, 29),
+(5207808, 'Firminópolis', -16.5778, -50.304, FALSE, 52),
+(2702801, 'Flexeiras', -9.27281, -35.7139, FALSE, 27),
+(4107850, 'Flor da Serra do Sul', -26.2523, -53.3092, FALSE, 41),
+(4205357, 'Flor do Sertão', -26.7811, -53.3505, FALSE, 42),
+(3515806, 'Flora Rica', -21.6727, -51.3821, FALSE, 35),
+(4107801, 'Floraí', -23.3178, -52.3029, FALSE, 41),
+(2403806, 'Florânia', -6.12264, -36.8226, FALSE, 24),
+(3515905, 'Floreal', -20.6752, -50.1513, FALSE, 35),
+(2605608, 'Flores', -7.85842, -37.9715, FALSE, 26),
+(4308201, 'Flores da Cunha', -29.0261, -51.1875, FALSE, 43),
+(5207907, 'Flores de Goiás', -14.4451, -47.0417, FALSE, 52),
+(2203800, 'Flores do Piauí', -7.78793, -42.918, FALSE, 22),
+(4107900, 'Floresta', -23.6031, -52.0807, FALSE, 41),
+(2605707, 'Floresta', -8.60307, -38.5687, FALSE, 26),
+(2911006, 'Floresta Azul', -14.8629, -39.6579, FALSE, 29),
+(1503044, 'Floresta do Araguaia', -7.55335, -49.7125, FALSE, 15),
+(2203859, 'Floresta do Piauí', -7.46682, -41.7883, FALSE, 22),
+(3126000, 'Florestal', -19.888, -44.4318, FALSE, 31),
+(4108007, 'Florestópolis', -22.8623, -51.3882, FALSE, 41),
+(2203909, 'Floriano', -6.77182, -43.0241, FALSE, 22),
+(4308250, 'Floriano Peixoto', -27.8614, -52.0838, FALSE, 43),
+(4205407, 'Florianópolis', -27.5945, -48.5477, TRUE, 42),
+(4108106, 'Flórida', -23.0847, -51.9546, FALSE, 41),
+(3516002, 'Flórida Paulista', -21.6127, -51.1724, FALSE, 35),
+(3516101, 'Florínia', -22.868, -50.6814, FALSE, 35),
+(1301605, 'Fonte Boa', -2.52342, -66.0942, FALSE, 13),
+(4308300, 'Fontoura Xavier', -28.9817, -52.3445, FALSE, 43),
+(3126109, 'Formiga', -20.4618, -45.4268, FALSE, 31),
+(4308409, 'Formigueiro', -30.0035, -53.4959, FALSE, 43),
+(5208004, 'Formosa', -15.54, -47.337, FALSE, 52),
+(2104099, 'Formosa da Serra Negra', -6.44017, -46.1916, FALSE, 21),
+(4108205, 'Formosa do Oeste', -24.2951, -53.3114, FALSE, 41),
+(2911105, 'Formosa do Rio Preto', -11.0328, -45.193, FALSE, 29),
+(4205431, 'Formosa do Sul', -26.6453, -52.7946, FALSE, 42),
+(5208103, 'Formoso', -13.6499, -48.8775, FALSE, 52),
+(3126208, 'Formoso', -14.9446, -46.2371, FALSE, 31),
+(1708205, 'Formoso do Araguaia', -11.7976, -49.5316, FALSE, 17),
+(4308433, 'Forquetinha', -29.3828, -52.0981, FALSE, 43),
+(2304350, 'Forquilha', -3.79945, -40.2634, FALSE, 23),
+(4205456, 'Forquilhinha', -28.7454, -49.4785, FALSE, 42),
+(2304400, 'Fortaleza', -3.71664, -38.5423, TRUE, 23),
+(3126307, 'Fortaleza de Minas', -20.8508, -46.712, FALSE, 31),
+(1708254, 'Fortaleza do Tabocão', -9.05611, -48.5206, FALSE, 17),
+(2104107, 'Fortaleza dos Nogueiras', -6.95983, -46.1749, FALSE, 21),
+(4308458, 'Fortaleza dos Valos', -28.7986, -53.2249, FALSE, 43),
+(2304459, 'Fortim', -4.45126, -37.7981, FALSE, 23),
+(2104206, 'Fortuna', -5.72792, -44.1565, FALSE, 21),
+(3126406, 'Fortuna de Minas', -19.5578, -44.4472, FALSE, 31),
+(4108304, 'Foz do Iguaçu', -25.5427, -54.5827, FALSE, 41),
+(4108452, 'Foz do Jordão', -25.7371, -52.1188, FALSE, 41),
+(4205506, 'Fraiburgo', -27.0233, -50.92, FALSE, 42),
+(3516200, 'Franca', -20.5352, -47.4039, FALSE, 35),
+(2204006, 'Francinópolis', -6.39334, -42.2591, FALSE, 22),
+(4108320, 'Francisco Alves', -24.0667, -53.8461, FALSE, 41),
+(2204105, 'Francisco Ayres', -6.62606, -42.6881, FALSE, 22),
+(3126505, 'Francisco Badaró', -16.9883, -42.3568, FALSE, 31),
+(4108403, 'Francisco Beltrão', -26.0817, -53.0535, FALSE, 41),
+(2403905, 'Francisco Dantas', -6.07234, -38.1212, FALSE, 24),
+(3126604, 'Francisco Dumont', -17.3107, -44.2317, FALSE, 31),
+(2204154, 'Francisco Macedo', -7.331, -40.788, FALSE, 22),
+(3516309, 'Francisco Morato', -23.2792, -46.7448, FALSE, 35),
+(3126703, 'Francisco Sá', -16.4827, -43.4896, FALSE, 31),
+(2204204, 'Francisco Santos', -6.99491, -41.1288, FALSE, 22),
+(3126752, 'Franciscópolis', -17.9578, -42.0094, FALSE, 31),
+(3516408, 'Franco da Rocha', -23.3229, -46.729, FALSE, 35),
+(2304509, 'Frecheirinha', -3.75557, -40.818, FALSE, 23),
+(4308508, 'Frederico Westphalen', -27.3586, -53.3958, FALSE, 43),
+(3126802, 'Frei Gaspar', -18.0709, -41.4325, FALSE, 31),
+(3126901, 'Frei Inocêncio', -18.5556, -41.9121, FALSE, 31),
+(3126950, 'Frei Lagonegro', -18.1751, -42.7617, FALSE, 31),
+(2506202, 'Frei Martinho', -6.39759, -36.4526, FALSE, 25),
+(2605806, 'Frei Miguelinho', -7.93918, -35.9113, FALSE, 26),
+(2802304, 'Frei Paulo', -10.5513, -37.5279, FALSE, 28),
+(4205555, 'Frei Rogério', -27.175, -50.8076, FALSE, 42),
+(3127008, 'Fronteira', -20.2748, -49.1984, FALSE, 31),
+(3127057, 'Fronteira dos Vales', -16.8898, -40.923, FALSE, 31),
+(2204303, 'Fronteiras', -7.08173, -40.6146, FALSE, 22),
+(3127073, 'Fruta de Leite', -16.1225, -42.5288, FALSE, 31),
+(3127107, 'Frutal', -20.0259, -48.9355, FALSE, 31),
+(2404002, 'Frutuoso Gomes', -6.15669, -37.8375, FALSE, 24),
+(3202207, 'Fundão', -19.937, -40.4078, FALSE, 32),
+(3127206, 'Funilândia', -19.3661, -44.061, FALSE, 31),
+(3516507, 'Gabriel Monteiro', -21.5294, -50.5573, FALSE, 35),
+(2506251, 'Gado Bravo', -7.58279, -35.7899, FALSE, 25),
+(3516606, 'Gália', -22.2918, -49.5504, FALSE, 35),
+(3127305, 'Galiléia', -19.0005, -41.5387, FALSE, 31),
+(2404101, 'Galinhos', -5.0909, -36.2754, FALSE, 24),
+(4205605, 'Galvão', -26.4549, -52.6875, FALSE, 42),
+(2605905, 'Gameleira', -8.5798, -35.3846, FALSE, 26),
+(5208152, 'Gameleira de Goiás', -16.4854, -48.6454, FALSE, 52),
+(3127339, 'Gameleiras', -15.0829, -43.125, FALSE, 31),
+(2911204, 'Gandu', -13.7441, -39.4747, FALSE, 29),
+(2606002, 'Garanhuns', -8.88243, -36.4966, FALSE, 26),
+(2802403, 'Gararu', -9.9722, -37.0869, FALSE, 28),
+(3516705, 'Garça', -22.2125, -49.6546, FALSE, 35),
+(4308607, 'Garibaldi', -29.259, -51.5352, FALSE, 43),
+(4205704, 'Garopaba', -28.0275, -48.6192, FALSE, 42),
+(1503077, 'Garrafão do Norte', -1.92986, -47.0505, FALSE, 15),
+(4308656, 'Garruchos', -28.1944, -55.6383, FALSE, 43),
+(4205803, 'Garuva', -26.0292, -48.852, FALSE, 42),
+(4205902, 'Gaspar', -26.9336, -48.9534, FALSE, 42),
+(3516804, 'Gastão Vidigal', -20.7948, -50.1912, FALSE, 35),
+(5103858, 'Gaúcha do Norte', -13.2443, -53.0809, FALSE, 51),
+(4308706, 'Gaurama', -27.5856, -52.0915, FALSE, 43),
+(2911253, 'Gavião', -11.4688, -39.7757, FALSE, 29),
+(3516853, 'Gavião Peixoto', -21.8367, -48.4957, FALSE, 35),
+(2204352, 'Geminiano', -7.15476, -41.3409, FALSE, 22),
+(4308805, 'General Câmara', -29.9032, -51.7612, FALSE, 43),
+(5103908, 'General Carneiro', -15.7094, -52.7574, FALSE, 51),
+(4108502, 'General Carneiro', -26.425, -51.3172, FALSE, 41),
+(2802502, 'General Maynard', -10.6835, -36.9838, FALSE, 28),
+(3516903, 'General Salgado', -20.6485, -50.364, FALSE, 35),
+(2304608, 'General Sampaio', -4.04351, -39.454, FALSE, 23),
+(4308854, 'Gentil', -28.4316, -52.0337, FALSE, 43),
+(2911303, 'Gentio do Ouro', -11.4342, -42.5077, FALSE, 29),
+(3517000, 'Getulina', -21.7961, -49.9312, FALSE, 35),
+(4308904, 'Getúlio Vargas', -27.8911, -52.2294, FALSE, 43),
+(2204402, 'Gilbués', -9.83001, -45.3423, FALSE, 22),
+(2702900, 'Girau do Ponciano', -9.88404, -36.8316, FALSE, 27),
+(4309001, 'Giruá', -28.0297, -54.3517, FALSE, 43),
+(3127354, 'Glaucilândia', -16.8481, -43.692, FALSE, 31),
+(3517109, 'Glicério', -21.3812, -50.2123, FALSE, 35),
+(2911402, 'Glória', -9.34382, -38.2544, FALSE, 29),
+(5103957, 'Glória D''Oeste', -15.768, -58.3108, FALSE, 51),
+(5004007, 'Glória de Dourados', -22.4136, -54.2335, FALSE, 50),
+(2606101, 'Glória do Goitá', -8.00568, -35.2904, FALSE, 26),
+(4309050, 'Glorinha', -29.8798, -50.7734, FALSE, 43),
+(2104305, 'Godofredo Viana', -1.40259, -45.7795, FALSE, 21),
+(4108551, 'Godoy Moreira', -24.173, -51.9246, FALSE, 41),
+(3127370, 'Goiabeira', -18.9807, -41.2235, FALSE, 31),
+(3127388, 'Goianá', -21.536, -43.1957, FALSE, 31),
+(2606200, 'Goiana', -7.5606, -34.9959, FALSE, 26),
+(5208400, 'Goianápolis', -16.5098, -49.0234, FALSE, 52),
+(5208509, 'Goiandira', -18.1352, -48.0875, FALSE, 52),
+(5208608, 'Goianésia', -15.3118, -49.1162, FALSE, 52),
+(1503093, 'Goianésia do Pará', -3.84338, -49.0974, FALSE, 15),
+(5208707, 'Goiânia', -16.6864, -49.2643, TRUE, 52),
+(2404200, 'Goianinha', -6.26486, -35.1943, FALSE, 24),
+(5208806, 'Goianira', -16.4947, -49.427, FALSE, 52),
+(1708304, 'Goianorte', -8.77413, -48.9313, FALSE, 17),
+(5208905, 'Goiás', -15.9333, -50.14, FALSE, 52),
+(1709005, 'Goiatins', -7.71478, -47.3252, FALSE, 17),
+(5209101, 'Goiatuba', -18.0105, -49.3658, FALSE, 52),
+(4108601, 'Goioerê', -24.1835, -53.0248, FALSE, 41),
+(4108650, 'Goioxim', -25.1927, -51.9911, FALSE, 41),
+(3127404, 'Gonçalves', -22.6545, -45.8556, FALSE, 31),
+(2104404, 'Gonçalves Dias', -5.1475, -44.3013, FALSE, 21),
+(2911501, 'Gongogi', -14.3195, -39.469, FALSE, 29),
+(3127503, 'Gonzaga', -18.8196, -42.4769, FALSE, 31),
+(3127602, 'Gouveia', -18.4519, -43.7423, FALSE, 31),
+(5209150, 'Gouvelândia', -18.6238, -50.0805, FALSE, 52),
+(2104503, 'Governador Archer', -5.02078, -44.2754, FALSE, 21),
+(4206009, 'Governador Celso Ramos', -27.3172, -48.5576, FALSE, 42),
+(2404309, 'Governador Dix-Sept Rosado', -5.44887, -37.5183, FALSE, 24),
+(2104552, 'Governador Edison Lobão', -5.74973, -47.3646, FALSE, 21),
+(2104602, 'Governador Eugênio Barros', -5.31897, -44.2469, FALSE, 21),
+(1101005, 'Governador Jorge Teixeira', -10.61, -62.7371, FALSE, 11),
+(3202256, 'Governador Lindenberg', -19.1864, -40.4473, FALSE, 32),
+(2104628, 'Governador Luiz Rocha', -5.47835, -44.0774, FALSE, 21),
+(2911600, 'Governador Mangabeira', -12.5994, -39.0412, FALSE, 29),
+(2104651, 'Governador Newton Bello', -3.43245, -45.6619, FALSE, 21),
+(2104677, 'Governador Nunes Freire', -2.12899, -45.8777, FALSE, 21),
+(3127701, 'Governador Valadares', -18.8545, -41.9555, FALSE, 31),
+(2304657, 'Graça', -4.04422, -40.749, FALSE, 23),
+(2104701, 'Graça Aranha', -5.40547, -44.3358, FALSE, 21),
+(2802601, 'Gracho Cardoso', -10.2252, -37.2006, FALSE, 28),
+(2104800, 'Grajaú', -5.81367, -46.1462, FALSE, 21),
+(4309100, 'Gramado', -29.3734, -50.8762, FALSE, 43),
+(4309126, 'Gramado dos Loureiros', -27.4429, -52.9149, FALSE, 43),
+(4309159, 'Gramado Xavier', -29.2706, -52.5795, FALSE, 43),
+(4108700, 'Grandes Rios', -24.1466, -51.5094, FALSE, 41),
+(2606309, 'Granito', -7.70711, -39.615, FALSE, 26),
+(2304707, 'Granja', -3.12788, -40.8372, FALSE, 23),
+(2304806, 'Granjeiro', -6.88134, -39.2144, FALSE, 23),
+(3127800, 'Grão Mogol', -16.5662, -42.8923, FALSE, 31),
+(4206108, 'Grão Pará', -28.1809, -49.2252, FALSE, 42),
+(2606408, 'Gravatá', -8.21118, -35.5675, FALSE, 26),
+(4309209, 'Gravataí', -29.9413, -50.9869, FALSE, 43),
+(4206207, 'Gravatal', -28.3208, -49.0427, FALSE, 42),
+(2304905, 'Groaíras', -3.91787, -40.3852, FALSE, 23),
+(2404408, 'Grossos', -4.98068, -37.1621, FALSE, 24),
+(3127909, 'Grupiara', -18.5003, -47.7318, FALSE, 31),
+(4309258, 'Guabiju', -28.5421, -51.6948, FALSE, 43),
+(4206306, 'Guabiruba', -27.0808, -48.9804, FALSE, 42),
+(3202306, 'Guaçuí', -20.7668, -41.6734, FALSE, 32),
+(2204501, 'Guadalupe', -6.78285, -43.5594, FALSE, 22),
+(4309308, 'Guaíba', -30.1086, -51.3233, FALSE, 43),
+(3517208, 'Guaiçara', -21.6195, -49.8013, FALSE, 35),
+(3517307, 'Guaimbê', -21.9091, -49.8986, FALSE, 35),
+(3517406, 'Guaíra', -20.3196, -48.312, FALSE, 35),
+(4108809, 'Guaíra', -24.085, -54.2573, FALSE, 41),
+(4108908, 'Guairaçá', -22.932, -52.6906, FALSE, 41),
+(2304954, 'Guaiúba', -4.04057, -38.6404, FALSE, 23),
+(1301654, 'Guajará', -7.53797, -72.5907, FALSE, 13),
+(1100106, 'Guajará-Mirim', -10.7889, -65.3296, FALSE, 11),
+(2911659, 'Guajeru', -14.5467, -41.9381, FALSE, 29),
+(2404507, 'Guamaré', -5.10619, -36.3222, FALSE, 24),
+(4108957, 'Guamiranga', -25.1912, -50.8021, FALSE, 41),
+(2911709, 'Guanambi', -14.2231, -42.7799, FALSE, 29),
+(3128006, 'Guanhães', -18.7713, -42.9312, FALSE, 31),
+(3128105, 'Guapé', -20.7631, -45.9152, FALSE, 31),
+(3517505, 'Guapiaçu', -20.7959, -49.2172, FALSE, 35),
+(3517604, 'Guapiara', -24.1892, -48.5295, FALSE, 35),
+(3301850, 'Guapimirim', -22.5347, -42.9895, FALSE, 33),
+(4109005, 'Guapirama', -23.5203, -50.0407, FALSE, 41),
+(5209200, 'Guapó', -16.8297, -49.5345, FALSE, 52),
+(4309407, 'Guaporé', -28.8399, -51.8895, FALSE, 43),
+(4109104, 'Guaporema', -23.3402, -52.7786, FALSE, 41),
+(3517703, 'Guará', -20.4302, -47.8236, FALSE, 35),
+(2506301, 'Guarabira', -6.85064, -35.485, FALSE, 25),
+(3517802, 'Guaraçaí', -21.0292, -51.2119, FALSE, 35),
+(3517901, 'Guaraci', -20.4977, -48.9391, FALSE, 35),
+(4109203, 'Guaraci', -22.9694, -51.6504, FALSE, 41),
+(3128204, 'Guaraciaba', -20.5716, -43.0094, FALSE, 31),
+(4206405, 'Guaraciaba', -26.6042, -53.5243, FALSE, 42),
+(2305001, 'Guaraciaba do Norte', -4.15814, -40.7476, FALSE, 23),
+(3128253, 'Guaraciama', -17.0142, -43.6675, FALSE, 31),
+(1709302, 'Guaraí', -8.83543, -48.5114, FALSE, 17),
+(5209291, 'Guaraíta', -15.6121, -50.0265, FALSE, 52),
+(2305100, 'Guaramiranga', -4.26248, -38.932, FALSE, 23),
+(4206504, 'Guaramirim', -26.4688, -49.0026, FALSE, 42),
+(3128303, 'Guaranésia', -21.3009, -46.7964, FALSE, 31),
+(3128402, 'Guarani', -21.3563, -43.0328, FALSE, 31),
+(3518008, 'Guarani d''Oeste', -20.0746, -50.3411, FALSE, 35),
+(4309506, 'Guarani das Missões', -28.1491, -54.5629, FALSE, 43),
+(5209408, 'Guarani de Goiás', -13.9421, -46.4868, FALSE, 52),
+(4109302, 'Guaraniaçu', -25.0968, -52.8755, FALSE, 41),
+(3518107, 'Guarantã', -21.8942, -49.5914, FALSE, 35),
+(5104104, 'Guarantã do Norte', -9.96218, -54.9121, FALSE, 51),
+(3202405, 'Guarapari', -20.6772, -40.5093, FALSE, 32),
+(4109401, 'Guarapuava', -25.3902, -51.4623, FALSE, 41),
+(4109500, 'Guaraqueçaba', -25.3071, -48.3204, FALSE, 41),
+(3128501, 'Guarará', -21.7304, -43.0334, FALSE, 31),
+(3518206, 'Guararapes', -21.2544, -50.6453, FALSE, 35),
+(3518305, 'Guararema', -23.4112, -46.0369, FALSE, 35),
+(2911808, 'Guaratinga', -16.5833, -39.7847, FALSE, 29),
+(3518404, 'Guaratinguetá', -22.8075, -45.1938, FALSE, 35),
+(4109609, 'Guaratuba', -25.8817, -48.5752, FALSE, 41),
+(3128600, 'Guarda-Mor', -17.7673, -47.0998, FALSE, 31),
+(3518503, 'Guareí', -23.3714, -48.1837, FALSE, 35),
+(3518602, 'Guariba', -21.3594, -48.2316, FALSE, 35),
+(2204550, 'Guaribas', -9.38647, -43.6943, FALSE, 22),
+(5209457, 'Guarinos', -14.7292, -49.7006, FALSE, 52),
+(3518701, 'Guarujá', -23.9888, -46.258, FALSE, 35),
+(4206603, 'Guarujá do Sul', -26.3858, -53.5296, FALSE, 42),
+(3518800, 'Guarulhos', -23.4538, -46.5333, FALSE, 35),
+(4206652, 'Guatambú', -27.1341, -52.7887, FALSE, 42),
+(3518859, 'Guatapará', -21.4944, -48.0356, FALSE, 35),
+(3128709, 'Guaxupé', -21.305, -46.7081, FALSE, 31),
+(5004106, 'Guia Lopes da Laguna', -21.4583, -56.1117, FALSE, 50),
+(3128808, 'Guidoval', -21.155, -42.7887, FALSE, 31),
+(2104909, 'Guimarães', -2.12755, -44.602, FALSE, 21),
+(3128907, 'Guimarânia', -18.8425, -46.7901, FALSE, 31),
+(5104203, 'Guiratinga', -16.346, -53.7575, FALSE, 51),
+(3129004, 'Guiricema', -21.0098, -42.7207, FALSE, 31),
+(3129103, 'Gurinhatã', -19.2143, -49.7876, FALSE, 31),
+(2506400, 'Gurinhém', -7.1233, -35.4222, FALSE, 25),
+(2506509, 'Gurjão', -7.24833, -36.4923, FALSE, 25),
+(1503101, 'Gurupá', -1.41412, -51.6338, FALSE, 15),
+(1709500, 'Gurupi', -11.7279, -49.068, FALSE, 17),
+(3518909, 'Guzolândia', -20.6467, -50.6645, FALSE, 35),
+(4309555, 'Harmonia', -29.5456, -51.4185, FALSE, 43),
+(5209606, 'Heitoraí', -15.719, -49.8268, FALSE, 52),
+(3129202, 'Heliodora', -22.0644, -45.5453, FALSE, 31),
+(2911857, 'Heliópolis', -10.6825, -38.2907, FALSE, 29),
+(3519006, 'Herculândia', -22.0038, -50.3907, FALSE, 35),
+(4307104, 'Herval', -32.024, -53.3944, FALSE, 43),
+(4206702, 'Herval d''Oeste', -27.1903, -51.4917, FALSE, 42),
+(4309571, 'Herveiras', -29.4552, -52.6553, FALSE, 43),
+(5209705, 'Hidrolândia', -16.9626, -49.2265, FALSE, 52),
+(2305209, 'Hidrolândia', -4.40958, -40.4056, FALSE, 23),
+(5209804, 'Hidrolina', -14.7261, -49.4634, FALSE, 52),
+(3519055, 'Holambra', -22.6405, -47.0487, FALSE, 35),
+(4109658, 'Honório Serpa', -26.139, -52.3848, FALSE, 41),
+(2305233, 'Horizonte', -4.1209, -38.4707, FALSE, 23),
+(4309605, 'Horizontina', -27.6282, -54.3053, FALSE, 43),
+(3519071, 'Hortolândia', -22.8529, -47.2143, FALSE, 35),
+(2204600, 'Hugo Napoleão', -5.9886, -42.5598, FALSE, 22),
+(4309654, 'Hulha Negra', -31.4067, -53.8667, FALSE, 43),
+(4309704, 'Humaitá', -27.5691, -53.9695, FALSE, 43),
+(1301704, 'Humaitá', -7.51171, -63.0327, FALSE, 13),
+(2105005, 'Humberto de Campos', -2.59828, -43.4649, FALSE, 21),
+(3519105, 'Iacanga', -21.8896, -49.031, FALSE, 35),
+(5209903, 'Iaciara', -14.1011, -46.6335, FALSE, 52),
+(3519204, 'Iacri', -21.8572, -50.6932, FALSE, 35),
+(2911907, 'Iaçu', -12.7666, -40.2056, FALSE, 29),
+(3129301, 'Iapu', -19.4387, -42.2147, FALSE, 31),
+(3519253, 'Iaras', -22.8682, -49.1634, FALSE, 35),
+(2606507, 'Iati', -9.04559, -36.8498, FALSE, 26),
+(4109708, 'Ibaiti', -23.8478, -50.1932, FALSE, 41),
+(4309753, 'Ibarama', -29.4203, -53.1295, FALSE, 43),
+(2305266, 'Ibaretama', -4.80376, -38.7501, FALSE, 23),
+(3519303, 'Ibaté', -21.9584, -47.9882, FALSE, 35),
+(2703007, 'Ibateguara', -8.97823, -35.9373, FALSE, 27),
+(3202454, 'Ibatiba', -20.2347, -41.5087, FALSE, 32),
+(4109757, 'Ibema', -25.1193, -53.0072, FALSE, 41),
+(3129400, 'Ibertioga', -21.433, -43.9639, FALSE, 31),
+(3129509, 'Ibiá', -19.4749, -46.5474, FALSE, 31),
+(4309803, 'Ibiaçá', -28.0566, -51.8599, FALSE, 43),
+(3129608, 'Ibiaí', -16.8591, -44.9046, FALSE, 31),
+(4206751, 'Ibiam', -27.1847, -51.2352, FALSE, 42),
+(2305308, 'Ibiapina', -3.92403, -40.8911, FALSE, 23),
+(2506608, 'Ibiara', -7.47957, -38.4059, FALSE, 25),
+(2912004, 'Ibiassucê', -14.2711, -42.257, FALSE, 29),
+(2912103, 'Ibicaraí', -14.8579, -39.5914, FALSE, 29),
+(4206801, 'Ibicaré', -27.0881, -51.3681, FALSE, 42),
+(2912202, 'Ibicoara', -13.4059, -41.284, FALSE, 29),
+(2912301, 'Ibicuí', -14.845, -39.9879, FALSE, 29),
+(2305332, 'Ibicuitinga', -4.96999, -38.6362, FALSE, 23),
+(2606606, 'Ibimirim', -8.54026, -37.7032, FALSE, 26),
+(2912400, 'Ibipeba', -11.6438, -42.0195, FALSE, 29),
+(2912509, 'Ibipitanga', -12.8804, -42.4856, FALSE, 29),
+(4109807, 'Ibiporã', -23.2659, -51.0522, FALSE, 41),
+(2912608, 'Ibiquera', -12.6444, -40.9338, FALSE, 29),
+(3519402, 'Ibirá', -21.083, -49.2448, FALSE, 35),
+(3129657, 'Ibiracatu', -15.6605, -44.1667, FALSE, 31),
+(3129707, 'Ibiraci', -20.4611, -47.1222, FALSE, 31),
+(3202504, 'Ibiraçu', -19.8366, -40.3732, FALSE, 32),
+(4309902, 'Ibiraiaras', -28.3741, -51.6377, FALSE, 43),
+(2606705, 'Ibirajuba', -8.57633, -36.1812, FALSE, 26),
+(4206900, 'Ibirama', -27.0547, -49.5193, FALSE, 42),
+(2912707, 'Ibirapitanga', -14.1649, -39.3787, FALSE, 29),
+(2912806, 'Ibirapuã', -17.6832, -40.1129, FALSE, 29),
+(4309951, 'Ibirapuitã', -28.6247, -52.5158, FALSE, 43),
+(3519501, 'Ibirarema', -22.8185, -50.0739, FALSE, 35),
+(2912905, 'Ibirataia', -14.0643, -39.6459, FALSE, 29),
+(3129806, 'Ibirité', -20.0252, -44.0569, FALSE, 31),
+(4310009, 'Ibirubá', -28.6302, -53.0961, FALSE, 43),
+(2913002, 'Ibitiara', -12.6502, -42.2179, FALSE, 29),
+(3519600, 'Ibitinga', -21.7562, -48.8319, FALSE, 35),
+(3202553, 'Ibitirama', -20.5466, -41.6667, FALSE, 32),
+(2913101, 'Ibititá', -11.5414, -41.9748, FALSE, 29),
+(3129905, 'Ibitiúra de Minas', -22.0604, -46.4368, FALSE, 31),
+(3130002, 'Ibituruna', -21.1541, -44.7479, FALSE, 31),
+(3519709, 'Ibiúna', -23.6596, -47.223, FALSE, 35),
+(2913200, 'Ibotirama', -12.1779, -43.2167, FALSE, 29),
+(2305357, 'Icapuí', -4.71206, -37.3531, FALSE, 23),
+(4207007, 'Içara', -28.7132, -49.3087, FALSE, 42),
+(3130051, 'Icaraí de Minas', -16.214, -44.9034, FALSE, 31),
+(4109906, 'Icaraíma', -23.3944, -53.615, FALSE, 41),
+(2105104, 'Icatu', -2.77206, -44.0501, FALSE, 21),
+(3519808, 'Icém', -20.3391, -49.1915, FALSE, 35),
+(2913309, 'Ichu', -11.7431, -39.1905, FALSE, 29),
+(2305407, 'Icó', -6.39627, -38.8554, FALSE, 23),
+(3202603, 'Iconha', -20.7913, -40.8132, FALSE, 32),
+(2404606, 'Ielmo Marinho', -5.82447, -35.55, FALSE, 24),
+(3519907, 'Iepê', -22.6602, -51.0779, FALSE, 35),
+(2703106, 'Igaci', -9.53768, -36.6372, FALSE, 27),
+(2913408, 'Igaporã', -13.774, -42.7155, FALSE, 29),
+(3520004, 'Igaraçu do Tietê', -22.509, -48.5597, FALSE, 35),
+(2502607, 'Igaracy', -7.17184, -38.1478, FALSE, 25),
+(3520103, 'Igarapava', -20.0407, -47.7466, FALSE, 35),
+(3130101, 'Igarapé', -20.0707, -44.2994, FALSE, 31),
+(2105153, 'Igarapé do Meio', -3.65771, -45.2114, FALSE, 21),
+(2105203, 'Igarapé Grande', -4.6625, -44.8558, FALSE, 21),
+(1503200, 'Igarapé-Açu', -1.12539, -47.626, FALSE, 15),
+(1503309, 'Igarapé-Miri', -1.97533, -48.9575, FALSE, 15),
+(2606804, 'Igarassu', -7.82881, -34.9013, FALSE, 26),
+(3520202, 'Igaratá', -23.2037, -46.157, FALSE, 35),
+(3130200, 'Igaratinga', -19.9476, -44.7063, FALSE, 31),
+(2913457, 'Igrapiúna', -13.8295, -39.1361, FALSE, 29),
+(2703205, 'Igreja Nova', -10.1235, -36.6597, FALSE, 27),
+(4310108, 'Igrejinha', -29.5693, -50.7919, FALSE, 43),
+(3301876, 'Iguaba Grande', -22.8495, -42.2299, FALSE, 33),
+(2913507, 'Iguaí', -14.7528, -40.0894, FALSE, 29),
+(3520301, 'Iguape', -24.699, -47.5537, FALSE, 35),
+(4110003, 'Iguaraçu', -23.1949, -51.8256, FALSE, 41),
+(2606903, 'Iguaracy', -7.83222, -37.5082, FALSE, 26),
+(3130309, 'Iguatama', -20.1776, -45.7111, FALSE, 31),
+(5004304, 'Iguatemi', -23.6736, -54.5637, FALSE, 50),
+(2305506, 'Iguatu', -6.36281, -39.2892, FALSE, 23),
+(4110052, 'Iguatu', -24.7153, -53.0827, FALSE, 41),
+(3130408, 'Ijaci', -21.1738, -44.9233, FALSE, 31),
+(4310207, 'Ijuí', -28.388, -53.92, FALSE, 43),
+(3520426, 'Ilha Comprida', -24.7307, -47.5383, FALSE, 35),
+(2802700, 'Ilha das Flores', -10.4425, -36.5479, FALSE, 28),
+(2607604, 'Ilha de Itamaracá', -7.74766, -34.8303, FALSE, 26),
+(2204659, 'Ilha Grande', -2.85774, -41.8186, FALSE, 22),
+(3520442, 'Ilha Solteira', -20.4326, -51.3426, FALSE, 35),
+(3520400, 'Ilhabela', -23.7785, -45.3552, FALSE, 35),
+(2913606, 'Ilhéus', -14.793, -39.046, FALSE, 29),
+(4207106, 'Ilhota', -26.9023, -48.8251, FALSE, 42),
+(3130507, 'Ilicínea', -20.9402, -45.8308, FALSE, 31),
+(4310306, 'Ilópolis', -28.9282, -52.1258, FALSE, 43),
+(2506707, 'Imaculada', -7.3889, -37.5079, FALSE, 25),
+(4207205, 'Imaruí', -28.3339, -48.817, FALSE, 42),
+(4110078, 'Imbaú', -24.448, -50.7533, FALSE, 41),
+(4310330, 'Imbé', -29.9753, -50.1281, FALSE, 43),
+(3130556, 'Imbé de Minas', -19.6017, -41.9695, FALSE, 31),
+(4207304, 'Imbituba', -28.2284, -48.6659, FALSE, 42),
+(4110102, 'Imbituva', -25.2285, -50.5989, FALSE, 41),
+(4207403, 'Imbuia', -27.4908, -49.4218, FALSE, 42),
+(4310363, 'Imigrante', -29.3508, -51.7748, FALSE, 43),
+(2105302, 'Imperatriz', -5.51847, -47.4777, FALSE, 21),
+(4110201, 'Inácio Martins', -25.5704, -51.0769, FALSE, 41),
+(5209937, 'Inaciolândia', -18.4869, -49.9888, FALSE, 52),
+(2607000, 'Inajá', -8.90206, -37.8351, FALSE, 26),
+(4110300, 'Inajá', -22.7509, -52.1995, FALSE, 41),
+(3130606, 'Inconfidentes', -22.3136, -46.3264, FALSE, 31),
+(3130655, 'Indaiabira', -15.4911, -42.2005, FALSE, 31),
+(4207502, 'Indaial', -26.8992, -49.2354, FALSE, 42),
+(3520509, 'Indaiatuba', -23.0816, -47.2101, FALSE, 35),
+(4310405, 'Independência', -27.8354, -54.1886, FALSE, 43),
+(2305605, 'Independência', -5.38789, -40.3085, FALSE, 23),
+(3520608, 'Indiana', -22.1738, -51.2555, FALSE, 35),
+(4110409, 'Indianópolis', -23.4762, -52.6989, FALSE, 41),
+(3130705, 'Indianópolis', -19.0341, -47.9155, FALSE, 31),
+(3520707, 'Indiaporã', -19.979, -50.2909, FALSE, 35),
+(5209952, 'Indiara', -17.1387, -49.9862, FALSE, 52),
+(2802809, 'Indiaroba', -11.5157, -37.515, FALSE, 28),
+(5104500, 'Indiavaí', -15.4921, -58.5802, FALSE, 51),
+(2506806, 'Ingá', -7.28144, -35.605, FALSE, 25),
+(3130804, 'Ingaí', -21.4024, -44.9152, FALSE, 31),
+(2607109, 'Ingazeira', -7.66909, -37.4576, FALSE, 26),
+(4310413, 'Inhacorá', -27.8752, -54.015, FALSE, 43),
+(2913705, 'Inhambupe', -11.781, -38.355, FALSE, 29),
+(1503408, 'Inhangapi', -1.4349, -47.9114, FALSE, 15),
+(2703304, 'Inhapi', -9.22594, -37.7509, FALSE, 27),
+(3130903, 'Inhapim', -19.5476, -42.1147, FALSE, 31),
+(3131000, 'Inhaúma', -19.4898, -44.3934, FALSE, 31),
+(2204709, 'Inhuma', -6.665, -41.7041, FALSE, 22),
+(5210000, 'Inhumas', -16.3611, -49.5001, FALSE, 52),
+(3131109, 'Inimutaba', -18.7271, -44.3584, FALSE, 31),
+(5004403, 'Inocência', -19.7277, -51.9281, FALSE, 50),
+(3520806, 'Inúbia Paulista', -21.7695, -50.9633, FALSE, 35),
+(4207577, 'Iomerê', -27.0019, -51.2442, FALSE, 42),
+(3131158, 'Ipaba', -19.4158, -42.4139, FALSE, 31),
+(5210109, 'Ipameri', -17.7215, -48.1581, FALSE, 52),
+(3131208, 'Ipanema', -19.7992, -41.7164, FALSE, 31),
+(2404705, 'Ipanguaçu', -5.48984, -36.8501, FALSE, 24),
+(2305654, 'Ipaporanga', -4.89764, -40.7537, FALSE, 23),
+(3131307, 'Ipatinga', -19.4703, -42.5476, FALSE, 31),
+(2305704, 'Ipaumirim', -6.78265, -38.7179, FALSE, 23),
+(3520905, 'Ipaussu', -23.0575, -49.6279, FALSE, 35),
+(4310439, 'Ipê', -28.8171, -51.2859, FALSE, 43),
+(2913804, 'Ipecaetá', -12.3028, -39.3069, FALSE, 29),
+(3521002, 'Iperó', -23.3513, -47.6927, FALSE, 35),
+(3521101, 'Ipeúna', -22.4355, -47.7151, FALSE, 35),
+(3131406, 'Ipiaçu', -18.6927, -49.9436, FALSE, 31),
+(2913903, 'Ipiaú', -14.1226, -39.7353, FALSE, 29),
+(3521150, 'Ipiguá', -20.6557, -49.3842, FALSE, 35),
+(2914000, 'Ipirá', -12.1561, -39.7359, FALSE, 29),
+(4207601, 'Ipira', -27.4038, -51.7758, FALSE, 42),
+(4110508, 'Ipiranga', -25.0238, -50.5794, FALSE, 41),
+(5210158, 'Ipiranga de Goiás', -15.1689, -49.6695, FALSE, 52),
+(5104526, 'Ipiranga do Norte', -12.2408, -56.1531, FALSE, 51),
+(2204808, 'Ipiranga do Piauí', -6.82421, -41.7381, FALSE, 22),
+(4310462, 'Ipiranga do Sul', -27.9404, -52.4271, FALSE, 43),
+(1301803, 'Ipixuna', -7.04791, -71.6934, FALSE, 13),
+(1503457, 'Ipixuna do Pará', -2.55992, -47.5059, FALSE, 15),
+(2607208, 'Ipojuca', -8.39303, -35.0609, FALSE, 26),
+(4110607, 'Iporã', -24.0083, -53.706, FALSE, 41),
+(5210208, 'Iporá', -16.4398, -51.118, FALSE, 52),
+(4207650, 'Iporã do Oeste', -26.9854, -53.5355, FALSE, 42),
+(3521200, 'Iporanga', -24.5847, -48.5971, FALSE, 35),
+(2305803, 'Ipu', -4.31748, -40.7059, FALSE, 23),
+(3521309, 'Ipuã', -20.4438, -48.0129, FALSE, 35),
+(4207684, 'Ipuaçu', -26.635, -52.4556, FALSE, 42),
+(2607307, 'Ipubi', -7.64505, -40.1476, FALSE, 26),
+(2404804, 'Ipueira', -6.80596, -37.2045, FALSE, 24),
+(1709807, 'Ipueiras', -11.2329, -48.46, FALSE, 17),
+(2305902, 'Ipueiras', -4.53802, -40.7118, FALSE, 23),
+(3131505, 'Ipuiúna', -22.1013, -46.1915, FALSE, 31),
+(4207700, 'Ipumirim', -27.0772, -52.1289, FALSE, 42),
+(2914109, 'Ipupiara', -11.8219, -42.6179, FALSE, 29),
+(1400282, 'Iracema', 2.18305, -61.0415, FALSE, 14),
+(2306009, 'Iracema', -5.8124, -38.2919, FALSE, 23),
+(4110656, 'Iracema do Oeste', -24.4262, -53.3528, FALSE, 41),
+(3521408, 'Iracemápolis', -22.5832, -47.523, FALSE, 35),
+(4207759, 'Iraceminha', -26.8215, -53.2767, FALSE, 42),
+(4310504, 'Iraí', -27.1951, -53.2543, FALSE, 43),
+(3131604, 'Iraí de Minas', -18.9819, -47.461, FALSE, 31),
+(2914208, 'Irajuba', -13.2563, -40.0848, FALSE, 29),
+(2914307, 'Iramaia', -13.2902, -40.9595, FALSE, 29),
+(1301852, 'Iranduba', -3.27479, -60.19, FALSE, 13),
+(4207809, 'Irani', -27.0287, -51.9012, FALSE, 42),
+(3521507, 'Irapuã', -21.2768, -49.4164, FALSE, 35),
+(3521606, 'Irapuru', -21.5684, -51.3472, FALSE, 35),
+(2914406, 'Iraquara', -12.2429, -41.6155, FALSE, 29),
+(2914505, 'Irará', -12.0504, -38.7631, FALSE, 29),
+(4110706, 'Irati', -25.4697, -50.6493, FALSE, 41),
+(4207858, 'Irati', -26.6539, -52.8955, FALSE, 42),
+(2306108, 'Irauçuba', -3.74737, -39.7843, FALSE, 23),
+(2914604, 'Irecê', -11.3033, -41.8535, FALSE, 29),
+(4110805, 'Iretama', -24.4253, -52.1012, FALSE, 41),
+(4207908, 'Irineópolis', -26.242, -50.7957, FALSE, 42),
+(1503507, 'Irituia', -1.76984, -47.446, FALSE, 15),
+(3202652, 'Irupi', -20.3501, -41.6444, FALSE, 32),
+(2204907, 'Isaías Coelho', -7.73597, -41.6735, FALSE, 22),
+(5210307, 'Israelândia', -16.3144, -50.9087, FALSE, 52),
+(4208005, 'Itá', -27.2907, -52.3212, FALSE, 42),
+(4310538, 'Itaara', -29.6013, -53.7725, FALSE, 43),
+(2506905, 'Itabaiana', -7.33167, -35.3317, FALSE, 25),
+(2802908, 'Itabaiana', -10.6826, -37.4273, FALSE, 28),
+(2803005, 'Itabaianinha', -11.2693, -37.7875, FALSE, 28),
+(2914653, 'Itabela', -16.5732, -39.5593, FALSE, 29),
+(3521705, 'Itaberá', -23.8638, -49.14, FALSE, 35),
+(2914703, 'Itaberaba', -12.5242, -40.3059, FALSE, 29),
+(5210406, 'Itaberaí', -16.0206, -49.806, FALSE, 52),
+(2803104, 'Itabi', -10.1248, -37.1056, FALSE, 28),
+(3131703, 'Itabira', -19.6239, -43.2312, FALSE, 31),
+(3131802, 'Itabirinha', -18.5712, -41.234, FALSE, 31),
+(3131901, 'Itabirito', -20.2501, -43.8038, FALSE, 31),
+(3301900, 'Itaboraí', -22.7565, -42.8639, FALSE, 33),
+(2914802, 'Itabuna', -14.7876, -39.2781, FALSE, 29),
+(1710508, 'Itacajá', -8.39293, -47.7726, FALSE, 17),
+(3132008, 'Itacambira', -17.0625, -43.3069, FALSE, 31),
+(3132107, 'Itacarambi', -15.089, -44.095, FALSE, 31),
+(2914901, 'Itacaré', -14.2784, -38.9959, FALSE, 29),
+(1301902, 'Itacoatiara', -3.13861, -58.4449, FALSE, 13),
+(2607406, 'Itacuruba', -8.82231, -38.6975, FALSE, 26),
+(4310553, 'Itacurubi', -28.7913, -55.2447, FALSE, 43),
+(2915007, 'Itaeté', -12.9831, -40.9677, FALSE, 29),
+(2915106, 'Itagi', -14.1615, -40.0131, FALSE, 29),
+(2915205, 'Itagibá', -14.2782, -39.8449, FALSE, 29),
+(2915304, 'Itagimirim', -16.0819, -39.6133, FALSE, 29),
+(3202702, 'Itaguaçu', -19.8018, -40.8601, FALSE, 32),
+(2915353, 'Itaguaçu da Bahia', -11.0147, -42.3997, FALSE, 29),
+(3302007, 'Itaguaí', -22.8636, -43.7798, FALSE, 33),
+(4110904, 'Itaguajé', -22.6183, -51.9674, FALSE, 41),
+(3132206, 'Itaguara', -20.3947, -44.4875, FALSE, 31),
+(5210562, 'Itaguari', -15.918, -49.6071, FALSE, 52),
+(5210604, 'Itaguaru', -15.7565, -49.6354, FALSE, 52),
+(1710706, 'Itaguatins', -5.77267, -47.4864, FALSE, 17),
+(3521804, 'Itaí', -23.4213, -49.092, FALSE, 35),
+(2607505, 'Itaíba', -8.94569, -37.4173, FALSE, 26),
+(2306207, 'Itaiçaba', -4.67146, -37.833, FALSE, 23),
+(2205003, 'Itainópolis', -7.44336, -41.4687, FALSE, 22),
+(4208104, 'Itaiópolis', -26.339, -49.9092, FALSE, 42),
+(2105351, 'Itaipava do Grajaú', -5.14252, -45.7877, FALSE, 21),
+(3132305, 'Itaipé', -17.4014, -41.6697, FALSE, 31),
+(4110953, 'Itaipulândia', -25.1366, -54.3001, FALSE, 41),
+(2306256, 'Itaitinga', -3.96577, -38.5298, FALSE, 23),
+(1503606, 'Itaituba', -4.2667, -55.9926, FALSE, 15),
+(2404853, 'Itajá', -5.63894, -36.8712, FALSE, 24),
+(5210802, 'Itajá', -19.0673, -51.5495, FALSE, 52),
+(4208203, 'Itajaí', -26.9101, -48.6705, FALSE, 42),
+(3521903, 'Itajobi', -21.3123, -49.0629, FALSE, 35),
+(3522000, 'Itaju', -21.9857, -48.8116, FALSE, 35),
+(2915403, 'Itaju do Colônia', -15.1366, -39.7283, FALSE, 29),
+(3132404, 'Itajubá', -22.4225, -45.4598, FALSE, 31),
+(2915502, 'Itajuípe', -14.6788, -39.3698, FALSE, 29),
+(3302056, 'Italva', -21.4296, -41.7014, FALSE, 33),
+(2915601, 'Itamaraju', -17.0378, -39.5386, FALSE, 29),
+(3132503, 'Itamarandiba', -17.8552, -42.8561, FALSE, 31),
+(1301951, 'Itamarati', -6.43852, -68.2437, FALSE, 13),
+(3132602, 'Itamarati de Minas', -21.4179, -42.813, FALSE, 31),
+(2915700, 'Itamari', -13.7782, -39.683, FALSE, 29),
+(3132701, 'Itambacuri', -18.035, -41.683, FALSE, 31),
+(4111001, 'Itambaracá', -23.0181, -50.4097, FALSE, 41),
+(4111100, 'Itambé', -23.6601, -51.9912, FALSE, 41),
+(2607653, 'Itambé', -7.41403, -35.0963, FALSE, 26),
+(2915809, 'Itambé', -15.2429, -40.63, FALSE, 29),
+(3132800, 'Itambé do Mato Dentro', -19.4158, -43.3182, FALSE, 31),
+(3132909, 'Itamogi', -21.0758, -47.046, FALSE, 31),
+(3133006, 'Itamonte', -22.2859, -44.868, FALSE, 31),
+(2915908, 'Itanagra', -12.2614, -38.0436, FALSE, 29),
+(3522109, 'Itanhaém', -24.1736, -46.788, FALSE, 35),
+(3133105, 'Itanhandu', -22.2942, -44.9382, FALSE, 31),
+(5104542, 'Itanhangá', -12.2259, -56.6463, FALSE, 51),
+(2916005, 'Itanhém', -17.1642, -40.3321, FALSE, 29),
+(3133204, 'Itanhomi', -19.1736, -41.863, FALSE, 31),
+(3133303, 'Itaobim', -16.5571, -41.5017, FALSE, 31),
+(3522158, 'Itaóca', -24.6393, -48.8413, FALSE, 35),
+(3302106, 'Itaocara', -21.6748, -42.0758, FALSE, 33),
+(5210901, 'Itapaci', -14.9522, -49.5511, FALSE, 52),
+(3133402, 'Itapagipe', -19.9062, -49.3781, FALSE, 31),
+(2306306, 'Itapajé', -3.68314, -39.5855, FALSE, 23),
+(2916104, 'Itaparica', -12.8932, -38.68, FALSE, 29),
+(2916203, 'Itapé', -14.8876, -39.4239, FALSE, 29),
+(2916302, 'Itapebi', -15.9551, -39.5329, FALSE, 29),
+(3133501, 'Itapecerica', -20.4704, -45.127, FALSE, 31),
+(3522208, 'Itapecerica da Serra', -23.7161, -46.8572, FALSE, 35),
+(2105401, 'Itapecuru Mirim', -3.40202, -44.3508, FALSE, 21),
+(4111209, 'Itapejara d''Oeste', -25.9619, -52.8152, FALSE, 41),
+(4208302, 'Itapema', -27.0861, -48.616, FALSE, 42),
+(3202801, 'Itapemirim', -21.0095, -40.8307, FALSE, 32),
+(4111258, 'Itaperuçu', -25.2193, -49.3454, FALSE, 41),
+(3302205, 'Itaperuna', -21.1997, -41.8799, FALSE, 33),
+(2607703, 'Itapetim', -7.37178, -37.1863, FALSE, 26),
+(2916401, 'Itapetinga', -15.2475, -40.2482, FALSE, 29),
+(3522307, 'Itapetininga', -23.5886, -48.0483, FALSE, 35),
+(3522406, 'Itapeva', -23.9788, -48.8764, FALSE, 35),
+(3133600, 'Itapeva', -22.7665, -46.2241, FALSE, 31),
+(3522505, 'Itapevi', -23.5488, -46.9327, FALSE, 35),
+(2916500, 'Itapicuru', -11.3088, -38.2262, FALSE, 29),
+(2306405, 'Itapipoca', -3.49933, -39.5836, FALSE, 23),
+(3522604, 'Itapira', -22.4357, -46.8224, FALSE, 35),
+(1302009, 'Itapiranga', -2.74081, -58.0293, FALSE, 13),
+(4208401, 'Itapiranga', -27.1659, -53.7166, FALSE, 42),
+(5211008, 'Itapirapuã', -15.8205, -50.6094, FALSE, 52),
+(3522653, 'Itapirapuã Paulista', -24.572, -49.1661, FALSE, 35),
+(1710904, 'Itapiratins', -8.37982, -48.1072, FALSE, 17),
+(2607752, 'Itapissuma', -7.76798, -34.8971, FALSE, 26),
+(2916609, 'Itapitanga', -14.4139, -39.5657, FALSE, 29),
+(2306504, 'Itapiúna', -4.55516, -38.9281, FALSE, 23),
+(4208450, 'Itapoá', -26.1158, -48.6182, FALSE, 42),
+(3522703, 'Itápolis', -21.5942, -48.8149, FALSE, 35),
+(5004502, 'Itaporã', -22.08, -54.7934, FALSE, 50),
+(1711100, 'Itaporã do Tocantins', -8.57172, -48.6895, FALSE, 17),
+(3522802, 'Itaporanga', -23.7043, -49.4819, FALSE, 35),
+(2507002, 'Itaporanga', -7.30202, -38.1504, FALSE, 25),
+(2803203, 'Itaporanga d''Ajuda', -10.99, -37.3078, FALSE, 28),
+(2507101, 'Itapororoca', -6.82374, -35.2406, FALSE, 25),
+(1101104, 'Itapuã do Oeste', -9.19687, -63.1809, FALSE, 11),
+(4310579, 'Itapuca', -28.7768, -52.1693, FALSE, 43),
+(3522901, 'Itapuí', -22.2324, -48.7197, FALSE, 35),
+(3523008, 'Itapura', -20.6419, -51.5063, FALSE, 35),
+(5211206, 'Itapuranga', -15.5606, -49.949, FALSE, 52),
+(3523107, 'Itaquaquecetuba', -23.4835, -46.3457, FALSE, 35),
+(2916708, 'Itaquara', -13.4459, -39.9378, FALSE, 29),
+(4310603, 'Itaqui', -29.1311, -56.5515, FALSE, 43),
+(5004601, 'Itaquiraí', -23.4779, -54.187, FALSE, 50),
+(2607802, 'Itaquitinga', -7.66373, -35.1002, FALSE, 26),
+(3202900, 'Itarana', -19.875, -40.8753, FALSE, 32),
+(2916807, 'Itarantim', -15.6528, -40.065, FALSE, 29),
+(3523206, 'Itararé', -24.1085, -49.3352, FALSE, 35),
+(2306553, 'Itarema', -2.9248, -39.9167, FALSE, 23),
+(3523305, 'Itariri', -24.2834, -47.1736, FALSE, 35),
+(5211305, 'Itarumã', -18.7646, -51.3485, FALSE, 52),
+(4310652, 'Itati', -29.4974, -50.1016, FALSE, 43),
+(3302254, 'Itatiaia', -22.4897, -44.5675, FALSE, 33),
+(3133709, 'Itatiaiuçu', -20.1983, -44.4211, FALSE, 31),
+(3523404, 'Itatiba', -23.0035, -46.8464, FALSE, 35),
+(4310702, 'Itatiba do Sul', -27.3846, -52.4538, FALSE, 43),
+(2916856, 'Itatim', -12.7099, -39.6952, FALSE, 29),
+(3523503, 'Itatinga', -23.1047, -48.6157, FALSE, 35),
+(2306603, 'Itatira', -4.52608, -39.6202, FALSE, 23),
+(2507200, 'Itatuba', -7.38115, -35.638, FALSE, 25),
+(2404903, 'Itaú', -5.8363, -37.9912, FALSE, 24),
+(3133758, 'Itaú de Minas', -20.7375, -46.7525, FALSE, 31),
+(5104559, 'Itaúba', -11.0614, -55.2766, FALSE, 51),
+(1600253, 'Itaubal', 0.602185, -50.6996, FALSE, 16),
+(5211404, 'Itauçu', -16.2029, -49.6109, FALSE, 52),
+(2205102, 'Itaueira', -7.59989, -43.0249, FALSE, 22),
+(3133808, 'Itaúna', -20.0818, -44.5801, FALSE, 31),
+(4111308, 'Itaúna do Sul', -22.7289, -52.8874, FALSE, 41),
+(3133907, 'Itaverava', -20.6769, -43.6141, FALSE, 31),
+(3134004, 'Itinga', -16.61, -41.7672, FALSE, 31),
+(2105427, 'Itinga do Maranhão', -4.45293, -47.5235, FALSE, 21),
+(5104609, 'Itiquira', -17.2147, -54.1422, FALSE, 51),
+(3523602, 'Itirapina', -22.2562, -47.8166, FALSE, 35),
+(3523701, 'Itirapuã', -20.6416, -47.2194, FALSE, 35),
+(2916906, 'Itiruçu', -13.529, -40.1472, FALSE, 29),
+(2917003, 'Itiúba', -10.6948, -39.8446, FALSE, 29),
+(3523800, 'Itobi', -21.7309, -46.9743, FALSE, 35),
+(2917102, 'Itororó', -15.11, -40.0684, FALSE, 29),
+(3523909, 'Itu', -23.2544, -47.2927, FALSE, 35),
+(2917201, 'Ituaçu', -13.8107, -41.3003, FALSE, 29),
+(2917300, 'Ituberá', -13.7249, -39.1481, FALSE, 29),
+(3134103, 'Itueta', -19.3999, -41.1746, FALSE, 31),
+(3134202, 'Ituiutaba', -18.9772, -49.4639, FALSE, 31),
+(5211503, 'Itumbiara', -18.4093, -49.2158, FALSE, 52),
+(3134301, 'Itumirim', -21.3171, -44.8724, FALSE, 31),
+(3524006, 'Itupeva', -23.1526, -47.0593, FALSE, 35),
+(1503705, 'Itupiranga', -5.13272, -49.3358, FALSE, 15),
+(4208500, 'Ituporanga', -27.4101, -49.5963, FALSE, 42),
+(3134400, 'Iturama', -19.7276, -50.1966, FALSE, 31),
+(3134509, 'Itutinga', -21.3, -44.6567, FALSE, 31),
+(3524105, 'Ituverava', -20.3355, -47.7902, FALSE, 35),
+(2917334, 'Iuiú', -14.4054, -43.5595, FALSE, 29),
+(3203007, 'Iúna', -20.3531, -41.5334, FALSE, 32),
+(4111407, 'Ivaí', -25.0067, -50.857, FALSE, 41),
+(4111506, 'Ivaiporã', -24.2485, -51.6754, FALSE, 41),
+(4111555, 'Ivaté', -23.4072, -53.3687, FALSE, 41),
+(4111605, 'Ivatuba', -23.6187, -52.2203, FALSE, 41),
+(5004700, 'Ivinhema', -22.3046, -53.8184, FALSE, 50),
+(5211602, 'Ivolândia', -16.5995, -50.7921, FALSE, 52),
+(4310751, 'Ivorá', -29.5232, -53.5842, FALSE, 43),
+(4310801, 'Ivoti', -29.5995, -51.1533, FALSE, 43),
+(2607901, 'Jaboatão dos Guararapes', -8.11298, -35.015, FALSE, 26),
+(4208609, 'Jaborá', -27.1782, -51.7279, FALSE, 42),
+(2917359, 'Jaborandi', -13.6071, -44.4255, FALSE, 29),
+(3524204, 'Jaborandi', -20.6884, -48.4112, FALSE, 35),
+(4111704, 'Jaboti', -23.7435, -50.0729, FALSE, 41),
+(4310850, 'Jaboticaba', -27.6347, -53.2762, FALSE, 43),
+(3524303, 'Jaboticabal', -21.252, -48.3252, FALSE, 35),
+(3134608, 'Jaboticatubas', -19.5119, -43.7373, FALSE, 31),
+(2405009, 'Jaçanã', -6.41856, -36.2031, FALSE, 24),
+(2917409, 'Jacaraci', -14.8541, -42.4329, FALSE, 29),
+(2507309, 'Jacaraú', -6.61453, -35.289, FALSE, 25),
+(2703403, 'Jacaré dos Homens', -9.63545, -37.2076, FALSE, 27),
+(1503754, 'Jacareacanga', -6.21469, -57.7544, FALSE, 15),
+(3524402, 'Jacareí', -23.2983, -45.9658, FALSE, 35),
+(4111803, 'Jacarezinho', -23.1591, -49.9739, FALSE, 41),
+(3524501, 'Jaci', -20.8805, -49.5797, FALSE, 35),
+(5104807, 'Jaciara', -15.9548, -54.9733, FALSE, 51),
+(3134707, 'Jacinto', -16.1428, -40.295, FALSE, 31),
+(4208708, 'Jacinto Machado', -28.9961, -49.7623, FALSE, 42),
+(2917508, 'Jacobina', -11.1812, -40.5117, FALSE, 29),
+(2205151, 'Jacobina do Piauí', -7.93063, -41.2075, FALSE, 22),
+(3134806, 'Jacuí', -21.0137, -46.7359, FALSE, 31),
+(2703502, 'Jacuípe', -8.83951, -35.4591, FALSE, 27),
+(4310876, 'Jacuizinho', -29.0401, -53.0657, FALSE, 43),
+(1503804, 'Jacundá', -4.44617, -49.1153, FALSE, 15),
+(3524600, 'Jacupiranga', -24.6963, -48.0064, FALSE, 35),
+(4310900, 'Jacutinga', -27.7291, -52.5372, FALSE, 43),
+(3134905, 'Jacutinga', -22.286, -46.6166, FALSE, 31),
+(4111902, 'Jaguapitã', -23.1104, -51.5342, FALSE, 41),
+(2917607, 'Jaguaquara', -13.5248, -39.964, FALSE, 29),
+(3135001, 'Jaguaraçu', -19.647, -42.7498, FALSE, 31),
+(4311007, 'Jaguarão', -32.5604, -53.377, FALSE, 43),
+(2917706, 'Jaguarari', -10.2569, -40.1999, FALSE, 29),
+(3203056, 'Jaguaré', -18.907, -40.0759, FALSE, 32),
+(2306702, 'Jaguaretama', -5.6051, -38.7639, FALSE, 23),
+(4311106, 'Jaguari', -29.4936, -54.703, FALSE, 43),
+(4112009, 'Jaguariaíva', -24.2439, -49.7066, FALSE, 41),
+(2306801, 'Jaguaribara', -5.67765, -38.5359, FALSE, 23),
+(2306900, 'Jaguaribe', -5.90213, -38.6227, FALSE, 23),
+(2917805, 'Jaguaripe', -13.1109, -38.8939, FALSE, 29),
+(3524709, 'Jaguariúna', -22.7037, -46.9851, FALSE, 35),
+(2307007, 'Jaguaruana', -4.83151, -37.781, FALSE, 23),
+(4208807, 'Jaguaruna', -28.6146, -49.0296, FALSE, 42),
+(3135050, 'Jaíba', -15.3432, -43.6688, FALSE, 31),
+(2205201, 'Jaicós', -7.36229, -41.1371, FALSE, 22),
+(3524808, 'Jales', -20.2672, -50.5494, FALSE, 35),
+(3524907, 'Jambeiro', -23.2522, -45.6942, FALSE, 35),
+(3135076, 'Jampruca', -18.461, -41.809, FALSE, 31),
+(3135100, 'Janaúba', -15.8022, -43.3132, FALSE, 31),
+(5211701, 'Jandaia', -17.0481, -50.1453, FALSE, 52),
+(4112108, 'Jandaia do Sul', -23.6011, -51.6448, FALSE, 41),
+(2405108, 'Jandaíra', -5.35211, -36.1278, FALSE, 24),
+(2917904, 'Jandaíra', -11.5616, -37.7853, FALSE, 29),
+(3525003, 'Jandira', -23.5275, -46.9023, FALSE, 35),
+(2405207, 'Janduís', -6.01474, -37.4048, FALSE, 24),
+(5104906, 'Jangada', -15.235, -56.4917, FALSE, 51),
+(4112207, 'Janiópolis', -24.1401, -52.7784, FALSE, 41),
+(3135209, 'Januária', -15.4802, -44.3639, FALSE, 31),
+(2405306, 'Januário Cicco (Boa Saúde)', -6.16566, -35.6219, FALSE, 24),
+(3135308, 'Japaraíba', -20.1442, -45.5015, FALSE, 31),
+(2703601, 'Japaratinga', -9.08746, -35.2634, FALSE, 27),
+(2803302, 'Japaratuba', -10.5849, -36.9418, FALSE, 28),
+(3302270, 'Japeri', -22.6435, -43.6602, FALSE, 33),
+(2405405, 'Japi', -6.46544, -35.9346, FALSE, 24),
+(4112306, 'Japira', -23.8142, -50.1422, FALSE, 41),
+(2803401, 'Japoatã', -10.3477, -36.8045, FALSE, 28),
+(3135357, 'Japonvar', -15.9891, -44.2758, FALSE, 31),
+(5004809, 'Japorã', -23.8903, -54.4059, FALSE, 50),
+(4112405, 'Japurá', -23.4693, -52.5557, FALSE, 41),
+(1302108, 'Japurá', -1.88237, -66.9291, FALSE, 13),
+(2607950, 'Jaqueira', -8.72618, -35.7942, FALSE, 26),
+(4311122, 'Jaquirana', -28.8811, -50.3637, FALSE, 43),
+(5211800, 'Jaraguá', -15.7529, -49.3344, FALSE, 52),
+(4208906, 'Jaraguá do Sul', -26.4851, -49.0713, FALSE, 42),
+(5004908, 'Jaraguari', -20.1386, -54.3996, FALSE, 50),
+(2703700, 'Jaramataia', -9.66224, -37.0046, FALSE, 27),
+(2307106, 'Jardim', -7.57599, -39.2826, FALSE, 23),
+(5005004, 'Jardim', -21.4799, -56.1489, FALSE, 50),
+(4112504, 'Jardim Alegre', -24.1809, -51.6902, FALSE, 41),
+(2405504, 'Jardim de Angicos', -5.64999, -35.9713, FALSE, 24),
+(2405603, 'Jardim de Piranhas', -6.37665, -37.3496, FALSE, 24),
+(2205250, 'Jardim do Mulato', -6.099, -42.63, FALSE, 22),
+(2405702, 'Jardim do Seridó', -6.58047, -36.7736, FALSE, 24),
+(4112603, 'Jardim Olinda', -22.5523, -52.0503, FALSE, 41),
+(3525102, 'Jardinópolis', -21.0176, -47.7606, FALSE, 35),
+(4208955, 'Jardinópolis', -26.7191, -52.8625, FALSE, 42),
+(4311130, 'Jari', -29.2922, -54.2237, FALSE, 43),
+(3525201, 'Jarinu', -23.1039, -46.728, FALSE, 35),
+(1100114, 'Jaru', -10.4318, -62.4788, FALSE, 11),
+(5211909, 'Jataí', -17.8784, -51.7204, FALSE, 52),
+(4112702, 'Jataizinho', -23.2578, -50.9777, FALSE, 41),
+(2608008, 'Jataúba', -7.97668, -36.4943, FALSE, 26),
+(5005103, 'Jateí', -22.4806, -54.3079, FALSE, 50),
+(2307205, 'Jati', -7.6797, -39.0029, FALSE, 23),
+(2105450, 'Jatobá', -5.82282, -44.2153, FALSE, 21),
+(2608057, 'Jatobá', -9.17476, -38.2607, FALSE, 26),
+(2205276, 'Jatobá do Piauí', -4.77025, -41.817, FALSE, 22),
+(3525300, 'Jaú', -22.2936, -48.5592, FALSE, 35),
+(1711506, 'Jaú do Tocantins', -12.6509, -48.589, FALSE, 17),
+(5212006, 'Jaupaci', -16.1773, -50.9508, FALSE, 52),
+(5105002, 'Jauru', -15.3342, -58.8723, FALSE, 51),
+(3135407, 'Jeceaba', -20.5339, -43.9894, FALSE, 31),
+(3135456, 'Jenipapo de Minas', -17.0831, -42.2589, FALSE, 31),
+(2105476, 'Jenipapo dos Vieiras', -5.36237, -45.6356, FALSE, 21),
+(3135506, 'Jequeri', -20.4542, -42.6651, FALSE, 31),
+(2703759, 'Jequiá da Praia', -10.0133, -36.0142, FALSE, 27),
+(2918001, 'Jequié', -13.8509, -40.0877, FALSE, 29),
+(3135605, 'Jequitaí', -17.229, -44.4376, FALSE, 31),
+(3135704, 'Jequitibá', -19.2345, -44.0304, FALSE, 31),
+(3135803, 'Jequitinhonha', -16.4375, -41.0117, FALSE, 31),
+(2918100, 'Jeremoabo', -10.0685, -38.3471, FALSE, 29),
+(2507408, 'Jericó', -6.54577, -37.8036, FALSE, 25),
+(3525409, 'Jeriquara', -20.3116, -47.5918, FALSE, 35),
+(3203106, 'Jerônimo Monteiro', -20.7994, -41.3948, FALSE, 32),
+(2205300, 'Jerumenha', -7.09128, -43.5033, FALSE, 22),
+(3135902, 'Jesuânia', -21.9887, -45.2911, FALSE, 31),
+(4112751, 'Jesuítas', -24.3839, -53.3849, FALSE, 41),
+(5212055, 'Jesúpolis', -15.9484, -49.3739, FALSE, 52),
+(1100122, 'Ji-Paraná', -10.8777, -61.9322, FALSE, 11),
+(2307254, 'Jijoca de Jericoacoara', -2.79331, -40.5127, FALSE, 23),
+(2918209, 'Jiquiriçá', -13.2621, -39.5737, FALSE, 29),
+(2918308, 'Jitaúna', -14.0131, -39.8969, FALSE, 29),
+(4209003, 'Joaçaba', -27.1721, -51.5108, FALSE, 42),
+(3136009, 'Joaíma', -16.6522, -41.0229, FALSE, 31),
+(3136108, 'Joanésia', -19.1729, -42.6775, FALSE, 31),
+(3525508, 'Joanópolis', -22.927, -46.2741, FALSE, 35),
+(2608107, 'João Alfredo', -7.86565, -35.5787, FALSE, 26),
+(2405801, 'João Câmara', -5.54094, -35.8122, FALSE, 24),
+(2205359, 'João Costa', -8.50736, -42.4264, FALSE, 22),
+(2405900, 'João Dias', -6.27215, -37.7885, FALSE, 24),
+(2918357, 'João Dourado', -11.3486, -41.6548, FALSE, 29),
+(2105500, 'João Lisboa', -5.44363, -47.4064, FALSE, 21),
+(3136207, 'João Monlevade', -19.8126, -43.1735, FALSE, 31),
+(3203130, 'João Neiva', -19.7577, -40.386, FALSE, 32),
+(2507507, 'João Pessoa', -7.11509, -34.8641, TRUE, 25),
+(3136306, 'João Pinheiro', -17.7398, -46.1715, FALSE, 31),
+(3525607, 'João Ramalho', -22.2473, -50.7694, FALSE, 35),
+(3136405, 'Joaquim Felício', -17.758, -44.1643, FALSE, 31),
+(2703809, 'Joaquim Gomes', -9.1328, -35.7474, FALSE, 27),
+(2608206, 'Joaquim Nabuco', -8.62281, -35.5288, FALSE, 26),
+(2205409, 'Joaquim Pires', -3.50164, -42.1865, FALSE, 22),
+(4112801, 'Joaquim Távora', -23.4987, -49.909, FALSE, 41),
+(2513653, 'Joca Claudino', -6.48362, -38.4764, FALSE, 25),
+(2205458, 'Joca Marques', -3.4804, -42.4255, FALSE, 22),
+(4311155, 'Jóia', -28.6435, -54.1141, FALSE, 43),
+(4209102, 'Joinville', -26.3045, -48.8487, FALSE, 42),
+(3136504, 'Jordânia', -15.9009, -40.1841, FALSE, 31),
+(1200328, 'Jordão', -9.43091, -71.8974, FALSE, 12),
+(4209151, 'José Boiteux', -26.9566, -49.6286, FALSE, 42),
+(3525706, 'José Bonifácio', -21.0551, -49.6892, FALSE, 35),
+(2406007, 'José da Penha', -6.31095, -38.2823, FALSE, 24),
+(2205508, 'José de Freitas', -4.75146, -42.5746, FALSE, 22),
+(3136520, 'José Gonçalves de Minas', -16.9053, -42.6014, FALSE, 31),
+(3136553, 'José Raydan', -18.2195, -42.4946, FALSE, 31),
+(2105609, 'Joselândia', -4.98611, -44.6958, FALSE, 21),
+(3136579, 'Josenópolis', -16.5417, -42.5151, FALSE, 31),
+(5212105, 'Joviânia', -17.802, -49.6197, FALSE, 52),
+(5105101, 'Juara', -11.2639, -57.5244, FALSE, 51),
+(2507606, 'Juarez Távora', -7.1713, -35.5686, FALSE, 25),
+(1711803, 'Juarina', -8.11951, -49.0643, FALSE, 17),
+(3136652, 'Juatuba', -19.9448, -44.3451, FALSE, 31),
+(2507705, 'Juazeirinho', -7.06092, -36.5793, FALSE, 25),
+(2918407, 'Juazeiro', -9.41622, -40.5033, FALSE, 29),
+(2307304, 'Juazeiro do Norte', -7.19621, -39.3076, FALSE, 23),
+(2205516, 'Juazeiro do Piauí', -5.17459, -41.6976, FALSE, 22),
+(2307403, 'Jucás', -6.51523, -39.5187, FALSE, 23),
+(2608255, 'Jucati', -8.70195, -36.4871, FALSE, 26),
+(2918456, 'Jucuruçu', -16.8488, -40.1641, FALSE, 29),
+(2406106, 'Jucurutu', -6.0306, -37.009, FALSE, 24),
+(5105150, 'Juína', -11.3728, -58.7483, FALSE, 51),
+(3136702, 'Juiz de Fora', -21.7595, -43.3398, FALSE, 31),
+(2205524, 'Júlio Borges', -10.3225, -44.2381, FALSE, 22),
+(4311205, 'Júlio de Castilhos', -29.2299, -53.6772, FALSE, 43),
+(3525805, 'Júlio Mesquita', -22.0112, -49.7873, FALSE, 35),
+(3525854, 'Jumirim', -23.0884, -47.7868, FALSE, 35),
+(2105658, 'Junco do Maranhão', -1.83888, -46.09, FALSE, 21),
+(2507804, 'Junco do Seridó', -6.99269, -36.7166, FALSE, 25),
+(2406155, 'Jundiá', -6.26866, -35.3495, FALSE, 24),
+(2703908, 'Jundiá', -8.93297, -35.5669, FALSE, 27),
+(3525904, 'Jundiaí', -23.1852, -46.8974, FALSE, 35),
+(4112900, 'Jundiaí do Sul', -23.4357, -50.2496, FALSE, 41),
+(2704005, 'Junqueiro', -9.90696, -36.4803, FALSE, 27),
+(3526001, 'Junqueirópolis', -21.5103, -51.4342, FALSE, 35),
+(2608305, 'Jupi', -8.70904, -36.4126, FALSE, 26),
+(4209177, 'Jupiá', -26.395, -52.7298, FALSE, 42),
+(3526100, 'Juquiá', -24.3101, -47.6426, FALSE, 35),
+(3526209, 'Juquitiba', -23.9244, -47.0653, FALSE, 35),
+(3136801, 'Juramento', -16.8473, -43.5865, FALSE, 31),
+(4112959, 'Juranda', -24.4209, -52.8413, FALSE, 41),
+(2608404, 'Jurema', -8.70714, -36.1347, FALSE, 26),
+(2205532, 'Jurema', -9.21992, -43.1337, FALSE, 22),
+(2507903, 'Juripiranga', -7.36176, -35.2321, FALSE, 25),
+(2508000, 'Juru', -7.52983, -37.815, FALSE, 25),
+(1302207, 'Juruá', -3.48438, -66.0718, FALSE, 13),
+(3136900, 'Juruaia', -21.2493, -46.5735, FALSE, 31),
+(5105176, 'Juruena', -10.3178, -58.3592, FALSE, 51),
+(1503903, 'Juruti', -2.16347, -56.0889, FALSE, 15),
+(5105200, 'Juscimeira', -16.0633, -54.8859, FALSE, 51),
+(2918506, 'Jussara', -11.0431, -41.9702, FALSE, 29),
+(5212204, 'Jussara', -15.8659, -50.8668, FALSE, 52),
+(4113007, 'Jussara', -23.6219, -52.4693, FALSE, 41),
+(2918555, 'Jussari', -15.192, -39.491, FALSE, 29),
+(2918605, 'Jussiape', -13.5155, -41.5882, FALSE, 29),
+(1302306, 'Jutaí', -2.75814, -66.7595, FALSE, 13),
+(5005152, 'Juti', -22.8596, -54.6061, FALSE, 50),
+(3136959, 'Juvenília', -14.2662, -44.1597, FALSE, 31),
+(4113106, 'Kaloré', -23.8188, -51.6687, FALSE, 41),
+(1302405, 'Lábrea', -7.26413, -64.7948, FALSE, 13),
+(4209201, 'Lacerdópolis', -27.2579, -51.5577, FALSE, 42),
+(3137007, 'Ladainha', -17.6279, -41.7488, FALSE, 31),
+(5005202, 'Ladário', -19.0089, -57.5973, FALSE, 50),
+(2918704, 'Lafaiete Coutinho', -13.6541, -40.2119, FALSE, 29),
+(3137106, 'Lagamar', -18.1759, -46.8063, FALSE, 31),
+(2803500, 'Lagarto', -10.9136, -37.6689, FALSE, 28),
+(4209300, 'Lages', -27.815, -50.3259, FALSE, 42),
+(2105708, 'Lago da Pedra', -4.56974, -45.1319, FALSE, 21),
+(2105807, 'Lago do Junco', -4.609, -45.049, FALSE, 21),
+(2105948, 'Lago dos Rodrigues', -4.61173, -44.9798, FALSE, 21),
+(2105906, 'Lago Verde', -3.94661, -44.826, FALSE, 21),
+(2508109, 'Lagoa', -6.58572, -37.9127, FALSE, 25),
+(2205557, 'Lagoa Alegre', -4.51539, -42.6309, FALSE, 22),
+(4311239, 'Lagoa Bonita do Sul', -29.4939, -53.017, FALSE, 43),
+(2406205, 'Lagoa d''Anta', -6.39493, -35.5949, FALSE, 24),
+(2704104, 'Lagoa da Canoa', -9.83291, -36.7413, FALSE, 27),
+(1711902, 'Lagoa da Confusão', -10.7906, -49.6199, FALSE, 17),
+(3137205, 'Lagoa da Prata', -20.0237, -45.5401, FALSE, 31),
+(2508208, 'Lagoa de Dentro', -6.67213, -35.3706, FALSE, 25),
+(2608503, 'Lagoa de Itaenga', -7.93005, -35.2874, FALSE, 26),
+(2406304, 'Lagoa de Pedras', -6.15082, -35.4299, FALSE, 24),
+(2205573, 'Lagoa de São Francisco', -4.38505, -41.5969, FALSE, 22),
+(2406403, 'Lagoa de Velhos', -6.0119, -35.8729, FALSE, 24),
+(2205565, 'Lagoa do Barro do Piauí', -8.47673, -41.5342, FALSE, 22),
+(2608453, 'Lagoa do Carro', -7.84383, -35.3108, FALSE, 26),
+(2105922, 'Lagoa do Mato', -6.05023, -43.5333, FALSE, 21),
+(2608602, 'Lagoa do Ouro', -9.12567, -36.4584, FALSE, 26),
+(2205581, 'Lagoa do Piauí', -5.41864, -42.6437, FALSE, 22),
+(2205599, 'Lagoa do Sítio', -6.50766, -41.5653, FALSE, 22),
+(1711951, 'Lagoa do Tocantins', -10.368, -47.538, FALSE, 17),
+(2608701, 'Lagoa dos Gatos', -8.6602, -35.904, FALSE, 26),
+(3137304, 'Lagoa dos Patos', -16.978, -44.5754, FALSE, 31),
+(4311270, 'Lagoa dos Três Cantos', -28.5676, -52.8618, FALSE, 43),
+(3137403, 'Lagoa Dourada', -20.9139, -44.0797, FALSE, 31),
+(3137502, 'Lagoa Formosa', -18.7715, -46.4012, FALSE, 31),
+(3137536, 'Lagoa Grande', -17.8323, -46.5165, FALSE, 31),
+(2608750, 'Lagoa Grande', -8.99452, -40.2767, FALSE, 26),
+(2105963, 'Lagoa Grande do Maranhão', -4.98893, -45.3816, FALSE, 21),
+(2406502, 'Lagoa Nova', -6.09339, -36.4703, FALSE, 24),
+(2918803, 'Lagoa Real', -14.0334, -42.1328, FALSE, 29),
+(2406601, 'Lagoa Salgada', -6.12295, -35.4724, FALSE, 24),
+(5212253, 'Lagoa Santa', -19.1832, -51.3998, FALSE, 52),
+(3137601, 'Lagoa Santa', -19.6397, -43.8932, FALSE, 31),
+(2508307, 'Lagoa Seca', -7.15535, -35.8491, FALSE, 25),
+(4311304, 'Lagoa Vermelha', -28.2093, -51.5248, FALSE, 43),
+(4311254, 'Lagoão', -29.2348, -52.7997, FALSE, 43),
+(3526308, 'Lagoinha', -23.0846, -45.1944, FALSE, 35),
+(2205540, 'Lagoinha do Piauí', -5.83074, -42.6223, FALSE, 22),
+(4209409, 'Laguna', -28.4843, -48.7772, FALSE, 42),
+(5005251, 'Laguna Carapã', -22.5448, -55.1502, FALSE, 50),
+(2918902, 'Laje', -13.1673, -39.4213, FALSE, 29),
+(3302304, 'Laje do Muriaé', -21.2091, -42.1271, FALSE, 33),
+(1712009, 'Lajeado', -9.74996, -48.3565, FALSE, 17),
+(4311403, 'Lajeado', -29.4591, -51.9644, FALSE, 43),
+(4311429, 'Lajeado do Bugre', -27.6913, -53.1818, FALSE, 43),
+(4209458, 'Lajeado Grande', -26.8576, -52.5648, FALSE, 42),
+(2105989, 'Lajeado Novo', -6.18539, -47.0293, FALSE, 21),
+(2919009, 'Lajedão', -17.6056, -40.3383, FALSE, 29),
+(2919058, 'Lajedinho', -12.3529, -40.9048, FALSE, 29),
+(2608800, 'Lajedo', -8.65791, -36.3293, FALSE, 26),
+(2918753, 'Lajedo do Tabocal', -13.4663, -40.2204, FALSE, 29),
+(2406700, 'Lajes', -5.69322, -36.247, FALSE, 24),
+(2406809, 'Lajes Pintadas', -6.14943, -36.1171, FALSE, 24),
+(3137700, 'Lajinha', -20.1539, -41.6228, FALSE, 31),
+(2919108, 'Lamarão', -11.773, -38.887, FALSE, 29),
+(3137809, 'Lambari', -21.9671, -45.3498, FALSE, 31),
+(5105234, 'Lambari D''Oeste', -15.3188, -58.0046, FALSE, 51),
+(3137908, 'Lamim', -20.79, -43.4706, FALSE, 31),
+(2205607, 'Landri Sales', -7.25922, -43.9364, FALSE, 22),
+(4113205, 'Lapa', -25.7671, -49.7168, FALSE, 41),
+(2919157, 'Lapão', -11.3851, -41.8286, FALSE, 29),
+(3203163, 'Laranja da Terra', -19.8994, -41.0621, FALSE, 32),
+(3138005, 'Laranjal', -21.3715, -42.4732, FALSE, 31),
+(4113254, 'Laranjal', -24.8862, -52.47, FALSE, 41),
+(1600279, 'Laranjal do Jari', -0.804911, -52.453, FALSE, 16),
+(3526407, 'Laranjal Paulista', -23.0506, -47.8375, FALSE, 35),
+(2803609, 'Laranjeiras', -10.7981, -37.1731, FALSE, 28),
+(4113304, 'Laranjeiras do Sul', -25.4077, -52.4109, FALSE, 41),
+(3138104, 'Lassance', -17.887, -44.5735, FALSE, 31),
+(2508406, 'Lastro', -6.50603, -38.1742, FALSE, 25),
+(4209508, 'Laurentino', -27.2173, -49.7331, FALSE, 42),
+(2919207, 'Lauro de Freitas', -12.8978, -38.321, FALSE, 29),
+(4209607, 'Lauro Muller', -28.3859, -49.4035, FALSE, 42),
+(1712157, 'Lavandeira', -12.7847, -46.5099, FALSE, 17),
+(3526506, 'Lavínia', -21.1639, -51.0412, FALSE, 35),
+(3138203, 'Lavras', -21.248, -45.0009, FALSE, 31),
+(2307502, 'Lavras da Mangabeira', -6.7448, -38.9706, FALSE, 23),
+(4311502, 'Lavras do Sul', -30.8071, -53.8931, FALSE, 43),
+(3526605, 'Lavrinhas', -22.57, -44.9024, FALSE, 35),
+(3138302, 'Leandro Ferreira', -19.7193, -45.0279, FALSE, 31),
+(4209706, 'Lebon Régis', -26.928, -50.6921, FALSE, 42),
+(3526704, 'Leme', -22.1809, -47.3841, FALSE, 35),
+(3138351, 'Leme do Prado', -17.0793, -42.6936, FALSE, 31),
+(2919306, 'Lençóis', -12.5616, -41.3928, FALSE, 29),
+(3526803, 'Lençóis Paulista', -22.6027, -48.8037, FALSE, 35),
+(4209805, 'Leoberto Leal', -27.5081, -49.2789, FALSE, 42),
+(3138401, 'Leopoldina', -21.5296, -42.6421, FALSE, 31),
+(5212303, 'Leopoldo de Bulhões', -16.619, -48.7428, FALSE, 52),
+(4113403, 'Leópolis', -23.0818, -50.7511, FALSE, 41),
+(4311601, 'Liberato Salzano', -27.601, -53.0753, FALSE, 43),
+(3138500, 'Liberdade', -22.0275, -44.3208, FALSE, 31),
+(2919405, 'Licínio de Almeida', -14.6842, -42.5095, FALSE, 29),
+(4113429, 'Lidianópolis', -24.11, -51.6506, FALSE, 41),
+(2106003, 'Lima Campos', -4.51837, -44.4646, FALSE, 21),
+(3138609, 'Lima Duarte', -21.8386, -43.7934, FALSE, 31),
+(3526902, 'Limeira', -22.566, -47.397, FALSE, 35),
+(3138625, 'Limeira do Oeste', -19.5512, -50.5815, FALSE, 31),
+(2608909, 'Limoeiro', -7.8726, -35.4402, FALSE, 26),
+(2704203, 'Limoeiro de Anadia', -9.74098, -36.5121, FALSE, 27),
+(1504000, 'Limoeiro do Ajuru', -1.8985, -49.3903, FALSE, 15),
+(2307601, 'Limoeiro do Norte', -5.14392, -38.0847, FALSE, 23),
+(4113452, 'Lindoeste', -25.2596, -53.5733, FALSE, 41),
+(3527009, 'Lindóia', -22.5226, -46.65, FALSE, 35),
+(4209854, 'Lindóia do Sul', -27.0545, -52.069, FALSE, 42),
+(4311627, 'Lindolfo Collor', -29.5859, -51.2141, FALSE, 43),
+(4311643, 'Linha Nova', -29.4679, -51.2003, FALSE, 43),
+(3203205, 'Linhares', -19.3946, -40.0643, FALSE, 32),
+(3527108, 'Lins', -21.6718, -49.7526, FALSE, 35),
+(2508505, 'Livramento', -7.37113, -36.9491, FALSE, 25),
+(2919504, 'Livramento de Nossa Senhora', -13.6369, -41.8432, FALSE, 29),
+(1712405, 'Lizarda', -9.59002, -46.6738, FALSE, 17),
+(4113502, 'Loanda', -22.9232, -53.1362, FALSE, 41),
+(4113601, 'Lobato', -23.0058, -51.9524, FALSE, 41),
+(2508554, 'Logradouro', -6.61191, -35.4384, FALSE, 25),
+(4113700, 'Londrina', -23.304, -51.1691, FALSE, 41),
+(3138658, 'Lontra', -15.9013, -44.306, FALSE, 31),
+(4209904, 'Lontras', -27.1684, -49.535, FALSE, 42),
+(3527207, 'Lorena', -22.7334, -45.1197, FALSE, 35),
+(2106102, 'Loreto', -7.08111, -45.1451, FALSE, 21),
+(3527256, 'Lourdes', -20.966, -50.2263, FALSE, 35),
+(3527306, 'Louveira', -23.0856, -46.9484, FALSE, 35),
+(5105259, 'Lucas do Rio Verde', -13.0588, -55.9042, FALSE, 51),
+(3527405, 'Lucélia', -21.7182, -51.0215, FALSE, 35),
+(2508604, 'Lucena', -6.90258, -34.8748, FALSE, 25),
+(3527504, 'Lucianópolis', -22.4294, -49.522, FALSE, 35),
+(5105309, 'Luciara', -11.2219, -50.6676, FALSE, 51),
+(2406908, 'Lucrécia', -6.10525, -37.8134, FALSE, 24),
+(3527603, 'Luís Antônio', -21.55, -47.7801, FALSE, 35),
+(2205706, 'Luís Correia', -2.88438, -41.6641, FALSE, 22),
+(2106201, 'Luís Domingues', -1.27492, -45.867, FALSE, 21),
+(2919553, 'Luís Eduardo Magalhães', -12.0956, -45.7866, FALSE, 29),
+(2407005, 'Luís Gomes', -6.40588, -38.3899, FALSE, 24),
+(3138674, 'Luisburgo', -20.4468, -42.0976, FALSE, 31),
+(3138682, 'Luislândia', -16.1095, -44.5886, FALSE, 31),
+(4210001, 'Luiz Alves', -26.7151, -48.9322, FALSE, 42),
+(4113734, 'Luiziana', -24.2853, -52.269, FALSE, 41),
+(3527702, 'Luiziânia', -21.6737, -50.3294, FALSE, 35),
+(3138708, 'Luminárias', -21.5145, -44.9034, FALSE, 31),
+(4113759, 'Lunardelli', -24.0821, -51.7368, FALSE, 41),
+(3527801, 'Lupércio', -22.4146, -49.818, FALSE, 35),
+(4113809, 'Lupionópolis', -22.755, -51.6601, FALSE, 41),
+(3527900, 'Lutécia', -22.3384, -50.394, FALSE, 35),
+(3138807, 'Luz', -19.7911, -45.6794, FALSE, 31),
+(4210035, 'Luzerna', -27.1304, -51.4682, FALSE, 42),
+(5212501, 'Luziânia', -16.253, -47.95, FALSE, 52),
+(2205805, 'Luzilândia', -3.4683, -42.3718, FALSE, 22),
+(1712454, 'Luzinópolis', -6.17794, -47.8582, FALSE, 17),
+(3302403, 'Macaé', -22.3768, -41.7848, FALSE, 33),
+(2407104, 'Macaíba', -5.85229, -35.3552, FALSE, 24),
+(2919603, 'Macajuba', -12.1326, -40.3571, FALSE, 29),
+(4311718, 'Maçambará', -29.1445, -56.0674, FALSE, 43),
+(2803708, 'Macambira', -10.6619, -37.5413, FALSE, 28),
+(1600303, 'Macapá', 0.034934, -51.0694, TRUE, 16),
+(2609006, 'Macaparana', -7.55564, -35.4425, FALSE, 26),
+(2919702, 'Macarani', -15.5646, -40.4209, FALSE, 29),
+(3528007, 'Macatuba', -22.5002, -48.7102, FALSE, 35),
+(2407203, 'Macau', -5.10795, -36.6318, FALSE, 24),
+(3528106, 'Macaubal', -20.8022, -49.9687, FALSE, 35),
+(2919801, 'Macaúbas', -13.0186, -42.6945, FALSE, 29),
+(3528205, 'Macedônia', -20.1444, -50.1973, FALSE, 35),
+(2704302, 'Maceió', -9.66599, -35.735, TRUE, 27),
+(3138906, 'Machacalis', -17.0723, -40.7245, FALSE, 31),
+(4311700, 'Machadinho', -27.5667, -51.6668, FALSE, 43),
+(1100130, 'Machadinho D''Oeste', -9.44363, -61.9818, FALSE, 11),
+(3139003, 'Machado', -21.6778, -45.9219, FALSE, 31),
+(2609105, 'Machados', -7.68827, -35.5114, FALSE, 26),
+(4210050, 'Macieira', -26.8552, -51.3705, FALSE, 42),
+(3302452, 'Macuco', -21.9813, -42.2533, FALSE, 33),
+(2919900, 'Macururé', -9.16226, -39.0518, FALSE, 29),
+(2307635, 'Madalena', -4.84601, -39.5725, FALSE, 23),
+(2205854, 'Madeiro', -3.48624, -42.4981, FALSE, 22),
+(2919926, 'Madre de Deus', -12.7446, -38.6153, FALSE, 29),
+(3139102, 'Madre de Deus de Minas', -21.483, -44.3287, FALSE, 31),
+(2508703, 'Mãe d''Água', -7.25201, -37.4322, FALSE, 25),
+(1504059, 'Mãe do Rio', -2.05683, -47.5601, FALSE, 15),
+(2919959, 'Maetinga', -14.6623, -41.4915, FALSE, 29),
+(4210100, 'Mafra', -26.1159, -49.8086, FALSE, 42),
+(1504109, 'Magalhães Barata', -0.803391, -47.6014, FALSE, 15),
+(2106300, 'Magalhães de Almeida', -3.39232, -42.2117, FALSE, 21),
+(3528304, 'Magda', -20.6445, -50.2305, FALSE, 35),
+(3302502, 'Magé', -22.6632, -43.0315, FALSE, 33),
+(2920007, 'Maiquinique', -15.624, -40.2587, FALSE, 29),
+(2920106, 'Mairi', -11.7107, -40.1437, FALSE, 29),
+(3528403, 'Mairinque', -23.5398, -47.185, FALSE, 35),
+(3528502, 'Mairiporã', -23.3171, -46.5897, FALSE, 35),
+(5212600, 'Mairipotaba', -17.2975, -49.4898, FALSE, 52),
+(4210209, 'Major Gercino', -27.4192, -48.9488, FALSE, 42),
+(2704401, 'Major Isidoro', -9.53009, -36.992, FALSE, 27),
+(2407252, 'Major Sales', -6.39949, -38.324, FALSE, 24),
+(4210308, 'Major Vieira', -26.3709, -50.3266, FALSE, 42),
+(3139201, 'Malacacheta', -17.8456, -42.0769, FALSE, 31),
+(2920205, 'Malhada', -14.3371, -43.7686, FALSE, 29),
+(2920304, 'Malhada de Pedras', -14.3847, -41.8842, FALSE, 29),
+(2803807, 'Malhada dos Bois', -10.3418, -36.9252, FALSE, 28),
+(2803906, 'Malhador', -10.6649, -37.3004, FALSE, 28),
+(4113908, 'Mallet', -25.8806, -50.8173, FALSE, 41),
+(2508802, 'Malta', -6.89719, -37.5221, FALSE, 25),
+(2508901, 'Mamanguape', -6.8337, -35.1213, FALSE, 25),
+(5212709, 'Mambaí', -14.4823, -46.1165, FALSE, 52),
+(4114005, 'Mamborê', -24.317, -52.5271, FALSE, 41),
+(3139250, 'Mamonas', -15.0479, -42.9469, FALSE, 31),
+(4311734, 'Mampituba', -29.2136, -49.9311, FALSE, 43),
+(1302504, 'Manacapuru', -3.29066, -60.6216, FALSE, 13),
+(2509008, 'Manaíra', -7.70331, -38.1523, FALSE, 25),
+(1302553, 'Manaquiri', -3.44078, -60.4612, FALSE, 13),
+(2609154, 'Manari', -8.9649, -37.6313, FALSE, 26),
+(1302603, 'Manaus', -3.11866, -60.0212, TRUE, 13),
+(1200336, 'Mâncio Lima', -7.61657, -72.8997, FALSE, 12),
+(4114104, 'Mandaguaçu', -23.3458, -52.0944, FALSE, 41),
+(4114203, 'Mandaguari', -23.5446, -51.671, FALSE, 41),
+(4114302, 'Mandirituba', -25.777, -49.3282, FALSE, 41),
+(3528601, 'Manduri', -23.0056, -49.3202, FALSE, 35),
+(4114351, 'Manfrinópolis', -26.1441, -53.3113, FALSE, 41),
+(3139300, 'Manga', -14.7529, -43.9391, FALSE, 31),
+(3302601, 'Mangaratiba', -22.9594, -44.0409, FALSE, 33),
+(4114401, 'Mangueirinha', -25.9421, -52.1743, FALSE, 41),
+(3139409, 'Manhuaçu', -20.2572, -42.028, FALSE, 31),
+(3139508, 'Manhumirim', -20.3591, -41.9589, FALSE, 31),
+(1302702, 'Manicoré', -5.80462, -61.2895, FALSE, 13),
+(2205904, 'Manoel Emídio', -8.01234, -43.8755, FALSE, 22),
+(4114500, 'Manoel Ribas', -24.5144, -51.6658, FALSE, 41),
+(1200344, 'Manoel Urbano', -8.83291, -69.2679, FALSE, 12),
+(4311759, 'Manoel Viana', -29.5859, -55.4841, FALSE, 43),
+(2920403, 'Manoel Vitorino', -14.1476, -40.2399, FALSE, 29),
+(2920452, 'Mansidão', -10.7227, -44.0428, FALSE, 29),
+(3139607, 'Mantena', -18.7761, -40.9874, FALSE, 31),
+(3203304, 'Mantenópolis', -18.8594, -41.124, FALSE, 32),
+(4311775, 'Maquiné', -29.6798, -50.2079, FALSE, 43),
+(3139805, 'Mar de Espanha', -21.8707, -43.0062, FALSE, 31),
+(2704906, 'Mar Vermelho', -9.44739, -36.3881, FALSE, 27),
+(5212808, 'Mara Rosa', -14.0148, -49.1777, FALSE, 52),
+(1302801, 'Maraã', -1.85313, -65.573, FALSE, 13),
+(1504208, 'Marabá', -5.38075, -49.1327, FALSE, 15),
+(3528700, 'Marabá Paulista', -22.1068, -51.9617, FALSE, 35),
+(2106326, 'Maracaçumé', -2.04918, -45.9587, FALSE, 21),
+(3528809, 'Maracaí', -22.6149, -50.6713, FALSE, 35),
+(4210407, 'Maracajá', -28.8463, -49.4605, FALSE, 42),
+(5005400, 'Maracaju', -21.6105, -55.1678, FALSE, 50),
+(1504307, 'Maracanã', -0.778899, -47.452, FALSE, 15),
+(2307650, 'Maracanaú', -3.86699, -38.6259, FALSE, 23),
+(2920502, 'Maracás', -13.4355, -40.4323, FALSE, 29),
+(2704500, 'Maragogi', -9.00744, -35.2267, FALSE, 27),
+(2920601, 'Maragogipe', -12.776, -38.9175, FALSE, 29),
+(2609204, 'Maraial', -8.79062, -35.8266, FALSE, 26),
+(2106359, 'Marajá do Sena', -4.62806, -45.4531, FALSE, 21),
+(2307700, 'Maranguape', -3.89143, -38.6829, FALSE, 23),
+(2106375, 'Maranhãozinho', -2.24078, -45.8507, FALSE, 21),
+(1504406, 'Marapanim', -0.714702, -47.7034, FALSE, 15),
+(3528858, 'Marapoama', -21.2587, -49.13, FALSE, 35),
+(4311791, 'Maratá', -29.5457, -51.5573, FALSE, 43),
+(3203320, 'Marataízes', -21.0398, -40.8384, FALSE, 32),
+(4311809, 'Marau', -28.4498, -52.1986, FALSE, 43),
+(2920700, 'Maraú', -14.1035, -39.0137, FALSE, 29),
+(2704609, 'Maravilha', -9.23045, -37.3524, FALSE, 27),
+(4210506, 'Maravilha', -26.7665, -53.1737, FALSE, 42),
+(3139706, 'Maravilhas', -19.5076, -44.6779, FALSE, 31),
+(2509057, 'Marcação', -6.76535, -35.0087, FALSE, 25),
+(5105580, 'Marcelândia', -11.0463, -54.4377, FALSE, 51),
+(4311908, 'Marcelino Ramos', -27.4676, -51.9095, FALSE, 43),
+(2407302, 'Marcelino Vieira', -6.2846, -38.1642, FALSE, 24),
+(2920809, 'Marcionílio Souza', -13.0064, -40.5295, FALSE, 29),
+(2307809, 'Marco', -3.1285, -40.1582, FALSE, 23),
+(2205953, 'Marcolândia', -7.44169, -40.6602, FALSE, 22),
+(2206001, 'Marcos Parente', -7.11565, -43.8926, FALSE, 22),
+(4114609, 'Marechal Cândido Rondon', -24.557, -54.0571, FALSE, 41),
+(2704708, 'Marechal Deodoro', -9.70971, -35.8967, FALSE, 27),
+(3203346, 'Marechal Floriano', -20.4159, -40.67, FALSE, 32),
+(1200351, 'Marechal Thaumaturgo', -8.93898, -72.7997, FALSE, 12),
+(4210555, 'Marema', -26.8024, -52.6264, FALSE, 42),
+(2509107, 'Mari', -7.05942, -35.318, FALSE, 25),
+(3139904, 'Maria da Fé', -22.3044, -45.3773, FALSE, 31),
+(4114708, 'Maria Helena', -23.6158, -53.2053, FALSE, 41),
+(4114807, 'Marialva', -23.4843, -51.7928, FALSE, 41),
+(3140001, 'Mariana', -20.3765, -43.414, FALSE, 31),
+(4311981, 'Mariana Pimentel', -30.353, -51.5803, FALSE, 43),
+(4312005, 'Mariano Moro', -27.3568, -52.1467, FALSE, 43),
+(1712504, 'Marianópolis do Tocantins', -9.79377, -49.6553, FALSE, 17),
+(3528908, 'Mariápolis', -21.7959, -51.1824, FALSE, 35),
+(2704807, 'Maribondo', -9.58353, -36.3045, FALSE, 27),
+(3302700, 'Maricá', -22.9354, -42.8246, FALSE, 33),
+(3140100, 'Marilac', -18.5079, -42.0822, FALSE, 31),
+(3203353, 'Marilândia', -19.4114, -40.5456, FALSE, 32),
+(4114906, 'Marilândia do Sul', -23.7425, -51.3137, FALSE, 41),
+(4115002, 'Marilena', -22.7336, -53.0402, FALSE, 41),
+(3529005, 'Marília', -22.2171, -49.9501, FALSE, 35),
+(4115101, 'Mariluz', -24.0089, -53.1432, FALSE, 41),
+(4115200, 'Maringá', -23.4205, -51.9333, FALSE, 41),
+(3529104, 'Marinópolis', -20.4389, -50.8254, FALSE, 35),
+(3140159, 'Mário Campos', -20.0582, -44.1883, FALSE, 31),
+(4115309, 'Mariópolis', -26.355, -52.5532, FALSE, 41),
+(4115358, 'Maripá', -24.42, -53.8286, FALSE, 41),
+(3140209, 'Maripá de Minas', -21.6979, -42.9546, FALSE, 31),
+(1504422, 'Marituba', -1.36002, -48.3421, FALSE, 15),
+(2509156, 'Marizópolis', -6.82748, -38.3528, FALSE, 25),
+(3140308, 'Marliéria', -19.7096, -42.7327, FALSE, 31),
+(4115408, 'Marmeleiro', -26.1472, -53.0267, FALSE, 41),
+(3140407, 'Marmelópolis', -22.447, -45.1645, FALSE, 31),
+(4312054, 'Marques de Souza', -29.3311, -52.0973, FALSE, 43),
+(4115457, 'Marquinho', -25.112, -52.2497, FALSE, 41),
+(3140506, 'Martinho Campos', -19.3306, -45.2434, FALSE, 31),
+(2307908, 'Martinópole', -3.2252, -40.6896, FALSE, 23),
+(3529203, 'Martinópolis', -22.1462, -51.1709, FALSE, 35),
+(2407401, 'Martins', -6.08279, -37.908, FALSE, 24),
+(3140530, 'Martins Soares', -20.2546, -41.8786, FALSE, 31),
+(2804003, 'Maruim', -10.7308, -37.0856, FALSE, 28),
+(4115507, 'Marumbi', -23.7058, -51.6404, FALSE, 41),
+(5212907, 'Marzagão', -17.983, -48.6415, FALSE, 52),
+(2920908, 'Mascote', -15.5542, -39.3016, FALSE, 29),
+(2308005, 'Massapê', -3.52364, -40.3423, FALSE, 23),
+(2206050, 'Massapê do Piauí', -7.47469, -41.1103, FALSE, 22),
+(2509206, 'Massaranduba', -7.18995, -35.7848, FALSE, 25),
+(4210605, 'Massaranduba', -26.6109, -49.0054, FALSE, 42),
+(4312104, 'Mata', -29.5649, -54.4641, FALSE, 43),
+(2921005, 'Mata de São João', -12.5307, -38.3009, FALSE, 29),
+(2705002, 'Mata Grande', -9.11824, -37.7323, FALSE, 27),
+(2106409, 'Mata Roma', -3.62035, -43.1112, FALSE, 21),
+(3140555, 'Mata Verde', -15.6869, -40.7366, FALSE, 31),
+(3529302, 'Matão', -21.6025, -48.364, FALSE, 35),
+(2509305, 'Mataraca', -6.59673, -35.0531, FALSE, 25),
+(1712702, 'Mateiros', -10.5464, -46.4168, FALSE, 17),
+(4115606, 'Matelândia', -25.2496, -53.9935, FALSE, 41),
+(3140605, 'Materlândia', -18.4699, -43.0579, FALSE, 31),
+(3140704, 'Mateus Leme', -19.9794, -44.4318, FALSE, 31),
+(3171501, 'Mathias Lobato', -18.59, -41.9166, FALSE, 31),
+(3140803, 'Matias Barbosa', -21.869, -43.3135, FALSE, 31),
+(3140852, 'Matias Cardoso', -14.8563, -43.9146, FALSE, 31),
+(2206100, 'Matias Olímpio', -3.71492, -42.5507, FALSE, 22),
+(2921054, 'Matina', -13.9109, -42.8439, FALSE, 29),
+(2106508, 'Matinha', -3.09849, -45.035, FALSE, 21),
+(2509339, 'Matinhas', -7.12486, -35.7669, FALSE, 25),
+(4115705, 'Matinhos', -25.8237, -48.549, FALSE, 41),
+(3140902, 'Matipó', -20.2873, -42.3401, FALSE, 31),
+(4312138, 'Mato Castelhano', -28.28, -52.1932, FALSE, 43),
+(2509370, 'Mato Grosso', -6.54018, -37.7279, FALSE, 25),
+(4312153, 'Mato Leitão', -29.5285, -52.1278, FALSE, 43),
+(4312179, 'Mato Queimado', -28.252, -54.6159, FALSE, 43),
+(4115739, 'Mato Rico', -24.6995, -52.1454, FALSE, 41),
+(3141009, 'Mato Verde', -15.3944, -42.86, FALSE, 31),
+(2106607, 'Matões', -5.51359, -43.2018, FALSE, 21),
+(2106631, 'Matões do Norte', -3.6244, -44.5468, FALSE, 21),
+(4210704, 'Matos Costa', -26.4709, -51.1501, FALSE, 42),
+(3141108, 'Matozinhos', -19.5543, -44.0868, FALSE, 31),
+(5212956, 'Matrinchã', -15.4342, -50.7456, FALSE, 52),
+(2705101, 'Matriz de Camaragibe', -9.15437, -35.5243, FALSE, 27),
+(5105606, 'Matupá', -10.1821, -54.9467, FALSE, 51),
+(2509396, 'Maturéia', -7.26188, -37.351, FALSE, 25),
+(3141207, 'Matutina', -19.2179, -45.9664, FALSE, 31),
+(3529401, 'Mauá', -23.6677, -46.4613, FALSE, 35),
+(4115754, 'Mauá da Serra', -23.8988, -51.2277, FALSE, 41),
+(1302900, 'Maués', -3.39289, -57.7067, FALSE, 13),
+(5213004, 'Maurilândia', -17.9719, -50.3388, FALSE, 52),
+(1712801, 'Maurilândia do Tocantins', -5.95169, -47.5125, FALSE, 17),
+(2308104, 'Mauriti', -7.38597, -38.7708, FALSE, 23),
+(2407500, 'Maxaranguape', -5.52181, -35.2631, FALSE, 24),
+(4312203, 'Maximiliano de Almeida', -27.6325, -51.802, FALSE, 43),
+(1600402, 'Mazagão', -0.11336, -51.2891, FALSE, 16),
+(3141306, 'Medeiros', -19.9865, -46.2181, FALSE, 31),
+(2921104, 'Medeiros Neto', -17.3707, -40.2238, FALSE, 29),
+(4115804, 'Medianeira', -25.2977, -54.0943, FALSE, 41),
+(1504455, 'Medicilândia', -3.44637, -52.8875, FALSE, 15),
+(3141405, 'Medina', -16.2245, -41.4728, FALSE, 31),
+(4210803, 'Meleiro', -28.8244, -49.6378, FALSE, 42),
+(1504505, 'Melgaço', -1.8032, -50.7149, FALSE, 15),
+(3302809, 'Mendes', -22.5245, -43.7312, FALSE, 33),
+(3141504, 'Mendes Pimentel', -18.6631, -41.4052, FALSE, 31),
+(3529500, 'Mendonça', -21.1757, -49.5791, FALSE, 35),
+(4115853, 'Mercedes', -24.4538, -54.1618, FALSE, 41),
+(3141603, 'Mercês', -21.1976, -43.3337, FALSE, 31),
+(3529609, 'Meridiano', -20.3579, -50.1811, FALSE, 35),
+(2308203, 'Meruoca', -3.53974, -40.4531, FALSE, 23),
+(3529658, 'Mesópolis', -19.9684, -50.6326, FALSE, 35),
+(3302858, 'Mesquita', -22.8028, -43.4601, FALSE, 33),
+(3141702, 'Mesquita', -19.224, -42.6079, FALSE, 31),
+(2705200, 'Messias', -9.39384, -35.8392, FALSE, 27),
+(2407609, 'Messias Targino', -6.07194, -37.5158, FALSE, 24),
+(2206209, 'Miguel Alves', -4.16857, -42.8963, FALSE, 22),
+(2921203, 'Miguel Calmon', -11.4299, -40.6031, FALSE, 29),
+(2206308, 'Miguel Leão', -5.68077, -42.7436, FALSE, 22),
+(3302908, 'Miguel Pereira', -22.4572, -43.4803, FALSE, 33),
+(3529708, 'Miguelópolis', -20.1796, -48.031, FALSE, 35),
+(2308302, 'Milagres', -7.29749, -38.9378, FALSE, 23),
+(2921302, 'Milagres', -12.8646, -39.8611, FALSE, 29),
+(2106672, 'Milagres do Maranhão', -3.57443, -42.6131, FALSE, 21),
+(2308351, 'Milhã', -5.67252, -39.1875, FALSE, 23),
+(2206357, 'Milton Brandão', -4.68295, -41.4173, FALSE, 22),
+(5213053, 'Mimoso de Goiás', -15.0515, -48.1611, FALSE, 52),
+(3203403, 'Mimoso do Sul', -21.0628, -41.3615, FALSE, 32),
+(5213087, 'Minaçu', -13.5304, -48.2206, FALSE, 52),
+(2705309, 'Minador do Negrão', -9.31236, -36.8696, FALSE, 27),
+(4312252, 'Minas do Leão', -30.1346, -52.0423, FALSE, 43),
+(3141801, 'Minas Novas', -17.2156, -42.5884, FALSE, 31),
+(3141900, 'Minduri', -21.6797, -44.6051, FALSE, 31),
+(5213103, 'Mineiros', -17.5654, -52.5537, FALSE, 52),
+(3529807, 'Mineiros do Tietê', -22.412, -48.451, FALSE, 35),
+(1101203, 'Ministro Andreazza', -11.196, -61.5174, FALSE, 11),
+(3530003, 'Mira Estrela', -19.9789, -50.139, FALSE, 35),
+(3142007, 'Mirabela', -16.256, -44.1602, FALSE, 31),
+(3529906, 'Miracatu', -24.2766, -47.4625, FALSE, 35),
+(3303005, 'Miracema', -21.4148, -42.1938, FALSE, 33),
+(1713205, 'Miracema do Tocantins', -9.56556, -48.393, FALSE, 17),
+(2106706, 'Mirador', -6.37454, -44.3683, FALSE, 21),
+(4115903, 'Mirador', -23.255, -52.7761, FALSE, 41),
+(3142106, 'Miradouro', -20.8899, -42.3458, FALSE, 31),
+(4312302, 'Miraguaí', -27.497, -53.6891, FALSE, 43),
+(3142205, 'Miraí', -21.2021, -42.6122, FALSE, 31),
+(2308377, 'Miraíma', -3.56867, -39.9663, FALSE, 23),
+(5005608, 'Miranda', -20.2355, -56.3746, FALSE, 50),
+(2106755, 'Miranda do Norte', -3.56313, -44.5814, FALSE, 21),
+(2609303, 'Mirandiba', -8.12113, -38.7388, FALSE, 26),
+(3530102, 'Mirandópolis', -21.1313, -51.1035, FALSE, 35),
+(2921401, 'Mirangaba', -10.961, -40.574, FALSE, 29),
+(1713304, 'Miranorte', -9.52907, -48.5922, FALSE, 17),
+(2921450, 'Mirante', -14.2385, -40.7718, FALSE, 29),
+(1101302, 'Mirante da Serra', -11.029, -62.6696, FALSE, 11),
+(3530201, 'Mirante do Paranapanema', -22.2904, -51.9084, FALSE, 35),
+(4116000, 'Miraselva', -22.9657, -51.4846, FALSE, 41),
+(3530300, 'Mirassol', -20.8169, -49.5206, FALSE, 35),
+(5105622, 'Mirassol d''Oeste', -15.6759, -58.0951, FALSE, 51),
+(3530409, 'Mirassolândia', -20.6179, -49.4617, FALSE, 35),
+(3142254, 'Miravânia', -14.7348, -44.4092, FALSE, 31),
+(4210852, 'Mirim Doce', -27.197, -50.0786, FALSE, 42),
+(2106805, 'Mirinzal', -2.07094, -44.7787, FALSE, 21),
+(4116059, 'Missal', -25.0919, -54.2477, FALSE, 41),
+(2308401, 'Missão Velha', -7.23522, -39.143, FALSE, 23),
+(1504604, 'Mocajuba', -2.5831, -49.5042, FALSE, 15),
+(3530508, 'Mococa', -21.4647, -47.0024, FALSE, 35),
+(4210902, 'Modelo', -26.7729, -53.04, FALSE, 42),
+(3142304, 'Moeda', -20.3399, -44.0509, FALSE, 31),
+(3142403, 'Moema', -19.8387, -45.4127, FALSE, 31),
+(2509404, 'Mogeiro', -7.28517, -35.4832, FALSE, 25),
+(3530607, 'Mogi das Cruzes', -23.5208, -46.1854, FALSE, 35),
+(3530706, 'Mogi Guaçu', -22.3675, -46.9428, FALSE, 35),
+(3530805, 'Mogi Mirim', -22.4332, -46.9532, FALSE, 35),
+(5213400, 'Moiporá', -16.5434, -50.739, FALSE, 52),
+(2804102, 'Moita Bonita', -10.5769, -37.3512, FALSE, 28),
+(1504703, 'Moju', -1.88993, -48.7668, FALSE, 15),
+(1504752, 'Mojuí dos Campos', -2.6822, -54.6425, FALSE, 15),
+(2308500, 'Mombaça', -5.73844, -39.63, FALSE, 23),
+(3530904, 'Mombuca', -22.9285, -47.559, FALSE, 35),
+(2106904, 'Monção', -3.48125, -45.2496, FALSE, 21),
+(3531001, 'Monções', -20.8509, -50.0975, FALSE, 35),
+(4211009, 'Mondaí', -27.1008, -53.4032, FALSE, 42),
+(3531100, 'Mongaguá', -24.0809, -46.6265, FALSE, 35),
+(3142502, 'Monjolos', -18.3245, -44.118, FALSE, 31),
+(2206407, 'Monsenhor Gil', -5.562, -42.6075, FALSE, 22),
+(2206506, 'Monsenhor Hipólito', -6.99275, -41.026, FALSE, 22),
+(3142601, 'Monsenhor Paulo', -21.7579, -45.5391, FALSE, 31),
+(2308609, 'Monsenhor Tabosa', -4.79102, -40.0646, FALSE, 23),
+(2509503, 'Montadas', -7.08848, -35.9592, FALSE, 25),
+(3142700, 'Montalvânia', -14.4197, -44.3719, FALSE, 31),
+(3203502, 'Montanha', -18.1303, -40.3668, FALSE, 32),
+(2407708, 'Montanhas', -6.48522, -35.2842, FALSE, 24),
+(4312351, 'Montauri', -28.6462, -52.0767, FALSE, 43),
+(1504802, 'Monte Alegre', -1.99768, -54.0724, FALSE, 15),
+(2407807, 'Monte Alegre', -6.07063, -35.3253, FALSE, 24),
+(5213509, 'Monte Alegre de Goiás', -13.2552, -46.8928, FALSE, 52),
+(3142809, 'Monte Alegre de Minas', -18.869, -48.881, FALSE, 31),
+(2804201, 'Monte Alegre de Sergipe', -10.0256, -37.5616, FALSE, 28),
+(2206605, 'Monte Alegre do Piauí', -9.75364, -45.3037, FALSE, 22),
+(3531209, 'Monte Alegre do Sul', -22.6817, -46.681, FALSE, 35),
+(4312377, 'Monte Alegre dos Campos', -28.6805, -50.7834, FALSE, 43),
+(3531308, 'Monte Alto', -21.2655, -48.4971, FALSE, 35),
+(3531407, 'Monte Aprazível', -20.768, -49.7184, FALSE, 35),
+(3142908, 'Monte Azul', -15.1514, -42.8718, FALSE, 31),
+(3531506, 'Monte Azul Paulista', -20.9065, -48.6387, FALSE, 35),
+(3143005, 'Monte Belo', -21.3271, -46.3635, FALSE, 31),
+(4312385, 'Monte Belo do Sul', -29.1607, -51.6333, FALSE, 43),
+(4211058, 'Monte Carlo', -27.2239, -50.9808, FALSE, 42),
+(3143104, 'Monte Carmelo', -18.7302, -47.4912, FALSE, 31),
+(4211108, 'Monte Castelo', -26.461, -50.2327, FALSE, 42),
+(3531605, 'Monte Castelo', -21.2981, -51.5679, FALSE, 35),
+(2407906, 'Monte das Gameleiras', -6.43698, -35.7831, FALSE, 24),
+(1713601, 'Monte do Carmo', -10.7611, -48.1114, FALSE, 17),
+(3143153, 'Monte Formoso', -16.8691, -41.2473, FALSE, 31),
+(2509602, 'Monte Horebe', -7.20402, -38.5838, FALSE, 25),
+(3531803, 'Monte Mor', -22.945, -47.3122, FALSE, 35),
+(1101401, 'Monte Negro', -10.2458, -63.29, FALSE, 11),
+(2921500, 'Monte Santo', -10.4374, -39.3321, FALSE, 29),
+(3143203, 'Monte Santo de Minas', -21.1873, -46.9753, FALSE, 31),
+(1713700, 'Monte Santo do Tocantins', -10.0075, -48.9941, FALSE, 17),
+(3143401, 'Monte Sião', -22.4335, -46.573, FALSE, 31),
+(2509701, 'Monteiro', -7.88363, -37.1184, FALSE, 25),
+(3531704, 'Monteiro Lobato', -22.9544, -45.8407, FALSE, 35),
+(2705408, 'Monteirópolis', -9.60357, -37.2505, FALSE, 27),
+(4312401, 'Montenegro', -29.6824, -51.4679, FALSE, 43),
+(2107001, 'Montes Altos', -5.83067, -47.0673, FALSE, 21),
+(3143302, 'Montes Claros', -16.7282, -43.8578, FALSE, 31),
+(5213707, 'Montes Claros de Goiás', -16.0059, -51.3979, FALSE, 52),
+(3143450, 'Montezuma', -15.1702, -42.4941, FALSE, 31),
+(5213756, 'Montividiu', -17.4439, -51.1728, FALSE, 52),
+(5213772, 'Montividiu do Norte', -13.3485, -48.6853, FALSE, 52),
+(2308708, 'Morada Nova', -5.09736, -38.3702, FALSE, 23),
+(3143500, 'Morada Nova de Minas', -18.5998, -45.3584, FALSE, 31),
+(2308807, 'Moraújo', -3.46311, -40.6776, FALSE, 23),
+(2614303, 'Moreilândia', -7.61931, -39.546, FALSE, 26),
+(4116109, 'Moreira Sales', -24.0509, -53.0102, FALSE, 41),
+(2609402, 'Moreno', -8.10871, -35.0835, FALSE, 26),
+(4312427, 'Mormaço', -28.6968, -52.6999, FALSE, 43),
+(2921609, 'Morpará', -11.5569, -43.2766, FALSE, 29),
+(4116208, 'Morretes', -25.4744, -48.8345, FALSE, 41),
+(5213806, 'Morrinhos', -17.7334, -49.1059, FALSE, 52),
+(2308906, 'Morrinhos', -3.23426, -40.1233, FALSE, 23),
+(4312443, 'Morrinhos do Sul', -29.3578, -49.9328, FALSE, 43),
+(3531902, 'Morro Agudo', -20.7288, -48.0581, FALSE, 35),
+(5213855, 'Morro Agudo de Goiás', -15.3184, -50.0553, FALSE, 52),
+(2206654, 'Morro Cabeça no Tempo', -9.71891, -43.9072, FALSE, 22),
+(4211207, 'Morro da Fumaça', -28.6511, -49.2169, FALSE, 42),
+(3143609, 'Morro da Garça', -18.5356, -44.601, FALSE, 31),
+(2921708, 'Morro do Chapéu', -11.5488, -41.1565, FALSE, 29),
+(2206670, 'Morro do Chapéu do Piauí', -3.73337, -42.3024, FALSE, 22),
+(3143708, 'Morro do Pilar', -19.2236, -43.3795, FALSE, 31),
+(4211256, 'Morro Grande', -28.8006, -49.7214, FALSE, 42),
+(4312450, 'Morro Redondo', -31.5887, -52.6261, FALSE, 43),
+(4312476, 'Morro Reuter', -29.5379, -51.0811, FALSE, 43),
+(2107100, 'Morros', -2.85379, -44.0357, FALSE, 21),
+(2921807, 'Mortugaba', -15.0225, -42.3727, FALSE, 29),
+(3532009, 'Morungaba', -22.8811, -46.7896, FALSE, 35),
+(5213905, 'Mossâmedes', -16.124, -50.2136, FALSE, 52),
+(2408003, 'Mossoró', -5.18374, -37.3474, FALSE, 24),
+(4312500, 'Mostardas', -31.1054, -50.9167, FALSE, 43),
+(3532058, 'Motuca', -21.5103, -48.1538, FALSE, 35),
+(5214002, 'Mozarlândia', -14.7457, -50.5713, FALSE, 52),
+(1504901, 'Muaná', -1.53936, -49.2224, FALSE, 15),
+(1400308, 'Mucajaí', 2.43998, -60.9096, FALSE, 14),
+(2309003, 'Mucambo', -3.90271, -40.7452, FALSE, 23),
+(2921906, 'Mucugê', -13.0053, -41.3703, FALSE, 29),
+(4312609, 'Muçum', -29.163, -51.8714, FALSE, 43),
+(2922003, 'Mucuri', -18.0754, -39.5565, FALSE, 29),
+(3203601, 'Mucurici', -18.0965, -40.52, FALSE, 32),
+(4312617, 'Muitos Capões', -28.3132, -51.1836, FALSE, 43),
+(4312625, 'Muliterno', -28.3253, -51.7697, FALSE, 43),
+(2509800, 'Mulungu', -7.02525, -35.46, FALSE, 25),
+(2309102, 'Mulungu', -4.30294, -38.9951, FALSE, 23),
+(2922052, 'Mulungu do Morro', -11.9648, -41.6374, FALSE, 29),
+(2922102, 'Mundo Novo', -11.8541, -40.4714, FALSE, 29),
+(5005681, 'Mundo Novo', -23.9355, -54.281, FALSE, 50),
+(5214051, 'Mundo Novo', -13.7729, -50.2814, FALSE, 52),
+(3143807, 'Munhoz', -22.6092, -46.362, FALSE, 31),
+(4116307, 'Munhoz de Melo', -23.1487, -51.7737, FALSE, 41),
+(2922201, 'Muniz Ferreira', -13.0092, -39.1092, FALSE, 29),
+(3203700, 'Muniz Freire', -20.4652, -41.4156, FALSE, 32),
+(2922250, 'Muquém de São Francisco', -12.065, -43.5497, FALSE, 29),
+(3203809, 'Muqui', -20.9509, -41.346, FALSE, 32),
+(3143906, 'Muriaé', -21.13, -42.3693, FALSE, 31),
+(2804300, 'Muribeca', -10.4271, -36.9588, FALSE, 28),
+(2705507, 'Murici', -9.30682, -35.9428, FALSE, 27),
+(2206696, 'Murici dos Portelas', -3.319, -42.094, FALSE, 22),
+(1713957, 'Muricilândia', -7.14669, -48.6091, FALSE, 17),
+(2922300, 'Muritiba', -12.6329, -38.9921, FALSE, 29),
+(3532108, 'Murutinga do Sul', -20.9908, -51.2774, FALSE, 35),
+(2922409, 'Mutuípe', -13.2284, -39.5044, FALSE, 29),
+(3144003, 'Mutum', -19.8121, -41.4407, FALSE, 31),
+(5214101, 'Mutunópolis', -13.7303, -49.2745, FALSE, 52),
+(3144102, 'Muzambinho', -21.3692, -46.5213, FALSE, 31),
+(3144201, 'Nacip Raydan', -18.4544, -42.2481, FALSE, 31),
+(3532157, 'Nantes', -22.6156, -51.24, FALSE, 35),
+(3144300, 'Nanuque', -17.8481, -40.3533, FALSE, 31),
+(4312658, 'Não-Me-Toque', -28.4548, -52.8182, FALSE, 43),
+(3144359, 'Naque', -19.2291, -42.3312, FALSE, 31),
+(3532207, 'Narandiba', -22.4057, -51.5274, FALSE, 35),
+(2408102, 'Natal', -5.79357, -35.1986, TRUE, 24),
+(3144375, 'Natalândia', -16.5021, -46.4874, FALSE, 31),
+(3144409, 'Natércia', -22.1158, -45.5123, FALSE, 31),
+(1714203, 'Natividade', -11.7034, -47.7223, FALSE, 17),
+(3303104, 'Natividade', -21.039, -41.9697, FALSE, 33),
+(3532306, 'Natividade da Serra', -23.3707, -45.4468, FALSE, 35),
+(2509909, 'Natuba', -7.63514, -35.5586, FALSE, 25),
+(4211306, 'Navegantes', -26.8943, -48.6546, FALSE, 42),
+(5005707, 'Naviraí', -23.0618, -54.1995, FALSE, 50),
+(2922508, 'Nazaré', -13.0235, -39.0108, FALSE, 29),
+(1714302, 'Nazaré', -6.37496, -47.6643, FALSE, 17),
+(2609501, 'Nazaré da Mata', -7.74149, -35.2193, FALSE, 26),
+(2206704, 'Nazaré do Piauí', -6.97023, -42.6773, FALSE, 22),
+(3532405, 'Nazaré Paulista', -23.1747, -46.3983, FALSE, 35),
+(3144508, 'Nazareno', -21.2168, -44.6138, FALSE, 31),
+(2510006, 'Nazarezinho', -6.9114, -38.322, FALSE, 25),
+(2206720, 'Nazária', -5.35128, -42.8153, FALSE, 22),
+(5214408, 'Nazário', -16.5808, -49.8817, FALSE, 52),
+(2804409, 'Neópolis', -10.3215, -36.585, FALSE, 28),
+(3144607, 'Nepomuceno', -21.2324, -45.235, FALSE, 31),
+(5214507, 'Nerópolis', -16.4047, -49.2227, FALSE, 52),
+(3532504, 'Neves Paulista', -20.843, -49.6358, FALSE, 35),
+(1303007, 'Nhamundá', -2.20793, -56.7112, FALSE, 13),
+(3532603, 'Nhandeara', -20.6945, -50.0436, FALSE, 35),
+(4312674, 'Nicolau Vergueiro', -28.5298, -52.4676, FALSE, 43),
+(2922607, 'Nilo Peçanha', -13.604, -39.1091, FALSE, 29),
+(3303203, 'Nilópolis', -22.8057, -43.4233, FALSE, 33),
+(2107209, 'Nina Rodrigues', -3.46788, -43.9134, FALSE, 21),
+(3144656, 'Ninheira', -15.3148, -41.7564, FALSE, 31),
+(5005806, 'Nioaque', -21.1419, -55.8296, FALSE, 50),
+(3532702, 'Nipoã', -20.9114, -49.7833, FALSE, 35),
+(5214606, 'Niquelândia', -14.4662, -48.4599, FALSE, 52),
+(2408201, 'Nísia Floresta', -6.09329, -35.1991, FALSE, 24),
+(3303302, 'Niterói', -22.8832, -43.1034, FALSE, 33),
+(5105903, 'Nobres', -14.7192, -56.3284, FALSE, 51),
+(4312708, 'Nonoai', -27.3689, -52.7756, FALSE, 43),
+(2922656, 'Nordestina', -10.8192, -39.4297, FALSE, 29),
+(1400407, 'Normandia', 3.8853, -59.6204, FALSE, 14),
+(5106000, 'Nortelândia', -14.454, -56.7945, FALSE, 51),
+(2804458, 'Nossa Senhora Aparecida', -10.3944, -37.4517, FALSE, 28),
+(2804508, 'Nossa Senhora da Glória', -10.2158, -37.4211, FALSE, 28),
+(2804607, 'Nossa Senhora das Dores', -10.4854, -37.1963, FALSE, 28),
+(4116406, 'Nossa Senhora das Graças', -22.9129, -51.7978, FALSE, 41),
+(2804706, 'Nossa Senhora de Lourdes', -10.0772, -37.0615, FALSE, 28),
+(2206753, 'Nossa Senhora de Nazaré', -4.63019, -42.173, FALSE, 22),
+(5106109, 'Nossa Senhora do Livramento', -15.772, -56.3432, FALSE, 51),
+(2804805, 'Nossa Senhora do Socorro', -10.8468, -37.1231, FALSE, 28),
+(2206803, 'Nossa Senhora dos Remédios', -3.97574, -42.6184, FALSE, 22),
+(3532801, 'Nova Aliança', -21.0156, -49.4986, FALSE, 35),
+(4116505, 'Nova Aliança do Ivaí', -23.1763, -52.6032, FALSE, 41),
+(4312757, 'Nova Alvorada', -28.6822, -52.1631, FALSE, 43),
+(5006002, 'Nova Alvorada do Sul', -21.4657, -54.3825, FALSE, 50),
+(5214705, 'Nova América', -15.0206, -49.8953, FALSE, 52),
+(4116604, 'Nova América da Colina', -23.3308, -50.7168, FALSE, 41),
+(5006200, 'Nova Andradina', -22.238, -53.3437, FALSE, 50),
+(4312807, 'Nova Araçá', -28.6537, -51.7458, FALSE, 43),
+(4116703, 'Nova Aurora', -24.5289, -53.2575, FALSE, 41),
+(5214804, 'Nova Aurora', -18.0597, -48.2552, FALSE, 52),
+(5106158, 'Nova Bandeirantes', -9.84977, -57.8139, FALSE, 51),
+(4312906, 'Nova Bassano', -28.7291, -51.7072, FALSE, 43),
+(3144672, 'Nova Belém', -18.4925, -41.1107, FALSE, 31),
+(4312955, 'Nova Boa Vista', -27.9926, -52.9784, FALSE, 43),
+(5106208, 'Nova Brasilândia', -14.9612, -54.9685, FALSE, 51),
+(1100148, 'Nova Brasilândia D''Oeste', -11.7247, -62.3127, FALSE, 11),
+(4313003, 'Nova Bréscia', -29.2182, -52.0319, FALSE, 43),
+(3532827, 'Nova Campina', -24.1224, -48.9022, FALSE, 35),
+(2922706, 'Nova Canaã', -14.7912, -40.1458, FALSE, 29),
+(5106216, 'Nova Canaã do Norte', -10.558, -55.953, FALSE, 51),
+(3532843, 'Nova Canaã Paulista', -20.3836, -50.9483, FALSE, 35),
+(4313011, 'Nova Candelária', -27.6137, -54.1074, FALSE, 43),
+(4116802, 'Nova Cantu', -24.6723, -52.5661, FALSE, 41),
+(3532868, 'Nova Castilho', -20.7615, -50.3477, FALSE, 35),
+(2107258, 'Nova Colinas', -7.12263, -46.2607, FALSE, 21),
+(5214838, 'Nova Crixás', -14.0957, -50.33, FALSE, 52),
+(2408300, 'Nova Cruz', -6.47511, -35.4286, FALSE, 24),
+(3144706, 'Nova Era', -19.7577, -43.0333, FALSE, 31),
+(4211405, 'Nova Erechim', -26.8982, -52.9066, FALSE, 42),
+(4116901, 'Nova Esperança', -23.182, -52.2031, FALSE, 41),
+(1504950, 'Nova Esperança do Piriá', -2.26693, -46.9731, FALSE, 15),
+(4116950, 'Nova Esperança do Sudoeste', -25.9004, -53.2618, FALSE, 41),
+(4313037, 'Nova Esperança do Sul', -29.4066, -54.8293, FALSE, 43),
+(3532900, 'Nova Europa', -21.7765, -48.5705, FALSE, 35),
+(4117008, 'Nova Fátima', -23.4324, -50.5665, FALSE, 41),
+(2922730, 'Nova Fátima', -11.6031, -39.6302, FALSE, 29),
+(2510105, 'Nova Floresta', -6.45056, -36.2057, FALSE, 25),
+(3303401, 'Nova Friburgo', -22.2932, -42.5377, FALSE, 33),
+(5214861, 'Nova Glória', -15.145, -49.5737, FALSE, 52),
+(3533007, 'Nova Granada', -20.5321, -49.3123, FALSE, 35),
+(5108808, 'Nova Guarita', -10.312, -55.4061, FALSE, 51),
+(3533106, 'Nova Guataporanga', -21.332, -51.6447, FALSE, 35),
+(4313060, 'Nova Hartz', -29.5808, -50.9051, FALSE, 43),
+(2922755, 'Nova Ibiá', -13.812, -39.6182, FALSE, 29),
+(3303500, 'Nova Iguaçu', -22.7556, -43.4603, FALSE, 33),
+(5214879, 'Nova Iguaçu de Goiás', -14.2868, -49.3872, FALSE, 52),
+(3533205, 'Nova Independência', -21.1026, -51.4905, FALSE, 35),
+(2107308, 'Nova Iorque', -6.73047, -44.0471, FALSE, 21),
+(1504976, 'Nova Ipixuna', -4.91622, -49.0822, FALSE, 15),
+(4211454, 'Nova Itaberaba', -26.9428, -52.8141, FALSE, 42),
+(2922805, 'Nova Itarana', -13.0241, -40.0653, FALSE, 29),
+(5106182, 'Nova Lacerda', -14.4727, -59.6001, FALSE, 51),
+(4117057, 'Nova Laranjeiras', -25.3054, -52.5447, FALSE, 41),
+(3144805, 'Nova Lima', -19.9758, -43.8509, FALSE, 31),
+(4117107, 'Nova Londrina', -22.7639, -52.9868, FALSE, 41),
+(3533304, 'Nova Luzitânia', -20.856, -50.2617, FALSE, 35),
+(1100338, 'Nova Mamoré', -10.4077, -65.3346, FALSE, 11),
+(5108857, 'Nova Marilândia', -14.3568, -56.9696, FALSE, 51),
+(5108907, 'Nova Maringá', -13.0136, -57.0908, FALSE, 51),
+(3144904, 'Nova Módica', -18.4417, -41.4984, FALSE, 31),
+(5108956, 'Nova Monte Verde', -9.99998, -57.5261, FALSE, 51),
+(5106224, 'Nova Mutum', -13.8374, -56.0743, FALSE, 51),
+(5106174, 'Nova Nazaré', -13.9486, -51.8002, FALSE, 51),
+(3533403, 'Nova Odessa', -22.7832, -47.2941, FALSE, 35),
+(4117206, 'Nova Olímpia', -23.4703, -53.0898, FALSE, 41),
+(5106232, 'Nova Olímpia', -14.7889, -57.2886, FALSE, 51),
+(1714880, 'Nova Olinda', -7.63171, -48.4252, FALSE, 17),
+(2309201, 'Nova Olinda', -7.08415, -39.6713, FALSE, 23),
+(2510204, 'Nova Olinda', -7.47232, -38.0382, FALSE, 25),
+(2107357, 'Nova Olinda do Maranhão', -2.84227, -45.6953, FALSE, 21),
+(1303106, 'Nova Olinda do Norte', -3.90037, -59.094, FALSE, 13),
+(4313086, 'Nova Pádua', -29.0275, -51.3098, FALSE, 43),
+(4313102, 'Nova Palma', -29.471, -53.4689, FALSE, 43),
+(2510303, 'Nova Palmeira', -6.67122, -36.422, FALSE, 25),
+(4313201, 'Nova Petrópolis', -29.3741, -51.1136, FALSE, 43),
+(3145000, 'Nova Ponte', -19.1461, -47.6779, FALSE, 31),
+(3145059, 'Nova Porteirinha', -15.7993, -43.2941, FALSE, 31),
+(4313300, 'Nova Prata', -28.7799, -51.6113, FALSE, 43),
+(4117255, 'Nova Prata do Iguaçu', -25.6309, -53.3469, FALSE, 41),
+(4313334, 'Nova Ramada', -28.0667, -53.6992, FALSE, 43),
+(2922854, 'Nova Redenção', -12.815, -41.0748, FALSE, 29),
+(3145109, 'Nova Resende', -21.1286, -46.4157, FALSE, 31),
+(5214903, 'Nova Roma', -13.7388, -46.8734, FALSE, 52),
+(4313359, 'Nova Roma do Sul', -28.9882, -51.4095, FALSE, 43),
+(1715002, 'Nova Rosalândia', -10.5651, -48.9125, FALSE, 17),
+(2309300, 'Nova Russas', -4.70581, -40.5621, FALSE, 23),
+(4117214, 'Nova Santa Bárbara', -23.5865, -50.7598, FALSE, 41),
+(5106190, 'Nova Santa Helena', -10.8651, -55.1872, FALSE, 51),
+(4313375, 'Nova Santa Rita', -29.8525, -51.2837, FALSE, 43),
+(2207959, 'Nova Santa Rita', -8.09707, -42.0471, FALSE, 22),
+(4117222, 'Nova Santa Rosa', -24.4693, -53.9552, FALSE, 41),
+(3145208, 'Nova Serrana', -19.8713, -44.9847, FALSE, 31),
+(2922904, 'Nova Soure', -11.2329, -38.4871, FALSE, 29),
+(4117271, 'Nova Tebas', -24.438, -51.9454, FALSE, 41),
+(1505007, 'Nova Timboteua', -1.20874, -47.3921, FALSE, 15),
+(4211504, 'Nova Trento', -27.278, -48.9298, FALSE, 42),
+(5106240, 'Nova Ubiratã', -12.9834, -55.2556, FALSE, 51),
+(3136603, 'Nova União', -19.6876, -43.583, FALSE, 31),
+(1101435, 'Nova União', -10.9068, -62.5564, FALSE, 11),
+(3203908, 'Nova Venécia', -18.715, -40.4053, FALSE, 32),
+(4211603, 'Nova Veneza', -28.6338, -49.5055, FALSE, 42),
+(5215009, 'Nova Veneza', -16.3695, -49.3168, FALSE, 52),
+(2923001, 'Nova Viçosa', -17.8926, -39.3743, FALSE, 29),
+(5106257, 'Nova Xavantina', -14.6771, -52.3502, FALSE, 51),
+(3533254, 'Novais', -20.9893, -48.9141, FALSE, 35),
+(1715101, 'Novo Acordo', -9.97063, -47.6785, FALSE, 17),
+(1303205, 'Novo Airão', -2.63637, -60.9434, FALSE, 13),
+(1715150, 'Novo Alegre', -12.9217, -46.5713, FALSE, 17),
+(1303304, 'Novo Aripuanã', -5.12593, -60.3732, FALSE, 13),
+(4313490, 'Novo Barreiro', -27.9077, -53.1103, FALSE, 43),
+(5215207, 'Novo Brasil', -16.0313, -50.7113, FALSE, 52),
+(4313391, 'Novo Cabrais', -29.7338, -52.9489, FALSE, 43),
+(3145307, 'Novo Cruzeiro', -17.4654, -41.8826, FALSE, 31),
+(5215231, 'Novo Gama', -16.0592, -48.0417, FALSE, 52),
+(4313409, 'Novo Hamburgo', -29.6875, -51.1328, FALSE, 43),
+(4211652, 'Novo Horizonte', -26.4442, -52.8281, FALSE, 42),
+(3533502, 'Novo Horizonte', -21.4651, -49.2234, FALSE, 35),
+(2923035, 'Novo Horizonte', -12.8083, -42.1682, FALSE, 29),
+(5106273, 'Novo Horizonte do Norte', -11.4089, -57.3488, FALSE, 51),
+(1100502, 'Novo Horizonte do Oeste', -11.6961, -61.9951, FALSE, 11),
+(5006259, 'Novo Horizonte do Sul', -22.6693, -53.8601, FALSE, 50),
+(4117297, 'Novo Itacolomi', -23.7631, -51.5079, FALSE, 41),
+(1715259, 'Novo Jardim', -11.826, -46.6325, FALSE, 17),
+(2705606, 'Novo Lino', -8.94191, -35.664, FALSE, 27),
+(4313425, 'Novo Machado', -27.5765, -54.5036, FALSE, 43),
+(5106265, 'Novo Mundo', -9.95616, -55.2029, FALSE, 51),
+(2309409, 'Novo Oriente', -5.52552, -40.7713, FALSE, 23),
+(3145356, 'Novo Oriente de Minas', -17.4089, -41.2194, FALSE, 31),
+(2206902, 'Novo Oriente do Piauí', -6.44901, -41.9261, FALSE, 22),
+(5215256, 'Novo Planalto', -13.2424, -49.506, FALSE, 52),
+(1505031, 'Novo Progresso', -7.14347, -55.3786, FALSE, 15),
+(1505064, 'Novo Repartimento', -4.24749, -49.9499, FALSE, 15),
+(2206951, 'Novo Santo Antônio', -5.28749, -41.9325, FALSE, 22),
+(5106315, 'Novo Santo Antônio', -12.2875, -50.9686, FALSE, 51),
+(5106281, 'Novo São Joaquim', -14.9054, -53.0194, FALSE, 51),
+(4313441, 'Novo Tiradentes', -27.5649, -53.1837, FALSE, 43),
+(2923050, 'Novo Triunfo', -10.3182, -38.4014, FALSE, 29),
+(4313466, 'Novo Xingu', -27.749, -53.0639, FALSE, 43),
+(3145372, 'Novorizonte', -16.0162, -42.4044, FALSE, 31),
+(3533601, 'Nuporanga', -20.7296, -47.7429, FALSE, 35),
+(1505106, 'Óbidos', -1.90107, -55.5208, FALSE, 15),
+(2309458, 'Ocara', -4.48523, -38.5933, FALSE, 23),
+(3533700, 'Ocauçu', -22.438, -49.922, FALSE, 35),
+(2207009, 'Oeiras', -7.01915, -42.1283, FALSE, 22),
+(1505205, 'Oeiras do Pará', -2.00358, -49.8628, FALSE, 15),
+(1600501, 'Oiapoque', 3.84074, -51.8331, FALSE, 16),
+(3145406, 'Olaria', -21.8598, -43.9356, FALSE, 31),
+(3533809, 'Óleo', -22.9435, -49.3419, FALSE, 35),
+(2510402, 'Olho d''Água', -7.22118, -37.7406, FALSE, 25),
+(2107407, 'Olho d''Água das Cunhãs', -4.13417, -45.1163, FALSE, 21),
+(2705705, 'Olho d''Água das Flores', -9.53686, -37.2971, FALSE, 27),
+(2705804, 'Olho d''Água do Casado', -9.50357, -37.8301, FALSE, 27),
+(2207108, 'Olho D''Água do Piauí', -5.84125, -42.5594, FALSE, 22),
+(2705903, 'Olho d''Água Grande', -10.0572, -36.8101, FALSE, 27),
+(2408409, 'Olho-d''Água do Borges', -5.9486, -37.7047, FALSE, 24),
+(3145455, 'Olhos d''Água', -17.3982, -43.5719, FALSE, 31),
+(3533908, 'Olímpia', -20.7366, -48.9106, FALSE, 35),
+(3145505, 'Olímpio Noronha', -22.0685, -45.2657, FALSE, 31),
+(2609600, 'Olinda', -8.01017, -34.8545, FALSE, 26),
+(2107456, 'Olinda Nova do Maranhão', -2.99295, -44.9897, FALSE, 21),
+(2923100, 'Olindina', -11.3497, -38.3379, FALSE, 29),
+(2510501, 'Olivedos', -6.98434, -36.241, FALSE, 25),
+(3145604, 'Oliveira', -20.6982, -44.829, FALSE, 31),
+(1715507, 'Oliveira de Fátima', -10.707, -48.9086, FALSE, 17),
+(2923209, 'Oliveira dos Brejinhos', -12.3132, -42.8969, FALSE, 29),
+(3145703, 'Oliveira Fortes', -21.3401, -43.4499, FALSE, 31),
+(2706000, 'Olivença', -9.51954, -37.1954, FALSE, 27),
+(3145802, 'Onça de Pitangui', -19.7276, -44.8058, FALSE, 31),
+(3534005, 'Onda Verde', -20.6042, -49.2929, FALSE, 35),
+(3145851, 'Oratórios', -20.4298, -42.7977, FALSE, 31),
+(3534104, 'Oriente', -22.1549, -50.0971, FALSE, 35),
+(3534203, 'Orindiúva', -20.1861, -49.3464, FALSE, 35),
+(1505304, 'Oriximiná', -1.75989, -55.8579, FALSE, 15),
+(3145877, 'Orizânia', -20.5142, -42.1991, FALSE, 31),
+(5215306, 'Orizona', -17.0334, -48.2964, FALSE, 52),
+(3534302, 'Orlândia', -20.7169, -47.8852, FALSE, 35),
+(4211702, 'Orleans', -28.3487, -49.2986, FALSE, 42),
+(2609709, 'Orobó', -7.74553, -35.5956, FALSE, 26),
+(2609808, 'Orocó', -8.61026, -39.6026, FALSE, 26),
+(2309508, 'Orós', -6.25182, -38.9053, FALSE, 23),
+(4117305, 'Ortigueira', -24.2058, -50.9185, FALSE, 41),
+(3534401, 'Osasco', -23.5324, -46.7916, FALSE, 35),
+(3534500, 'Oscar Bressane', -22.3149, -50.2811, FALSE, 35),
+(4313508, 'Osório', -29.8881, -50.2667, FALSE, 43),
+(3534609, 'Osvaldo Cruz', -21.7968, -50.8793, FALSE, 35),
+(4211751, 'Otacílio Costa', -27.4789, -50.1231, FALSE, 42),
+(1505403, 'Ourém', -1.54168, -47.1126, FALSE, 15),
+(2923308, 'Ouriçangas', -12.0175, -38.6166, FALSE, 29),
+(2609907, 'Ouricuri', -7.87918, -40.08, FALSE, 26),
+(1505437, 'Ourilândia do Norte', -6.7529, -51.0858, FALSE, 15),
+(3534708, 'Ourinhos', -22.9797, -49.8697, FALSE, 35),
+(4117404, 'Ourizona', -23.4053, -52.1964, FALSE, 41),
+(4211801, 'Ouro', -27.3379, -51.6194, FALSE, 42),
+(3145901, 'Ouro Branco', -20.5263, -43.6962, FALSE, 31),
+(2408508, 'Ouro Branco', -6.6958, -36.9428, FALSE, 24),
+(2706109, 'Ouro Branco', -9.15884, -37.3556, FALSE, 27),
+(3146008, 'Ouro Fino', -22.2779, -46.3716, FALSE, 31),
+(3146107, 'Ouro Preto', -20.3796, -43.512, FALSE, 31),
+(1100155, 'Ouro Preto do Oeste', -10.7167, -62.2565, FALSE, 11),
+(2510600, 'Ouro Velho', -7.61604, -37.1519, FALSE, 25),
+(4211850, 'Ouro Verde', -26.692, -52.3108, FALSE, 42),
+(3534807, 'Ouro Verde', -21.4872, -51.7024, FALSE, 35),
+(5215405, 'Ouro Verde de Goiás', -16.2181, -49.1942, FALSE, 52),
+(3146206, 'Ouro Verde de Minas', -18.0719, -41.2734, FALSE, 31),
+(4117453, 'Ouro Verde do Oeste', -24.7933, -53.9043, FALSE, 41),
+(3534757, 'Ouroeste', -20.0061, -50.3768, FALSE, 35),
+(2923357, 'Ourolândia', -10.9578, -41.0756, FALSE, 29),
+(5215504, 'Ouvidor', -18.2277, -47.8355, FALSE, 52),
+(3534906, 'Pacaembu', -21.5627, -51.2654, FALSE, 35),
+(1505486, 'Pacajá', -3.83542, -50.6399, FALSE, 15),
+(2309607, 'Pacajus', -4.17107, -38.465, FALSE, 23),
+(1400456, 'Pacaraima', 4.4799, -61.1477, FALSE, 14),
+(2309706, 'Pacatuba', -3.9784, -38.6183, FALSE, 23),
+(2804904, 'Pacatuba', -10.4538, -36.6531, FALSE, 28),
+(2107506, 'Paço do Lumiar', -2.51657, -44.1019, FALSE, 21),
+(2309805, 'Pacoti', -4.22492, -38.922, FALSE, 23),
+(2309904, 'Pacujá', -3.98327, -40.6989, FALSE, 23),
+(5215603, 'Padre Bernardo', -15.1605, -48.2833, FALSE, 52),
+(3146255, 'Padre Carvalho', -16.3646, -42.5088, FALSE, 31),
+(2207207, 'Padre Marcos', -7.35101, -40.8997, FALSE, 22),
+(3146305, 'Padre Paraíso', -17.0758, -41.4821, FALSE, 31),
+(2207306, 'Paes Landim', -7.77375, -42.2474, FALSE, 22),
+(3146552, 'Pai Pedro', -15.5271, -43.07, FALSE, 31),
+(4211876, 'Paial', -27.2541, -52.4975, FALSE, 42),
+(4117503, 'Paiçandu', -23.4555, -52.046, FALSE, 41),
+(4313607, 'Paim Filho', -27.7075, -51.763, FALSE, 43),
+(3146404, 'Paineiras', -18.8993, -45.5321, FALSE, 31),
+(4211892, 'Painel', -27.9234, -50.0972, FALSE, 42),
+(3146503, 'Pains', -20.3705, -45.6627, FALSE, 31),
+(3146602, 'Paiva', -21.2913, -43.4088, FALSE, 31),
+(2207355, 'Pajeú do Piauí', -7.85508, -42.8248, FALSE, 22),
+(2706208, 'Palestina', -9.67493, -37.339, FALSE, 27),
+(3535002, 'Palestina', -20.39, -49.4309, FALSE, 35),
+(5215652, 'Palestina de Goiás', -16.7392, -51.5309, FALSE, 52),
+(1505494, 'Palestina do Pará', -5.74027, -48.3181, FALSE, 15),
+(2310001, 'Palhano', -4.73672, -37.9655, FALSE, 23),
+(4211900, 'Palhoça', -27.6455, -48.6697, FALSE, 42),
+(3146701, 'Palma', -21.3748, -42.3123, FALSE, 31),
+(4212007, 'Palma Sola', -26.3471, -53.2771, FALSE, 42),
+(2310100, 'Palmácia', -4.13831, -38.8446, FALSE, 23),
+(2610004, 'Palmares', -8.68423, -35.589, FALSE, 26),
+(4313656, 'Palmares do Sul', -30.2535, -50.5103, FALSE, 43),
+(3535101, 'Palmares Paulista', -21.0854, -48.8037, FALSE, 35),
+(4117602, 'Palmas', -26.4839, -51.9888, FALSE, 41),
+(1721000, 'Palmas', -10.24, -48.3558, TRUE, 17),
+(2923407, 'Palmas de Monte Alto', -14.2676, -43.1609, FALSE, 29),
+(4117701, 'Palmeira', -25.4257, -50.007, FALSE, 41),
+(4212056, 'Palmeira', -27.583, -50.1577, FALSE, 42),
+(3535200, 'Palmeira d''Oeste', -20.4148, -50.7632, FALSE, 35),
+(4313706, 'Palmeira das Missões', -27.9007, -53.3134, FALSE, 43),
+(2207405, 'Palmeira do Piauí', -8.73076, -44.2466, FALSE, 22),
+(2706307, 'Palmeira dos Índios', -9.40568, -36.6328, FALSE, 27),
+(2207504, 'Palmeirais', -5.97086, -43.056, FALSE, 22),
+(2107605, 'Palmeirândia', -2.64433, -44.8933, FALSE, 21),
+(1715705, 'Palmeirante', -7.84786, -47.9242, FALSE, 17),
+(2923506, 'Palmeiras', -12.5059, -41.5809, FALSE, 29),
+(5215702, 'Palmeiras de Goiás', -16.8044, -49.924, FALSE, 52),
+(1713809, 'Palmeiras do Tocantins', -6.61658, -47.5464, FALSE, 17),
+(2610103, 'Palmeirina', -9.0109, -36.3242, FALSE, 26),
+(1715754, 'Palmeirópolis', -13.0447, -48.4026, FALSE, 17),
+(5215801, 'Palmelo', -17.3258, -48.426, FALSE, 52),
+(5215900, 'Palminópolis', -16.7924, -50.1652, FALSE, 52),
+(3535309, 'Palmital', -22.7858, -50.218, FALSE, 35),
+(4117800, 'Palmital', -24.8853, -52.2029, FALSE, 41),
+(4313805, 'Palmitinho', -27.3596, -53.558, FALSE, 43),
+(4212106, 'Palmitos', -27.0702, -53.1586, FALSE, 42),
+(3146750, 'Palmópolis', -16.7364, -40.4296, FALSE, 31),
+(4117909, 'Palotina', -24.2868, -53.8404, FALSE, 41),
+(5216007, 'Panamá', -18.1783, -49.355, FALSE, 52),
+(4313904, 'Panambi', -28.2833, -53.5023, FALSE, 43),
+(3204005, 'Pancas', -19.2229, -40.8534, FALSE, 32),
+(2610202, 'Panelas', -8.66121, -36.0125, FALSE, 26),
+(3535408, 'Panorama', -21.354, -51.8562, FALSE, 35),
+(4313953, 'Pantano Grande', -30.1902, -52.3729, FALSE, 43),
+(2706406, 'Pão de Açúcar', -9.74032, -37.4403, FALSE, 27),
+(3146909, 'Papagaios', -19.4419, -44.7468, FALSE, 31),
+(4212205, 'Papanduva', -26.3777, -50.1419, FALSE, 42),
+(2207553, 'Paquetá', -7.10303, -41.7, FALSE, 22),
+(3147105, 'Pará de Minas', -19.8534, -44.6114, FALSE, 31),
+(3303609, 'Paracambi', -22.6078, -43.7108, FALSE, 33),
+(3147006, 'Paracatu', -17.2252, -46.8711, FALSE, 31),
+(2310209, 'Paracuru', -3.41436, -39.03, FALSE, 23),
+(1505502, 'Paragominas', -3.00212, -47.3527, FALSE, 15),
+(3147204, 'Paraguaçu', -21.5465, -45.7374, FALSE, 31),
+(3535507, 'Paraguaçu Paulista', -22.4114, -50.5732, FALSE, 35),
+(4314001, 'Paraí', -28.5964, -51.7896, FALSE, 43),
+(3303708, 'Paraíba do Sul', -22.1585, -43.304, FALSE, 33),
+(2107704, 'Paraibano', -6.4264, -43.9792, FALSE, 21),
+(3535606, 'Paraibuna', -23.3872, -45.6639, FALSE, 35),
+(2310258, 'Paraipaba', -3.43799, -39.1479, FALSE, 23),
+(3535705, 'Paraíso', -21.0159, -48.7761, FALSE, 35),
+(4212239, 'Paraíso', -26.62, -53.6716, FALSE, 42),
+(5006275, 'Paraíso das Águas', -19.0216, -53.0116, FALSE, 50),
+(4118006, 'Paraíso do Norte', -23.2824, -52.6054, FALSE, 41),
+(4314027, 'Paraíso do Sul', -29.6717, -53.144, FALSE, 43),
+(1716109, 'Paraíso do Tocantins', -10.175, -48.8823, FALSE, 17),
+(3147303, 'Paraisópolis', -22.5539, -45.7803, FALSE, 31),
+(2310308, 'Parambu', -6.20768, -40.6905, FALSE, 23),
+(2923605, 'Paramirim', -13.4388, -42.2395, FALSE, 29),
+(2310407, 'Paramoti', -4.08815, -39.2417, FALSE, 23),
+(1716208, 'Paranã', -12.6167, -47.8734, FALSE, 17),
+(2408607, 'Paraná', -6.47565, -38.3057, FALSE, 24),
+(4118105, 'Paranacity', -22.9297, -52.1549, FALSE, 41),
+(4118204, 'Paranaguá', -25.5161, -48.5225, FALSE, 41),
+(5006309, 'Paranaíba', -19.6746, -51.1909, FALSE, 50),
+(5216304, 'Paranaiguara', -18.9141, -50.6539, FALSE, 52),
+(5106299, 'Paranaíta', -9.65835, -56.4786, FALSE, 51),
+(3535804, 'Paranapanema', -23.3862, -48.7214, FALSE, 35),
+(4118303, 'Paranapoema', -22.6412, -52.0905, FALSE, 41),
+(3535903, 'Paranapuã', -20.1048, -50.5886, FALSE, 35),
+(2610301, 'Paranatama', -8.91875, -36.6549, FALSE, 26),
+(5106307, 'Paranatinga', -14.4265, -54.0524, FALSE, 51),
+(4118402, 'Paranavaí', -23.0816, -52.4617, FALSE, 41),
+(5006358, 'Paranhos', -23.8911, -55.429, FALSE, 50),
+(3147402, 'Paraopeba', -19.2732, -44.4044, FALSE, 31),
+(3536000, 'Parapuã', -21.7792, -50.7949, FALSE, 35),
+(2510659, 'Parari', -7.30975, -36.6522, FALSE, 25),
+(2923704, 'Paratinga', -12.687, -43.1798, FALSE, 29),
+(3303807, 'Paraty', -23.2221, -44.7175, FALSE, 33),
+(2408706, 'Paraú', -5.76893, -37.1032, FALSE, 24),
+(1505536, 'Parauapebas', -6.06781, -49.9037, FALSE, 15),
+(5216403, 'Paraúna', -16.9463, -50.4484, FALSE, 52),
+(2408805, 'Parazinho', -5.22276, -35.8398, FALSE, 24),
+(3536109, 'Pardinho', -23.0841, -48.3679, FALSE, 35),
+(4314035, 'Pareci Novo', -29.6365, -51.3974, FALSE, 43),
+(1101450, 'Parecis', -12.1754, -61.6032, FALSE, 11),
+(2408904, 'Parelhas', -6.68491, -36.6566, FALSE, 24),
+(2706422, 'Pariconha', -9.25634, -37.9988, FALSE, 27),
+(1303403, 'Parintins', -2.63741, -56.729, FALSE, 13),
+(2923803, 'Paripiranga', -10.6859, -37.8626, FALSE, 29),
+(2706448, 'Paripueira', -9.46313, -35.552, FALSE, 27),
+(3536208, 'Pariquera-Açu', -24.7147, -47.8742, FALSE, 35),
+(3536257, 'Parisi', -20.3034, -50.0163, FALSE, 35),
+(2207603, 'Parnaguá', -10.2166, -44.63, FALSE, 22),
+(2207702, 'Parnaíba', -2.90585, -41.7754, FALSE, 22),
+(2403251, 'Parnamirim', -5.91116, -35.271, FALSE, 24),
+(2610400, 'Parnamirim', -8.08729, -39.5795, FALSE, 26),
+(2107803, 'Parnarama', -5.67365, -43.1011, FALSE, 21),
+(4314050, 'Parobé', -29.6243, -50.8312, FALSE, 43),
+(2409100, 'Passa e Fica', -6.43018, -35.6442, FALSE, 24),
+(3147600, 'Passa Quatro', -22.3871, -44.9709, FALSE, 31),
+(4314068, 'Passa Sete', -29.4577, -52.9599, FALSE, 43),
+(3147709, 'Passa Tempo', -20.6539, -44.4926, FALSE, 31),
+(3147808, 'Passa-Vinte', -22.2097, -44.2344, FALSE, 31),
+(3147501, 'Passabém', -19.3509, -43.1383, FALSE, 31),
+(2409209, 'Passagem', -6.27268, -35.37, FALSE, 24),
+(2510709, 'Passagem', -7.13467, -37.0433, FALSE, 25),
+(2107902, 'Passagem Franca', -6.17745, -43.7755, FALSE, 21),
+(2207751, 'Passagem Franca do Piauí', -5.86036, -42.4436, FALSE, 22),
+(2610509, 'Passira', -7.9971, -35.5813, FALSE, 26),
+(2706505, 'Passo de Camaragibe', -9.24511, -35.4745, FALSE, 27),
+(4212254, 'Passo de Torres', -29.3099, -49.722, FALSE, 42),
+(4314076, 'Passo do Sobrado', -29.748, -52.2748, FALSE, 43),
+(4314100, 'Passo Fundo', -28.2576, -52.4091, FALSE, 43),
+(3147907, 'Passos', -20.7193, -46.609, FALSE, 31),
+(4212270, 'Passos Maia', -26.7829, -52.0568, FALSE, 42),
+(2108009, 'Pastos Bons', -6.60296, -44.0745, FALSE, 21),
+(3147956, 'Patis', -16.0773, -44.0787, FALSE, 31),
+(4118451, 'Pato Bragado', -24.6271, -54.2265, FALSE, 41),
+(4118501, 'Pato Branco', -26.2292, -52.6706, FALSE, 41),
+(2510808, 'Patos', -7.01743, -37.2747, FALSE, 25),
+(3148004, 'Patos de Minas', -18.5699, -46.5013, FALSE, 31),
+(2207777, 'Patos do Piauí', -7.67231, -41.2408, FALSE, 22),
+(3148103, 'Patrocínio', -18.9379, -46.9934, FALSE, 31),
+(3148202, 'Patrocínio do Muriaé', -21.1544, -42.2125, FALSE, 31),
+(3536307, 'Patrocínio Paulista', -20.6384, -47.2801, FALSE, 35),
+(2409308, 'Patu', -6.10656, -37.6356, FALSE, 24),
+(3303856, 'Paty do Alferes', -22.4309, -43.4285, FALSE, 33),
+(2923902, 'Pau Brasil', -15.4572, -39.6458, FALSE, 29),
+(1505551, 'Pau d''Arco', -1.59772, -46.9268, FALSE, 15),
+(1716307, 'Pau D''Arco', -7.53919, -49.367, FALSE, 17),
+(2207793, 'Pau D''Arco do Piauí', -5.26072, -42.3908, FALSE, 22),
+(2409407, 'Pau dos Ferros', -6.10498, -38.2077, FALSE, 24),
+(2610608, 'Paudalho', -7.90287, -35.1716, FALSE, 26),
+(1303502, 'Pauini', -7.71311, -66.992, FALSE, 13),
+(3148301, 'Paula Cândido', -20.8754, -42.9752, FALSE, 31),
+(4118600, 'Paula Freitas', -26.2105, -50.931, FALSE, 41),
+(3536406, 'Paulicéia', -21.3153, -51.8321, FALSE, 35),
+(3536505, 'Paulínia', -22.7542, -47.1488, FALSE, 35),
+(2108058, 'Paulino Neves', -2.72094, -42.5258, FALSE, 21),
+(2510907, 'Paulista', -6.59138, -37.6185, FALSE, 25),
+(2610707, 'Paulista', -7.93401, -34.8684, FALSE, 26),
+(2207801, 'Paulistana', -8.13436, -41.1431, FALSE, 22),
+(3536570, 'Paulistânia', -22.5768, -49.4008, FALSE, 35),
+(3148400, 'Paulistas', -18.4276, -42.8628, FALSE, 31),
+(2924009, 'Paulo Afonso', -9.3983, -38.2216, FALSE, 29),
+(4314134, 'Paulo Bento', -27.7051, -52.4169, FALSE, 43),
+(3536604, 'Paulo de Faria', -20.0296, -49.4, FALSE, 35),
+(4118709, 'Paulo Frontin', -26.0466, -50.8304, FALSE, 41),
+(2706604, 'Paulo Jacinto', -9.36792, -36.3672, FALSE, 27),
+(4212304, 'Paulo Lopes', -27.9607, -48.6864, FALSE, 42),
+(2108108, 'Paulo Ramos', -4.44485, -45.2398, FALSE, 21),
+(3148509, 'Pavão', -17.4267, -41.0035, FALSE, 31),
+(4314159, 'Paverama', -29.5486, -51.7339, FALSE, 43),
+(2207850, 'Pavussu', -7.96059, -43.2284, FALSE, 22),
+(2924058, 'Pé de Serra', -11.8313, -39.611, FALSE, 29),
+(4118808, 'Peabiru', -23.914, -52.3431, FALSE, 41),
+(3148608, 'Peçanha', -18.5441, -42.5583, FALSE, 31),
+(3536703, 'Pederneiras', -22.3511, -48.7781, FALSE, 35),
+(2610806, 'Pedra', -8.49641, -36.94, FALSE, 26),
+(3148707, 'Pedra Azul', -16.0086, -41.2909, FALSE, 31),
+(3536802, 'Pedra Bela', -22.7902, -46.4455, FALSE, 35),
+(3148756, 'Pedra Bonita', -20.5219, -42.3304, FALSE, 31),
+(2511004, 'Pedra Branca', -7.42169, -38.0689, FALSE, 25),
+(2310506, 'Pedra Branca', -5.45341, -39.7078, FALSE, 23),
+(1600154, 'Pedra Branca do Amapari', 0.777424, -51.9503, FALSE, 16),
+(3148806, 'Pedra do Anta', -20.5968, -42.7123, FALSE, 31),
+(3148905, 'Pedra do Indaiá', -20.2563, -45.2107, FALSE, 31),
+(3149002, 'Pedra Dourada', -20.8266, -42.1515, FALSE, 31),
+(2409506, 'Pedra Grande', -5.14988, -35.876, FALSE, 24),
+(2511103, 'Pedra Lavrada', -6.74997, -36.4758, FALSE, 25),
+(2805000, 'Pedra Mole', -10.6134, -37.6922, FALSE, 28),
+(2409605, 'Pedra Preta', -5.57352, -36.1084, FALSE, 24),
+(5106372, 'Pedra Preta', -16.6245, -54.4722, FALSE, 51),
+(3149101, 'Pedralva', -22.2386, -45.4654, FALSE, 31),
+(3536901, 'Pedranópolis', -20.2474, -50.1129, FALSE, 35),
+(2924108, 'Pedrão', -12.1491, -38.6487, FALSE, 29),
+(4314175, 'Pedras Altas', -31.7365, -53.5814, FALSE, 43),
+(2511202, 'Pedras de Fogo', -7.39107, -35.1065, FALSE, 25),
+(3149150, 'Pedras de Maria da Cruz', -15.6032, -44.391, FALSE, 31),
+(4212403, 'Pedras Grandes', -28.4339, -49.1949, FALSE, 42),
+(3537008, 'Pedregulho', -20.2535, -47.4775, FALSE, 35),
+(3537107, 'Pedreira', -22.7413, -46.8948, FALSE, 35),
+(2108207, 'Pedreiras', -4.56482, -44.6006, FALSE, 21),
+(2805109, 'Pedrinhas', -11.1902, -37.6775, FALSE, 28),
+(3537156, 'Pedrinhas Paulista', -22.8174, -50.7933, FALSE, 35),
+(3149200, 'Pedrinópolis', -19.2241, -47.4579, FALSE, 31),
+(1716505, 'Pedro Afonso', -8.97034, -48.1729, FALSE, 17),
+(2924207, 'Pedro Alexandre', -10.012, -37.8932, FALSE, 29),
+(2409704, 'Pedro Avelino', -5.5161, -36.3867, FALSE, 24),
+(3204054, 'Pedro Canário', -18.3004, -39.9574, FALSE, 32),
+(3537206, 'Pedro de Toledo', -24.2764, -47.2354, FALSE, 35),
+(2108256, 'Pedro do Rosário', -2.97272, -45.3493, FALSE, 21),
+(5006408, 'Pedro Gomes', -18.0996, -54.5507, FALSE, 50),
+(2207900, 'Pedro II', -4.42585, -41.4482, FALSE, 22),
+(2207934, 'Pedro Laurentino', -8.06807, -42.2847, FALSE, 22),
+(3149309, 'Pedro Leopoldo', -19.6308, -44.0383, FALSE, 31),
+(4314209, 'Pedro Osório', -31.8642, -52.8184, FALSE, 43),
+(2512721, 'Pedro Régis', -6.63323, -35.2966, FALSE, 25),
+(3149408, 'Pedro Teixeira', -21.7076, -43.743, FALSE, 31),
+(2409803, 'Pedro Velho', -6.4356, -35.2195, FALSE, 24),
+(1716604, 'Peixe', -12.0254, -48.5395, FALSE, 17),
+(1505601, 'Peixe-Boi', -1.19382, -47.324, FALSE, 15),
+(5106422, 'Peixoto de Azevedo', -10.2262, -54.9794, FALSE, 51),
+(4314308, 'Pejuçara', -28.4283, -53.6579, FALSE, 43),
+(4314407, 'Pelotas', -31.7649, -52.3371, FALSE, 43),
+(2310605, 'Penaforte', -7.82163, -39.0707, FALSE, 23),
+(2108306, 'Penalva', -3.27674, -45.1768, FALSE, 21),
+(3537305, 'Penápolis', -21.4148, -50.0769, FALSE, 35),
+(2409902, 'Pendências', -5.2564, -36.7095, FALSE, 24),
+(2706703, 'Penedo', -10.2874, -36.5819, FALSE, 27),
+(4212502, 'Penha', -26.7754, -48.6465, FALSE, 42),
+(2310704, 'Pentecoste', -3.79274, -39.2692, FALSE, 23),
+(3149507, 'Pequeri', -21.8341, -43.1145, FALSE, 31),
+(3149606, 'Pequi', -19.6284, -44.6604, FALSE, 31),
+(1716653, 'Pequizeiro', -8.5932, -48.9327, FALSE, 17),
+(3149705, 'Perdigão', -19.9411, -45.078, FALSE, 31),
+(3149804, 'Perdizes', -19.3434, -47.2963, FALSE, 31),
+(3149903, 'Perdões', -21.0932, -45.0896, FALSE, 31),
+(3537404, 'Pereira Barreto', -20.6368, -51.1123, FALSE, 35),
+(3537503, 'Pereiras', -23.0804, -47.972, FALSE, 35),
+(2310803, 'Pereiro', -6.03576, -38.4624, FALSE, 23),
+(2108405, 'Peri Mirim', -2.57676, -44.8504, FALSE, 21),
+(3149952, 'Periquito', -19.1573, -42.2333, FALSE, 31),
+(4212601, 'Peritiba', -27.3754, -51.9018, FALSE, 42),
+(2108454, 'Peritoró', -4.37459, -44.3369, FALSE, 21),
+(4118857, 'Perobal', -23.8949, -53.4098, FALSE, 41),
+(4118907, 'Pérola', -23.8039, -53.6834, FALSE, 41),
+(4119004, 'Pérola d''Oeste', -25.8278, -53.7433, FALSE, 41),
+(5216452, 'Perolândia', -17.5258, -52.065, FALSE, 52),
+(3537602, 'Peruíbe', -24.312, -47.0012, FALSE, 35),
+(3150000, 'Pescador', -18.357, -41.6006, FALSE, 31),
+(4212650, 'Pescaria Brava', -28.3966, -48.8864, FALSE, 42),
+(2610905, 'Pesqueira', -8.35797, -36.6978, FALSE, 26),
+(2611002, 'Petrolândia', -9.06863, -38.3027, FALSE, 26),
+(4212700, 'Petrolândia', -27.5346, -49.6937, FALSE, 42),
+(2611101, 'Petrolina', -9.38866, -40.5027, FALSE, 26),
+(5216809, 'Petrolina de Goiás', -16.0968, -49.3364, FALSE, 52),
+(3303906, 'Petrópolis', -22.52, -43.1926, FALSE, 33),
+(2706802, 'Piaçabuçu', -10.406, -36.434, FALSE, 27),
+(3537701, 'Piacatu', -21.5921, -50.6003, FALSE, 35),
+(2511301, 'Piancó', -7.19282, -37.9289, FALSE, 25),
+(2924306, 'Piatã', -13.1465, -41.7702, FALSE, 29),
+(3150109, 'Piau', -21.5096, -43.313, FALSE, 31),
+(4314423, 'Picada Café', -29.4464, -51.1367, FALSE, 43),
+(1505635, 'Piçarra', -6.43778, -48.8716, FALSE, 15),
+(2208007, 'Picos', -7.07721, -41.467, FALSE, 22),
+(2511400, 'Picuí', -6.50845, -36.3497, FALSE, 25),
+(3537800, 'Piedade', -23.7139, -47.4256, FALSE, 35),
+(3150158, 'Piedade de Caratinga', -19.7593, -42.0756, FALSE, 31),
+(3150208, 'Piedade de Ponte Nova', -20.2438, -42.7379, FALSE, 31),
+(3150307, 'Piedade do Rio Grande', -21.469, -44.1938, FALSE, 31),
+(3150406, 'Piedade dos Gerais', -20.4715, -44.2243, FALSE, 31),
+(4119103, 'Piên', -26.0965, -49.4336, FALSE, 41),
+(2924405, 'Pilão Arcado', -10.0051, -42.4936, FALSE, 29),
+(2511509, 'Pilar', -7.26403, -35.2523, FALSE, 25),
+(2706901, 'Pilar', -9.60135, -35.9543, FALSE, 27),
+(5216908, 'Pilar de Goiás', -14.7608, -49.5784, FALSE, 52),
+(3537909, 'Pilar do Sul', -23.8077, -47.7222, FALSE, 35),
+(2410009, 'Pilões', -6.26364, -38.0461, FALSE, 24),
+(2511608, 'Pilões', -6.86827, -35.613, FALSE, 25),
+(2511707, 'Pilõezinhos', -6.84277, -35.531, FALSE, 25),
+(3150505, 'Pimenta', -20.4827, -45.8049, FALSE, 31),
+(1100189, 'Pimenta Bueno', -11.672, -61.198, FALSE, 11),
+(2208106, 'Pimenteiras', -6.23839, -41.4113, FALSE, 22),
+(1101468, 'Pimenteiras do Oeste', -13.4823, -61.0471, FALSE, 11),
+(2924504, 'Pindaí', -14.4921, -42.686, FALSE, 29),
+(3538006, 'Pindamonhangaba', -22.9246, -45.4613, FALSE, 35),
+(2108504, 'Pindaré-Mirim', -3.60985, -45.342, FALSE, 21),
+(2707008, 'Pindoba', -9.47382, -36.2918, FALSE, 27),
+(2924603, 'Pindobaçu', -10.7433, -40.3675, FALSE, 29),
+(3538105, 'Pindorama', -21.1853, -48.9086, FALSE, 35),
+(1717008, 'Pindorama do Tocantins', -11.1311, -47.5726, FALSE, 17),
+(2310852, 'Pindoretama', -4.01584, -38.3061, FALSE, 23),
+(3150539, 'Pingo-d''Água', -19.7287, -42.4095, FALSE, 31),
+(4119152, 'Pinhais', -25.4429, -49.1927, FALSE, 41),
+(4314456, 'Pinhal', -27.508, -53.2082, FALSE, 43),
+(4314464, 'Pinhal da Serra', -27.8751, -51.1673, FALSE, 43),
+(4119251, 'Pinhal de São Bento', -26.0324, -53.482, FALSE, 41),
+(4314472, 'Pinhal Grande', -29.345, -53.3206, FALSE, 43),
+(4119202, 'Pinhalão', -23.7982, -50.0536, FALSE, 41),
+(3538204, 'Pinhalzinho', -22.7811, -46.5897, FALSE, 35),
+(4212908, 'Pinhalzinho', -26.8495, -52.9913, FALSE, 42),
+(2805208, 'Pinhão', -10.5677, -37.7242, FALSE, 28),
+(4119301, 'Pinhão', -25.6944, -51.6536, FALSE, 41),
+(3303955, 'Pinheiral', -22.5172, -44.0022, FALSE, 33),
+(4314498, 'Pinheirinho do Vale', -27.2109, -53.608, FALSE, 43),
+(2108603, 'Pinheiro', -2.52224, -45.0788, FALSE, 21),
+(4314506, 'Pinheiro Machado', -31.5794, -53.3798, FALSE, 43),
+(4213005, 'Pinheiro Preto', -27.0483, -51.2243, FALSE, 42),
+(3204104, 'Pinheiros', -18.4141, -40.2171, FALSE, 32),
+(2924652, 'Pintadas', -11.8117, -39.9009, FALSE, 29),
+(4314548, 'Pinto Bandeira', -29.0975, -51.4503, FALSE, 43),
+(3150570, 'Pintópolis', -16.0572, -45.1402, FALSE, 31),
+(2208205, 'Pio IX', -6.83002, -40.6083, FALSE, 22),
+(2108702, 'Pio XII', -3.89315, -45.1759, FALSE, 21),
+(3538303, 'Piquerobi', -21.8747, -51.7282, FALSE, 35),
+(2310902, 'Piquet Carneiro', -5.80025, -39.417, FALSE, 23),
+(3538501, 'Piquete', -22.6069, -45.1869, FALSE, 35),
+(3538600, 'Piracaia', -23.0525, -46.3594, FALSE, 35),
+(5217104, 'Piracanjuba', -17.302, -49.017, FALSE, 52),
+(3150604, 'Piracema', -20.5089, -44.4783, FALSE, 31),
+(3538709, 'Piracicaba', -22.7338, -47.6476, FALSE, 35),
+(2208304, 'Piracuruca', -3.93335, -41.7088, FALSE, 22),
+(3304003, 'Piraí', -22.6215, -43.9081, FALSE, 33),
+(2924678, 'Piraí do Norte', -13.759, -39.3836, FALSE, 29),
+(4119400, 'Piraí do Sul', -24.5306, -49.9433, FALSE, 41),
+(3538808, 'Piraju', -23.1981, -49.3803, FALSE, 35),
+(3150703, 'Pirajuba', -19.9092, -48.7027, FALSE, 31),
+(3538907, 'Pirajuí', -21.999, -49.4608, FALSE, 35),
+(2805307, 'Pirambu', -10.7215, -36.8544, FALSE, 28),
+(3150802, 'Piranga', -20.6834, -43.2967, FALSE, 31),
+(3539004, 'Pirangi', -21.0886, -48.6607, FALSE, 35),
+(3150901, 'Piranguçu', -22.5249, -45.4945, FALSE, 31),
+(3151008, 'Piranguinho', -22.395, -45.5324, FALSE, 31),
+(2707107, 'Piranhas', -9.624, -37.757, FALSE, 27),
+(5217203, 'Piranhas', -16.4258, -51.8235, FALSE, 52),
+(2108801, 'Pirapemas', -3.72041, -44.2216, FALSE, 21),
+(3151107, 'Pirapetinga', -21.6554, -42.3434, FALSE, 31),
+(4314555, 'Pirapó', -28.0439, -55.2001, FALSE, 43),
+(3151206, 'Pirapora', -17.3392, -44.934, FALSE, 31),
+(3539103, 'Pirapora do Bom Jesus', -23.3965, -46.9991, FALSE, 35),
+(3539202, 'Pirapozinho', -22.2711, -51.4976, FALSE, 35),
+(4119509, 'Piraquara', -25.4422, -49.0624, FALSE, 41),
+(1717206, 'Piraquê', -6.77302, -48.2958, FALSE, 17),
+(3539301, 'Pirassununga', -21.996, -47.4257, FALSE, 35),
+(4314605, 'Piratini', -31.4473, -53.0973, FALSE, 43),
+(3539400, 'Piratininga', -22.4142, -49.1339, FALSE, 35),
+(4213104, 'Piratuba', -27.4242, -51.7668, FALSE, 42),
+(3151305, 'Piraúba', -21.2825, -43.0172, FALSE, 31),
+(5217302, 'Pirenópolis', -15.8507, -48.9584, FALSE, 52),
+(5217401, 'Pires do Rio', -17.3019, -48.2768, FALSE, 52),
+(2310951, 'Pires Ferreira', -4.23922, -40.6442, FALSE, 23),
+(2924702, 'Piripá', -14.9444, -41.7168, FALSE, 29),
+(2208403, 'Piripiri', -4.27157, -41.7716, FALSE, 22),
+(2924801, 'Piritiba', -11.73, -40.5587, FALSE, 29),
+(2511806, 'Pirpirituba', -6.77922, -35.4906, FALSE, 25),
+(4119608, 'Pitanga', -24.7588, -51.7596, FALSE, 41),
+(3539509, 'Pitangueiras', -21.0132, -48.221, FALSE, 35),
+(4119657, 'Pitangueiras', -23.2281, -51.5873, FALSE, 41),
+(3151404, 'Pitangui', -19.6741, -44.8964, FALSE, 31),
+(2511905, 'Pitimbu', -7.4664, -34.8151, FALSE, 25),
+(1717503, 'Pium', -10.442, -49.1876, FALSE, 17),
+(3204203, 'Piúma', -20.8334, -40.7268, FALSE, 32),
+(3151503, 'Piumhi', -20.4762, -45.9589, FALSE, 31),
+(1505650, 'Placas', -3.86813, -54.2124, FALSE, 15),
+(1200385, 'Plácido de Castro', -10.2806, -67.1371, FALSE, 12),
+(5217609, 'Planaltina', -15.452, -47.6089, FALSE, 52),
+(4119707, 'Planaltina do Paraná', -23.0101, -52.9162, FALSE, 41),
+(2924900, 'Planaltino', -13.2618, -40.3695, FALSE, 29),
+(2925006, 'Planalto', -14.6654, -40.4718, FALSE, 29),
+(4314704, 'Planalto', -27.3297, -53.0575, FALSE, 43),
+(3539608, 'Planalto', -21.0342, -49.933, FALSE, 35),
+(4119806, 'Planalto', -25.7211, -53.7642, FALSE, 41),
+(4213153, 'Planalto Alegre', -27.0704, -52.867, FALSE, 42),
+(5106455, 'Planalto da Serra', -14.6518, -54.7819, FALSE, 51),
+(3151602, 'Planura', -20.1376, -48.7, FALSE, 31),
+(3539707, 'Platina', -22.6371, -50.2104, FALSE, 35),
+(3539806, 'Poá', -23.5333, -46.3473, FALSE, 35),
+(2611200, 'Poção', -8.18726, -36.7111, FALSE, 26),
+(2108900, 'Poção de Pedras', -4.74626, -44.9432, FALSE, 21),
+(2512002, 'Pocinhos', -7.06658, -36.0668, FALSE, 25),
+(2410108, 'Poço Branco', -5.62233, -35.6635, FALSE, 24),
+(2512036, 'Poço Dantas', -6.39876, -38.4909, FALSE, 25),
+(4314753, 'Poço das Antas', -29.4481, -51.6719, FALSE, 43),
+(2707206, 'Poço das Trincheiras', -9.30742, -37.2889, FALSE, 27),
+(2512077, 'Poço de José de Moura', -6.56401, -38.5111, FALSE, 25),
+(3151701, 'Poço Fundo', -21.78, -45.9658, FALSE, 31),
+(2805406, 'Poço Redondo', -9.80616, -37.6833, FALSE, 28),
+(2805505, 'Poço Verde', -10.7151, -38.1813, FALSE, 28),
+(2925105, 'Poções', -14.5234, -40.3634, FALSE, 29),
+(5106505, 'Poconé', -16.266, -56.6261, FALSE, 51),
+(3151800, 'Poços de Caldas', -21.78, -46.5692, FALSE, 31),
+(3151909, 'Pocrane', -19.6208, -41.6334, FALSE, 31),
+(2925204, 'Pojuca', -12.4303, -38.3374, FALSE, 29),
+(3539905, 'Poloni', -20.7829, -49.8258, FALSE, 35),
+(2512101, 'Pombal', -6.76606, -37.8003, FALSE, 25),
+(2611309, 'Pombos', -8.13982, -35.3967, FALSE, 26),
+(4213203, 'Pomerode', -26.7384, -49.1785, FALSE, 42),
+(3540002, 'Pompéia', -22.107, -50.176, FALSE, 35),
+(3152006, 'Pompéu', -19.2257, -45.0141, FALSE, 31),
+(3540101, 'Pongaí', -21.7396, -49.3604, FALSE, 35),
+(1505700, 'Ponta de Pedras', -1.39587, -48.8661, FALSE, 15),
+(4119905, 'Ponta Grossa', -25.0916, -50.1668, FALSE, 41),
+(5006606, 'Ponta Porã', -22.5296, -55.7203, FALSE, 50),
+(3540200, 'Pontal', -21.0216, -48.0423, FALSE, 35),
+(5106653, 'Pontal do Araguaia', -15.9274, -52.3273, FALSE, 51),
+(4119954, 'Pontal do Paraná', -25.6735, -48.5111, FALSE, 41),
+(5217708, 'Pontalina', -17.5225, -49.4489, FALSE, 52),
+(3540259, 'Pontalinda', -20.4396, -50.5258, FALSE, 35),
+(4314779, 'Pontão', -28.0585, -52.6791, FALSE, 43),
+(4213302, 'Ponte Alta', -27.4835, -50.3764, FALSE, 42),
+(1717800, 'Ponte Alta do Bom Jesus', -12.0853, -46.4825, FALSE, 17),
+(4213351, 'Ponte Alta do Norte', -27.1591, -50.4659, FALSE, 42),
+(1717909, 'Ponte Alta do Tocantins', -10.7481, -47.5276, FALSE, 17),
+(5106703, 'Ponte Branca', -16.7584, -52.8369, FALSE, 51),
+(3152105, 'Ponte Nova', -20.4111, -42.8978, FALSE, 31),
+(4314787, 'Ponte Preta', -27.6587, -52.4848, FALSE, 43),
+(4213401, 'Ponte Serrada', -26.8733, -52.0112, FALSE, 42),
+(5106752, 'Pontes e Lacerda', -15.2219, -59.3435, FALSE, 51),
+(3540309, 'Pontes Gestal', -20.1727, -49.7064, FALSE, 35),
+(3204252, 'Ponto Belo', -18.1253, -40.5458, FALSE, 32),
+(3152131, 'Ponto Chique', -16.6282, -45.0588, FALSE, 31),
+(3152170, 'Ponto dos Volantes', -16.7473, -41.5025, FALSE, 31),
+(2925253, 'Ponto Novo', -10.8653, -40.1311, FALSE, 29),
+(3540408, 'Populina', -19.9453, -50.538, FALSE, 35),
+(2311009, 'Poranga', -4.74672, -40.9205, FALSE, 23),
+(3540507, 'Porangaba', -23.1761, -48.1195, FALSE, 35),
+(5218003, 'Porangatu', -13.4391, -49.1503, FALSE, 52),
+(3304102, 'Porciúncula', -20.9632, -42.0465, FALSE, 33),
+(4120002, 'Porecatu', -22.7537, -51.3795, FALSE, 41),
+(2410207, 'Portalegre', -6.02064, -37.9865, FALSE, 24),
+(4314803, 'Portão', -29.7015, -51.2429, FALSE, 43),
+(5218052, 'Porteirão', -17.8143, -50.1653, FALSE, 52),
+(2311108, 'Porteiras', -7.52265, -39.114, FALSE, 23),
+(3152204, 'Porteirinha', -15.7404, -43.0281, FALSE, 31),
+(1505809, 'Portel', -1.93639, -50.8194, FALSE, 15),
+(5218102, 'Portelândia', -17.3554, -52.6799, FALSE, 52),
+(2208502, 'Porto', -3.88815, -42.6998, FALSE, 22),
+(1200807, 'Porto Acre', -9.58138, -67.5478, FALSE, 12),
+(4314902, 'Porto Alegre', -30.0318, -51.2065, TRUE, 43),
+(5106778, 'Porto Alegre do Norte', -10.8761, -51.6357, FALSE, 51),
+(2208551, 'Porto Alegre do Piauí', -6.96423, -44.1837, FALSE, 22),
+(1718006, 'Porto Alegre do Tocantins', -11.618, -47.0621, FALSE, 17),
+(4120101, 'Porto Amazonas', -25.54, -49.8946, FALSE, 41),
+(4120150, 'Porto Barreiro', -25.5477, -52.4067, FALSE, 41),
+(4213500, 'Porto Belo', -27.1586, -48.5469, FALSE, 42),
+(2707305, 'Porto Calvo', -9.05195, -35.3987, FALSE, 27),
+(2805604, 'Porto da Folha', -9.91626, -37.2842, FALSE, 28),
+(1505908, 'Porto de Moz', -1.74691, -52.2361, FALSE, 15),
+(2707404, 'Porto de Pedras', -9.16006, -35.3049, FALSE, 27),
+(2410256, 'Porto do Mangue', -5.05441, -36.7887, FALSE, 24),
+(5106802, 'Porto dos Gaúchos', -11.533, -57.4132, FALSE, 51),
+(5106828, 'Porto Esperidião', -15.857, -58.4619, FALSE, 51),
+(5106851, 'Porto Estrela', -15.3235, -57.2204, FALSE, 51),
+(3540606, 'Porto Feliz', -23.2093, -47.5251, FALSE, 35),
+(3540705, 'Porto Ferreira', -21.8498, -47.487, FALSE, 35),
+(3152303, 'Porto Firme', -20.6642, -43.0834, FALSE, 31),
+(2109007, 'Porto Franco', -6.34149, -47.3962, FALSE, 21),
+(1600535, 'Porto Grande', 0.71243, -51.4155, FALSE, 16),
+(4315008, 'Porto Lucena', -27.8569, -55.01, FALSE, 43),
+(4315057, 'Porto Mauá', -27.5796, -54.6657, FALSE, 43),
+(5006903, 'Porto Murtinho', -21.6981, -57.8836, FALSE, 50),
+(1718204, 'Porto Nacional', -10.7027, -48.408, FALSE, 17),
+(3304110, 'Porto Real', -22.4175, -44.2952, FALSE, 33),
+(2707503, 'Porto Real do Colégio', -10.1849, -36.8376, FALSE, 27),
+(4120200, 'Porto Rico', -22.7747, -53.2677, FALSE, 41),
+(2109056, 'Porto Rico do Maranhão', -1.85925, -44.5842, FALSE, 21),
+(2925303, 'Porto Seguro', -16.4435, -39.0643, FALSE, 29),
+(4213609, 'Porto União', -26.2451, -51.0759, FALSE, 42),
+(1100205, 'Porto Velho', -8.76077, -63.8999, TRUE, 11),
+(4315073, 'Porto Vera Cruz', -27.7405, -54.8994, FALSE, 43),
+(4120309, 'Porto Vitória', -26.1674, -51.231, FALSE, 41),
+(1200393, 'Porto Walter', -8.26323, -72.7537, FALSE, 12),
+(4315107, 'Porto Xavier', -27.9082, -55.1379, FALSE, 43),
+(5218300, 'Posse', -14.0859, -46.3704, FALSE, 52),
+(3152402, 'Poté', -17.8077, -41.786, FALSE, 31),
+(2311207, 'Potengi', -7.09154, -40.0233, FALSE, 23),
+(3540754, 'Potim', -22.8343, -45.2552, FALSE, 35),
+(2925402, 'Potiraguá', -15.5943, -39.8638, FALSE, 29),
+(3540804, 'Potirendaba', -21.0428, -49.3815, FALSE, 35),
+(2311231, 'Potiretama', -5.71287, -38.1578, FALSE, 23),
+(3152501, 'Pouso Alegre', -22.2266, -45.9389, FALSE, 31),
+(3152600, 'Pouso Alto', -22.1964, -44.9748, FALSE, 31),
+(4315131, 'Pouso Novo', -29.1738, -52.2136, FALSE, 43),
+(4213708, 'Pouso Redondo', -27.2567, -49.9301, FALSE, 42),
+(5107008, 'Poxoréu', -15.8299, -54.4208, FALSE, 51),
+(3540853, 'Pracinha', -21.8496, -51.0868, FALSE, 35),
+(1600550, 'Pracuúba', 1.74543, -50.7892, FALSE, 16),
+(2925501, 'Prado', -17.3364, -39.2227, FALSE, 29),
+(4120333, 'Prado Ferreira', -23.0357, -51.4429, FALSE, 41),
+(3540903, 'Pradópolis', -21.3626, -48.0679, FALSE, 35),
+(3152709, 'Prados', -21.0597, -44.0778, FALSE, 31),
+(3541000, 'Praia Grande', -24.0084, -46.4121, FALSE, 35),
+(4213807, 'Praia Grande', -29.1918, -49.9525, FALSE, 42),
+(1718303, 'Praia Norte', -5.39281, -47.8111, FALSE, 17),
+(1506005, 'Prainha', -1.798, -53.4779, FALSE, 15),
+(4120358, 'Pranchita', -26.0209, -53.7397, FALSE, 41),
+(3152808, 'Prata', -19.3086, -48.9276, FALSE, 31),
+(2512200, 'Prata', -7.68826, -37.0801, FALSE, 25),
+(2208601, 'Prata do Piauí', -5.67265, -42.2046, FALSE, 22),
+(3541059, 'Pratânia', -22.8112, -48.6636, FALSE, 35),
+(3152907, 'Pratápolis', -20.7411, -46.8624, FALSE, 31),
+(3153004, 'Pratinha', -19.739, -46.3755, FALSE, 31),
+(3541109, 'Presidente Alves', -22.0999, -49.4381, FALSE, 35),
+(3541208, 'Presidente Bernardes', -22.0082, -51.5565, FALSE, 35),
+(3153103, 'Presidente Bernardes', -20.7656, -43.1895, FALSE, 31),
+(4213906, 'Presidente Castello Branco', -27.2218, -51.8089, FALSE, 42),
+(4120408, 'Presidente Castelo Branco', -23.2782, -52.1536, FALSE, 41),
+(2925600, 'Presidente Dutra', -11.2923, -41.9843, FALSE, 29),
+(2109106, 'Presidente Dutra', -5.2898, -44.495, FALSE, 21),
+(3541307, 'Presidente Epitácio', -21.7651, -52.1111, FALSE, 35),
+(1303536, 'Presidente Figueiredo', -2.02981, -60.0234, FALSE, 13),
+(4214003, 'Presidente Getúlio', -27.0474, -49.6246, FALSE, 42),
+(2925709, 'Presidente Jânio Quadros', -14.6885, -41.6798, FALSE, 29),
+(3153202, 'Presidente Juscelino', -18.6401, -44.06, FALSE, 31),
+(2109205, 'Presidente Juscelino', -2.91872, -44.0715, FALSE, 21),
+(1718402, 'Presidente Kennedy', -8.5406, -48.5062, FALSE, 17),
+(3204302, 'Presidente Kennedy', -21.0964, -41.0468, FALSE, 32),
+(3153301, 'Presidente Kubitschek', -18.6193, -43.5628, FALSE, 31),
+(4315149, 'Presidente Lucena', -29.5175, -51.1798, FALSE, 43),
+(1100254, 'Presidente Médici', -11.169, -61.8986, FALSE, 11),
+(2109239, 'Presidente Médici', -2.38991, -45.82, FALSE, 21),
+(4214102, 'Presidente Nereu', -27.2768, -49.3889, FALSE, 42),
+(3153400, 'Presidente Olegário', -18.4096, -46.4165, FALSE, 31),
+(3541406, 'Presidente Prudente', -22.1207, -51.3925, FALSE, 35),
+(2109270, 'Presidente Sarney', -2.58799, -45.3595, FALSE, 21),
+(2925758, 'Presidente Tancredo Neves', -13.4471, -39.4203, FALSE, 29),
+(2109304, 'Presidente Vargas', -3.40787, -44.0234, FALSE, 21),
+(3541505, 'Presidente Venceslau', -21.8732, -51.8447, FALSE, 35),
+(2611408, 'Primavera', -8.32999, -35.3544, FALSE, 26),
+(1506104, 'Primavera', -0.945439, -47.1253, FALSE, 15),
+(1101476, 'Primavera de Rondônia', -11.8295, -61.3153, FALSE, 11),
+(5107040, 'Primavera do Leste', -15.544, -54.2811, FALSE, 51),
+(2109403, 'Primeira Cruz', -2.50568, -43.4232, FALSE, 21),
+(4120507, 'Primeiro de Maio', -22.8517, -51.0293, FALSE, 41),
+(4214151, 'Princesa', -26.4441, -53.5994, FALSE, 42),
+(2512309, 'Princesa Isabel', -7.73175, -37.9886, FALSE, 25),
+(5218391, 'Professor Jamil', -17.2497, -49.244, FALSE, 52),
+(4315156, 'Progresso', -29.2441, -52.3197, FALSE, 43),
+(3541604, 'Promissão', -21.5356, -49.8599, FALSE, 35),
+(2805703, 'Propriá', -10.2138, -36.8442, FALSE, 28),
+(4315172, 'Protásio Alves', -28.7572, -51.4757, FALSE, 43),
+(3153608, 'Prudente de Morais', -19.4742, -44.1591, FALSE, 31),
+(4120606, 'Prudentópolis', -25.2111, -50.9754, FALSE, 41),
+(1718451, 'Pugmil', -10.424, -48.8957, FALSE, 17),
+(2410405, 'Pureza', -5.46393, -35.5554, FALSE, 24),
+(4315206, 'Putinga', -29.0045, -52.1569, FALSE, 43),
+(2512408, 'Puxinanã', -7.15479, -35.9543, FALSE, 25),
+(3541653, 'Quadra', -23.2993, -48.0547, FALSE, 35),
+(4315305, 'Quaraí', -30.384, -56.4483, FALSE, 43),
+(3153707, 'Quartel Geral', -19.2703, -45.5569, FALSE, 31),
+(4120655, 'Quarto Centenário', -24.2775, -53.0759, FALSE, 41),
+(3541703, 'Quatá', -22.2456, -50.6966, FALSE, 35),
+(4120705, 'Quatiguá', -23.5671, -49.916, FALSE, 41),
+(1506112, 'Quatipuru', -0.899604, -47.0134, FALSE, 15),
+(3304128, 'Quatis', -22.4045, -44.2597, FALSE, 33),
+(4120804, 'Quatro Barras', -25.3673, -49.0763, FALSE, 41),
+(4315313, 'Quatro Irmãos', -27.8257, -52.4424, FALSE, 43),
+(4120853, 'Quatro Pontes', -24.5752, -53.9759, FALSE, 41),
+(2707602, 'Quebrangulo', -9.32001, -36.4692, FALSE, 27),
+(4120903, 'Quedas do Iguaçu', -25.4492, -52.9102, FALSE, 41),
+(2208650, 'Queimada Nova', -8.57064, -41.4106, FALSE, 22),
+(2512507, 'Queimadas', -7.35029, -35.9031, FALSE, 25),
+(2925808, 'Queimadas', -10.9736, -39.6293, FALSE, 29),
+(3304144, 'Queimados', -22.7102, -43.5518, FALSE, 33),
+(3541802, 'Queiroz', -21.7969, -50.2415, FALSE, 35),
+(3541901, 'Queluz', -22.5312, -44.7781, FALSE, 35),
+(3153806, 'Queluzito', -20.7416, -43.8851, FALSE, 31),
+(5107065, 'Querência', -12.6093, -52.1821, FALSE, 51),
+(4121000, 'Querência do Norte', -23.0838, -53.483, FALSE, 41),
+(4315321, 'Quevedos', -29.3504, -54.0789, FALSE, 43),
+(2925907, 'Quijingue', -10.7505, -39.2137, FALSE, 29),
+(4214201, 'Quilombo', -26.7264, -52.724, FALSE, 42),
+(4121109, 'Quinta do Sol', -23.8533, -52.1309, FALSE, 41),
+(3542008, 'Quintana', -22.0692, -50.307, FALSE, 35),
+(4315354, 'Quinze de Novembro', -28.7466, -53.1011, FALSE, 43),
+(2611507, 'Quipapá', -8.81175, -36.0137, FALSE, 26),
+(5218508, 'Quirinópolis', -18.4472, -50.4547, FALSE, 52),
+(3304151, 'Quissamã', -22.1031, -41.4693, FALSE, 33),
+(4121208, 'Quitandinha', -25.8734, -49.4973, FALSE, 41),
+(2311264, 'Quiterianópolis', -5.8425, -40.7002, FALSE, 23),
+(2512606, 'Quixabá', -7.0224, -37.1458, FALSE, 25),
+(2611533, 'Quixaba', -7.70734, -37.8446, FALSE, 26),
+(2925931, 'Quixabeira', -11.4031, -40.12, FALSE, 29),
+(2311306, 'Quixadá', -4.9663, -39.0155, FALSE, 23),
+(2311355, 'Quixelô', -6.24637, -39.2011, FALSE, 23),
+(2311405, 'Quixeramobim', -5.19067, -39.2889, FALSE, 23),
+(2311504, 'Quixeré', -5.07148, -37.9802, FALSE, 23),
+(2410504, 'Rafael Fernandes', -6.18987, -38.2211, FALSE, 24),
+(2410603, 'Rafael Godeiro', -6.07244, -37.716, FALSE, 24),
+(2925956, 'Rafael Jambeiro', -12.4053, -39.5007, FALSE, 29),
+(3542107, 'Rafard', -23.0105, -47.5318, FALSE, 35),
+(4121257, 'Ramilândia', -25.1195, -54.023, FALSE, 41),
+(3542206, 'Rancharia', -22.2269, -50.893, FALSE, 35),
+(4121307, 'Rancho Alegre', -23.0676, -50.9145, FALSE, 41),
+(4121356, 'Rancho Alegre D''Oeste', -24.3065, -52.9552, FALSE, 41),
+(4214300, 'Rancho Queimado', -27.6727, -49.0191, FALSE, 42),
+(2109452, 'Raposa', -2.4254, -44.0973, FALSE, 21),
+(3153905, 'Raposos', -19.9636, -43.8079, FALSE, 31),
+(3154002, 'Raul Soares', -20.1061, -42.4502, FALSE, 31),
+(4121406, 'Realeza', -25.7711, -53.526, FALSE, 41),
+(4121505, 'Rebouças', -25.6232, -50.6877, FALSE, 41),
+(2611606, 'Recife', -8.04666, -34.8771, TRUE, 26),
+(3154101, 'Recreio', -21.5289, -42.4676, FALSE, 31),
+(1718501, 'Recursolândia', -8.7227, -47.2421, FALSE, 17),
+(1506138, 'Redenção', -8.02529, -50.0317, FALSE, 15),
+(2311603, 'Redenção', -4.21587, -38.7277, FALSE, 23),
+(3542305, 'Redenção da Serra', -23.2638, -45.5422, FALSE, 35),
+(2208700, 'Redenção do Gurguéia', -9.47937, -44.5811, FALSE, 22),
+(4315404, 'Redentora', -27.664, -53.6407, FALSE, 43),
+(3154150, 'Reduto', -20.2401, -41.9848, FALSE, 31),
+(2208809, 'Regeneração', -6.23115, -42.6842, FALSE, 22),
+(3542404, 'Regente Feijó', -22.2181, -51.3055, FALSE, 35),
+(3542503, 'Reginópolis', -21.8914, -49.2268, FALSE, 35),
+(3542602, 'Registro', -24.4979, -47.8449, FALSE, 35),
+(4315453, 'Relvado', -29.1164, -52.0778, FALSE, 43),
+(2926004, 'Remanso', -9.61944, -42.0848, FALSE, 29),
+(2512705, 'Remígio', -6.94992, -35.8011, FALSE, 25),
+(4121604, 'Renascença', -26.1588, -52.9703, FALSE, 41),
+(2311702, 'Reriutaba', -4.14191, -40.5759, FALSE, 23),
+(3304201, 'Resende', -22.4705, -44.4509, FALSE, 33),
+(3154200, 'Resende Costa', -20.9171, -44.2407, FALSE, 31),
+(4121703, 'Reserva', -24.6492, -50.8466, FALSE, 41),
+(5107156, 'Reserva do Cabaçal', -15.0743, -58.4585, FALSE, 51),
+(4121752, 'Reserva do Iguaçu', -25.8319, -52.0272, FALSE, 41),
+(3154309, 'Resplendor', -19.3194, -41.2462, FALSE, 31),
+(3154408, 'Ressaquinha', -21.0642, -43.7598, FALSE, 31),
+(3542701, 'Restinga', -20.6056, -47.4833, FALSE, 35),
+(4315503, 'Restinga Sêca', -29.8188, -53.3807, FALSE, 43),
+(2926103, 'Retirolândia', -11.4832, -39.4234, FALSE, 29),
+(2512747, 'Riachão', -6.54269, -35.661, FALSE, 25),
+(2109502, 'Riachão', -7.35819, -46.6225, FALSE, 21),
+(2926202, 'Riachão das Neves', -11.7508, -44.9143, FALSE, 29),
+(2512754, 'Riachão do Bacamarte', -7.25347, -35.6693, FALSE, 25),
+(2805802, 'Riachão do Dantas', -11.0729, -37.731, FALSE, 28),
+(2926301, 'Riachão do Jacuípe', -11.8067, -39.3818, FALSE, 29),
+(2512762, 'Riachão do Poço', -7.14173, -35.2914, FALSE, 25),
+(1718550, 'Riachinho', -6.44005, -48.1371, FALSE, 17),
+(3154457, 'Riachinho', -16.2258, -45.9888, FALSE, 31),
+(2410702, 'Riacho da Cruz', -5.92654, -37.949, FALSE, 24),
+(2611705, 'Riacho das Almas', -8.13742, -35.8648, FALSE, 26),
+(2410801, 'Riacho de Santana', -6.25139, -38.3116, FALSE, 24),
+(2926400, 'Riacho de Santana', -13.6059, -42.9397, FALSE, 29),
+(2512788, 'Riacho de Santo Antônio', -7.68023, -36.157, FALSE, 25),
+(2512804, 'Riacho dos Cavalos', -6.44067, -37.6483, FALSE, 25),
+(3154507, 'Riacho dos Machados', -16.0091, -43.0488, FALSE, 31),
+(2208858, 'Riacho Frio', -10.1244, -44.9503, FALSE, 22),
+(2410900, 'Riachuelo', -5.82156, -35.8215, FALSE, 24),
+(2805901, 'Riachuelo', -10.735, -37.1966, FALSE, 28),
+(5218607, 'Rialma', -15.3145, -49.5814, FALSE, 52),
+(5218706, 'Rianápolis', -15.4456, -49.5114, FALSE, 52),
+(2109551, 'Ribamar Fiquene', -5.93067, -47.3888, FALSE, 21),
+(5007109, 'Ribas do Rio Pardo', -20.4445, -53.7588, FALSE, 50),
+(3542800, 'Ribeira', -24.6517, -49.0044, FALSE, 35),
+(2926509, 'Ribeira do Amparo', -11.0421, -38.4242, FALSE, 29),
+(2208874, 'Ribeira do Piauí', -7.69028, -42.7128, FALSE, 22),
+(2926608, 'Ribeira do Pombal', -10.8373, -38.5382, FALSE, 29),
+(2611804, 'Ribeirão', -8.50957, -35.3698, FALSE, 26),
+(3542909, 'Ribeirão Bonito', -22.0685, -48.182, FALSE, 35),
+(3543006, 'Ribeirão Branco', -24.2206, -48.7635, FALSE, 35),
+(5107180, 'Ribeirão Cascalheira', -12.9367, -51.8244, FALSE, 51),
+(4121802, 'Ribeirão Claro', -23.1941, -49.7597, FALSE, 41),
+(3543105, 'Ribeirão Corrente', -20.4579, -47.5904, FALSE, 35),
+(3154606, 'Ribeirão das Neves', -19.7621, -44.0844, FALSE, 31),
+(2926657, 'Ribeirão do Largo', -15.4508, -40.7441, FALSE, 29),
+(4121901, 'Ribeirão do Pinhal', -23.4091, -50.3601, FALSE, 41),
+(3543204, 'Ribeirão do Sul', -22.789, -49.933, FALSE, 35),
+(3543238, 'Ribeirão dos Índios', -21.8382, -51.6103, FALSE, 35),
+(3543253, 'Ribeirão Grande', -24.1011, -48.3679, FALSE, 35),
+(3543303, 'Ribeirão Pires', -23.7067, -46.4058, FALSE, 35),
+(3543402, 'Ribeirão Preto', -21.1699, -47.8099, FALSE, 35),
+(3154705, 'Ribeirão Vermelho', -21.1879, -45.0637, FALSE, 31),
+(5107198, 'Ribeirãozinho', -16.4856, -52.6924, FALSE, 51),
+(2208908, 'Ribeiro Gonçalves', -7.55651, -45.2447, FALSE, 22),
+(2806008, 'Ribeirópolis', -10.5357, -37.438, FALSE, 28),
+(3543600, 'Rifaina', -20.0803, -47.4291, FALSE, 35),
+(3543709, 'Rincão', -21.5894, -48.0728, FALSE, 35),
+(3543808, 'Rinópolis', -21.7284, -50.7239, FALSE, 35),
+(3154804, 'Rio Acima', -20.0876, -43.7878, FALSE, 31),
+(4122008, 'Rio Azul', -25.7306, -50.7985, FALSE, 41),
+(3204351, 'Rio Bananal', -19.2719, -40.3366, FALSE, 32),
+(4122107, 'Rio Bom', -23.7606, -51.4122, FALSE, 41),
+(3304300, 'Rio Bonito', -22.7181, -42.6276, FALSE, 33),
+(4122156, 'Rio Bonito do Iguaçu', -25.4874, -52.5292, FALSE, 41),
+(5107206, 'Rio Branco', -15.2483, -58.1259, FALSE, 51),
+(1200401, 'Rio Branco', -9.97499, -67.8243, TRUE, 12),
+(4122172, 'Rio Branco do Ivaí', -24.3244, -51.3187, FALSE, 41),
+(4122206, 'Rio Branco do Sul', -25.1892, -49.3115, FALSE, 41),
+(5007208, 'Rio Brilhante', -21.8033, -54.5427, FALSE, 50),
+(3154903, 'Rio Casca', -20.2285, -42.6462, FALSE, 31),
+(3304409, 'Rio Claro', -22.72, -44.1419, FALSE, 33),
+(3543907, 'Rio Claro', -22.3984, -47.5546, FALSE, 35),
+(1100262, 'Rio Crespo', -9.69965, -62.9011, FALSE, 11),
+(1718659, 'Rio da Conceição', -11.3949, -46.8847, FALSE, 17),
+(4214409, 'Rio das Antas', -26.8946, -51.0674, FALSE, 42),
+(3304508, 'Rio das Flores', -22.1692, -43.5856, FALSE, 33),
+(3304524, 'Rio das Ostras', -22.5174, -41.9475, FALSE, 33),
+(3544004, 'Rio das Pedras', -22.8417, -47.6047, FALSE, 35),
+(2926707, 'Rio de Contas', -13.5852, -41.8048, FALSE, 29),
+(3304557, 'Rio de Janeiro', -22.9129, -43.2003, TRUE, 33),
+(2926806, 'Rio do Antônio', -14.4071, -42.0721, FALSE, 29),
+(4214508, 'Rio do Campo', -26.9452, -50.136, FALSE, 42),
+(2408953, 'Rio do Fogo', -5.2765, -35.3794, FALSE, 24),
+(4214607, 'Rio do Oeste', -27.1952, -49.7989, FALSE, 42),
+(2926905, 'Rio do Pires', -13.1185, -42.2902, FALSE, 29),
+(3155108, 'Rio do Prado', -16.6056, -40.5714, FALSE, 31),
+(4214805, 'Rio do Sul', -27.2156, -49.643, FALSE, 42),
+(3155009, 'Rio Doce', -20.2412, -42.8995, FALSE, 31),
+(1718709, 'Rio dos Bois', -9.34425, -48.5245, FALSE, 17),
+(4214706, 'Rio dos Cedros', -26.7398, -49.2718, FALSE, 42),
+(4315552, 'Rio dos Índios', -27.2973, -52.8417, FALSE, 43),
+(3155207, 'Rio Espera', -20.855, -43.4721, FALSE, 31),
+(2611903, 'Rio Formoso', -8.6592, -35.1532, FALSE, 26),
+(4214904, 'Rio Fortuna', -28.1244, -49.1068, FALSE, 42),
+(4315602, 'Rio Grande', -32.0349, -52.1071, FALSE, 43),
+(3544103, 'Rio Grande da Serra', -23.7437, -46.3971, FALSE, 35),
+(2209005, 'Rio Grande do Piauí', -7.78029, -43.1369, FALSE, 22),
+(2707701, 'Rio Largo', -9.47783, -35.8394, FALSE, 27),
+(3155306, 'Rio Manso', -20.2666, -44.3069, FALSE, 31),
+(1506161, 'Rio Maria', -7.31236, -50.0379, FALSE, 15),
+(4215000, 'Rio Negrinho', -26.2591, -49.5177, FALSE, 42),
+(5007307, 'Rio Negro', -19.447, -54.9859, FALSE, 50),
+(4122305, 'Rio Negro', -26.095, -49.7982, FALSE, 41),
+(3155405, 'Rio Novo', -21.4649, -43.1168, FALSE, 31),
+(3204401, 'Rio Novo do Sul', -20.8556, -40.9388, FALSE, 32),
+(3155504, 'Rio Paranaíba', -19.1861, -46.2455, FALSE, 31),
+(4315701, 'Rio Pardo', -29.988, -52.3711, FALSE, 43),
+(3155603, 'Rio Pardo de Minas', -15.616, -42.5405, FALSE, 31),
+(3155702, 'Rio Piracicaba', -19.9284, -43.1829, FALSE, 31),
+(3155801, 'Rio Pomba', -21.2712, -43.1696, FALSE, 31),
+(3155900, 'Rio Preto', -22.0861, -43.8293, FALSE, 31),
+(1303569, 'Rio Preto da Eva', -2.7045, -59.6858, FALSE, 13),
+(5218789, 'Rio Quente', -17.774, -48.7725, FALSE, 52),
+(2927002, 'Rio Real', -11.4814, -37.9332, FALSE, 29),
+(4215059, 'Rio Rufino', -27.8592, -49.7754, FALSE, 42),
+(1718758, 'Rio Sono', -9.35002, -47.888, FALSE, 17),
+(2512903, 'Rio Tinto', -6.80383, -35.0776, FALSE, 25),
+(5218805, 'Rio Verde', -17.7923, -50.9192, FALSE, 52),
+(5007406, 'Rio Verde de Mato Grosso', -18.9249, -54.8434, FALSE, 50),
+(3156007, 'Rio Vermelho', -18.2922, -43.0018, FALSE, 31),
+(3544202, 'Riolândia', -19.9868, -49.6836, FALSE, 35),
+(4315750, 'Riozinho', -29.639, -50.4488, FALSE, 43),
+(4215075, 'Riqueza', -27.0653, -53.3265, FALSE, 42),
+(3156106, 'Ritápolis', -21.0276, -44.3204, FALSE, 31),
+(3543501, 'Riversul', -23.829, -49.429, FALSE, 35),
+(4315800, 'Roca Sales', -29.2884, -51.8658, FALSE, 43),
+(5007505, 'Rochedo', -19.9565, -54.8848, FALSE, 50),
+(3156205, 'Rochedo de Minas', -21.6284, -43.0165, FALSE, 31),
+(4215109, 'Rodeio', -26.9243, -49.3649, FALSE, 42),
+(4315909, 'Rodeio Bonito', -27.4742, -53.1706, FALSE, 43),
+(3156304, 'Rodeiro', -21.2035, -42.8586, FALSE, 31),
+(2927101, 'Rodelas', -8.85021, -38.78, FALSE, 29),
+(2411007, 'Rodolfo Fernandes', -5.78393, -38.0579, FALSE, 24),
+(1200427, 'Rodrigues Alves', -7.73864, -72.661, FALSE, 12),
+(4315958, 'Rolador', -28.2566, -54.8186, FALSE, 43),
+(4122404, 'Rolândia', -23.3101, -51.3659, FALSE, 41),
+(4316006, 'Rolante', -29.6462, -50.5819, FALSE, 43),
+(1100288, 'Rolim de Moura', -11.7271, -61.7714, FALSE, 11),
+(3156403, 'Romaria', -18.8838, -47.5782, FALSE, 31),
+(4215208, 'Romelândia', -26.6809, -53.3172, FALSE, 42),
+(4122503, 'Roncador', -24.5958, -52.2716, FALSE, 41),
+(4316105, 'Ronda Alta', -27.7758, -52.8056, FALSE, 43),
+(4316204, 'Rondinha', -27.8315, -52.9081, FALSE, 43),
+(5107578, 'Rondolândia', -10.8376, -61.4697, FALSE, 51),
+(4122602, 'Rondon', -23.412, -52.7659, FALSE, 41),
+(1506187, 'Rondon do Pará', -4.77793, -48.067, FALSE, 15),
+(5107602, 'Rondonópolis', -16.4673, -54.6372, FALSE, 51),
+(4316303, 'Roque Gonzales', -28.1297, -55.0266, FALSE, 43),
+(1400472, 'Rorainópolis', 0.939956, -60.4389, FALSE, 14),
+(3544251, 'Rosana', -22.5782, -53.0603, FALSE, 35),
+(2109601, 'Rosário', -2.93444, -44.2531, FALSE, 21),
+(3156452, 'Rosário da Limeira', -20.9812, -42.5112, FALSE, 31),
+(2806107, 'Rosário do Catete', -10.6904, -37.0357, FALSE, 28),
+(4122651, 'Rosário do Ivaí', -24.2682, -51.272, FALSE, 41),
+(4316402, 'Rosário do Sul', -30.2515, -54.9221, FALSE, 43),
+(5107701, 'Rosário Oeste', -14.8259, -56.4236, FALSE, 51),
+(3544301, 'Roseira', -22.8938, -45.307, FALSE, 35),
+(2707800, 'Roteiro', -9.83503, -35.9782, FALSE, 27),
+(3156502, 'Rubelita', -16.4053, -42.261, FALSE, 31),
+(3544400, 'Rubiácea', -21.3006, -50.7296, FALSE, 35),
+(5218904, 'Rubiataba', -15.1617, -49.8048, FALSE, 52),
+(3156601, 'Rubim', -16.3775, -40.5397, FALSE, 31),
+(3544509, 'Rubinéia', -20.1759, -51.007, FALSE, 35),
+(1506195, 'Rurópolis', -4.10028, -54.9092, FALSE, 15),
+(2311801, 'Russas', -4.92673, -37.9721, FALSE, 23),
+(2411106, 'Ruy Barbosa', -5.88745, -35.933, FALSE, 24),
+(2927200, 'Ruy Barbosa', -12.2816, -40.4931, FALSE, 29),
+(3156700, 'Sabará', -19.884, -43.8263, FALSE, 31),
+(4122701, 'Sabáudia', -23.3155, -51.555, FALSE, 41),
+(3544608, 'Sabino', -21.4593, -49.5755, FALSE, 35),
+(3156809, 'Sabinópolis', -18.6653, -43.0752, FALSE, 31),
+(2311900, 'Saboeiro', -6.5346, -39.9017, FALSE, 23),
+(3156908, 'Sacramento', -19.8622, -47.4508, FALSE, 31),
+(4316428, 'Sagrada Família', -27.7085, -53.1351, FALSE, 43),
+(3544707, 'Sagres', -21.8823, -50.9594, FALSE, 35),
+(2612000, 'Sairé', -8.32864, -35.6967, FALSE, 26),
+(4316436, 'Saldanha Marinho', -28.3941, -53.097, FALSE, 43),
+(3544806, 'Sales', -21.3427, -49.4897, FALSE, 35),
+(3544905, 'Sales Oliveira', -20.7696, -47.8369, FALSE, 35),
+(3545001, 'Salesópolis', -23.5288, -45.8465, FALSE, 35),
+(4215307, 'Salete', -26.9798, -49.9988, FALSE, 42),
+(2513000, 'Salgadinho', -7.10098, -36.8458, FALSE, 25),
+(2612109, 'Salgadinho', -7.9269, -35.6503, FALSE, 26),
+(2806206, 'Salgado', -11.0288, -37.4804, FALSE, 28),
+(2513109, 'Salgado de São Félix', -7.35337, -35.4305, FALSE, 25),
+(4122800, 'Salgado Filho', -26.1777, -53.3631, FALSE, 41),
+(2612208, 'Salgueiro', -8.07373, -39.1247, FALSE, 26),
+(3157005, 'Salinas', -16.1753, -42.2964, FALSE, 31),
+(2927309, 'Salinas da Margarida', -12.873, -38.7562, FALSE, 29),
+(1506203, 'Salinópolis', -0.630815, -47.3465, FALSE, 15),
+(2311959, 'Salitre', -7.28398, -40.45, FALSE, 23),
+(3545100, 'Salmourão', -21.6267, -50.8614, FALSE, 35),
+(2612307, 'Saloá', -8.9723, -36.691, FALSE, 26),
+(4215356, 'Saltinho', -26.6049, -53.0578, FALSE, 42),
+(3545159, 'Saltinho', -22.8442, -47.6754, FALSE, 35),
+(3545209, 'Salto', -23.1996, -47.2931, FALSE, 35),
+(3157104, 'Salto da Divisa', -16.0063, -39.9391, FALSE, 31),
+(3545308, 'Salto de Pirapora', -23.6474, -47.5743, FALSE, 35),
+(5107750, 'Salto do Céu', -15.1303, -58.1317, FALSE, 51),
+(4122909, 'Salto do Itararé', -23.6074, -49.6354, FALSE, 41),
+(4316451, 'Salto do Jacuí', -29.0951, -53.2133, FALSE, 43),
+(4123006, 'Salto do Lontra', -25.7813, -53.3135, FALSE, 41),
+(3545407, 'Salto Grande', -22.8894, -49.9831, FALSE, 35),
+(4215406, 'Salto Veloso', -26.903, -51.4043, FALSE, 42),
+(2927408, 'Salvador', -12.9718, -38.5011, TRUE, 29),
+(4316477, 'Salvador das Missões', -28.1233, -54.8373, FALSE, 43),
+(4316501, 'Salvador do Sul', -29.4386, -51.5077, FALSE, 43),
+(1506302, 'Salvaterra', -0.758444, -48.5139, FALSE, 15),
+(2109700, 'Sambaíba', -7.13447, -45.3515, FALSE, 21),
+(1718808, 'Sampaio', -5.35423, -47.8782, FALSE, 17),
+(4316600, 'Sananduva', -27.947, -51.8079, FALSE, 43),
+(5219001, 'Sanclerlândia', -16.197, -50.3124, FALSE, 52),
+(1718840, 'Sandolândia', -12.538, -49.9242, FALSE, 17),
+(3545506, 'Sandovalina', -22.4551, -51.7648, FALSE, 35),
+(4215455, 'Sangão', -28.6326, -49.1322, FALSE, 42),
+(2612406, 'Sanharó', -8.36097, -36.5696, FALSE, 26),
+(4317103, 'Sant''Ana do Livramento', -30.8773, -55.5392, FALSE, 43),
+(3545605, 'Santa Adélia', -21.2427, -48.8063, FALSE, 35),
+(3545704, 'Santa Albertina', -20.0311, -50.7297, FALSE, 35),
+(4123105, 'Santa Amélia', -23.2654, -50.4288, FALSE, 41),
+(2927507, 'Santa Bárbara', -11.9515, -38.9681, FALSE, 29),
+(3157203, 'Santa Bárbara', -19.9604, -43.4101, FALSE, 31),
+(3545803, 'Santa Bárbara d''Oeste', -22.7553, -47.4143, FALSE, 35),
+(5219100, 'Santa Bárbara de Goiás', -16.5714, -49.6954, FALSE, 52),
+(3157252, 'Santa Bárbara do Leste', -19.9753, -42.1457, FALSE, 31),
+(3157278, 'Santa Bárbara do Monte Verde', -21.9592, -43.7027, FALSE, 31),
+(1506351, 'Santa Bárbara do Pará', -1.19219, -48.238, FALSE, 15),
+(4316709, 'Santa Bárbara do Sul', -28.3653, -53.251, FALSE, 43),
+(3157302, 'Santa Bárbara do Tugúrio', -21.2431, -43.5607, FALSE, 31),
+(3546009, 'Santa Branca', -23.3933, -45.8875, FALSE, 35),
+(2927606, 'Santa Brígida', -9.73227, -38.1209, FALSE, 29),
+(5107248, 'Santa Carmem', -11.9125, -55.2263, FALSE, 51),
+(4215505, 'Santa Cecília', -26.9592, -50.4252, FALSE, 42),
+(2513158, 'Santa Cecília', -7.7389, -35.8764, FALSE, 25),
+(4123204, 'Santa Cecília do Pavão', -23.5201, -50.7835, FALSE, 41),
+(4316733, 'Santa Cecília do Sul', -28.1609, -51.9279, FALSE, 43),
+(3546108, 'Santa Clara d''Oeste', -20.09, -50.9491, FALSE, 35),
+(4316758, 'Santa Clara do Sul', -29.4747, -52.0843, FALSE, 43),
+(2411205, 'Santa Cruz', -6.22475, -36.0193, FALSE, 24),
+(2513208, 'Santa Cruz', -6.5237, -38.0617, FALSE, 25),
+(2612455, 'Santa Cruz', -8.24153, -40.3434, FALSE, 26),
+(2927705, 'Santa Cruz Cabrália', -16.2825, -39.0295, FALSE, 29),
+(2612471, 'Santa Cruz da Baixa Verde', -7.81339, -38.1476, FALSE, 26),
+(3546207, 'Santa Cruz da Conceição', -22.1405, -47.4512, FALSE, 35),
+(3546256, 'Santa Cruz da Esperança', -21.2951, -47.4304, FALSE, 35),
+(2927804, 'Santa Cruz da Vitória', -14.964, -39.8115, FALSE, 29),
+(3546306, 'Santa Cruz das Palmeiras', -21.8235, -47.248, FALSE, 35),
+(5219209, 'Santa Cruz de Goiás', -17.3155, -48.4809, FALSE, 52),
+(3157336, 'Santa Cruz de Minas', -21.1241, -44.2202, FALSE, 31),
+(4123303, 'Santa Cruz de Monte Castelo', -22.9582, -53.2949, FALSE, 41),
+(3157377, 'Santa Cruz de Salinas', -16.0967, -41.7418, FALSE, 31),
+(1506401, 'Santa Cruz do Arari', -0.661019, -49.1771, FALSE, 15),
+(2612505, 'Santa Cruz do Capibaribe', -7.94802, -36.2061, FALSE, 26),
+(3157401, 'Santa Cruz do Escalvado', -20.2372, -42.8169, FALSE, 31),
+(2209104, 'Santa Cruz do Piauí', -7.1785, -41.7609, FALSE, 22),
+(3546405, 'Santa Cruz do Rio Pardo', -22.8988, -49.6354, FALSE, 35),
+(4316808, 'Santa Cruz do Sul', -29.722, -52.4343, FALSE, 43),
+(5107743, 'Santa Cruz do Xingu', -10.1532, -52.3953, FALSE, 51),
+(2209153, 'Santa Cruz dos Milagres', -5.80581, -41.9506, FALSE, 22),
+(3157500, 'Santa Efigênia de Minas', -18.8235, -42.4388, FALSE, 31),
+(3546504, 'Santa Ernestina', -21.4618, -48.3953, FALSE, 35),
+(4123402, 'Santa Fé', -23.04, -51.808, FALSE, 41),
+(5219258, 'Santa Fé de Goiás', -15.7664, -51.1037, FALSE, 52),
+(3157609, 'Santa Fé de Minas', -16.6859, -45.4102, FALSE, 31),
+(1718865, 'Santa Fé do Araguaia', -7.15803, -48.7165, FALSE, 17),
+(3546603, 'Santa Fé do Sul', -20.2083, -50.932, FALSE, 35),
+(2209203, 'Santa Filomena', -9.11228, -45.9116, FALSE, 22),
+(2612554, 'Santa Filomena', -8.16688, -40.6079, FALSE, 26),
+(2109759, 'Santa Filomena do Maranhão', -5.49671, -44.5638, FALSE, 21),
+(3546702, 'Santa Gertrudes', -22.4572, -47.5272, FALSE, 35),
+(4123501, 'Santa Helena', -24.8585, -54.336, FALSE, 41),
+(4215554, 'Santa Helena', -26.937, -53.6214, FALSE, 42),
+(2109809, 'Santa Helena', -2.24426, -45.29, FALSE, 21),
+(2513307, 'Santa Helena', -6.7176, -38.6427, FALSE, 25),
+(5219308, 'Santa Helena de Goiás', -17.8115, -50.5977, FALSE, 52),
+(3157658, 'Santa Helena de Minas', -16.9707, -40.6727, FALSE, 31),
+(2927903, 'Santa Inês', -13.2793, -39.814, FALSE, 29),
+(4123600, 'Santa Inês', -22.6376, -51.9024, FALSE, 41),
+(2513356, 'Santa Inês', -7.621, -38.554, FALSE, 25),
+(2109908, 'Santa Inês', -3.65112, -45.3774, FALSE, 21),
+(3546801, 'Santa Isabel', -23.3172, -46.2237, FALSE, 35),
+(5219357, 'Santa Isabel', -15.2958, -49.4259, FALSE, 52),
+(4123709, 'Santa Isabel do Ivaí', -23.0025, -53.1989, FALSE, 41),
+(1303601, 'Santa Isabel do Rio Negro', -0.410824, -65.0092, FALSE, 13),
+(4123808, 'Santa Izabel do Oeste', -25.8217, -53.4801, FALSE, 41),
+(1506500, 'Santa Izabel do Pará', -1.29686, -48.1606, FALSE, 15),
+(3157708, 'Santa Juliana', -19.3108, -47.5322, FALSE, 31),
+(3204500, 'Santa Leopoldina', -20.0999, -40.527, FALSE, 32),
+(3546900, 'Santa Lúcia', -21.685, -48.0885, FALSE, 35),
+(4123824, 'Santa Lúcia', -25.4104, -53.5638, FALSE, 41),
+(2209302, 'Santa Luz', -8.9488, -44.1296, FALSE, 22),
+(2110005, 'Santa Luzia', -4.06873, -45.69, FALSE, 21),
+(2928059, 'Santa Luzia', -15.4342, -39.3287, FALSE, 29),
+(3157807, 'Santa Luzia', -19.7548, -43.8497, FALSE, 31),
+(2513406, 'Santa Luzia', -6.86092, -36.9178, FALSE, 25),
+(1100296, 'Santa Luzia D''Oeste', -11.9074, -61.7777, FALSE, 11),
+(2806305, 'Santa Luzia do Itanhy', -11.3536, -37.4586, FALSE, 28),
+(2707909, 'Santa Luzia do Norte', -9.6037, -35.8232, FALSE, 27),
+(1506559, 'Santa Luzia do Pará', -1.52147, -46.9008, FALSE, 15),
+(2110039, 'Santa Luzia do Paruá', -2.51123, -45.7801, FALSE, 21),
+(3157906, 'Santa Margarida', -20.3839, -42.2519, FALSE, 31),
+(4316972, 'Santa Margarida do Sul', -30.3393, -54.0817, FALSE, 43),
+(4316907, 'Santa Maria', -29.6868, -53.8149, FALSE, 43),
+(2409332, 'Santa Maria', -5.83802, -35.6914, FALSE, 24),
+(2612604, 'Santa Maria da Boa Vista', -8.79766, -39.8241, FALSE, 26),
+(3547007, 'Santa Maria da Serra', -22.5661, -48.1593, FALSE, 35),
+(2928109, 'Santa Maria da Vitória', -13.3859, -44.2011, FALSE, 29),
+(1506583, 'Santa Maria das Barreiras', -8.85784, -49.7215, FALSE, 15),
+(3158003, 'Santa Maria de Itabira', -19.4431, -43.1064, FALSE, 31),
+(3204559, 'Santa Maria de Jetibá', -20.0253, -40.7439, FALSE, 32),
+(2612703, 'Santa Maria do Cambucá', -7.83676, -35.8941, FALSE, 26),
+(4316956, 'Santa Maria do Herval', -29.4902, -50.9919, FALSE, 43),
+(4123857, 'Santa Maria do Oeste', -24.9377, -51.8696, FALSE, 41),
+(1506609, 'Santa Maria do Pará', -1.35392, -47.5712, FALSE, 15),
+(3158102, 'Santa Maria do Salto', -16.2479, -40.1512, FALSE, 31),
+(3158201, 'Santa Maria do Suaçuí', -18.1896, -42.4139, FALSE, 31),
+(1718881, 'Santa Maria do Tocantins', -8.8046, -47.7887, FALSE, 17),
+(3304607, 'Santa Maria Madalena', -21.9547, -42.0098, FALSE, 33),
+(4123907, 'Santa Mariana', -23.1465, -50.5167, FALSE, 41),
+(3547106, 'Santa Mercedes', -21.3495, -51.7564, FALSE, 35),
+(4123956, 'Santa Mônica', -23.108, -53.1103, FALSE, 41),
+(2312205, 'Santa Quitéria', -4.32608, -40.1523, FALSE, 23),
+(2110104, 'Santa Quitéria do Maranhão', -3.49308, -42.5688, FALSE, 21),
+(2110203, 'Santa Rita', -3.14241, -44.3211, FALSE, 21),
+(2513703, 'Santa Rita', -7.11724, -34.9753, FALSE, 25),
+(3547403, 'Santa Rita d''Oeste', -20.1414, -50.8358, FALSE, 35),
+(3159209, 'Santa Rita de Caldas', -22.0292, -46.3385, FALSE, 31),
+(2928406, 'Santa Rita de Cássia', -11.0063, -44.5255, FALSE, 29),
+(3159407, 'Santa Rita de Ibitipoca', -21.5658, -43.9163, FALSE, 31),
+(3159308, 'Santa Rita de Jacutinga', -22.1474, -44.0977, FALSE, 31),
+(3159357, 'Santa Rita de Minas', -19.876, -42.1363, FALSE, 31),
+(5219407, 'Santa Rita do Araguaia', -17.3269, -53.2012, FALSE, 52),
+(3159506, 'Santa Rita do Itueto', -19.3576, -41.3821, FALSE, 31),
+(5219456, 'Santa Rita do Novo Destino', -15.1351, -49.1203, FALSE, 52),
+(5007554, 'Santa Rita do Pardo', -21.3016, -52.8333, FALSE, 50),
+(3547502, 'Santa Rita do Passa Quatro', -21.7083, -47.478, FALSE, 35),
+(3159605, 'Santa Rita do Sapucaí', -22.2461, -45.7034, FALSE, 31),
+(1718899, 'Santa Rita do Tocantins', -10.8617, -48.9161, FALSE, 17),
+(5107768, 'Santa Rita do Trivelato', -13.8146, -55.2706, FALSE, 51),
+(4317202, 'Santa Rosa', -27.8702, -54.4796, FALSE, 43),
+(3159704, 'Santa Rosa da Serra', -19.5186, -45.9611, FALSE, 31),
+(5219506, 'Santa Rosa de Goiás', -16.084, -49.4953, FALSE, 52),
+(4215604, 'Santa Rosa de Lima', -28.0331, -49.133, FALSE, 42),
+(2806503, 'Santa Rosa de Lima', -10.6434, -37.1931, FALSE, 28),
+(3547601, 'Santa Rosa de Viterbo', -21.4776, -47.3622, FALSE, 35),
+(2209377, 'Santa Rosa do Piauí', -6.79581, -42.2814, FALSE, 22),
+(1200435, 'Santa Rosa do Purus', -9.44652, -70.4902, FALSE, 12),
+(4215653, 'Santa Rosa do Sul', -29.1313, -49.7109, FALSE, 42),
+(1718907, 'Santa Rosa do Tocantins', -11.4474, -48.1216, FALSE, 17),
+(3547650, 'Santa Salete', -20.2429, -50.6887, FALSE, 35),
+(3204609, 'Santa Teresa', -19.9363, -40.5979, FALSE, 32),
+(2928505, 'Santa Teresinha', -12.7697, -39.5215, FALSE, 29),
+(2513802, 'Santa Teresinha', -7.07964, -37.4435, FALSE, 25),
+(4317251, 'Santa Tereza', -29.1655, -51.7351, FALSE, 43),
+(5219605, 'Santa Tereza de Goiás', -13.7138, -49.0144, FALSE, 52),
+(4124020, 'Santa Tereza do Oeste', -25.0543, -53.6274, FALSE, 41),
+(1719004, 'Santa Tereza do Tocantins', -10.2746, -47.8033, FALSE, 17),
+(4215679, 'Santa Terezinha', -26.7813, -50.009, FALSE, 42),
+(5107776, 'Santa Terezinha', -10.4704, -50.514, FALSE, 51),
+(2612802, 'Santa Terezinha', -7.37696, -37.4787, FALSE, 26),
+(5219704, 'Santa Terezinha de Goiás', -14.4326, -49.7091, FALSE, 52),
+(4124053, 'Santa Terezinha de Itaipu', -25.4391, -54.402, FALSE, 41),
+(4215695, 'Santa Terezinha do Progresso', -26.624, -53.1997, FALSE, 42),
+(1720002, 'Santa Terezinha do Tocantins', -6.44438, -47.6684, FALSE, 17),
+(3159803, 'Santa Vitória', -18.8414, -50.1208, FALSE, 31),
+(4317301, 'Santa Vitória do Palmar', -33.525, -53.3717, FALSE, 43),
+(2928000, 'Santaluz', -11.2508, -39.375, FALSE, 29),
+(2928208, 'Santana', -12.9792, -44.0506, FALSE, 29),
+(1600600, 'Santana', -0.045434, -51.1729, FALSE, 16),
+(4317004, 'Santana da Boa Vista', -30.8697, -53.11, FALSE, 43),
+(3547205, 'Santana da Ponte Pensa', -20.2523, -50.8014, FALSE, 35),
+(3158300, 'Santana da Vargem', -21.2449, -45.5005, FALSE, 31),
+(3158409, 'Santana de Cataguases', -21.2893, -42.5524, FALSE, 31),
+(2513505, 'Santana de Mangueira', -7.54705, -38.3236, FALSE, 25),
+(3547304, 'Santana de Parnaíba', -23.4439, -46.9178, FALSE, 35),
+(3158508, 'Santana de Pirapama', -18.9962, -44.0409, FALSE, 31),
+(2312007, 'Santana do Acaraú', -3.46144, -40.2118, FALSE, 23),
+(1506708, 'Santana do Araguaia', -9.3281, -50.35, FALSE, 15),
+(2312106, 'Santana do Cariri', -7.17613, -39.7302, FALSE, 23),
+(3158607, 'Santana do Deserto', -21.9512, -43.1583, FALSE, 31),
+(3158706, 'Santana do Garambéu', -21.5983, -44.105, FALSE, 31),
+(2708006, 'Santana do Ipanema', -9.36999, -37.248, FALSE, 27),
+(4124004, 'Santana do Itararé', -23.7587, -49.6293, FALSE, 41),
+(3158805, 'Santana do Jacaré', -20.9007, -45.1285, FALSE, 31),
+(3158904, 'Santana do Manhuaçu', -20.1031, -41.9278, FALSE, 31),
+(2110237, 'Santana do Maranhão', -3.109, -42.4064, FALSE, 21),
+(2411403, 'Santana do Matos', -5.94605, -36.6578, FALSE, 24),
+(2708105, 'Santana do Mundaú', -9.17141, -36.2176, FALSE, 27),
+(3158953, 'Santana do Paraíso', -19.3661, -42.5446, FALSE, 31),
+(2209351, 'Santana do Piauí', -6.94696, -41.5178, FALSE, 22),
+(3159001, 'Santana do Riacho', -19.1662, -43.722, FALSE, 31),
+(2806404, 'Santana do São Francisco', -10.2922, -36.6105, FALSE, 28),
+(2411429, 'Santana do Seridó', -6.76643, -36.7312, FALSE, 24),
+(2513604, 'Santana dos Garrotes', -7.38162, -37.9819, FALSE, 25),
+(3159100, 'Santana dos Montes', -20.7868, -43.6949, FALSE, 31),
+(2928307, 'Santanópolis', -12.0311, -38.8694, FALSE, 29),
+(1506807, 'Santarém', -2.43849, -54.6996, FALSE, 15),
+(1506906, 'Santarém Novo', -0.93097, -47.3855, FALSE, 15),
+(4317400, 'Santiago', -29.1897, -54.8666, FALSE, 43),
+(4215687, 'Santiago do Sul', -26.6388, -52.6799, FALSE, 42),
+(5107263, 'Santo Afonso', -14.4945, -57.0091, FALSE, 51),
+(2928604, 'Santo Amaro', -12.5472, -38.7137, FALSE, 29),
+(4215703, 'Santo Amaro da Imperatriz', -27.6852, -48.7813, FALSE, 42),
+(2806602, 'Santo Amaro das Brotas', -10.7892, -37.0564, FALSE, 28),
+(2110278, 'Santo Amaro do Maranhão', -2.50068, -43.238, FALSE, 21),
+(3547700, 'Santo Anastácio', -21.9747, -51.6527, FALSE, 35),
+(3547809, 'Santo André', -23.6737, -46.5432, FALSE, 35),
+(2513851, 'Santo André', -7.22016, -36.6213, FALSE, 25),
+(4317509, 'Santo Ângelo', -28.3001, -54.2668, FALSE, 43),
+(2411502, 'Santo Antônio', -6.31195, -35.4739, FALSE, 24),
+(3547908, 'Santo Antônio da Alegria', -21.0864, -47.1464, FALSE, 35),
+(5219712, 'Santo Antônio da Barra', -17.5585, -50.6345, FALSE, 52),
+(4317608, 'Santo Antônio da Patrulha', -29.8268, -50.5175, FALSE, 43),
+(4124103, 'Santo Antônio da Platina', -23.2959, -50.0815, FALSE, 41),
+(4317707, 'Santo Antônio das Missões', -28.514, -55.2251, FALSE, 43),
+(5219738, 'Santo Antônio de Goiás', -16.4815, -49.3096, FALSE, 52),
+(2928703, 'Santo Antônio de Jesus', -12.9614, -39.2584, FALSE, 29),
+(2209401, 'Santo Antônio de Lisboa', -6.98676, -41.2252, FALSE, 22),
+(3304706, 'Santo Antônio de Pádua', -21.541, -42.1832, FALSE, 33),
+(3548005, 'Santo Antônio de Posse', -22.6029, -46.9192, FALSE, 35),
+(3159902, 'Santo Antônio do Amparo', -20.943, -44.9176, FALSE, 31),
+(3548054, 'Santo Antônio do Aracanguá', -20.9331, -50.498, FALSE, 35),
+(3160009, 'Santo Antônio do Aventureiro', -21.7606, -42.8115, FALSE, 31),
+(4124202, 'Santo Antônio do Caiuá', -22.7351, -52.344, FALSE, 41),
+(5219753, 'Santo Antônio do Descoberto', -15.9412, -48.2578, FALSE, 52),
+(3160108, 'Santo Antônio do Grama', -20.3185, -42.6047, FALSE, 31),
+(1303700, 'Santo Antônio do Içá', -3.09544, -67.9463, FALSE, 13),
+(3160207, 'Santo Antônio do Itambé', -18.4609, -43.3006, FALSE, 31),
+(3160306, 'Santo Antônio do Jacinto', -16.5332, -40.1817, FALSE, 31),
+(3548104, 'Santo Antônio do Jardim', -22.1121, -46.6845, FALSE, 35),
+(5107792, 'Santo Antônio do Leste', -14.805, -53.6075, FALSE, 51),
+(5107800, 'Santo Antônio do Leverger', -15.8632, -56.0788, FALSE, 51),
+(3160405, 'Santo Antônio do Monte', -20.085, -45.2947, FALSE, 31),
+(4317558, 'Santo Antônio do Palma', -28.4956, -52.0267, FALSE, 43),
+(4124301, 'Santo Antônio do Paraíso', -23.4969, -50.6455, FALSE, 41),
+(3548203, 'Santo Antônio do Pinhal', -22.827, -45.663, FALSE, 35),
+(4317756, 'Santo Antônio do Planalto', -28.403, -52.6992, FALSE, 43),
+(3160454, 'Santo Antônio do Retiro', -15.3393, -42.6171, FALSE, 31),
+(3160504, 'Santo Antônio do Rio Abaixo', -19.2374, -43.2604, FALSE, 31),
+(4124400, 'Santo Antônio do Sudoeste', -26.0737, -53.7251, FALSE, 41),
+(1507003, 'Santo Antônio do Tauá', -1.1522, -48.1314, FALSE, 15),
+(2110302, 'Santo Antônio dos Lopes', -4.86613, -44.3653, FALSE, 21),
+(2209450, 'Santo Antônio dos Milagres', -6.04647, -42.7123, FALSE, 22),
+(4317806, 'Santo Augusto', -27.8526, -53.7776, FALSE, 43),
+(4317905, 'Santo Cristo', -27.8263, -54.662, FALSE, 43),
+(2928802, 'Santo Estêvão', -12.428, -39.2505, FALSE, 29),
+(3548302, 'Santo Expedito', -21.8467, -51.3929, FALSE, 35),
+(4317954, 'Santo Expedito do Sul', -27.9074, -51.6434, FALSE, 43),
+(3160603, 'Santo Hipólito', -18.2968, -44.2229, FALSE, 31),
+(4124509, 'Santo Inácio', -22.6957, -51.7969, FALSE, 41),
+(2209500, 'Santo Inácio do Piauí', -7.42072, -41.9063, FALSE, 22),
+(3548401, 'Santópolis do Aguapeí', -21.6376, -50.5044, FALSE, 35),
+(3548500, 'Santos', -23.9535, -46.335, FALSE, 35),
+(3160702, 'Santos Dumont', -21.4634, -43.5499, FALSE, 31),
+(2312304, 'São Benedito', -4.04713, -40.8596, FALSE, 23),
+(2110401, 'São Benedito do Rio Preto', -3.33515, -43.5287, FALSE, 21),
+(2612901, 'São Benedito do Sul', -8.8166, -35.9453, FALSE, 26),
+(2513927, 'São Bentinho', -6.88596, -37.7243, FALSE, 25),
+(2513901, 'São Bento', -6.48529, -37.4488, FALSE, 25),
+(2110500, 'São Bento', -2.69781, -44.8289, FALSE, 21),
+(3160801, 'São Bento Abade', -21.5839, -45.0699, FALSE, 31),
+(2411601, 'São Bento do Norte', -5.09259, -35.9587, FALSE, 24),
+(3548609, 'São Bento do Sapucaí', -22.6837, -45.7287, FALSE, 35),
+(4215802, 'São Bento do Sul', -26.2495, -49.3831, FALSE, 42),
+(1720101, 'São Bento do Tocantins', -6.0258, -47.9012, FALSE, 17),
+(2411700, 'São Bento do Trairí', -6.33798, -36.0863, FALSE, 24),
+(2613008, 'São Bento do Una', -8.52637, -36.4465, FALSE, 26),
+(4215752, 'São Bernardino', -26.4739, -52.9687, FALSE, 42),
+(2110609, 'São Bernardo', -3.37223, -42.4191, FALSE, 21),
+(3548708, 'São Bernardo do Campo', -23.6914, -46.5646, FALSE, 35),
+(4215901, 'São Bonifácio', -27.9009, -48.9326, FALSE, 42),
+(4318002, 'São Borja', -28.6578, -56.0036, FALSE, 43),
+(2708204, 'São Brás', -10.1141, -36.8522, FALSE, 27),
+(3160900, 'São Brás do Suaçuí', -20.6242, -43.9515, FALSE, 31),
+(2209559, 'São Braz do Piauí', -9.05797, -43.0076, FALSE, 22),
+(2613107, 'São Caetano', -8.33763, -36.2869, FALSE, 26),
+(1507102, 'São Caetano de Odivelas', -0.747293, -48.0246, FALSE, 15),
+(3548807, 'São Caetano do Sul', -23.6229, -46.5548, FALSE, 35),
+(3548906, 'São Carlos', -22.0174, -47.886, FALSE, 35),
+(4216008, 'São Carlos', -27.0798, -53.0037, FALSE, 42),
+(4124608, 'São Carlos do Ivaí', -23.3158, -52.4761, FALSE, 41),
+(2806701, 'São Cristóvão', -11.0084, -37.2044, FALSE, 28),
+(4216057, 'São Cristovão do Sul', -27.2666, -50.4388, FALSE, 42),
+(2928901, 'São Desidério', -12.3572, -44.9769, FALSE, 29),
+(2928950, 'São Domingos', -11.4649, -39.5268, FALSE, 29),
+(4216107, 'São Domingos', -26.5548, -52.5313, FALSE, 42),
+(2513968, 'São Domingos', -6.80313, -37.9488, FALSE, 25),
+(2806800, 'São Domingos', -10.7916, -37.5685, FALSE, 28),
+(5219803, 'São Domingos', -13.621, -46.7415, FALSE, 52),
+(3160959, 'São Domingos das Dores', -19.5246, -42.0106, FALSE, 31),
+(1507151, 'São Domingos do Araguaia', -5.53732, -48.7366, FALSE, 15),
+(2110658, 'São Domingos do Azeitão', -6.81471, -44.6509, FALSE, 21),
+(1507201, 'São Domingos do Capim', -1.68768, -47.7665, FALSE, 15),
+(2513943, 'São Domingos do Cariri', -7.63273, -36.4374, FALSE, 25),
+(2110708, 'São Domingos do Maranhão', -5.58095, -44.3822, FALSE, 21),
+(3204658, 'São Domingos do Norte', -19.1452, -40.6281, FALSE, 32),
+(3161007, 'São Domingos do Prata', -19.8678, -42.971, FALSE, 31),
+(4318051, 'São Domingos do Sul', -28.5312, -51.886, FALSE, 43),
+(2929107, 'São Felipe', -12.8394, -39.0893, FALSE, 29),
+(1101484, 'São Felipe D''Oeste', -11.9023, -61.5026, FALSE, 11),
+(2929008, 'São Félix', -12.6104, -38.9727, FALSE, 29),
+(2110807, 'São Félix de Balsas', -7.07535, -44.8092, FALSE, 21),
+(3161056, 'São Félix de Minas', -18.5959, -41.4889, FALSE, 31),
+(5107859, 'São Félix do Araguaia', -11.615, -50.6706, FALSE, 51),
+(2929057, 'São Félix do Coribe', -13.4019, -44.1837, FALSE, 29),
+(2209609, 'São Félix do Piauí', -5.93485, -42.1172, FALSE, 22),
+(1720150, 'São Félix do Tocantins', -10.1615, -46.6618, FALSE, 17),
+(1507300, 'São Félix do Xingu', -6.64254, -51.9904, FALSE, 15),
+(2411809, 'São Fernando', -6.37975, -37.1864, FALSE, 24),
+(3304805, 'São Fidélis', -21.6551, -41.756, FALSE, 33),
+(3549003, 'São Francisco', -20.3623, -50.6952, FALSE, 35),
+(2513984, 'São Francisco', -6.60773, -38.0968, FALSE, 25),
+(2806909, 'São Francisco', -10.3442, -36.8869, FALSE, 28),
+(3161106, 'São Francisco', -15.9514, -44.8593, FALSE, 31),
+(4318101, 'São Francisco de Assis', -29.5547, -55.1253, FALSE, 43),
+(2209658, 'São Francisco de Assis do Piauí', -8.23599, -41.6873, FALSE, 22),
+(5219902, 'São Francisco de Goiás', -15.9256, -49.2605, FALSE, 52),
+(3304755, 'São Francisco de Itabapoana', -21.4702, -41.1091, FALSE, 33),
+(4318200, 'São Francisco de Paula', -29.4404, -50.5828, FALSE, 43),
+(3161205, 'São Francisco de Paula', -20.7036, -44.9838, FALSE, 31),
+(3161304, 'São Francisco de Sales', -19.8611, -49.7727, FALSE, 31),
+(2110856, 'São Francisco do Brejão', -5.12584, -47.389, FALSE, 21),
+(2929206, 'São Francisco do Conde', -12.6183, -38.6786, FALSE, 29),
+(3161403, 'São Francisco do Glória', -20.7923, -42.2673, FALSE, 31),
+(1101492, 'São Francisco do Guaporé', -12.052, -63.568, FALSE, 11),
+(2110906, 'São Francisco do Maranhão', -6.25159, -42.8668, FALSE, 21),
+(2411908, 'São Francisco do Oeste', -5.97472, -38.1519, FALSE, 24),
+(1507409, 'São Francisco do Pará', -1.16963, -47.7917, FALSE, 15),
+(2209708, 'São Francisco do Piauí', -7.2463, -42.541, FALSE, 22),
+(4216206, 'São Francisco do Sul', -26.2579, -48.6344, FALSE, 42),
+(4318309, 'São Gabriel', -30.3337, -54.3217, FALSE, 43),
+(2929255, 'São Gabriel', -11.2175, -41.8843, FALSE, 29),
+(1303809, 'São Gabriel da Cachoeira', -0.11909, -67.084, FALSE, 13),
+(3204708, 'São Gabriel da Palha', -19.0182, -40.5365, FALSE, 32),
+(5007695, 'São Gabriel do Oeste', -19.3889, -54.5507, FALSE, 50),
+(3161502, 'São Geraldo', -20.9252, -42.8364, FALSE, 31),
+(3161601, 'São Geraldo da Piedade', -18.8411, -42.2867, FALSE, 31),
+(1507458, 'São Geraldo do Araguaia', -6.39471, -48.5592, FALSE, 15),
+(3161650, 'São Geraldo do Baixio', -18.9097, -41.363, FALSE, 31),
+(3304904, 'São Gonçalo', -22.8268, -43.0634, FALSE, 33),
+(3161700, 'São Gonçalo do Abaeté', -18.3315, -45.8265, FALSE, 31),
+(2412005, 'São Gonçalo do Amarante', -5.79068, -35.3257, FALSE, 24),
+(2312403, 'São Gonçalo do Amarante', -3.60515, -38.9726, FALSE, 23),
+(2209757, 'São Gonçalo do Gurguéia', -10.0319, -45.3092, FALSE, 22),
+(3161809, 'São Gonçalo do Pará', -19.9822, -44.8593, FALSE, 31),
+(2209807, 'São Gonçalo do Piauí', -5.99393, -42.7095, FALSE, 22),
+(3161908, 'São Gonçalo do Rio Abaixo', -19.8221, -43.366, FALSE, 31),
+(3125507, 'São Gonçalo do Rio Preto', -18.0025, -43.3854, FALSE, 31),
+(3162005, 'São Gonçalo do Sapucaí', -21.8932, -45.5893, FALSE, 31),
+(2929305, 'São Gonçalo dos Campos', -12.4331, -38.9663, FALSE, 29),
+(3162104, 'São Gotardo', -19.3087, -46.0465, FALSE, 31),
+(4318408, 'São Jerônimo', -29.9716, -51.7251, FALSE, 43),
+(4124707, 'São Jerônimo da Serra', -23.7218, -50.7475, FALSE, 41),
+(4124806, 'São João', -25.8214, -52.7252, FALSE, 41),
+(2613206, 'São João', -8.87576, -36.3653, FALSE, 26),
+(2111003, 'São João Batista', -2.95398, -44.7953, FALSE, 21),
+(4216305, 'São João Batista', -27.2772, -48.8474, FALSE, 42),
+(3162203, 'São João Batista do Glória', -20.635, -46.508, FALSE, 31),
+(5220009, 'São João d''Aliança', -14.7048, -47.5228, FALSE, 52),
+(1400506, 'São João da Baliza', 0.951659, -59.9133, FALSE, 14),
+(3305000, 'São João da Barra', -21.638, -41.0446, FALSE, 33),
+(3549102, 'São João da Boa Vista', -21.9707, -46.7944, FALSE, 35),
+(2209856, 'São João da Canabrava', -6.81203, -41.3415, FALSE, 22),
+(2209872, 'São João da Fronteira', -3.95497, -41.2569, FALSE, 22),
+(3162252, 'São João da Lagoa', -16.8455, -44.3507, FALSE, 31),
+(3162302, 'São João da Mata', -21.928, -45.9297, FALSE, 31),
+(5220058, 'São João da Paraúna', -16.8126, -50.4092, FALSE, 52),
+(1507466, 'São João da Ponta', -0.857885, -47.918, FALSE, 15),
+(3162401, 'São João da Ponte', -15.9271, -44.0096, FALSE, 31),
+(2209906, 'São João da Serra', -5.51081, -41.8923, FALSE, 22),
+(4318424, 'São João da Urtiga', -27.8195, -51.8257, FALSE, 43),
+(2209955, 'São João da Varjota', -6.94082, -41.8889, FALSE, 22),
+(3549201, 'São João das Duas Pontes', -20.3879, -50.3792, FALSE, 35),
+(3162450, 'São João das Missões', -14.8859, -44.0922, FALSE, 31),
+(3549250, 'São João de Iracema', -20.5111, -50.3561, FALSE, 35),
+(3305109, 'São João de Meriti', -22.8058, -43.3729, FALSE, 33),
+(1507474, 'São João de Pirabas', -0.780222, -47.181, FALSE, 15),
+(3162500, 'São João del Rei', -21.1311, -44.2526, FALSE, 31),
+(1507508, 'São João do Araguaia', -5.36334, -48.7926, FALSE, 15),
+(2209971, 'São João do Arraial', -3.8186, -42.4459, FALSE, 22),
+(4124905, 'São João do Caiuá', -22.8535, -52.3411, FALSE, 41),
+(2514008, 'São João do Cariri', -7.38168, -36.5345, FALSE, 25),
+(2111029, 'São João do Carú', -3.5503, -46.2507, FALSE, 21),
+(4216354, 'São João do Itaperiú', -26.6213, -48.7683, FALSE, 42),
+(4125001, 'São João do Ivaí', -23.9833, -51.8215, FALSE, 41),
+(2312502, 'São João do Jaguaribe', -5.27516, -38.2694, FALSE, 23),
+(3162559, 'São João do Manhuaçu', -20.3933, -42.1533, FALSE, 31),
+(3162575, 'São João do Manteninha', -18.723, -41.1628, FALSE, 31),
+(4216255, 'São João do Oeste', -27.0984, -53.5977, FALSE, 42),
+(3162609, 'São João do Oriente', -19.3384, -42.1575, FALSE, 31),
+(3162658, 'São João do Pacuí', -16.5373, -44.5134, FALSE, 31),
+(3162708, 'São João do Paraíso', -15.3168, -42.0213, FALSE, 31),
+(2111052, 'São João do Paraíso', -6.45634, -47.0594, FALSE, 21),
+(3549300, 'São João do Pau d''Alho', -21.2662, -51.6672, FALSE, 35),
+(2210003, 'São João do Piauí', -8.35466, -42.2559, FALSE, 22),
+(4318432, 'São João do Polêsine', -29.6194, -53.4439, FALSE, 43),
+(2500700, 'São João do Rio do Peixe', -6.72195, -38.4468, FALSE, 25),
+(2412104, 'São João do Sabugi', -6.71387, -37.2027, FALSE, 24),
+(2111078, 'São João do Soter', -5.10821, -43.8163, FALSE, 21),
+(4216404, 'São João do Sul', -29.2154, -49.8094, FALSE, 42),
+(2514107, 'São João do Tigre', -8.07703, -36.8547, FALSE, 25),
+(4125100, 'São João do Triunfo', -25.683, -50.2949, FALSE, 41),
+(2111102, 'São João dos Patos', -6.4934, -43.7036, FALSE, 21),
+(3162807, 'São João Evangelista', -18.548, -42.7655, FALSE, 31),
+(3162906, 'São João Nepomuceno', -21.5381, -43.0069, FALSE, 31),
+(4216503, 'São Joaquim', -28.2887, -49.9457, FALSE, 42),
+(3549409, 'São Joaquim da Barra', -20.5812, -47.8593, FALSE, 35),
+(3162922, 'São Joaquim de Bicas', -20.048, -44.2749, FALSE, 31),
+(2613305, 'São Joaquim do Monte', -8.43196, -35.8035, FALSE, 26),
+(4318440, 'São Jorge', -28.4984, -51.7064, FALSE, 43),
+(4125209, 'São Jorge d''Oeste', -25.7085, -52.9204, FALSE, 41),
+(4125308, 'São Jorge do Ivaí', -23.4336, -52.2929, FALSE, 41),
+(4125357, 'São Jorge do Patrocínio', -23.7647, -53.8823, FALSE, 41),
+(4216602, 'São José', -27.6136, -48.6366, FALSE, 42),
+(3162948, 'São José da Barra', -20.7178, -46.313, FALSE, 31),
+(3549508, 'São José da Bela Vista', -20.5935, -47.6424, FALSE, 35),
+(4125407, 'São José da Boa Vista', -23.9122, -49.6577, FALSE, 41),
+(2613404, 'São José da Coroa Grande', -8.88937, -35.1515, FALSE, 26),
+(2514206, 'São José da Lagoa Tapada', -6.93646, -38.1622, FALSE, 25),
+(2708303, 'São José da Laje', -9.01278, -36.0515, FALSE, 27),
+(3162955, 'São José da Lapa', -19.6971, -43.9586, FALSE, 31),
+(3163003, 'São José da Safira', -18.3243, -42.1431, FALSE, 31),
+(2708402, 'São José da Tapera', -9.55768, -37.3831, FALSE, 27),
+(3163102, 'São José da Varginha', -19.7006, -44.556, FALSE, 31),
+(2929354, 'São José da Vitória', -15.0787, -39.3437, FALSE, 29),
+(4318457, 'São José das Missões', -27.7789, -53.1226, FALSE, 43),
+(4125456, 'São José das Palmeiras', -24.8369, -54.0572, FALSE, 41),
+(2514305, 'São José de Caiana', -7.24636, -38.2989, FALSE, 25),
+(2514404, 'São José de Espinharas', -6.83974, -37.3214, FALSE, 25),
+(2412203, 'São José de Mipibu', -6.0773, -35.2417, FALSE, 24),
+(2514503, 'São José de Piranhas', -7.1187, -38.502, FALSE, 25),
+(2514552, 'São José de Princesa', -7.73633, -38.0894, FALSE, 25),
+(2111201, 'São José de Ribamar', -2.54704, -44.0597, FALSE, 21),
+(3305133, 'São José de Ubá', -21.3661, -41.9511, FALSE, 33),
+(3163201, 'São José do Alegre', -22.3243, -45.5258, FALSE, 31),
+(3549607, 'São José do Barreiro', -22.6414, -44.5774, FALSE, 35),
+(2613503, 'São José do Belmonte', -7.85723, -38.7577, FALSE, 26),
+(2514602, 'São José do Bonfim', -7.1607, -37.3036, FALSE, 25),
+(2514651, 'São José do Brejo do Cruz', -6.21054, -37.3601, FALSE, 25),
+(3204807, 'São José do Calçado', -21.0274, -41.6636, FALSE, 32),
+(2412302, 'São José do Campestre', -6.31087, -35.7067, FALSE, 24),
+(4216701, 'São José do Cedro', -26.4561, -53.4955, FALSE, 42),
+(4216800, 'São José do Cerrito', -27.6602, -50.5733, FALSE, 42),
+(2210052, 'São José do Divino', -3.81411, -41.8308, FALSE, 22),
+(3163300, 'São José do Divino', -18.4793, -41.3907, FALSE, 31),
+(2613602, 'São José do Egito', -7.46945, -37.274, FALSE, 26),
+(3163409, 'São José do Goiabal', -19.9214, -42.7035, FALSE, 31),
+(4318465, 'São José do Herval', -29.052, -52.295, FALSE, 43),
+(4318481, 'São José do Hortêncio', -29.528, -51.245, FALSE, 43),
+(4318499, 'São José do Inhacorá', -27.7251, -54.1275, FALSE, 43),
+(2929370, 'São José do Jacuípe', -11.4137, -39.8669, FALSE, 29),
+(3163508, 'São José do Jacuri', -18.281, -42.6729, FALSE, 31),
+(3163607, 'São José do Mantimento', -20.0058, -41.7486, FALSE, 31),
+(4318507, 'São José do Norte', -32.0151, -52.0331, FALSE, 43),
+(4318606, 'São José do Ouro', -27.7707, -51.5966, FALSE, 43),
+(2210102, 'São José do Peixe', -7.48554, -42.5672, FALSE, 22),
+(2210201, 'São José do Piauí', -6.87194, -41.4731, FALSE, 22),
+(5107297, 'São José do Povo', -16.4549, -54.2487, FALSE, 51),
+(5107305, 'São José do Rio Claro', -13.4398, -56.7218, FALSE, 51),
+(3549706, 'São José do Rio Pardo', -21.5953, -46.8873, FALSE, 35),
+(3549805, 'São José do Rio Preto', -20.8113, -49.3758, FALSE, 35),
+(2514701, 'São José do Sabugi', -6.76295, -36.7972, FALSE, 25),
+(2412401, 'São José do Seridó', -6.44002, -36.8746, FALSE, 24),
+(4318614, 'São José do Sul', -29.5448, -51.4821, FALSE, 43),
+(3305158, 'São José do Vale do Rio Preto', -22.1525, -42.9327, FALSE, 33),
+(5107354, 'São José do Xingu', -10.7982, -52.7486, FALSE, 51),
+(4318622, 'São José dos Ausentes', -28.7476, -50.0677, FALSE, 43),
+(2111250, 'São José dos Basílios', -5.05493, -44.5809, FALSE, 21),
+(3549904, 'São José dos Campos', -23.1896, -45.8841, FALSE, 35),
+(2514800, 'São José dos Cordeiros', -7.38775, -36.8085, FALSE, 25),
+(4125506, 'São José dos Pinhais', -25.5313, -49.2031, FALSE, 41),
+(5107107, 'São José dos Quatro Marcos', -15.6276, -58.1772, FALSE, 51),
+(2514453, 'São José dos Ramos', -7.25238, -35.3725, FALSE, 25),
+(2210300, 'São Julião', -7.08391, -40.8246, FALSE, 22),
+(4318705, 'São Leopoldo', -29.7545, -51.1498, FALSE, 43),
+(3163706, 'São Lourenço', -22.1166, -45.0506, FALSE, 31),
+(2613701, 'São Lourenço da Mata', -8.00684, -35.0124, FALSE, 26),
+(3549953, 'São Lourenço da Serra', -23.8491, -46.9432, FALSE, 35),
+(4216909, 'São Lourenço do Oeste', -26.3557, -52.8498, FALSE, 42),
+(2210359, 'São Lourenço do Piauí', -9.16463, -42.5496, FALSE, 22),
+(4318804, 'São Lourenço do Sul', -31.3564, -51.9715, FALSE, 43),
+(4217006, 'São Ludgero', -28.3144, -49.1806, FALSE, 42),
+(2111300, 'São Luís', -2.53874, -44.2825, TRUE, 21),
+(5220108, 'São Luís de Montes Belos', -16.5211, -50.3726, FALSE, 52),
+(2312601, 'São Luís do Curu', -3.66976, -39.2391, FALSE, 23),
+(2210375, 'São Luis do Piauí', -6.81936, -41.3175, FALSE, 22),
+(2708501, 'São Luís do Quitunde', -9.31816, -35.5606, FALSE, 27),
+(2111409, 'São Luís Gonzaga do Maranhão', -4.38541, -44.6654, FALSE, 21),
+(1400605, 'São Luiz', 1.01019, -60.0419, FALSE, 14),
+(5220157, 'São Luiz do Norte', -14.8608, -49.3285, FALSE, 52),
+(3550001, 'São Luiz do Paraitinga', -23.222, -45.3109, FALSE, 35),
+(4318903, 'São Luiz Gonzaga', -28.412, -54.9559, FALSE, 43),
+(2514909, 'São Mamede', -6.92386, -37.0954, FALSE, 25),
+(4125555, 'São Manoel do Paraná', -23.3941, -52.6454, FALSE, 41),
+(3550100, 'São Manuel', -22.7321, -48.5723, FALSE, 35),
+(4319000, 'São Marcos', -28.9677, -51.0696, FALSE, 43),
+(4217105, 'São Martinho', -28.1609, -48.9867, FALSE, 42),
+(4319109, 'São Martinho', -27.7112, -53.9699, FALSE, 43),
+(4319125, 'São Martinho da Serra', -29.5397, -53.859, FALSE, 43),
+(3204906, 'São Mateus', -18.7214, -39.8579, FALSE, 32),
+(2111508, 'São Mateus do Maranhão', -4.03736, -44.4707, FALSE, 21),
+(4125605, 'São Mateus do Sul', -25.8677, -50.384, FALSE, 41),
+(2412500, 'São Miguel', -6.20283, -38.4947, FALSE, 24),
+(3550209, 'São Miguel Arcanjo', -23.8782, -47.9935, FALSE, 35),
+(2210383, 'São Miguel da Baixa Grande', -5.85646, -42.1934, FALSE, 22),
+(4217154, 'São Miguel da Boa Vista', -26.687, -53.2511, FALSE, 42),
+(2929404, 'São Miguel das Matas', -13.0434, -39.4578, FALSE, 29),
+(4319158, 'São Miguel das Missões', -28.556, -54.5559, FALSE, 43),
+(2515005, 'São Miguel de Taipu', -7.24764, -35.2016, FALSE, 25),
+(2807006, 'São Miguel do Aleixo', -10.3847, -37.3836, FALSE, 28),
+(3163805, 'São Miguel do Anta', -20.7067, -42.7174, FALSE, 31),
+(5220207, 'São Miguel do Araguaia', -13.2731, -50.1634, FALSE, 52),
+(2210391, 'São Miguel do Fidalgo', -7.59713, -42.3676, FALSE, 22),
+(2412559, 'São Miguel do Gostoso', -5.12302, -35.6354, FALSE, 24),
+(1507607, 'São Miguel do Guamá', -1.61307, -47.4784, FALSE, 15),
+(1100320, 'São Miguel do Guaporé', -11.6953, -62.7192, FALSE, 11),
+(4125704, 'São Miguel do Iguaçu', -25.3492, -54.2405, FALSE, 41),
+(4217204, 'São Miguel do Oeste', -26.7242, -53.5163, FALSE, 42),
+(5220264, 'São Miguel do Passa Quatro', -17.0582, -48.662, FALSE, 52),
+(2210409, 'São Miguel do Tapuio', -5.49729, -41.3165, FALSE, 22),
+(1720200, 'São Miguel do Tocantins', -5.56305, -47.5743, FALSE, 17),
+(2708600, 'São Miguel dos Campos', -9.78301, -36.0971, FALSE, 27),
+(2708709, 'São Miguel dos Milagres', -9.26493, -35.3763, FALSE, 27),
+(4319208, 'São Nicolau', -28.1834, -55.2654, FALSE, 43),
+(5220280, 'São Patrício', -15.35, -49.818, FALSE, 52),
+(3550308, 'São Paulo', -23.5329, -46.6395, TRUE, 35),
+(4319307, 'São Paulo das Missões', -28.0195, -54.9404, FALSE, 43),
+(1303908, 'São Paulo de Olivença', -3.47292, -68.9646, FALSE, 13),
+(2412609, 'São Paulo do Potengi', -5.8994, -35.7642, FALSE, 24),
+(2412708, 'São Pedro', -5.90559, -35.6317, FALSE, 24),
+(3550407, 'São Pedro', -22.5483, -47.9096, FALSE, 35),
+(2111532, 'São Pedro da Água Branca', -5.08472, -48.4291, FALSE, 21),
+(3305208, 'São Pedro da Aldeia', -22.8429, -42.1026, FALSE, 33),
+(5107404, 'São Pedro da Cipa', -16.0109, -54.9176, FALSE, 51),
+(4319356, 'São Pedro da Serra', -29.4193, -51.5134, FALSE, 43),
+(3163904, 'São Pedro da União', -21.131, -46.6123, FALSE, 31),
+(4319364, 'São Pedro das Missões', -27.7706, -53.2513, FALSE, 43),
+(4217253, 'São Pedro de Alcântara', -27.5665, -48.8048, FALSE, 42),
+(4319372, 'São Pedro do Butiá', -28.1243, -54.8926, FALSE, 43),
+(4125753, 'São Pedro do Iguaçu', -24.9373, -53.8521, FALSE, 41),
+(4125803, 'São Pedro do Ivaí', -23.8634, -51.8568, FALSE, 41),
+(4125902, 'São Pedro do Paraná', -22.8239, -53.2241, FALSE, 41),
+(2210508, 'São Pedro do Piauí', -5.92078, -42.7192, FALSE, 22),
+(3164100, 'São Pedro do Suaçuí', -18.3609, -42.5981, FALSE, 31),
+(4319406, 'São Pedro do Sul', -29.6202, -54.1855, FALSE, 43),
+(3550506, 'São Pedro do Turvo', -22.7453, -49.7428, FALSE, 35),
+(2111573, 'São Pedro dos Crentes', -6.82389, -46.5319, FALSE, 21),
+(3164001, 'São Pedro dos Ferros', -20.1732, -42.5251, FALSE, 31),
+(2412807, 'São Rafael', -5.79791, -36.8778, FALSE, 24),
+(2111607, 'São Raimundo das Mangabeiras', -7.02183, -45.4809, FALSE, 21),
+(2111631, 'São Raimundo do Doca Bezerra', -5.11053, -45.0696, FALSE, 21),
+(2210607, 'São Raimundo Nonato', -9.01241, -42.6987, FALSE, 22),
+(2111672, 'São Roberto', -5.0231, -45.001, FALSE, 21),
+(3164209, 'São Romão', -16.3641, -45.0749, FALSE, 31),
+(3550605, 'São Roque', -23.5226, -47.1357, FALSE, 35),
+(3164308, 'São Roque de Minas', -20.249, -46.3639, FALSE, 31),
+(3204955, 'São Roque do Canaã', -19.7411, -40.6526, FALSE, 32),
+(1720259, 'São Salvador do Tocantins', -12.7458, -48.2352, FALSE, 17),
+(3550704, 'São Sebastião', -23.7951, -45.4143, FALSE, 35),
+(2708808, 'São Sebastião', -9.93043, -36.559, FALSE, 27),
+(4126009, 'São Sebastião da Amoreira', -23.4656, -50.7625, FALSE, 41),
+(3164407, 'São Sebastião da Bela Vista', -22.1583, -45.7546, FALSE, 31),
+(1507706, 'São Sebastião da Boa Vista', -1.71597, -49.5249, FALSE, 15),
+(3550803, 'São Sebastião da Grama', -21.7041, -46.8208, FALSE, 35),
+(3164431, 'São Sebastião da Vargem Alegre', -19.7477, -43.3679, FALSE, 31),
+(2515104, 'São Sebastião de Lagoa de Roça', -7.11034, -35.8678, FALSE, 25),
+(3305307, 'São Sebastião do Alto', -21.9578, -42.1328, FALSE, 33),
+(3164472, 'São Sebastião do Anta', -19.5064, -41.985, FALSE, 31),
+(4319505, 'São Sebastião do Caí', -29.5885, -51.3749, FALSE, 43),
+(3164506, 'São Sebastião do Maranhão', -18.0873, -42.5659, FALSE, 31),
+(3164605, 'São Sebastião do Oeste', -20.2758, -45.0063, FALSE, 31),
+(3164704, 'São Sebastião do Paraíso', -20.9167, -46.9837, FALSE, 31),
+(2929503, 'São Sebastião do Passé', -12.5123, -38.4905, FALSE, 29),
+(3164803, 'São Sebastião do Rio Preto', -19.2959, -43.1757, FALSE, 31),
+(3164902, 'São Sebastião do Rio Verde', -22.2183, -44.9761, FALSE, 31),
+(1720309, 'São Sebastião do Tocantins', -5.26131, -48.2021, FALSE, 17),
+(1303957, 'São Sebastião do Uatumã', -2.55915, -57.8731, FALSE, 13),
+(2515203, 'São Sebastião do Umbuzeiro', -8.15289, -37.0138, FALSE, 25),
+(4319604, 'São Sepé', -30.1643, -53.5603, FALSE, 43),
+(3550902, 'São Simão', -21.4732, -47.5518, FALSE, 35),
+(5220405, 'São Simão', -18.996, -50.547, FALSE, 52),
+(3165206, 'São Thomé das Letras', -21.7218, -44.9849, FALSE, 31),
+(3165008, 'São Tiago', -20.9075, -44.5098, FALSE, 31),
+(3165107, 'São Tomás de Aquino', -20.7791, -47.0962, FALSE, 31),
+(4126108, 'São Tomé', -23.5349, -52.5901, FALSE, 41),
+(2412906, 'São Tomé', -5.96404, -36.0798, FALSE, 24),
+(4319703, 'São Valentim', -27.5583, -52.5237, FALSE, 43),
+(4319711, 'São Valentim do Sul', -29.0451, -51.7684, FALSE, 43),
+(1720499, 'São Valério', -11.9743, -48.2353, FALSE, 17),
+(4319737, 'São Valério do Sul', -27.7906, -53.9368, FALSE, 43),
+(4319752, 'São Vendelino', -29.3729, -51.3675, FALSE, 43),
+(3551009, 'São Vicente', -23.9574, -46.3883, FALSE, 35),
+(2413003, 'São Vicente', -6.21893, -36.6827, FALSE, 24),
+(3165305, 'São Vicente de Minas', -21.7042, -44.4431, FALSE, 31),
+(2515401, 'São Vicente do Seridó', -6.85426, -36.4122, FALSE, 25),
+(4319802, 'São Vicente do Sul', -29.6882, -54.6826, FALSE, 43),
+(2613800, 'São Vicente Ferrer', -7.58969, -35.4808, FALSE, 26),
+(2111706, 'São Vicente Ferrer', -2.89487, -44.8681, FALSE, 21),
+(2515302, 'Sapé', -7.09359, -35.228, FALSE, 25),
+(2929602, 'Sapeaçu', -12.7208, -39.1824, FALSE, 29),
+(5107875, 'Sapezal', -12.9892, -58.7645, FALSE, 51),
+(4319901, 'Sapiranga', -29.6349, -51.0064, FALSE, 43),
+(4126207, 'Sapopema', -23.9078, -50.5801, FALSE, 41),
+(3165404, 'Sapucaí-Mirim', -22.7409, -45.738, FALSE, 31),
+(1507755, 'Sapucaia', -6.94018, -49.6834, FALSE, 15),
+(3305406, 'Sapucaia', -21.9949, -42.9142, FALSE, 33),
+(4320008, 'Sapucaia do Sul', -29.8276, -51.145, FALSE, 43),
+(3305505, 'Saquarema', -22.9292, -42.5099, FALSE, 33),
+(4126256, 'Sarandi', -23.4441, -51.876, FALSE, 41),
+(4320107, 'Sarandi', -27.942, -52.9231, FALSE, 43),
+(3551108, 'Sarapuí', -23.6397, -47.8249, FALSE, 35),
+(3165503, 'Sardoá', -18.7828, -42.3629, FALSE, 31),
+(3551207, 'Sarutaiá', -23.2721, -49.4763, FALSE, 35),
+(3165537, 'Sarzedo', -20.0367, -44.1446, FALSE, 31),
+(2929701, 'Sátiro Dias', -11.5929, -38.5938, FALSE, 29),
+(2708907, 'Satuba', -9.56911, -35.8227, FALSE, 27),
+(2111722, 'Satubinha', -4.04913, -45.2457, FALSE, 21),
+(2929750, 'Saubara', -12.7387, -38.7625, FALSE, 29),
+(4126272, 'Saudade do Iguaçu', -25.6917, -52.6184, FALSE, 41),
+(4217303, 'Saudades', -26.9317, -53.0021, FALSE, 42),
+(2929800, 'Saúde', -10.9428, -40.4155, FALSE, 29),
+(4217402, 'Schroeder', -26.4116, -49.074, FALSE, 42),
+(2929909, 'Seabra', -12.4169, -41.7722, FALSE, 29),
+(4217501, 'Seara', -27.1564, -52.299, FALSE, 42),
+(3551306, 'Sebastianópolis do Sul', -20.6523, -49.925, FALSE, 35),
+(2210623, 'Sebastião Barros', -10.817, -44.8337, FALSE, 22),
+(2930006, 'Sebastião Laranjeiras', -14.571, -42.9434, FALSE, 29),
+(2210631, 'Sebastião Leal', -7.56803, -44.06, FALSE, 22),
+(4320206, 'Seberi', -27.4829, -53.4026, FALSE, 43),
+(4320230, 'Sede Nova', -27.6367, -53.9493, FALSE, 43),
+(4320263, 'Segredo', -29.3523, -52.9767, FALSE, 43),
+(4320305, 'Selbach', -28.6294, -52.9498, FALSE, 43),
+(5007802, 'Selvíria', -20.3637, -51.4192, FALSE, 50),
+(3165560, 'Sem-Peixe', -20.1008, -42.8483, FALSE, 31),
+(1200500, 'Sena Madureira', -9.06596, -68.6571, FALSE, 12),
+(2111748, 'Senador Alexandre Costa', -5.25096, -44.0533, FALSE, 21),
+(3165578, 'Senador Amaral', -22.5869, -46.1763, FALSE, 31),
+(5220454, 'Senador Canedo', -16.7084, -49.0914, FALSE, 52),
+(3165602, 'Senador Cortes', -21.7986, -42.9424, FALSE, 31),
+(2413102, 'Senador Elói de Souza', -6.03334, -35.6978, FALSE, 24),
+(3165701, 'Senador Firmino', -20.9158, -43.0904, FALSE, 31),
+(2413201, 'Senador Georgino Avelino', -6.1576, -35.1299, FALSE, 24),
+(1200450, 'Senador Guiomard', -10.1497, -67.7362, FALSE, 12),
+(3165800, 'Senador José Bento', -22.1633, -46.1792, FALSE, 31),
+(1507805, 'Senador José Porfírio', -4.31242, -51.5764, FALSE, 15),
+(2111763, 'Senador La Rocque', -5.4461, -47.2959, FALSE, 21),
+(3165909, 'Senador Modestino Gonçalves', -17.9465, -43.2172, FALSE, 31),
+(2312700, 'Senador Pompeu', -5.58244, -39.3704, FALSE, 23),
+(2708956, 'Senador Rui Palmeira', -9.46986, -37.4576, FALSE, 27),
+(2312809, 'Senador Sá', -3.35305, -40.4662, FALSE, 23),
+(4320321, 'Senador Salgado Filho', -28.025, -54.5507, FALSE, 43),
+(4126306, 'Sengés', -24.1129, -49.4616, FALSE, 41),
+(2930105, 'Senhor do Bonfim', -10.4594, -40.1865, FALSE, 29),
+(3166006, 'Senhora de Oliveira', -20.7972, -43.3394, FALSE, 31),
+(3166105, 'Senhora do Porto', -18.8909, -43.0799, FALSE, 31),
+(3166204, 'Senhora dos Remédios', -21.0351, -43.5812, FALSE, 31),
+(4320354, 'Sentinela do Sul', -30.6107, -51.5862, FALSE, 43),
+(2930204, 'Sento Sé', -9.74138, -41.8786, FALSE, 29),
+(4320404, 'Serafina Corrêa', -28.7126, -51.9352, FALSE, 43),
+(3166303, 'Sericita', -20.4748, -42.4828, FALSE, 31),
+(1101500, 'Seringueiras', -11.8055, -63.0182, FALSE, 11),
+(4320453, 'Sério', -29.3904, -52.2685, FALSE, 43),
+(3166402, 'Seritinga', -21.9134, -44.518, FALSE, 31),
+(3305554, 'Seropédica', -22.7526, -43.7155, FALSE, 33),
+(3205002, 'Serra', -20.121, -40.3074, FALSE, 32),
+(4217550, 'Serra Alta', -26.7229, -53.0409, FALSE, 42),
+(3551405, 'Serra Azul', -21.3074, -47.5602, FALSE, 35),
+(3166501, 'Serra Azul de Minas', -18.3602, -43.1675, FALSE, 31),
+(2515500, 'Serra Branca', -7.48034, -36.666, FALSE, 25),
+(2410306, 'Serra Caiada', -6.10478, -35.7113, FALSE, 24),
+(2515609, 'Serra da Raiz', -6.68527, -35.4379, FALSE, 25),
+(3166600, 'Serra da Saudade', -19.4447, -45.795, FALSE, 31),
+(2413300, 'Serra de São Bento', -6.41762, -35.7033, FALSE, 24),
+(2413359, 'Serra do Mel', -5.17725, -37.0242, FALSE, 24),
+(1600055, 'Serra do Navio', 0.901357, -52.0036, FALSE, 16),
+(2930154, 'Serra do Ramalho', -13.5659, -43.5929, FALSE, 29),
+(3166808, 'Serra do Salitre', -19.1083, -46.6961, FALSE, 31),
+(3166709, 'Serra dos Aimorés', -17.7872, -40.2453, FALSE, 31),
+(2930303, 'Serra Dourada', -12.759, -43.9504, FALSE, 29),
+(2515708, 'Serra Grande', -7.20957, -38.3647, FALSE, 25),
+(3551603, 'Serra Negra', -22.6139, -46.7033, FALSE, 35),
+(2413409, 'Serra Negra do Norte', -6.66031, -37.3996, FALSE, 24),
+(5107883, 'Serra Nova Dourada', -12.0896, -51.4025, FALSE, 51),
+(2930402, 'Serra Preta', -12.156, -39.3305, FALSE, 29),
+(2515807, 'Serra Redonda', -7.18622, -35.6842, FALSE, 25),
+(2613909, 'Serra Talhada', -7.98178, -38.289, FALSE, 26),
+(3551504, 'Serrana', -21.2043, -47.5952, FALSE, 35),
+(3166907, 'Serrania', -21.5441, -46.0417, FALSE, 31),
+(2111789, 'Serrano do Maranhão', -1.85229, -45.1207, FALSE, 21),
+(5220504, 'Serranópolis', -18.3067, -51.9586, FALSE, 52),
+(3166956, 'Serranópolis de Minas', -15.8176, -42.8732, FALSE, 31),
+(4126355, 'Serranópolis do Iguaçu', -25.3799, -54.0518, FALSE, 41),
+(3167004, 'Serranos', -21.8857, -44.5125, FALSE, 31),
+(2515906, 'Serraria', -6.81569, -35.6282, FALSE, 25),
+(2413508, 'Serrinha', -6.28181, -35.5, FALSE, 24),
+(2930501, 'Serrinha', -11.6584, -39.01, FALSE, 29),
+(2413557, 'Serrinha dos Pintos', -6.11087, -37.9548, FALSE, 24),
+(2614006, 'Serrita', -7.94041, -39.2951, FALSE, 26),
+(3167103, 'Serro', -18.5991, -43.3744, FALSE, 31),
+(2930600, 'Serrolândia', -11.4085, -40.2983, FALSE, 29),
+(4126405, 'Sertaneja', -23.0361, -50.8317, FALSE, 41),
+(2614105, 'Sertânia', -8.06847, -37.2684, FALSE, 26),
+(4126504, 'Sertanópolis', -23.0571, -51.0399, FALSE, 41),
+(4320503, 'Sertão', -27.9798, -52.2588, FALSE, 43),
+(4320552, 'Sertão Santana', -30.4562, -51.6017, FALSE, 43),
+(3551702, 'Sertãozinho', -21.1316, -47.9875, FALSE, 35),
+(2515930, 'Sertãozinho', -6.75127, -35.4372, FALSE, 25),
+(3551801, 'Sete Barras', -24.382, -47.9279, FALSE, 35),
+(4320578, 'Sete de Setembro', -28.1362, -54.4637, FALSE, 43),
+(3167202, 'Sete Lagoas', -19.4569, -44.2413, FALSE, 31),
+(5007703, 'Sete Quedas', -23.9705, -55.0398, FALSE, 50),
+(3165552, 'Setubinha', -17.6002, -42.1587, FALSE, 31),
+(4320602, 'Severiano de Almeida', -27.4362, -52.1217, FALSE, 43),
+(2413607, 'Severiano Melo', -5.77666, -37.957, FALSE, 24),
+(3551900, 'Severínia', -20.8108, -48.8054, FALSE, 35),
+(4217600, 'Siderópolis', -28.5955, -49.4314, FALSE, 42),
+(5007901, 'Sidrolândia', -20.9302, -54.9692, FALSE, 50),
+(2210656, 'Sigefredo Pacheco', -4.91665, -41.7311, FALSE, 22),
+(3305604, 'Silva Jardim', -22.6574, -42.3961, FALSE, 33),
+(5220603, 'Silvânia', -16.66, -48.6083, FALSE, 52),
+(1720655, 'Silvanópolis', -11.1471, -48.1694, FALSE, 17),
+(4320651, 'Silveira Martins', -29.6467, -53.591, FALSE, 43),
+(3167301, 'Silveirânia', -21.1615, -43.2128, FALSE, 31),
+(3552007, 'Silveiras', -22.6638, -44.8522, FALSE, 35),
+(1304005, 'Silves', -2.81748, -58.248, FALSE, 13),
+(3167400, 'Silvianópolis', -22.0274, -45.8385, FALSE, 31),
+(2807105, 'Simão Dias', -10.7387, -37.8097, FALSE, 28),
+(3167509, 'Simão Pereira', -21.964, -43.3088, FALSE, 31),
+(2210706, 'Simões', -7.59109, -40.8137, FALSE, 22),
+(2930709, 'Simões Filho', -12.7866, -38.4029, FALSE, 29),
+(5220686, 'Simolândia', -14.4644, -46.4847, FALSE, 52),
+(3167608, 'Simonésia', -20.1341, -42.0091, FALSE, 31),
+(2210805, 'Simplício Mendes', -7.85294, -41.9075, FALSE, 22),
+(4320677, 'Sinimbu', -29.5357, -52.5304, FALSE, 43),
+(5107909, 'Sinop', -11.8604, -55.5091, FALSE, 51),
+(4126603, 'Siqueira Campos', -23.6875, -49.8304, FALSE, 41),
+(2614204, 'Sirinhaém', -8.58778, -35.1126, FALSE, 26),
+(2807204, 'Siriri', -10.5965, -37.1131, FALSE, 28),
+(5220702, 'Sítio d''Abadia', -14.7992, -46.2506, FALSE, 52),
+(2930758, 'Sítio do Mato', -13.0801, -43.4689, FALSE, 29),
+(2930766, 'Sítio do Quinto', -10.3545, -38.2213, FALSE, 29),
+(2111805, 'Sítio Novo', -5.87601, -46.7033, FALSE, 21),
+(2413706, 'Sítio Novo', -6.11132, -35.909, FALSE, 24),
+(1720804, 'Sítio Novo do Tocantins', -5.6012, -47.6381, FALSE, 17),
+(2930774, 'Sobradinho', -9.45024, -40.8145, FALSE, 29),
+(4320701, 'Sobradinho', -29.4194, -53.0326, FALSE, 43),
+(2515971, 'Sobrado', -7.14429, -35.2357, FALSE, 25),
+(2312908, 'Sobral', -3.68913, -40.3482, FALSE, 23),
+(3167707, 'Sobrália', -19.2345, -42.0998, FALSE, 31),
+(3552106, 'Socorro', -22.5903, -46.5251, FALSE, 35),
+(2210904, 'Socorro do Piauí', -7.86773, -42.4922, FALSE, 22),
+(2516003, 'Solânea', -6.75161, -35.6636, FALSE, 25),
+(2516102, 'Soledade', -7.05829, -36.3668, FALSE, 25),
+(4320800, 'Soledade', -28.8306, -52.5131, FALSE, 43),
+(3167806, 'Soledade de Minas', -22.0554, -45.0464, FALSE, 31),
+(2614402, 'Solidão', -7.59472, -37.6445, FALSE, 26),
+(2313005, 'Solonópole', -5.71894, -39.0107, FALSE, 23),
+(4217709, 'Sombrio', -29.108, -49.6328, FALSE, 42),
+(5007935, 'Sonora', -17.5698, -54.7551, FALSE, 50),
+(3205010, 'Sooretama', -19.1897, -40.0974, FALSE, 32),
+(3552205, 'Sorocaba', -23.4969, -47.4451, FALSE, 35),
+(5107925, 'Sorriso', -12.5425, -55.7211, FALSE, 51),
+(2516151, 'Sossêgo', -6.77067, -36.2538, FALSE, 25),
+(1507904, 'Soure', -0.73032, -48.5015, FALSE, 15),
+(2516201, 'Sousa', -6.75148, -38.2311, FALSE, 25),
+(2930808, 'Souto Soares', -12.088, -41.6427, FALSE, 29),
+(1720853, 'Sucupira', -11.993, -48.9685, FALSE, 17),
+(2111904, 'Sucupira do Norte', -6.47839, -44.1919, FALSE, 21),
+(2111953, 'Sucupira do Riachão', -6.40858, -43.5455, FALSE, 21),
+(3552304, 'Sud Mennucci', -20.6872, -50.9238, FALSE, 35),
+(4217758, 'Sul Brasil', -26.7351, -52.964, FALSE, 42),
+(4126652, 'Sulina', -25.7066, -52.7299, FALSE, 41),
+(3552403, 'Sumaré', -22.8204, -47.2728, FALSE, 35),
+(2516300, 'Sumé', -7.66206, -36.884, FALSE, 25),
+(3305703, 'Sumidouro', -22.0485, -42.6761, FALSE, 33),
+(2614501, 'Surubim', -7.84746, -35.7481, FALSE, 26),
+(2210938, 'Sussuapara', -7.03687, -41.3767, FALSE, 22),
+(3552551, 'Suzanápolis', -20.4981, -51.0268, FALSE, 35),
+(3552502, 'Suzano', -23.5448, -46.3112, FALSE, 35),
+(4320859, 'Tabaí', -29.643, -51.6823, FALSE, 43),
+(5107941, 'Tabaporã', -11.3007, -56.8312, FALSE, 51),
+(3552601, 'Tabapuã', -20.9602, -49.0307, FALSE, 35),
+(3552700, 'Tabatinga', -21.7239, -48.6896, FALSE, 35),
+(1304062, 'Tabatinga', -4.2416, -69.9383, FALSE, 13),
+(2614600, 'Tabira', -7.58366, -37.5377, FALSE, 26),
+(3552809, 'Taboão da Serra', -23.6019, -46.7526, FALSE, 35),
+(2930907, 'Tabocas do Brejo Velho', -12.7026, -44.0075, FALSE, 29),
+(2413805, 'Taboleiro Grande', -5.91948, -38.0367, FALSE, 24),
+(3167905, 'Tabuleiro', -21.3632, -43.2381, FALSE, 31),
+(2313104, 'Tabuleiro do Norte', -5.24353, -38.1282, FALSE, 23),
+(2614709, 'Tacaimbó', -8.30867, -36.3, FALSE, 26),
+(2614808, 'Tacaratu', -9.09798, -38.1504, FALSE, 26),
+(3552908, 'Taciba', -22.3866, -51.2882, FALSE, 35),
+(2516409, 'Tacima', -6.48759, -35.6367, FALSE, 25),
+(5007950, 'Tacuru', -23.636, -55.0141, FALSE, 50),
+(3553005, 'Taguaí', -23.4452, -49.4024, FALSE, 35),
+(1720903, 'Taguatinga', -12.4026, -46.437, FALSE, 17),
+(3553104, 'Taiaçu', -21.1431, -48.5112, FALSE, 35),
+(1507953, 'Tailândia', -2.94584, -48.9489, FALSE, 15),
+(4217808, 'Taió', -27.121, -49.9942, FALSE, 42),
+(3168002, 'Taiobeiras', -15.8106, -42.2259, FALSE, 31),
+(1720937, 'Taipas do Tocantins', -12.1873, -46.9797, FALSE, 17),
+(2413904, 'Taipu', -5.63058, -35.5918, FALSE, 24),
+(3553203, 'Taiúva', -21.1223, -48.4528, FALSE, 35),
+(1720978, 'Talismã', -12.7949, -49.0896, FALSE, 17),
+(2614857, 'Tamandaré', -8.75665, -35.1033, FALSE, 26),
+(4126678, 'Tamarana', -23.7204, -51.0991, FALSE, 41),
+(3553302, 'Tambaú', -21.7029, -47.2703, FALSE, 35),
+(4126702, 'Tamboara', -23.2036, -52.4743, FALSE, 41),
+(2313203, 'Tamboril', -4.83136, -40.3196, FALSE, 23),
+(2210953, 'Tamboril do Piauí', -8.40937, -42.9211, FALSE, 22),
+(3553401, 'Tanabi', -20.6228, -49.6563, FALSE, 35),
+(2414001, 'Tangará', -6.19649, -35.7989, FALSE, 24),
+(4217907, 'Tangará', -27.0996, -51.2473, FALSE, 42),
+(5107958, 'Tangará da Serra', -14.6229, -57.4933, FALSE, 51),
+(3305752, 'Tanguá', -22.7423, -42.7202, FALSE, 33),
+(2931004, 'Tanhaçu', -14.0197, -41.2473, FALSE, 29),
+(2709004, 'Tanque d''Arca', -9.53379, -36.4366, FALSE, 27),
+(2210979, 'Tanque do Piauí', -6.59787, -42.2795, FALSE, 22),
+(2931053, 'Tanque Novo', -13.5485, -42.4934, FALSE, 29),
+(2931103, 'Tanquinho', -11.968, -39.1033, FALSE, 29),
+(3168051, 'Taparuba', -19.7621, -41.608, FALSE, 31),
+(1304104, 'Tapauá', -5.62085, -63.1808, FALSE, 13),
+(4126801, 'Tapejara', -23.7315, -52.8735, FALSE, 41),
+(4320909, 'Tapejara', -28.0652, -52.0097, FALSE, 43),
+(4321006, 'Tapera', -28.6277, -52.8613, FALSE, 43),
+(2931202, 'Taperoá', -13.5321, -39.1009, FALSE, 29),
+(2516508, 'Taperoá', -7.20629, -36.8245, FALSE, 25),
+(4321105, 'Tapes', -30.6683, -51.3991, FALSE, 43),
+(4126900, 'Tapira', -23.3193, -53.0684, FALSE, 41),
+(3168101, 'Tapira', -19.9166, -46.8264, FALSE, 31),
+(3168200, 'Tapiraí', -19.8936, -46.0221, FALSE, 31),
+(3553500, 'Tapiraí', -23.9612, -47.5062, FALSE, 35),
+(2931301, 'Tapiramutá', -11.8475, -40.7927, FALSE, 29),
+(3553609, 'Tapiratiba', -21.4713, -46.7448, FALSE, 35),
+(5108006, 'Tapurah', -12.695, -56.5178, FALSE, 51),
+(4321204, 'Taquara', -29.6505, -50.7753, FALSE, 43),
+(3168309, 'Taquaraçu de Minas', -19.6652, -43.6922, FALSE, 31),
+(3553658, 'Taquaral', -21.0737, -48.4126, FALSE, 35),
+(5221007, 'Taquaral de Goiás', -16.0521, -49.6039, FALSE, 52),
+(2709103, 'Taquarana', -9.64529, -36.4928, FALSE, 27),
+(4321303, 'Taquari', -29.7943, -51.8653, FALSE, 43),
+(3553708, 'Taquaritinga', -21.4049, -48.5103, FALSE, 35),
+(2615003, 'Taquaritinga do Norte', -7.89446, -36.0423, FALSE, 26),
+(3553807, 'Taquarituba', -23.5307, -49.241, FALSE, 35),
+(3553856, 'Taquarivaí', -23.9211, -48.6948, FALSE, 35),
+(4321329, 'Taquaruçu do Sul', -27.4005, -53.4702, FALSE, 43),
+(5007976, 'Taquarussu', -22.4898, -53.3519, FALSE, 50),
+(3553906, 'Tarabai', -22.3016, -51.5621, FALSE, 35),
+(1200609, 'Tarauacá', -8.15697, -70.7722, FALSE, 12),
+(2313252, 'Tarrafas', -6.67838, -39.753, FALSE, 23),
+(1600709, 'Tartarugalzinho', 1.50652, -50.9087, FALSE, 16),
+(3553955, 'Tarumã', -22.7429, -50.5786, FALSE, 35),
+(3168408, 'Tarumirim', -19.2835, -42.0097, FALSE, 31),
+(2112001, 'Tasso Fragoso', -8.4662, -45.7536, FALSE, 21),
+(3554003, 'Tatuí', -23.3487, -47.8461, FALSE, 35),
+(2313302, 'Tauá', -5.98585, -40.2968, FALSE, 23),
+(3554102, 'Taubaté', -23.0104, -45.5593, FALSE, 35),
+(4321352, 'Tavares', -31.2843, -51.088, FALSE, 43),
+(2516607, 'Tavares', -7.62697, -37.8712, FALSE, 25),
+(1304203, 'Tefé', -3.36822, -64.7193, FALSE, 13),
+(2516706, 'Teixeira', -7.22104, -37.2525, FALSE, 25),
+(2931350, 'Teixeira de Freitas', -17.5399, -39.74, FALSE, 29),
+(4127007, 'Teixeira Soares', -25.3701, -50.4571, FALSE, 41),
+(3168507, 'Teixeiras', -20.6561, -42.8564, FALSE, 31),
+(1101559, 'Teixeirópolis', -10.9056, -62.242, FALSE, 11),
+(2313351, 'Tejuçuoca', -3.98831, -39.5799, FALSE, 23),
+(3554201, 'Tejupá', -23.3425, -49.3722, FALSE, 35),
+(4127106, 'Telêmaco Borba', -24.3245, -50.6176, FALSE, 41),
+(2807303, 'Telha', -10.2064, -36.8818, FALSE, 28),
+(2414100, 'Tenente Ananias', -6.45823, -38.182, FALSE, 24),
+(2414159, 'Tenente Laurentino Cruz', -6.1378, -36.7135, FALSE, 24),
+(4321402, 'Tenente Portela', -27.3711, -53.7585, FALSE, 43),
+(2516755, 'Tenório', -6.93855, -36.6273, FALSE, 25),
+(2931400, 'Teodoro Sampaio', -12.295, -38.6347, FALSE, 29),
+(3554300, 'Teodoro Sampaio', -22.5299, -52.1682, FALSE, 35),
+(2931509, 'Teofilândia', -11.4827, -38.9913, FALSE, 29),
+(3168606, 'Teófilo Otoni', -17.8595, -41.5087, FALSE, 31),
+(2931608, 'Teolândia', -13.5896, -39.484, FALSE, 29),
+(2709152, 'Teotônio Vilela', -9.91656, -36.3492, FALSE, 27),
+(5008008, 'Terenos', -20.4378, -54.8647, FALSE, 50),
+(2211001, 'Teresina', -5.09194, -42.8034, TRUE, 22),
+(5221080, 'Teresina de Goiás', -13.7801, -47.2659, FALSE, 52),
+(3305802, 'Teresópolis', -22.4165, -42.9752, FALSE, 33),
+(2615102, 'Terezinha', -9.05621, -36.6272, FALSE, 26),
+(5221197, 'Terezópolis de Goiás', -16.3945, -49.0797, FALSE, 52),
+(1507961, 'Terra Alta', -1.02963, -47.9004, FALSE, 15),
+(4127205, 'Terra Boa', -23.7683, -52.447, FALSE, 41),
+(4321436, 'Terra de Areia', -29.5782, -50.0644, FALSE, 43),
+(2931707, 'Terra Nova', -12.3888, -38.6238, FALSE, 29),
+(2615201, 'Terra Nova', -8.22244, -39.3825, FALSE, 26),
+(5108055, 'Terra Nova do Norte', -10.517, -55.231, FALSE, 51),
+(4127304, 'Terra Rica', -22.7111, -52.6188, FALSE, 41),
+(4127403, 'Terra Roxa', -24.1575, -54.0988, FALSE, 41),
+(3554409, 'Terra Roxa', -20.787, -48.3314, FALSE, 35),
+(1507979, 'Terra Santa', -2.10443, -56.4877, FALSE, 15),
+(5108105, 'Tesouro', -16.0809, -53.559, FALSE, 51),
+(4321451, 'Teutônia', -29.4482, -51.8044, FALSE, 43),
+(1101609, 'Theobroma', -10.2483, -62.3538, FALSE, 11),
+(2313401, 'Tianguá', -3.72965, -40.9923, FALSE, 23),
+(4127502, 'Tibagi', -24.5153, -50.4176, FALSE, 41),
+(2411056, 'Tibau', -4.83729, -37.2554, FALSE, 24),
+(2414209, 'Tibau do Sul', -6.19176, -35.0866, FALSE, 24),
+(3554508, 'Tietê', -23.1101, -47.7164, FALSE, 35),
+(4217956, 'Tigrinhos', -26.6876, -53.1545, FALSE, 42),
+(4218004, 'Tijucas', -27.2354, -48.6322, FALSE, 42),
+(4127601, 'Tijucas do Sul', -25.9311, -49.195, FALSE, 41),
+(2615300, 'Timbaúba', -7.50484, -35.3119, FALSE, 26),
+(2414308, 'Timbaúba dos Batistas', -6.45768, -37.2745, FALSE, 24),
+(4218103, 'Timbé do Sul', -28.8287, -49.842, FALSE, 42),
+(2112100, 'Timbiras', -4.25597, -43.932, FALSE, 21),
+(4218202, 'Timbó', -26.8246, -49.269, FALSE, 42),
+(4218251, 'Timbó Grande', -26.6127, -50.6607, FALSE, 42),
+(3554607, 'Timburi', -23.2057, -49.6096, FALSE, 35),
+(2112209, 'Timon', -5.09769, -42.8329, FALSE, 21),
+(3168705, 'Timóteo', -19.5811, -42.6471, FALSE, 31),
+(4321469, 'Tio Hugo', -28.5712, -52.5955, FALSE, 43),
+(3168804, 'Tiradentes', -21.1102, -44.1744, FALSE, 31),
+(4321477, 'Tiradentes do Sul', -27.4022, -54.0814, FALSE, 43),
+(3168903, 'Tiros', -19.0037, -45.9626, FALSE, 31),
+(2807402, 'Tobias Barreto', -11.1798, -37.9995, FALSE, 28),
+(1721109, 'Tocantínia', -9.5632, -48.3741, FALSE, 17),
+(1721208, 'Tocantinópolis', -6.32447, -47.4224, FALSE, 17),
+(3169000, 'Tocantins', -21.1774, -43.0127, FALSE, 31),
+(3169059, 'Tocos do Moji', -22.3698, -46.0971, FALSE, 31),
+(3169109, 'Toledo', -22.7421, -46.3728, FALSE, 31),
+(4127700, 'Toledo', -24.7246, -53.7412, FALSE, 41),
+(2807501, 'Tomar do Geru', -11.3694, -37.8433, FALSE, 28),
+(4127809, 'Tomazina', -23.7796, -49.9499, FALSE, 41),
+(3169208, 'Tombos', -20.9086, -42.0228, FALSE, 31),
+(1508001, 'Tomé-Açu', -2.41302, -48.1415, FALSE, 15),
+(1304237, 'Tonantins', -2.86582, -67.7919, FALSE, 13),
+(2615409, 'Toritama', -8.00955, -36.0637, FALSE, 26),
+(5108204, 'Torixoréu', -16.2006, -52.5571, FALSE, 51),
+(4321493, 'Toropi', -29.4782, -54.2244, FALSE, 43),
+(3554656, 'Torre de Pedra', -23.2462, -48.1955, FALSE, 35),
+(4321501, 'Torres', -29.3334, -49.7333, FALSE, 43),
+(3554706, 'Torrinha', -22.4237, -48.1731, FALSE, 35),
+(2414407, 'Touros', -5.20182, -35.4621, FALSE, 24),
+(3554755, 'Trabiju', -22.0388, -48.3342, FALSE, 35),
+(1508035, 'Tracuateua', -1.07653, -46.9031, FALSE, 15),
+(2615508, 'Tracunhaém', -7.80228, -35.2314, FALSE, 26),
+(2709202, 'Traipu', -9.96262, -37.0071, FALSE, 27),
+(1508050, 'Trairão', -4.57347, -55.9429, FALSE, 15),
+(2313500, 'Trairi', -3.26932, -39.2681, FALSE, 23),
+(3305901, 'Trajano de Moraes', -22.0638, -42.0643, FALSE, 33),
+(4321600, 'Tramandaí', -29.9841, -50.1322, FALSE, 43),
+(4321626, 'Travesseiro', -29.2977, -52.0532, FALSE, 43),
+(2931806, 'Tremedal', -14.9736, -41.4142, FALSE, 29),
+(3554805, 'Tremembé', -22.9571, -45.5475, FALSE, 35),
+(4321634, 'Três Arroios', -27.5003, -52.1448, FALSE, 43),
+(4218301, 'Três Barras', -26.1056, -50.3197, FALSE, 42),
+(4127858, 'Três Barras do Paraná', -25.4185, -53.1833, FALSE, 41),
+(4321667, 'Três Cachoeiras', -29.4487, -49.9275, FALSE, 43),
+(3169307, 'Três Corações', -21.6921, -45.2511, FALSE, 31),
+(4321709, 'Três Coroas', -29.5137, -50.7739, FALSE, 43),
+(4321808, 'Três de Maio', -27.78, -54.2357, FALSE, 43),
+(4321832, 'Três Forquilhas', -29.5384, -50.0708, FALSE, 43),
+(3554904, 'Três Fronteiras', -20.2344, -50.8905, FALSE, 35),
+(5008305, 'Três Lagoas', -20.7849, -51.7007, FALSE, 50),
+(3169356, 'Três Marias', -18.2048, -45.2473, FALSE, 31),
+(4321857, 'Três Palmeiras', -27.6139, -52.8437, FALSE, 43),
+(4321907, 'Três Passos', -27.4555, -53.9296, FALSE, 43),
+(3169406, 'Três Pontas', -21.3694, -45.5109, FALSE, 31),
+(5221304, 'Três Ranchos', -18.3539, -47.776, FALSE, 52),
+(3306008, 'Três Rios', -22.1165, -43.2185, FALSE, 33),
+(4218350, 'Treviso', -28.5097, -49.4634, FALSE, 42),
+(4218400, 'Treze de Maio', -28.5537, -49.1565, FALSE, 42),
+(4218509, 'Treze Tílias', -27.0026, -51.4084, FALSE, 42),
+(5221403, 'Trindade', -16.6517, -49.4927, FALSE, 52),
+(2615607, 'Trindade', -7.759, -40.2647, FALSE, 26),
+(4321956, 'Trindade do Sul', -27.5239, -52.8956, FALSE, 43),
+(4322004, 'Triunfo', -29.9291, -51.7075, FALSE, 43),
+(2516805, 'Triunfo', -6.5713, -38.5986, FALSE, 25),
+(2615706, 'Triunfo', -7.83272, -38.0978, FALSE, 26),
+(2414456, 'Triunfo Potiguar', -5.85408, -37.1786, FALSE, 24),
+(2112233, 'Trizidela do Vale', -4.538, -44.628, FALSE, 21),
+(5221452, 'Trombas', -13.5079, -48.7417, FALSE, 52),
+(4218608, 'Trombudo Central', -27.3033, -49.793, FALSE, 42),
+(4218707, 'Tubarão', -28.4713, -49.0144, FALSE, 42),
+(2931905, 'Tucano', -10.9584, -38.7894, FALSE, 29),
+(1508084, 'Tucumã', -6.74687, -51.1626, FALSE, 15),
+(4322103, 'Tucunduva', -27.6573, -54.4439, FALSE, 43),
+(1508100, 'Tucuruí', -3.7657, -49.6773, FALSE, 15),
+(2112274, 'Tufilândia', -3.67355, -45.6238, FALSE, 21),
+(3554953, 'Tuiuti', -22.8193, -46.6937, FALSE, 35),
+(3169505, 'Tumiritinga', -18.9844, -41.6527, FALSE, 31),
+(4218756, 'Tunápolis', -26.9681, -53.6417, FALSE, 42),
+(4322152, 'Tunas', -29.1039, -52.9538, FALSE, 43),
+(4127882, 'Tunas do Paraná', -24.9731, -49.0879, FALSE, 41),
+(4127908, 'Tuneiras do Oeste', -23.8648, -52.8769, FALSE, 41),
+(2112308, 'Tuntum', -5.25476, -44.6444, FALSE, 21),
+(3555000, 'Tupã', -21.9335, -50.5191, FALSE, 35),
+(3169604, 'Tupaciguara', -18.5866, -48.6985, FALSE, 31),
+(2615805, 'Tupanatinga', -8.74798, -37.3445, FALSE, 26),
+(4322186, 'Tupanci do Sul', -27.9241, -51.5383, FALSE, 43),
+(4322202, 'Tupanciretã', -29.0858, -53.8445, FALSE, 43),
+(4322251, 'Tupandi', -29.4772, -51.4174, FALSE, 43),
+(4322301, 'Tuparendi', -27.7598, -54.4814, FALSE, 43),
+(2615904, 'Tuparetama', -7.6003, -37.3165, FALSE, 26),
+(4127957, 'Tupãssi', -24.5879, -53.5105, FALSE, 41),
+(3555109, 'Tupi Paulista', -21.3825, -51.575, FALSE, 35),
+(1721257, 'Tupirama', -8.97168, -48.1883, FALSE, 17),
+(1721307, 'Tupiratins', -8.39388, -48.1277, FALSE, 17),
+(2112407, 'Turiaçu', -1.65893, -45.3798, FALSE, 21),
+(2112456, 'Turilândia', -2.21638, -45.3044, FALSE, 21),
+(3555208, 'Turiúba', -20.9428, -50.1135, FALSE, 35),
+(3555307, 'Turmalina', -20.0486, -50.4792, FALSE, 35),
+(3169703, 'Turmalina', -17.2828, -42.7285, FALSE, 31),
+(4322327, 'Turuçu', -31.4173, -52.1706, FALSE, 43),
+(2313559, 'Tururu', -3.58413, -39.4297, FALSE, 23),
+(5221502, 'Turvânia', -16.6125, -50.1369, FALSE, 52),
+(5221551, 'Turvelândia', -17.8502, -50.3024, FALSE, 52),
+(4127965, 'Turvo', -25.0437, -51.5282, FALSE, 41),
+(4218806, 'Turvo', -28.9272, -49.6831, FALSE, 42),
+(3169802, 'Turvolândia', -21.8733, -45.7859, FALSE, 31),
+(2112506, 'Tutóia', -2.76141, -42.2755, FALSE, 21),
+(1304260, 'Uarini', -2.99609, -65.1133, FALSE, 13),
+(2932002, 'Uauá', -9.83325, -39.4794, FALSE, 29),
+(3169901, 'Ubá', -21.1204, -42.9359, FALSE, 31),
+(3170008, 'Ubaí', -16.2885, -44.7783, FALSE, 31),
+(2932101, 'Ubaíra', -13.2714, -39.666, FALSE, 29),
+(2932200, 'Ubaitaba', -14.303, -39.3222, FALSE, 29),
+(2313609, 'Ubajara', -3.85448, -40.9204, FALSE, 23),
+(3170057, 'Ubaporanga', -19.6351, -42.1059, FALSE, 31),
+(3555356, 'Ubarana', -21.165, -49.7198, FALSE, 35),
+(2932309, 'Ubatã', -14.2063, -39.5207, FALSE, 29),
+(3555406, 'Ubatuba', -23.4332, -45.0834, FALSE, 35),
+(3170107, 'Uberaba', -19.7472, -47.9381, FALSE, 31),
+(3170206, 'Uberlândia', -18.9141, -48.2749, FALSE, 31),
+(3555505, 'Ubirajara', -22.5272, -49.6613, FALSE, 35),
+(4128005, 'Ubiratã', -24.5393, -52.9865, FALSE, 41),
+(4322343, 'Ubiretama', -28.0404, -54.686, FALSE, 43),
+(3555604, 'Uchoa', -20.9511, -49.1713, FALSE, 35),
+(2932408, 'Uibaí', -11.3394, -42.1354, FALSE, 29),
+(1400704, 'Uiramutã', 4.60314, -60.1815, FALSE, 14),
+(5221577, 'Uirapuru', -14.2835, -49.9201, FALSE, 52),
+(2516904, 'Uiraúna', -6.51504, -38.4128, FALSE, 25),
+(1508126, 'Ulianópolis', -3.75007, -47.4892, FALSE, 15),
+(2313708, 'Umari', -6.63893, -38.7008, FALSE, 23),
+(2414506, 'Umarizal', -5.98238, -37.818, FALSE, 24),
+(2807600, 'Umbaúba', -11.3809, -37.6623, FALSE, 28),
+(2932457, 'Umburanas', -10.7339, -41.3234, FALSE, 29),
+(3170305, 'Umburatiba', -17.2548, -40.5779, FALSE, 31),
+(2517001, 'Umbuzeiro', -7.69199, -35.6582, FALSE, 25),
+(2313757, 'Umirim', -3.67654, -39.3465, FALSE, 23),
+(4128104, 'Umuarama', -23.7656, -53.3201, FALSE, 41),
+(2932507, 'Una', -15.2791, -39.0765, FALSE, 29),
+(3170404, 'Unaí', -16.3592, -46.9022, FALSE, 31),
+(2211100, 'União', -4.58571, -42.8583, FALSE, 22),
+(4322350, 'União da Serra', -28.7833, -52.0238, FALSE, 43),
+(4128203, 'União da Vitória', -26.2273, -51.0873, FALSE, 41),
+(3170438, 'União de Minas', -19.5299, -50.338, FALSE, 31),
+(4218855, 'União do Oeste', -26.762, -52.8541, FALSE, 42),
+(5108303, 'União do Sul', -11.5308, -54.3616, FALSE, 51),
+(2709301, 'União dos Palmares', -9.15921, -36.0223, FALSE, 27),
+(3555703, 'União Paulista', -20.8862, -49.9025, FALSE, 35),
+(4128302, 'Uniflor', -23.0868, -52.1573, FALSE, 41),
+(4322376, 'Unistalda', -29.04, -55.1517, FALSE, 43),
+(2414605, 'Upanema', -5.63761, -37.2635, FALSE, 24),
+(4128401, 'Uraí', -23.2, -50.7939, FALSE, 41),
+(2932606, 'Urandi', -14.7678, -42.6498, FALSE, 29),
+(3555802, 'Urânia', -20.2455, -50.6455, FALSE, 35),
+(2112605, 'Urbano Santos', -3.20642, -43.3878, FALSE, 21),
+(3555901, 'Uru', -21.7866, -49.2848, FALSE, 35),
+(5221601, 'Uruaçu', -14.5238, -49.1396, FALSE, 52),
+(5221700, 'Uruana', -15.4993, -49.6861, FALSE, 52),
+(3170479, 'Uruana de Minas', -16.0634, -46.2443, FALSE, 31),
+(1508159, 'Uruará', -3.71519, -53.7396, FALSE, 15),
+(4218905, 'Urubici', -28.0157, -49.5925, FALSE, 42),
+(2313807, 'Uruburetama', -3.62316, -39.5107, FALSE, 23),
+(3170503, 'Urucânia', -20.3521, -42.737, FALSE, 31),
+(1304302, 'Urucará', -2.52936, -57.7538, FALSE, 13),
+(2932705, 'Uruçuca', -14.5963, -39.2851, FALSE, 29),
+(2211209, 'Uruçuí', -7.23944, -44.5577, FALSE, 22),
+(3170529, 'Urucuia', -16.1244, -45.7352, FALSE, 31),
+(1304401, 'Urucurituba', -3.12841, -58.1496, FALSE, 13),
+(4322400, 'Uruguaiana', -29.7614, -57.0853, FALSE, 43),
+(2313906, 'Uruoca', -3.30819, -40.5628, FALSE, 23),
+(1101708, 'Urupá', -11.1261, -62.3639, FALSE, 11),
+(4218954, 'Urupema', -27.9557, -49.8729, FALSE, 42),
+(3556008, 'Urupês', -21.2032, -49.2931, FALSE, 35),
+(4219002, 'Urussanga', -28.518, -49.3238, FALSE, 42),
+(5221809, 'Urutaí', -17.4651, -48.2015, FALSE, 52),
+(2932804, 'Utinga', -12.0783, -41.0954, FALSE, 29),
+(4322509, 'Vacaria', -28.5079, -50.9418, FALSE, 43),
+(5108352, 'Vale de São Domingos', -15.286, -59.0683, FALSE, 51),
+(1101757, 'Vale do Anari', -9.86215, -62.1876, FALSE, 11),
+(1101807, 'Vale do Paraíso', -10.4465, -62.1352, FALSE, 11),
+(4322533, 'Vale do Sol', -29.5967, -52.6839, FALSE, 43),
+(4322541, 'Vale Real', -29.3919, -51.2559, FALSE, 43),
+(4322525, 'Vale Verde', -29.7864, -52.1857, FALSE, 43),
+(2932903, 'Valença', -13.3669, -39.073, FALSE, 29),
+(3306107, 'Valença', -22.2445, -43.7129, FALSE, 33),
+(2211308, 'Valença do Piauí', -6.40301, -41.7375, FALSE, 22),
+(2933000, 'Valente', -11.4062, -39.457, FALSE, 29),
+(3556107, 'Valentim Gentil', -20.4217, -50.0889, FALSE, 35),
+(3556206, 'Valinhos', -22.9698, -46.9974, FALSE, 35),
+(3556305, 'Valparaíso', -21.2229, -50.8699, FALSE, 35),
+(5221858, 'Valparaíso de Goiás', -16.0651, -47.9757, FALSE, 52),
+(4322558, 'Vanini', -28.4758, -51.8447, FALSE, 43),
+(4219101, 'Vargeão', -26.8621, -52.1549, FALSE, 42),
+(4219150, 'Vargem', -27.4867, -50.9724, FALSE, 42),
+(3556354, 'Vargem', -22.887, -46.4124, FALSE, 35),
+(3170578, 'Vargem Alegre', -19.5988, -42.2949, FALSE, 31),
+(3205036, 'Vargem Alta', -20.669, -41.0179, FALSE, 32),
+(3170602, 'Vargem Bonita', -20.3333, -46.3688, FALSE, 31),
+(4219176, 'Vargem Bonita', -27.0055, -51.7402, FALSE, 42),
+(2112704, 'Vargem Grande', -3.53639, -43.917, FALSE, 21),
+(3170651, 'Vargem Grande do Rio Pardo', -15.3987, -42.3085, FALSE, 31),
+(3556404, 'Vargem Grande do Sul', -21.8322, -46.8913, FALSE, 35),
+(3556453, 'Vargem Grande Paulista', -23.5993, -47.022, FALSE, 35),
+(3170701, 'Varginha', -21.5556, -45.4364, FALSE, 31),
+(5221908, 'Varjão', -17.0471, -49.6312, FALSE, 52),
+(3170750, 'Varjão de Minas', -18.3741, -46.0313, FALSE, 31),
+(2313955, 'Varjota', -4.19387, -40.4741, FALSE, 23),
+(3306156, 'Varre-Sai', -20.9276, -41.8701, FALSE, 33),
+(2414704, 'Várzea', -6.34641, -35.3732, FALSE, 24),
+(2517100, 'Várzea', -6.76189, -36.9913, FALSE, 25),
+(2314003, 'Várzea Alegre', -6.78264, -39.2942, FALSE, 23),
+(2211357, 'Várzea Branca', -9.238, -42.9692, FALSE, 22),
+(3170800, 'Várzea da Palma', -17.5944, -44.7226, FALSE, 31),
+(2933059, 'Várzea da Roça', -11.6005, -40.1328, FALSE, 29),
+(2933109, 'Várzea do Poço', -11.5273, -40.3149, FALSE, 29),
+(2211407, 'Várzea Grande', -6.54899, -42.248, FALSE, 22),
+(5108402, 'Várzea Grande', -15.6458, -56.1322, FALSE, 51),
+(2933158, 'Várzea Nova', -11.2557, -40.9432, FALSE, 29),
+(3556503, 'Várzea Paulista', -23.2136, -46.8234, FALSE, 35),
+(2933174, 'Varzedo', -12.9672, -39.3919, FALSE, 29),
+(3170909, 'Varzelândia', -15.6992, -44.0278, FALSE, 31),
+(3306206, 'Vassouras', -22.4059, -43.6686, FALSE, 33),
+(3171006, 'Vazante', -17.9827, -46.9088, FALSE, 31),
+(4322608, 'Venâncio Aires', -29.6143, -52.1932, FALSE, 43),
+(3205069, 'Venda Nova do Imigrante', -20.327, -41.1355, FALSE, 32),
+(2414753, 'Venha-Ver', -6.32016, -38.4896, FALSE, 24),
+(4128534, 'Ventania', -24.2458, -50.2376, FALSE, 41),
+(2616001, 'Venturosa', -8.57885, -36.8742, FALSE, 26),
+(5108501, 'Vera', -12.3017, -55.3045, FALSE, 51),
+(2414803, 'Vera Cruz', -6.04399, -35.428, FALSE, 24),
+(2933208, 'Vera Cruz', -12.9568, -38.6153, FALSE, 29),
+(4322707, 'Vera Cruz', -29.7184, -52.5152, FALSE, 43),
+(3556602, 'Vera Cruz', -22.2183, -49.8207, FALSE, 35),
+(4128559, 'Vera Cruz do Oeste', -25.0577, -53.8771, FALSE, 41),
+(2211506, 'Vera Mendes', -7.59748, -41.4673, FALSE, 22),
+(4322806, 'Veranópolis', -28.9312, -51.5516, FALSE, 43),
+(2616100, 'Verdejante', -7.92235, -38.9701, FALSE, 26),
+(3171030, 'Verdelândia', -15.5845, -43.6121, FALSE, 31),
+(4128609, 'Verê', -25.8772, -52.9051, FALSE, 41),
+(2933257, 'Vereda', -17.2183, -40.0974, FALSE, 29),
+(3171071, 'Veredinha', -17.3974, -42.7307, FALSE, 31),
+(3171105, 'Veríssimo', -19.6657, -48.3118, FALSE, 31),
+(3171154, 'Vermelho Novo', -20.0406, -42.2688, FALSE, 31),
+(2616183, 'Vertente do Lério', -7.77084, -35.8491, FALSE, 26),
+(2616209, 'Vertentes', -7.90158, -35.9681, FALSE, 26),
+(3171204, 'Vespasiano', -19.6883, -43.9239, FALSE, 31),
+(4322855, 'Vespasiano Corrêa', -29.0655, -51.8625, FALSE, 43),
+(4322905, 'Viadutos', -27.5716, -52.0211, FALSE, 43),
+(4323002, 'Viamão', -30.0819, -51.0194, FALSE, 43),
+(3205101, 'Viana', -20.3825, -40.4933, FALSE, 32),
+(2112803, 'Viana', -3.20451, -44.9912, FALSE, 21),
+(5222005, 'Vianópolis', -16.7405, -48.5159, FALSE, 52),
+(2616308, 'Vicência', -7.65655, -35.3139, FALSE, 26),
+(4323101, 'Vicente Dutra', -27.1607, -53.4022, FALSE, 43),
+(5008404, 'Vicentina', -22.4098, -54.4415, FALSE, 50),
+(5222054, 'Vicentinópolis', -17.7322, -49.8047, FALSE, 52),
+(2414902, 'Viçosa', -5.98253, -37.9462, FALSE, 24),
+(2709400, 'Viçosa', -9.36763, -36.2431, FALSE, 27),
+(3171303, 'Viçosa', -20.7559, -42.8742, FALSE, 31),
+(2314102, 'Viçosa do Ceará', -3.5667, -41.0916, FALSE, 23),
+(4323200, 'Victor Graeff', -28.5632, -52.7495, FALSE, 43),
+(4219200, 'Vidal Ramos', -27.3886, -49.3593, FALSE, 42),
+(4219309, 'Videira', -27.0086, -51.1543, FALSE, 42),
+(3171402, 'Vieiras', -20.867, -42.2401, FALSE, 31),
+(2517209, 'Vieirópolis', -6.50684, -38.2567, FALSE, 25),
+(1508209, 'Vigia', -0.861194, -48.1386, FALSE, 15),
+(5105507, 'Vila Bela da Santíssima Trindade', -15.0068, -59.9504, FALSE, 51),
+(5222203, 'Vila Boa', -15.0387, -47.052, FALSE, 52),
+(2415008, 'Vila Flor', -6.31287, -35.067, FALSE, 24),
+(4323309, 'Vila Flores', -28.8598, -51.5504, FALSE, 43),
+(4323358, 'Vila Lângaro', -28.1062, -52.1438, FALSE, 43),
+(4323408, 'Vila Maria', -28.5359, -52.1486, FALSE, 43),
+(2211605, 'Vila Nova do Piauí', -7.13272, -40.9345, FALSE, 22),
+(4323457, 'Vila Nova do Sul', -30.3461, -53.876, FALSE, 43),
+(2112852, 'Vila Nova dos Martírios', -5.18889, -48.1336, FALSE, 21),
+(3205150, 'Vila Pavão', -18.6091, -40.609, FALSE, 32),
+(5222302, 'Vila Propício', -15.4542, -48.8819, FALSE, 52),
+(5108600, 'Vila Rica', -10.0137, -51.1186, FALSE, 51),
+(3205176, 'Vila Valério', -18.9958, -40.3849, FALSE, 32),
+(3205200, 'Vila Velha', -20.3417, -40.2875, FALSE, 32),
+(1100304, 'Vilhena', -12.7502, -60.1488, FALSE, 11),
+(3556701, 'Vinhedo', -23.0302, -46.9833, FALSE, 35),
+(3556800, 'Viradouro', -20.8734, -48.293, FALSE, 35),
+(3171600, 'Virgem da Lapa', -16.807, -42.3431, FALSE, 31),
+(3171709, 'Virgínia', -22.3264, -45.0965, FALSE, 31),
+(3171808, 'Virginópolis', -18.8154, -42.7015, FALSE, 31),
+(3171907, 'Virgolândia', -18.4738, -42.3067, FALSE, 31),
+(4128658, 'Virmond', -25.3829, -52.1987, FALSE, 41),
+(3172004, 'Visconde do Rio Branco', -21.0127, -42.8361, FALSE, 31),
+(1508308, 'Viseu', -1.19124, -46.1399, FALSE, 15),
+(4323507, 'Vista Alegre', -27.3686, -53.4919, FALSE, 43),
+(3556909, 'Vista Alegre do Alto', -21.1692, -48.6284, FALSE, 35),
+(4323606, 'Vista Alegre do Prata', -28.8052, -51.7947, FALSE, 43),
+(4323705, 'Vista Gaúcha', -27.2902, -53.6974, FALSE, 43),
+(2505501, 'Vista Serrana', -6.7303, -37.5704, FALSE, 25),
+(4219358, 'Vitor Meireles', -26.8782, -49.8328, FALSE, 42),
+(3205309, 'Vitória', -20.3155, -40.3128, TRUE, 32),
+(3556958, 'Vitória Brasil', -20.1956, -50.4875, FALSE, 35),
+(2933307, 'Vitória da Conquista', -14.8615, -40.8442, FALSE, 29),
+(4323754, 'Vitória das Missões', -28.3516, -54.504, FALSE, 43),
+(2616407, 'Vitória de Santo Antão', -8.12819, -35.2976, FALSE, 26),
+(1600808, 'Vitória do Jari', -0.938, -52.424, FALSE, 16),
+(2112902, 'Vitória do Mearim', -3.45125, -44.8643, FALSE, 21),
+(1508357, 'Vitória do Xingu', -2.87922, -52.0088, FALSE, 15),
+(4128708, 'Vitorino', -26.2683, -52.7843, FALSE, 41),
+(2113009, 'Vitorino Freire', -4.28184, -45.2505, FALSE, 21),
+(3172103, 'Volta Grande', -21.7671, -42.5375, FALSE, 31),
+(3306305, 'Volta Redonda', -22.5202, -44.0996, FALSE, 33),
+(3557006, 'Votorantim', -23.5446, -47.4388, FALSE, 35),
+(3557105, 'Votuporanga', -20.4237, -49.9781, FALSE, 35),
+(2933406, 'Wagner', -12.2819, -41.1715, FALSE, 29),
+(2211704, 'Wall Ferraz', -7.23151, -41.905, FALSE, 22),
+(1722081, 'Wanderlândia', -6.85274, -47.9601, FALSE, 17),
+(2933455, 'Wanderley', -12.1144, -43.8958, FALSE, 29),
+(3172202, 'Wenceslau Braz', -22.5368, -45.3626, FALSE, 31),
+(4128500, 'Wenceslau Braz', -23.8742, -49.8032, FALSE, 41),
+(2933505, 'Wenceslau Guimarães', -13.6908, -39.4762, FALSE, 29),
+(4323770, 'Westfália', -29.4263, -51.7645, FALSE, 43),
+(4219408, 'Witmarsum', -26.9275, -49.7947, FALSE, 42),
+(1722107, 'Xambioá', -6.4141, -48.532, FALSE, 17),
+(4128807, 'Xambrê', -23.7364, -53.4884, FALSE, 41),
+(4323804, 'Xangri-lá', -29.8065, -50.0519, FALSE, 43),
+(4219507, 'Xanxerê', -26.8747, -52.4036, FALSE, 42),
+(1200708, 'Xapuri', -10.6516, -68.4969, FALSE, 12),
+(4219606, 'Xavantina', -27.0667, -52.343, FALSE, 42),
+(4219705, 'Xaxim', -26.9596, -52.5374, FALSE, 42),
+(2616506, 'Xexéu', -8.8046, -35.6212, FALSE, 26),
+(1508407, 'Xinguara', -7.0983, -49.9437, FALSE, 15),
+(2933604, 'Xique-Xique', -10.823, -42.7245, FALSE, 29),
+(2517407, 'Zabelê', -8.07901, -37.1057, FALSE, 25),
+(3557154, 'Zacarias', -21.0506, -50.0552, FALSE, 35),
+(2114007, 'Zé Doca', -3.27014, -45.6553, FALSE, 21),
+(4219853, 'Zortéa', -27.4521, -51.552, FALSE, 42);
 
-INSERT INTO "estado" (id, nome, uf, ibge, id_pais, ddd) VALUES
-(1, 'Acre', 'AC', 12, 1, '[68]'),
-(2, 'Alagoas', 'AL', 27, 1, '[82]'),
-(3, 'Amazonas', 'AM', 13, 1, '[97,92]'),
-(4, 'Amapá', 'AP', 16, 1, '[96]'),
-(5, 'Bahia', 'BA', 29, 1, '[77,75,73,74,71]'),
-(6, 'Ceará', 'CE', 23, 1, '[88,85]'),
-(7, 'Distrito Federal', 'DF', 53, 1, '[61]'),
-(8, 'Espírito Santo', 'ES', 32, 1, '[28,27]'),
-(9, 'Goiás', 'GO', 52, 1, '[62,64,61]'),
-(10, 'Maranhão', 'MA', 21, 1, '[99,98]'),
-(11, 'Minas Gerais', 'MG', 31, 1, '[34,37,31,33,35,38,32]'),
-(12, 'Mato Grosso do Sul', 'MS', 50, 1, '[67]'),
-(13, 'Mato Grosso', 'MT', 51, 1, '[65,66]'),
-(14, 'Pará', 'PA', 15, 1, '[91,94,93]'),
-(15, 'Paraíba', 'PB', 25, 1, '[83]'),
-(16, 'Pernambuco', 'PE', 26, 1, '[81,87]'),
-(17, 'Piauí', 'PI', 22, 1, '[89,86]'),
-(18, 'Paraná', 'PR', 41, 1, '[43,41,42,44,45,46]'),
-(19, 'Rio de Janeiro', 'RJ', 33, 1, '[24,22,21]'),
-(20, 'Rio Grande do Norte', 'RN', 24, 1, '[84]'),
-(21, 'Rondônia', 'RO', 11, 1, '[69]'),
-(22, 'Roraima', 'RR', 14, 1, '[95]'),
-(23, 'Rio Grande do Sul', 'RS', 43, 1, '[53,54,55,51]'),
-(24, 'Santa Catarina', 'SC', 42, 1, '[47,48,49]'),
-(25, 'Sergipe', 'SE', 28, 1, '[79]'),
-(26, 'São Paulo', 'SP', 35, 1, '[11,12,13,14,15,16,17,18,19]'),
-(27, 'Tocantins', 'TO', 17, 1, '[63]'),
-(99, 'Exterior', 'EX', 99, NULL, NULL);
-
-ALTER SEQUENCE estado_id_seq
-  RESTART 99;
-
---
--- PostgreSQL database dump
---
-
--- Dumped from database version 9.6.3
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
-
-DROP TABLE IF EXISTS "cidade" CASCADE;
-
---
--- Name: cidade; Type: TABLE; Schema: public;
---
-
-CREATE TABLE cidade (
-                      id bigint NOT NULL,
-                      nome character varying(120) DEFAULT NULL::character varying,
-                      id_estado integer,
-                      ibge integer,
-                      lat_lon point
-);
-
-ALTER TABLE cidade OWNER TO postgres;
-
---
--- Name: TABLE cidade; Type: COMMENT; Schema: public;
---
-
-COMMENT ON TABLE cidade IS 'Municipios das Unidades Federativas';
-
-
---
--- Name: cidade_id_seq; Type: SEQUENCE; Schema: public;
---
-
-CREATE SEQUENCE cidade_id_seq
-  START WITH 1
-  INCREMENT BY 1
-  NO MINVALUE
-  NO MAXVALUE
-  CACHE 1;
-
-
-ALTER TABLE cidade_id_seq OWNER TO postgres;
-
-ALTER SEQUENCE cidade_id_seq OWNED BY cidade.id;
-
-
-COPY cidade (id, nome, id_estado, ibge, lat_lon) FROM stdin;
-1	Afonso Cláudio	8	3200102	(-20.077800750732401,-41.1260986328125)
-2	Água Doce do Norte	8	3200169	(-18.548200607299805,-40.985401153564453)
-3	Águia Branca	8	3200136	(-18.984600067138672,-40.743698120117187)
-4	Alegre	8	3200201	(-20.757999420166016,-41.538200378417969)
-5	Alfredo Chaves	8	3200300	(-20.63960075378418,-40.754299163818359)
-6	Alto Rio Novo	8	3200359	(-19.061800003051758,-41.020900726318359)
-7	Anchieta	8	3200409	(-20.795499801635742,-40.642501831054687)
-8	Apiacá	8	3200508	(-21.152299880981445,-41.569301605224609)
-9	Aracruz	8	3200607	(-19.819999694824219,-40.276401519775391)
-10	Atilio Vivacqua	8	3200706	(-20.913000106811523,-41.198600769042969)
-11	Baixo Guandu	8	3200805	(-19.521299362182617,-41.010898590087891)
-12	Barra de São Francisco	8	3200904	(-18.754800796508789,-40.896499633789063)
-13	Boa Esperança	8	3201001	(-18.539499282836914,-40.302501678466797)
-14	Bom Jesus do Norte	8	3201100	(-21.117300033569336,-41.673099517822266)
-15	Brejetuba	8	3201159	(-20.139499664306641,-41.295398712158203)
-16	Cachoeiro de Itapemirim	8	3201209	(-20.846200942993164,-41.119800567626953)
-17	Cariacica	8	3201308	(-20.263200759887695,-40.416500091552734)
-18	Castelo	8	3201407	(-20.603300094604492,-41.203098297119141)
-19	Colatina	8	3201506	(-19.549299240112305,-40.626899719238281)
-20	Conceição da Barra	8	3201605	(-18.588300704956055,-39.736198425292969)
-21	Conceição do Castelo	8	3201704	(-20.363899230957031,-41.24169921875)
-22	Divino de São Lourenço	8	3201803	(-20.622900009155273,-41.693698883056641)
-23	Domingos Martins	8	3201902	(-20.360300064086914,-40.659400939941406)
-24	Dores do Rio Preto	8	3202009	(-20.693099975585938,-41.840499877929688)
-25	Ecoporanga	8	3202108	(-18.370199203491211,-40.83599853515625)
-26	Fundão	8	3202207	(-19.937000274658203,-40.407798767089844)
-27	Governador Lindenberg	8	3202256	(-19.186428070068359,-40.447338104248047)
-28	Guaçuí	8	3202306	(-20.766799926757813,-41.67340087890625)
-29	Guarapari	8	3202405	(-20.677200317382813,-40.509300231933594)
-30	Ibatiba	8	3202454	(-20.234699249267578,-41.508701324462891)
-31	Ibiraçu	8	3202504	(-19.836599349975586,-40.373199462890625)
-32	Ibitirama	8	3202553	(-20.546600341796875,-41.666698455810547)
-33	Iconha	8	3202603	(-20.791299819946289,-40.813201904296875)
-34	Irupi	8	3202652	(-20.350099563598633,-41.644401550292969)
-35	Itaguaçu	8	3202702	(-19.801799774169922,-40.860099792480469)
-36	Itapemirim	8	3202801	(-21.009500503540039,-40.830699920654297)
-37	Itarana	8	3202900	(-19.875,-40.875301361083984)
-38	Iúna	8	3203007	(-20.353099822998047,-41.533401489257813)
-39	Jaguaré	8	3203056	(-18.906999588012695,-40.075901031494141)
-40	Jerônimo Monteiro	8	3203106	(-20.799400329589844,-41.394798278808594)
-41	João Neiva	8	3203130	(-19.757699966430664,-40.386001586914063)
-42	Laranja da Terra	8	3203163	(-19.89940071105957,-41.062099456787109)
-43	Linhares	8	3203205	(-19.394599914550781,-40.064300537109375)
-44	Mantenópolis	8	3203304	(-18.859399795532227,-41.124000549316406)
-45	Marataízes	8	3203320	(-21.039800643920898,-40.838401794433594)
-46	Marechal Floriano	8	3203346	(-20.415899276733398,-40.669998168945313)
-47	Marilândia	8	3203353	(-19.411399841308594,-40.545600891113281)
-48	Mimoso do Sul	8	3203403	(-21.062799453735352,-41.361499786376953)
-49	Montanha	8	3203502	(-18.130300521850586,-40.366798400878906)
-50	Mucurici	8	3203601	(-18.096500396728516,-40.520000457763672)
-51	Muniz Freire	8	3203700	(-20.465200424194336,-41.415599822998047)
-52	Muqui	8	3203809	(-20.950899124145508,-41.346000671386719)
-53	Nova Venécia	8	3203908	(-18.715000152587891,-40.405300140380859)
-54	Pancas	8	3204005	(-19.222900390625,-40.853401184082031)
-55	Pedro Canário	8	3204054	(-18.300399780273438,-39.957401275634766)
-56	Pinheiros	8	3204104	(-18.414100646972656,-40.217098236083984)
-57	Piúma	8	3204203	(-20.833400726318359,-40.726799011230469)
-58	Ponto Belo	8	3204252	(-18.125299453735352,-40.545799255371094)
-59	Presidente Kennedy	8	3204302	(-21.096399307250977,-41.046798706054688)
-60	Rio Bananal	8	3204351	(-19.271900177001953,-40.336601257324219)
-61	Rio Novo do Sul	8	3204401	(-20.855600357055664,-40.938800811767578)
-62	Santa Leopoldina	8	3204500	(-20.099899291992188,-40.527000427246094)
-63	Santa Maria de Jetibá	8	3204559	(-20.025299072265625,-40.743900299072266)
-64	Santa Teresa	8	3204609	(-19.936300277709961,-40.597900390625)
-65	São Domingos do Norte	8	3204658	(-19.145200729370117,-40.628101348876953)
-66	São Gabriel da Palha	8	3204708	(-19.018199920654297,-40.5364990234375)
-67	São José do Calçado	8	3204807	(-21.027399063110352,-41.663600921630859)
-68	São Mateus	8	3204906	(-18.721399307250977,-39.857898712158203)
-69	São Roque do Canaã	8	3204955	(-19.741100311279297,-40.652599334716797)
-70	Serra	8	3205002	(-20.121000289916992,-40.307399749755859)
-71	Sooretama	8	3205010	(-19.189699172973633,-40.097400665283203)
-72	Vargem Alta	8	3205036	(-20.669000625610352,-41.017898559570313)
-73	Venda Nova do Imigrante	8	3205069	(-20.326999664306641,-41.135501861572266)
-74	Viana	8	3205101	(-20.382499694824219,-40.493301391601562)
-75	Vila Pavão	8	3205150	(-18.609100341796875,-40.609001159667969)
-76	Vila Valério	8	3205176	(-18.995800018310547,-40.384899139404297)
-77	Vila Velha	8	3205200	(-20.341699600219727,-40.287498474121094)
-78	Vitória	8	3205309	(-20.315500259399414,-40.312801361083984)
-79	Acrelândia	1	1200013	(-9.825810432434082,-66.897201538085938)
-80	Assis Brasil	1	1200054	(-10.929800033569336,-69.573799133300781)
-81	Brasiléia	1	1200104	(-10.994999885559082,-68.749702453613281)
-82	Bujari	1	1200138	(-9.8152799606323242,-67.955001831054688)
-83	Capixaba	1	1200179	(-10.565999984741211,-67.685997009277344)
-84	Cruzeiro do Sul	1	1200203	(-7.6276202201843262,-72.67559814453125)
-85	Epitaciolândia	1	1200252	(-11.018799781799316,-68.734100341796875)
-86	Feijó	1	1200302	(-8.1705398559570312,-70.350997924804688)
-87	Jordão	1	1200328	(-9.4309101104736328,-71.89739990234375)
-88	Mâncio Lima	1	1200336	(-7.616569995880127,-72.899696350097656)
-89	Manoel Urbano	1	1200344	(-8.8329095840454102,-69.267898559570313)
-90	Marechal Thaumaturgo	1	1200351	(-8.9389801025390625,-72.799697875976562)
-91	Plácido de Castro	1	1200385	(-10.280599594116211,-67.137100219726563)
-92	Porto Acre	1	1200807	(-9.5813798904418945,-67.547798156738281)
-93	Porto Walter	1	1200393	(-8.2632303237915039,-72.753700256347656)
-94	Rio Branco	1	1200401	(-9.9749898910522461,-67.824302673339844)
-95	Rodrigues Alves	1	1200427	(-7.7386398315429687,-72.661003112792969)
-96	Santa Rosa do Purus	1	1200435	(-9.4465198516845703,-70.490196228027344)
-97	Sena Madureira	1	1200500	(-9.0659551620483398,-68.6571044921875)
-98	Senador Guiomard	1	1200450	(-10.149700164794922,-67.736198425292969)
-99	Tarauacá	1	1200609	(-8.1569700241088867,-70.772201538085938)
-100	Xapuri	1	1200708	(-10.651599884033203,-68.496902465820312)
-101	Água Branca	2	2700102	(-9.2620000839233398,-37.937999725341797)
-102	Anadia	2	2700201	(-9.6848897933959961,-36.30780029296875)
-103	Arapiraca	2	2700300	(-9.7548704147338867,-36.6614990234375)
-104	Atalaia	2	2700409	(-9.5118999481201172,-36.008598327636719)
-105	Barra de Santo Antônio	2	2700508	(-9.4022998809814453,-35.510101318359375)
-106	Barra de São Miguel	2	2700607	(-9.8384199142456055,-35.90570068359375)
-107	Batalha	2	2700706	(-9.6742000579833984,-37.132999420166016)
-108	Belém	2	2700805	(-9.570469856262207,-36.490398406982422)
-109	Belo Monte	2	2700904	(-9.8227195739746094,-37.277000427246094)
-110	Boca da Mata	2	2701001	(-9.6430797576904297,-36.212501525878906)
-111	Branquinha	2	2701100	(-9.2334203720092773,-36.016201019287109)
-112	Cacimbinhas	2	2701209	(-9.401209831237793,-36.991100311279297)
-113	Cajueiro	2	2701308	(-9.3993997573852539,-36.155899047851562)
-114	Campestre	2	2701357	(-8.8472299575805664,-35.568500518798828)
-115	Campo Alegre	2	2701407	(-9.7845096588134766,-36.352500915527344)
-116	Campo Grande	2	2701506	(-9.9554195404052734,-36.792598724365234)
-117	Canapi	2	2701605	(-9.1193199157714844,-37.596698760986328)
-118	Capela	2	2701704	(-9.4150400161743164,-36.082599639892578)
-119	Carneiros	2	2701803	(-9.4847602844238281,-37.377300262451172)
-120	Chã Preta	2	2701902	(-9.2555999755859375,-36.298301696777344)
-121	Coité do Nóia	2	2702009	(-9.6334800720214844,-36.584499359130859)
-122	Colônia Leopoldina	2	2702108	(-8.918060302734375,-35.721401214599609)
-123	Coqueiro Seco	2	2702207	(-9.6371498107910156,-35.799400329589844)
-124	Coruripe	2	2702306	(-10.127599716186523,-36.171699523925781)
-125	Craíbas	2	2702355	(-9.6177997589111328,-36.769699096679688)
-126	Delmiro Gouveia	2	2702405	(-9.3853397369384766,-37.998699188232422)
-127	Dois Riachos	2	2702504	(-9.3846502304077148,-37.096500396728516)
-128	Estrela de Alagoas	2	2702553	(-9.3908901214599609,-36.764400482177734)
-129	Feira Grande	2	2702603	(-9.898590087890625,-36.681499481201172)
-130	Feliz Deserto	2	2702702	(-10.293499946594238,-36.302799224853516)
-131	Flexeiras	2	2702801	(-9.2728099822998047,-35.713901519775391)
-132	Girau do Ponciano	2	2702900	(-9.8840398788452148,-36.831600189208984)
-133	Ibateguara	2	2703007	(-8.9782304763793945,-35.937301635742188)
-134	Igaci	2	2703106	(-9.5376796722412109,-36.637199401855469)
-135	Igreja Nova	2	2703205	(-10.123499870300293,-36.659698486328125)
-136	Inhapi	2	2703304	(-9.2259397506713867,-37.750900268554688)
-137	Jacaré dos Homens	2	2703403	(-9.6354503631591797,-37.207599639892578)
-138	Jacuípe	2	2703502	(-8.8395099639892578,-35.459098815917969)
-139	Japaratinga	2	2703601	(-9.0874595642089844,-35.263401031494141)
-140	Jaramataia	2	2703700	(-9.6622400283813477,-37.004600524902344)
-141	Jequiá da Praia	2	2703759	(-10.013299942016602,-36.014198303222656)
-142	Joaquim Gomes	2	2703809	(-9.1328001022338867,-35.747398376464844)
-143	Jundiá	2	2703908	(-8.9329700469970703,-35.566898345947266)
-144	Junqueiro	2	2704005	(-9.9069595336914062,-36.480300903320312)
-145	Lagoa da Canoa	2	2704104	(-9.8329095840454102,-36.741298675537109)
-146	Limoeiro de Anadia	2	2704203	(-9.7409801483154297,-36.512100219726562)
-147	Maceió	2	2704302	(-9.665989875793457,-35.735000610351562)
-148	Major Isidoro	2	2704401	(-9.53009033203125,-36.992000579833984)
-149	Mar Vermelho	2	2704906	(-9.4473896026611328,-36.388099670410156)
-150	Maragogi	2	2704500	(-9.0074396133422852,-35.226699829101563)
-151	Maravilha	2	2704609	(-9.2304496765136719,-37.352401733398438)
-152	Marechal Deodoro	2	2704708	(-9.7097101211547852,-35.896701812744141)
-153	Maribondo	2	2704807	(-9.5835304260253906,-36.304500579833984)
-154	Mata Grande	2	2705002	(-9.1182403564453125,-37.7322998046875)
-155	Matriz de Camaragibe	2	2705101	(-9.1543703079223633,-35.524299621582031)
-156	Messias	2	2705200	(-9.3938398361206055,-35.839199066162109)
-157	Minador do Negrão	2	2705309	(-9.3123598098754883,-36.869598388671875)
-158	Monteirópolis	2	2705408	(-9.6035699844360352,-37.250499725341797)
-159	Murici	2	2705507	(-9.3068199157714844,-35.942798614501953)
-160	Novo Lino	2	2705606	(-8.9419097900390625,-35.66400146484375)
-161	Olho d`Água das Flores	2	2705705	(-9.536860466003418,-37.297100067138672)
-162	Olho d`Água do Casado	2	2705804	(-9.5035696029663086,-37.830101013183594)
-163	Olho d`Água Grande	2	2705903	(-10.05720043182373,-36.810100555419922)
-164	Olivença	2	2706000	(-9.5195398330688477,-37.195400238037109)
-165	Ouro Branco	2	2706109	(-9.1588401794433594,-37.355598449707031)
-166	Palestina	2	2706208	(-9.6749296188354492,-37.339000701904297)
-167	Palmeira dos Índios	2	2706307	(-9.4056797027587891,-36.632801055908203)
-168	Pão de Açúcar	2	2706406	(-9.7403202056884766,-37.440299987792969)
-169	Pariconha	2	2706422	(-9.2563400268554687,-37.998798370361328)
-170	Paripueira	2	2706448	(-9.463129997253418,-35.551998138427734)
-171	Passo de Camaragibe	2	2706505	(-9.2451095581054687,-35.474498748779297)
-172	Paulo Jacinto	2	2706604	(-9.367919921875,-36.367198944091797)
-173	Penedo	2	2706703	(-10.287400245666504,-36.581901550292969)
-174	Piaçabuçu	2	2706802	(-10.406000137329102,-36.433998107910156)
-175	Pilar	2	2706901	(-9.6013498306274414,-35.954299926757813)
-176	Pindoba	2	2707008	(-9.4738197326660156,-36.291801452636719)
-177	Piranhas	2	2707107	(-9.6239995956420898,-37.756999969482422)
-178	Poço das Trincheiras	2	2707206	(-9.3074197769165039,-37.288898468017578)
-179	Porto Calvo	2	2707305	(-9.0519504547119141,-35.398700714111328)
-180	Porto de Pedras	2	2707404	(-9.160059928894043,-35.304901123046875)
-181	Porto Real do Colégio	2	2707503	(-10.184900283813477,-36.837600708007813)
-182	Quebrangulo	2	2707602	(-9.3200101852416992,-36.469200134277344)
-183	Rio Largo	2	2707701	(-9.4778299331665039,-35.839401245117188)
-184	Roteiro	2	2707800	(-9.8350296020507812,-35.978199005126953)
-185	Santa Luzia do Norte	2	2707909	(-9.6036996841430664,-35.823200225830078)
-186	Santana do Ipanema	2	2708006	(-9.369990348815918,-37.248001098632812)
-187	Santana do Mundaú	2	2708105	(-9.1714096069335938,-36.217601776123047)
-188	São Brás	2	2708204	(-10.114095687866211,-36.852199554443359)
-189	São José da Laje	2	2708303	(-9.0127801895141602,-36.051498413085938)
-190	São José da Tapera	2	2708402	(-9.5576801300048828,-37.383098602294922)
-191	São Luís do Quitunde	2	2708501	(-9.3181600570678711,-35.560600280761719)
-192	São Miguel dos Campos	2	2708600	(-9.7830095291137695,-36.097099304199219)
-193	São Miguel dos Milagres	2	2708709	(-9.2649297714233398,-35.376300811767578)
-194	São Sebastião	2	2708808	(-9.9304304122924805,-36.558998107910156)
-195	Satuba	2	2708907	(-9.5691099166870117,-35.822700500488281)
-196	Senador Rui Palmeira	2	2708956	(-9.4698600769042969,-37.457599639892578)
-197	Tanque d`Arca	2	2709004	(-9.5337896347045898,-36.436599731445313)
-198	Taquarana	2	2709103	(-9.6452903747558594,-36.492801666259766)
-199	Teotônio Vilela	2	2709152	(-9.916560173034668,-36.349201202392578)
-200	Traipu	2	2709202	(-9.9626197814941406,-37.007099151611328)
-201	União dos Palmares	2	2709301	(-9.159210205078125,-36.022300720214844)
-202	Viçosa	2	2709400	(-9.3676300048828125,-36.243099212646484)
-203	Amapá	4	1600105	(2.0526700019836426,-50.795700073242188)
-204	Calçoene	4	1600204	(2.5047500133514404,-50.951198577880859)
-205	Cutias	4	1600212	(0.97076058387756348,-50.800468444824219)
-206	Ferreira Gomes	4	1600238	(0.85725599527359009,-51.179500579833984)
-207	Itaubal	4	1600253	(0.60218489170074463,-50.699596405029297)
-208	Laranjal do Jari	4	1600279	(-0.80491101741790771,-52.452999114990234)
-209	Macapá	4	1600303	(0.034933999180793762,-51.069400787353516)
-210	Mazagão	4	1600402	(-0.11336000263690948,-51.289100646972656)
-211	Oiapoque	4	1600501	(3.8407399654388428,-51.833099365234375)
-212	Pedra Branca do Amaparí	4	1600154	(0.77742397785186768,-51.950298309326172)
-213	Porto Grande	4	1600535	(0.71243000030517578,-51.415500640869141)
-214	Pracuúba	4	1600550	(1.7454299926757812,-50.789199829101563)
-215	Santana	4	1600600	(-0.045434001833200455,-51.172901153564453)
-216	Serra do Navio	4	1600055	(0.90135699510574341,-52.00360107421875)
-217	Tartarugalzinho	4	1600709	(1.5065200328826904,-50.908699035644531)
-218	Vitória do Jari	4	1600808	(-0.93800002336502075,-52.423999786376953)
-219	Alvarães	3	1300029	(-3.2272698879241943,-64.800697326660156)
-220	Amaturá	3	1300060	(-3.3745501041412354,-68.20050048828125)
-221	Anamã	3	1300086	(-3.5669701099395752,-61.39630126953125)
-222	Anori	3	1300102	(-3.7460300922393799,-61.657501220703125)
-223	Apuí	3	1300144	(-7.1940898895263672,-59.895999908447266)
-224	Atalaia do Norte	3	1300201	(-4.3705501556396484,-70.196701049804688)
-225	Autazes	3	1300300	(-3.5857400894165039,-59.125598907470703)
-226	Barcelos	3	1300409	(-0.98337298631668091,-62.931098937988281)
-227	Barreirinha	3	1300508	(-2.7988600730895996,-57.067901611328125)
-228	Benjamin Constant	3	1300607	(-4.3776798248291016,-70.034202575683594)
-229	Beruri	3	1300631	(-3.8987400531768799,-61.361598968505859)
-230	Boa Vista do Ramos	3	1300680	(-2.9740900993347168,-57.587299346923828)
-231	Boca do Acre	3	1300706	(-8.7423200607299805,-67.391899108886719)
-232	Borba	3	1300805	(-4.3915400505065918,-59.587398529052734)
-233	Caapiranga	3	1300839	(-3.3153700828552246,-61.220600128173828)
-234	Canutama	3	1300904	(-6.5258197784423828,-64.395301818847656)
-235	Carauari	3	1301001	(-4.8816099166870117,-66.908599853515625)
-236	Careiro	3	1301100	(-3.7680299282073975,-60.368999481201172)
-237	Careiro da Várzea	3	1301159	(-3.3139998912811279,-59.555736541748047)
-238	Coari	3	1301209	(-4.0941200256347656,-63.144100189208984)
-239	Codajás	3	1301308	(-3.8305299282073975,-62.065799713134766)
-240	Eirunepé	3	1301407	(-6.6567702293395996,-69.866203308105469)
-241	Envira	3	1301506	(-7.4378900527954102,-70.028099060058594)
-242	Fonte Boa	3	1301605	(-2.5234200954437256,-66.094200134277344)
-243	Guajará	3	1301654	(-7.5379700660705566,-72.5906982421875)
-244	Humaitá	3	1301704	(-7.5117101669311523,-63.032699584960938)
-245	Ipixuna	3	1301803	(-7.047910213470459,-71.693397521972656)
-246	Iranduba	3	1301852	(-3.2747900485992432,-60.189998626708984)
-247	Itacoatiara	3	1301902	(-3.1386098861694336,-58.444900512695312)
-248	Itamarati	3	1301951	(-6.4385190010070801,-68.243736267089844)
-249	Itapiranga	3	1302009	(-2.7408099174499512,-58.029300689697266)
-250	Japurá	3	1302108	(-1.8823699951171875,-66.929100036621094)
-251	Juruá	3	1302207	(-3.4843800067901611,-66.071800231933594)
-252	Jutaí	3	1302306	(-2.7581400871276855,-66.759498596191406)
-253	Lábrea	3	1302405	(-7.2641301155090332,-64.7947998046875)
-254	Manacapuru	3	1302504	(-3.2906599044799805,-60.621601104736328)
-255	Manaquiri	3	1302553	(-3.4407799243927002,-60.461200714111328)
-256	Manaus	3	1302603	(-3.1186599731445312,-60.021198272705078)
-257	Manicoré	3	1302702	(-5.8046197891235352,-61.289501190185547)
-258	Maraã	3	1302801	(-1.8531299829483032,-65.572998046875)
-259	Maués	3	1302900	(-3.3928899765014648,-57.706699371337891)
-260	Nhamundá	3	1303007	(-2.2079300880432129,-56.711200714111328)
-261	Nova Olinda do Norte	3	1303106	(-3.9003698825836182,-59.094001770019531)
-262	Novo Airão	3	1303205	(-2.6363699436187744,-60.943401336669922)
-263	Novo Aripuanã	3	1303304	(-5.1259298324584961,-60.373199462890625)
-264	Parintins	3	1303403	(-2.6374099254608154,-56.729000091552734)
-265	Pauini	3	1303502	(-7.7131099700927734,-66.991996765136719)
-266	Presidente Figueiredo	3	1303536	(-2.0298099517822266,-60.023399353027344)
-267	Rio Preto da Eva	3	1303569	(-2.7044999599456787,-59.685798645019531)
-268	Santa Isabel do Rio Negro	3	1303601	(-0.4108240008354187,-65.009201049804688)
-269	Santo Antônio do Içá	3	1303700	(-3.0954399108886719,-67.946296691894531)
-270	São Gabriel da Cachoeira	3	1303809	(-0.1190899983048439,-67.083999633789063)
-271	São Paulo de Olivença	3	1303908	(-3.4729199409484863,-68.964599609375)
-272	São Sebastião do Uatumã	3	1303957	(-2.5591499805450439,-57.873100280761719)
-273	Silves	3	1304005	(-2.8174800872802734,-58.248001098632813)
-274	Tabatinga	3	1304062	(-4.2416000366210938,-69.938301086425781)
-275	Tapauá	3	1304104	(-5.6208500862121582,-63.180801391601563)
-276	Tefé	3	1304203	(-3.3682200908660889,-64.71929931640625)
-277	Tonantins	3	1304237	(-2.8658199310302734,-67.791900634765625)
-278	Uarini	3	1304260	(-2.9960899353027344,-65.113296508789063)
-279	Urucará	3	1304302	(-2.5293600559234619,-57.753799438476563)
-280	Urucurituba	3	1304401	(-3.1284101009368896,-58.149600982666016)
-281	Abaíra	5	2900108	(-13.248800277709961,-41.661899566650391)
-282	Abaré	5	2900207	(-8.7207298278808594,-39.116199493408203)
-283	Acajutiba	5	2900306	(-11.657500267028809,-38.019699096679688)
-284	Adustina	5	2900355	(-10.543700218200684,-38.111301422119141)
-285	Água Fria	5	2900405	(-11.861800193786621,-38.763900756835938)
-286	Aiquara	5	2900603	(-14.126899719238281,-39.893699645996094)
-287	Alagoinhas	5	2900702	(-12.133500099182129,-38.420799255371094)
-288	Alcobaça	5	2900801	(-17.519500732421875,-39.203601837158203)
-289	Almadina	5	2900900	(-14.708900451660156,-39.641498565673828)
-290	Amargosa	5	2901007	(-13.021499633789063,-39.602001190185547)
-291	Amélia Rodrigues	5	2901106	(-12.391400337219238,-38.756301879882813)
-292	América Dourada	5	2901155	(-11.442899703979492,-41.438999176025391)
-293	Anagé	5	2901205	(-14.615099906921387,-41.135601043701172)
-294	Andaraí	5	2901304	(-12.804900169372559,-41.329700469970703)
-295	Andorinha	5	2901353	(-10.348199844360352,-39.839099884033203)
-296	Angical	5	2901403	(-12.00629997253418,-44.700298309326172)
-297	Anguera	5	2901502	(-12.146200180053711,-39.246200561523438)
-298	Antas	5	2901601	(-10.385600090026855,-38.340099334716797)
-299	Antônio Cardoso	5	2901700	(-12.433500289916992,-39.117599487304688)
-300	Antônio Gonçalves	5	2901809	(-10.576700210571289,-40.278499603271484)
-301	Aporá	5	2901908	(-11.657699584960938,-38.081401824951172)
-302	Apuarema	5	2901957	(-13.85420036315918,-39.750099182128906)
-303	Araças	5	2902054	(-12.220000267028809,-38.202701568603516)
-304	Aracatu	5	2902005	(-14.428000450134277,-41.464801788330078)
-305	Araci	5	2902104	(-11.325300216674805,-38.958400726318359)
-306	Aramari	5	2902203	(-12.088399887084961,-38.496898651123047)
-307	Arataca	5	2902252	(-15.26509952545166,-39.418998718261719)
-308	Aratuípe	5	2902302	(-13.071599960327148,-39.003799438476563)
-309	Aurelino Leal	5	2902401	(-14.321000099182129,-39.328998565673828)
-310	Baianópolis	5	2902500	(-12.301600456237793,-44.538799285888672)
-311	Baixa Grande	5	2902609	(-11.951899528503418,-40.168998718261719)
-312	Banzaê	5	2902658	(-10.578800201416016,-38.621200561523438)
-313	Barra	5	2902708	(-11.08590030670166,-43.145900726318359)
-314	Barra da Estiva	5	2902807	(-13.623700141906738,-41.334701538085938)
-315	Barra do Choça	5	2902906	(-14.865400314331055,-40.5791015625)
-316	Barra do Mendes	5	2903003	(-11.810000419616699,-42.058998107910156)
-317	Barra do Rocha	5	2903102	(-14.199999809265137,-39.599098205566406)
-318	Barreiras	5	2903201	(-12.143899917602539,-44.996799468994141)
-319	Barro Alto	5	2903235	(-11.760499954223633,-41.905399322509766)
-320	Barro Preto (antigo Gov. Lomanto Jr.)	5	2903300	(-14.7947998046875,-39.476001739501953)
-321	Barrocas	5	2903276	(-11.527199745178223,-39.077598571777344)
-322	Belmonte	5	2903409	(-15.860799789428711,-38.875801086425781)
-323	Belo Campo	5	2903508	(-15.03339958190918,-41.265201568603516)
-324	Biritinga	5	2903607	(-11.607199668884277,-38.805099487304688)
-325	Boa Nova	5	2903706	(-14.359800338745117,-40.206401824951172)
-326	Boa Vista do Tupim	5	2903805	(-12.649800300598145,-40.606399536132813)
-327	Bom Jesus da Lapa	5	2903904	(-13.25059986114502,-43.410800933837891)
-328	Bom Jesus da Serra	5	2903953	(-14.366299629211426,-40.512599945068359)
-329	Boninal	5	2904001	(-12.706899642944336,-41.828601837158203)
-330	Bonito	5	2904050	(-11.966799736022949,-41.264701843261719)
-331	Boquira	5	2904100	(-12.820500373840332,-42.732398986816406)
-332	Botuporã	5	2904209	(-13.377200126647949,-42.516300201416016)
-333	Brejões	5	2904308	(-13.103899955749512,-39.798801422119141)
-334	Brejolândia	5	2904407	(-12.481499671936035,-43.967899322509766)
-335	Brotas de Macaúbas	5	2904506	(-11.991499900817871,-42.632598876953125)
-336	Brumado	5	2904605	(-14.202099800109863,-41.669601440429688)
-337	Buerarema	5	2904704	(-14.959500312805176,-39.302799224853516)
-338	Buritirama	5	2904753	(-10.717100143432617,-43.630199432373047)
-339	Caatiba	5	2904803	(-14.969900131225586,-40.409198760986328)
-340	Cabaceiras do Paraguaçu	5	2904852	(-12.531700134277344,-39.190200805664062)
-341	Cachoeira	5	2904902	(-12.599399566650391,-38.958698272705078)
-342	Caculé	5	2905008	(-14.500300407409668,-42.222900390625)
-343	Caém	5	2905107	(-11.067700386047363,-40.431999206542969)
-344	Caetanos	5	2905156	(-14.334699630737305,-40.917499542236328)
-345	Caetité	5	2905206	(-14.068400382995605,-42.486099243164062)
-346	Cafarnaum	5	2905305	(-11.691399574279785,-41.468799591064453)
-347	Cairu	5	2905404	(-13.490400314331055,-39.046501159667969)
-348	Caldeirão Grande	5	2905503	(-11.02079963684082,-40.295600891113281)
-349	Camacan	5	2905602	(-15.414199829101563,-39.491901397705078)
-350	Camaçari	5	2905701	(-12.699600219726563,-38.326301574707031)
-351	Camamu	5	2905800	(-13.939800262451172,-39.107101440429687)
-352	Campo Alegre de Lourdes	5	2905909	(-9.5222101211547852,-43.012599945068359)
-353	Campo Formoso	5	2906006	(-10.510499954223633,-40.319999694824219)
-354	Canápolis	5	2906105	(-13.072500228881836,-44.201000213623047)
-355	Canarana	5	2906204	(-11.685799598693848,-41.7677001953125)
-356	Canavieiras	5	2906303	(-15.672200202941895,-38.953601837158203)
-357	Candeal	5	2906402	(-11.804900169372559,-39.12030029296875)
-358	Candeias	5	2906501	(-12.671600341796875,-38.547199249267578)
-359	Candiba	5	2906600	(-14.409700393676758,-42.86669921875)
-360	Cândido Sales	5	2906709	(-15.499300003051758,-41.241401672363281)
-361	Cansanção	5	2906808	(-10.664699554443359,-39.494400024414063)
-362	Canudos	5	2906824	(-9.9001398086547852,-39.147098541259766)
-363	Capela do Alto Alegre	5	2906857	(-11.665800094604492,-39.83489990234375)
-364	Capim Grosso	5	2906873	(-11.37969970703125,-40.008899688720703)
-365	Caraíbas	5	2906899	(-14.717700004577637,-41.260299682617187)
-366	Caravelas	5	2906907	(-17.726800918579102,-39.259700775146484)
-367	Cardeal da Silva	5	2907004	(-11.947199821472168,-37.9468994140625)
-368	Carinhanha	5	2907103	(-14.298500061035156,-43.77239990234375)
-369	Casa Nova	5	2907202	(-9.1640796661376953,-40.9739990234375)
-370	Castro Alves	5	2907301	(-12.757900238037109,-39.424800872802734)
-371	Catolândia	5	2907400	(-12.310000419616699,-44.864799499511719)
-372	Catu	5	2907509	(-12.351300239562988,-38.379100799560547)
-373	Caturama	5	2907558	(-13.32390022277832,-42.290401458740234)
-374	Central	5	2907608	(-11.137599945068359,-42.111598968505859)
-375	Chorrochó	5	2907707	(-8.9694995880126953,-39.097900390625)
-376	Cícero Dantas	5	2907806	(-10.589699745178223,-38.379398345947266)
-377	Cipó	5	2907905	(-11.10319995880127,-38.517898559570313)
-378	Coaraci	5	2908002	(-14.63700008392334,-39.555599212646484)
-379	Cocos	5	2908101	(-14.181400299072266,-44.535198211669922)
-380	Conceição da Feira	5	2908200	(-12.507800102233887,-38.997798919677734)
-381	Conceição do Almeida	5	2908309	(-12.783599853515625,-39.171501159667969)
-382	Conceição do Coité	5	2908408	(-11.560000419616699,-39.280799865722656)
-383	Conceição do Jacuípe	5	2908507	(-12.326800346374512,-38.768398284912109)
-384	Conde	5	2908606	(-11.817899703979492,-37.61309814453125)
-385	Condeúba	5	2908705	(-14.902199745178223,-41.9718017578125)
-386	Contendas do Sincorá	5	2908804	(-13.753700256347656,-41.048000335693359)
-387	Coração de Maria	5	2908903	(-12.23330020904541,-38.748699188232422)
-388	Cordeiros	5	2909000	(-15.035599708557129,-41.930801391601563)
-389	Coribe	5	2909109	(-13.823200225830078,-44.458599090576172)
-390	Coronel João Sá	5	2909208	(-10.284700393676758,-37.9197998046875)
-391	Correntina	5	2909307	(-13.347700119018555,-44.63330078125)
-392	Cotegipe	5	2909406	(-12.022800445556641,-44.256599426269531)
-393	Cravolândia	5	2909505	(-13.353099822998047,-39.8031005859375)
-394	Crisópolis	5	2909604	(-11.505900382995605,-38.151500701904297)
-395	Cristópolis	5	2909703	(-12.224900245666504,-44.421398162841797)
-396	Cruz das Almas	5	2909802	(-12.667499542236328,-39.100799560546875)
-397	Curaçá	5	2909901	(-8.9845800399780273,-39.899700164794922)
-398	Dário Meira	5	2910008	(-14.422900199890137,-39.903099060058594)
-399	Dias d`Ávila	5	2910057	(-12.618749618530273,-38.292644500732422)
-400	Dom Basílio	5	2910107	(-13.756500244140625,-41.7677001953125)
-401	Dom Macedo Costa	5	2910206	(-12.901599884033203,-39.192298889160156)
-402	Elísio Medrado	5	2910305	(-12.941699981689453,-39.519100189208984)
-403	Encruzilhada	5	2910404	(-15.530200004577637,-40.912399291992188)
-404	Entre Rios	5	2910503	(-11.939200401306152,-38.087100982666016)
-405	Érico Cardoso	5	2900504	(-13.421500205993652,-42.135200500488281)
-406	Esplanada	5	2910602	(-11.79419994354248,-37.943199157714844)
-407	Euclides da Cunha	5	2910701	(-10.507800102233887,-39.015300750732422)
-408	Eunápolis	5	2910727	(-16.371500015258789,-39.582099914550781)
-409	Fátima	5	2910750	(-10.616000175476074,-38.223899841308594)
-410	Feira da Mata	5	2910776	(-14.204400062561035,-44.274398803710937)
-411	Feira de Santana	5	2910800	(-12.266400337219238,-38.966300964355469)
-412	Filadélfia	5	2910859	(-10.740500450134277,-40.143699645996094)
-413	Firmino Alves	5	2910909	(-14.9822998046875,-39.926898956298828)
-414	Floresta Azul	5	2911006	(-14.862899780273437,-39.657901763916016)
-415	Formosa do Rio Preto	5	2911105	(-11.03279972076416,-45.193000793457031)
-416	Gandu	5	2911204	(-13.744099617004395,-39.474700927734375)
-417	Gavião	5	2911253	(-11.468799591064453,-39.775699615478516)
-418	Gentio do Ouro	5	2911303	(-11.434200286865234,-42.507701873779297)
-419	Glória	5	2911402	(-9.3438196182250977,-38.254398345947266)
-420	Gongogi	5	2911501	(-14.319499969482422,-39.469001770019531)
-421	Governador Mangabeira	5	2911600	(-12.599399566650391,-39.04119873046875)
-422	Guajeru	5	2911659	(-14.546699523925781,-41.938098907470703)
-423	Guanambi	5	2911709	(-14.223099708557129,-42.779899597167969)
-424	Guaratinga	5	2911808	(-16.58329963684082,-39.784698486328125)
-425	Heliópolis	5	2911857	(-10.682499885559082,-38.290699005126953)
-426	Iaçu	5	2911907	(-12.766599655151367,-40.205600738525391)
-427	Ibiassucê	5	2912004	(-14.271100044250488,-42.256999969482422)
-428	Ibicaraí	5	2912103	(-14.85789966583252,-39.591400146484375)
-429	Ibicoara	5	2912202	(-13.405900001525879,-41.284000396728516)
-430	Ibicuí	5	2912301	(-14.845000267028809,-39.987899780273437)
-431	Ibipeba	5	2912400	(-11.643799781799316,-42.019500732421875)
-432	Ibipitanga	5	2912509	(-12.880399703979492,-42.485599517822266)
-433	Ibiquera	5	2912608	(-12.644399642944336,-40.933799743652344)
-434	Ibirapitanga	5	2912707	(-14.164899826049805,-39.378700256347656)
-435	Ibirapuã	5	2912806	(-17.683200836181641,-40.112899780273438)
-436	Ibirataia	5	2912905	(-14.064299583435059,-39.645900726318359)
-437	Ibitiara	5	2913002	(-12.650199890136719,-42.217899322509766)
-438	Ibititá	5	2913101	(-11.541399955749512,-41.974800109863281)
-439	Ibotirama	5	2913200	(-12.177900314331055,-43.216701507568359)
-440	Ichu	5	2913309	(-11.743100166320801,-39.190498352050781)
-441	Igaporã	5	2913408	(-13.77400016784668,-42.715499877929688)
-442	Igrapiúna	5	2913457	(-13.829500198364258,-39.136100769042969)
-443	Iguaí	5	2913507	(-14.752799987792969,-40.089401245117188)
-444	Ilhéus	5	2913606	(-14.793000221252441,-39.046001434326172)
-445	Inhambupe	5	2913705	(-11.781000137329102,-38.354999542236328)
-446	Ipecaetá	5	2913804	(-12.302800178527832,-39.306900024414063)
-447	Ipiaú	5	2913903	(-14.122599601745605,-39.735298156738281)
-448	Ipirá	5	2914000	(-12.156100273132324,-39.73590087890625)
-449	Ipupiara	5	2914109	(-11.821900367736816,-42.617900848388672)
-450	Irajuba	5	2914208	(-13.25629997253418,-40.084800720214844)
-451	Iramaia	5	2914307	(-13.290200233459473,-40.959499359130859)
-452	Iraquara	5	2914406	(-12.242899894714355,-41.615501403808594)
-453	Irará	5	2914505	(-12.050399780273438,-38.763099670410156)
-454	Irecê	5	2914604	(-11.303299903869629,-41.853500366210938)
-455	Itabela	5	2914653	(-16.573200225830078,-39.559299468994141)
-456	Itaberaba	5	2914703	(-12.524200439453125,-40.305900573730469)
-457	Itabuna	5	2914802	(-14.787599563598633,-39.278099060058594)
-458	Itacaré	5	2914901	(-14.278400421142578,-38.995899200439453)
-459	Itaeté	5	2915007	(-12.983099937438965,-40.967700958251953)
-460	Itagi	5	2915106	(-14.161499977111816,-40.013099670410156)
-461	Itagibá	5	2915205	(-14.278200149536133,-39.844898223876953)
-462	Itagimirim	5	2915304	(-16.081899642944336,-39.613300323486328)
-463	Itaguaçu da Bahia	5	2915353	(-11.014699935913086,-42.399700164794922)
-464	Itaju do Colônia	5	2915403	(-15.136599540710449,-39.728298187255859)
-465	Itajuípe	5	2915502	(-14.678799629211426,-39.369800567626953)
-466	Itamaraju	5	2915601	(-17.037799835205078,-39.538600921630859)
-467	Itamari	5	2915700	(-13.778200149536133,-39.682998657226563)
-468	Itambé	5	2915809	(-15.242899894714355,-40.630001068115234)
-469	Itanagra	5	2915908	(-12.26140022277832,-38.043598175048828)
-470	Itanhém	5	2916005	(-17.164199829101563,-40.332099914550781)
-471	Itaparica	5	2916104	(-12.893199920654297,-38.680000305175781)
-472	Itapé	5	2916203	(-14.887599945068359,-39.423900604248047)
-473	Itapebi	5	2916302	(-15.955100059509277,-39.532901763916016)
-474	Itapetinga	5	2916401	(-15.247500419616699,-40.248199462890625)
-475	Itapicuru	5	2916500	(-11.308799743652344,-38.226200103759766)
-476	Itapitanga	5	2916609	(-14.413900375366211,-39.565700531005859)
-477	Itaquara	5	2916708	(-13.445899963378906,-39.937801361083984)
-478	Itarantim	5	2916807	(-15.652799606323242,-40.064998626708984)
-479	Itatim	5	2916856	(-12.70989990234375,-39.695201873779297)
-480	Itiruçu	5	2916906	(-13.529000282287598,-40.147201538085938)
-481	Itiúba	5	2917003	(-10.69480037689209,-39.844600677490234)
-482	Itororó	5	2917102	(-15.109999656677246,-40.068401336669922)
-483	Ituaçu	5	2917201	(-13.810700416564941,-41.300300598144531)
-484	Ituberá	5	2917300	(-13.724900245666504,-39.148101806640625)
-485	Iuiú	5	2917334	(-14.405400276184082,-43.559501647949219)
-486	Jaborandi	5	2917359	(-13.607099533081055,-44.425498962402344)
-487	Jacaraci	5	2917409	(-14.854100227355957,-42.432899475097656)
-488	Jacobina	5	2917508	(-11.18120002746582,-40.511699676513672)
-489	Jaguaquara	5	2917607	(-13.524800300598145,-39.964000701904297)
-490	Jaguarari	5	2917706	(-10.256899833679199,-40.199901580810547)
-491	Jaguaripe	5	2917805	(-13.110899925231934,-38.893901824951172)
-492	Jandaíra	5	2917904	(-11.561599731445313,-37.785301208496094)
-493	Jequié	5	2918001	(-13.850899696350098,-40.087699890136719)
-494	Jeremoabo	5	2918100	(-10.068499565124512,-38.347099304199219)
-495	Jiquiriçá	5	2918209	(-13.262100219726563,-39.573699951171875)
-496	Jitaúna	5	2918308	(-14.013099670410156,-39.896900177001953)
-497	João Dourado	5	2918357	(-11.348600387573242,-41.654800415039063)
-498	Juazeiro	5	2918407	(-9.4162197113037109,-40.503299713134766)
-499	Jucuruçu	5	2918456	(-16.848800659179688,-40.164100646972656)
-500	Jussara	5	2918506	(-11.043100357055664,-41.970199584960938)
-501	Jussari	5	2918555	(-15.192000389099121,-39.491001129150391)
-502	Jussiape	5	2918605	(-13.515500068664551,-41.588199615478516)
-503	Lafaiete Coutinho	5	2918704	(-13.65410041809082,-40.211898803710938)
-504	Lagoa Real	5	2918753	(-13.466300010681152,-40.220401763916016)
-505	Laje	5	2918803	(-14.03339958190918,-42.132801055908203)
-506	Lajedão	5	2918902	(-13.167300224304199,-39.421298980712891)
-507	Lajedinho	5	2919009	(-17.605600357055664,-40.338298797607422)
-508	Lajedo do Tabocal	5	2919058	(-12.352899551391602,-40.904800415039063)
-509	Lamarão	5	2919108	(-11.77299976348877,-38.887001037597656)
-510	Lapão	5	2919157	(-11.385100364685059,-41.828601837158203)
-511	Lauro de Freitas	5	2919207	(-12.897800445556641,-38.320999145507813)
-512	Lençóis	5	2919306	(-12.561599731445313,-41.392799377441406)
-513	Licínio de Almeida	5	2919405	(-14.684200286865234,-42.509498596191406)
-514	Livramento de Nossa Senhora	5	2919504	(-13.636899948120117,-41.84320068359375)
-515	Luís Eduardo Magalhães	5	2919553	(-12.095600128173828,-45.786598205566406)
-516	Macajuba	5	2919603	(-12.132599830627441,-40.357101440429688)
-517	Macarani	5	2919702	(-15.564599990844727,-40.4208984375)
-518	Macaúbas	5	2919801	(-13.018600463867188,-42.694499969482422)
-519	Macururé	5	2919900	(-9.1622600555419922,-39.051799774169922)
-520	Madre de Deus	5	2919926	(-12.744600296020508,-38.615299224853516)
-521	Maetinga	5	2919959	(-14.662300109863281,-41.491500854492188)
-522	Maiquinique	5	2920007	(-15.62399959564209,-40.258701324462891)
-523	Mairi	5	2920106	(-11.710700035095215,-40.143699645996094)
-524	Malhada	5	2920205	(-14.337100028991699,-43.768600463867188)
-525	Malhada de Pedras	5	2920304	(-14.384699821472168,-41.884201049804688)
-526	Manoel Vitorino	5	2920403	(-14.147600173950195,-40.239898681640625)
-527	Mansidão	5	2920452	(-10.722700119018555,-44.042800903320313)
-528	Maracás	5	2920502	(-13.435500144958496,-40.432300567626953)
-529	Maragogipe	5	2920601	(-12.776000022888184,-38.917499542236328)
-530	Maraú	5	2920700	(-14.103500366210938,-39.013698577880859)
-531	Marcionílio Souza	5	2920809	(-13.006400108337402,-40.529499053955078)
-532	Mascote	5	2920908	(-15.554200172424316,-39.301601409912109)
-533	Mata de São João	5	2921005	(-12.530699729919434,-38.300899505615234)
-534	Matina	5	2921054	(-13.910900115966797,-42.843898773193359)
-535	Medeiros Neto	5	2921104	(-17.370700836181641,-40.223800659179688)
-536	Miguel Calmon	5	2921203	(-11.429900169372559,-40.603099822998047)
-537	Milagres	5	2921302	(-12.86460018157959,-39.861099243164063)
-538	Mirangaba	5	2921401	(-10.961000442504883,-40.574001312255859)
-539	Mirante	5	2921450	(-14.238499641418457,-40.771800994873047)
-540	Monte Santo	5	2921500	(-10.437399864196777,-39.332099914550781)
-541	Morpará	5	2921609	(-11.556900024414063,-43.276599884033203)
-542	Morro do Chapéu	5	2921708	(-11.548800468444824,-41.156501770019531)
-543	Mortugaba	5	2921807	(-15.022500038146973,-42.372699737548828)
-544	Mucugê	5	2921906	(-13.00529956817627,-41.37030029296875)
-545	Mucuri	5	2922003	(-18.075399398803711,-39.556499481201172)
-546	Mulungu do Morro	5	2922052	(-11.964799880981445,-41.637401580810547)
-547	Mundo Novo	5	2922102	(-11.854100227355957,-40.471401214599609)
-548	Muniz Ferreira	5	2922201	(-13.009200096130371,-39.109199523925781)
-549	Muquém de São Francisco	5	2922250	(-12.06501579284668,-43.549716949462891)
-550	Muritiba	5	2922300	(-12.632900238037109,-38.992099761962891)
-551	Mutuípe	5	2922409	(-13.228400230407715,-39.504398345947266)
-552	Nazaré	5	2922508	(-13.023500442504883,-39.010799407958984)
-553	Nilo Peçanha	5	2922607	(-13.604000091552734,-39.109100341796875)
-554	Nordestina	5	2922656	(-10.819199562072754,-39.429698944091797)
-555	Nova Canaã	5	2922706	(-14.791199684143066,-40.145801544189453)
-556	Nova Fátima	5	2922730	(-11.603099822998047,-39.630199432373047)
-557	Nova Ibiá	5	2922755	(-13.812000274658203,-39.618198394775391)
-558	Nova Itarana	5	2922805	(-13.024100303649902,-40.065299987792969)
-559	Nova Redenção	5	2922854	(-12.814999580383301,-41.074798583984375)
-560	Nova Soure	5	2922904	(-11.23289966583252,-38.487098693847656)
-561	Nova Viçosa	5	2923001	(-17.892599105834961,-39.374298095703125)
-562	Novo Horizonte	5	2923035	(-12.808300018310547,-42.168201446533203)
-563	Novo Triunfo	5	2923050	(-10.31820011138916,-38.401401519775391)
-564	Olindina	5	2923100	(-11.349699974060059,-38.337898254394531)
-565	Oliveira dos Brejinhos	5	2923209	(-12.313199996948242,-42.896900177001953)
-566	Ouriçangas	5	2923308	(-12.017499923706055,-38.616600036621094)
-567	Ourolândia	5	2923357	(-10.957799911499023,-41.075599670410156)
-568	Palmas de Monte Alto	5	2923407	(-14.267600059509277,-43.160900115966797)
-569	Palmeiras	5	2923506	(-12.505900382995605,-41.580898284912109)
-570	Paramirim	5	2923605	(-13.438799858093262,-42.239498138427734)
-571	Paratinga	5	2923704	(-12.687000274658203,-43.179798126220703)
-572	Paripiranga	5	2923803	(-10.68589973449707,-37.862598419189453)
-573	Pau Brasil	5	2923902	(-15.457200050354004,-39.645801544189453)
-574	Paulo Afonso	5	2924009	(-9.3983001708984375,-38.221599578857422)
-575	Pé de Serra	5	2924058	(-11.831299781799316,-39.611000061035156)
-576	Pedrão	5	2924108	(-12.149100303649902,-38.648700714111328)
-577	Pedro Alexandre	5	2924207	(-10.01200008392334,-37.893199920654297)
-578	Piatã	5	2924306	(-13.146499633789062,-41.770198822021484)
-579	Pilão Arcado	5	2924405	(-10.005100250244141,-42.493598937988281)
-580	Pindaí	5	2924504	(-14.492099761962891,-42.686000823974609)
-581	Pindobaçu	5	2924603	(-10.743300437927246,-40.367500305175781)
-582	Pintadas	5	2924652	(-11.811699867248535,-39.900901794433594)
-583	Piraí do Norte	5	2924678	(-13.758999824523926,-39.383598327636719)
-584	Piripá	5	2924702	(-14.944399833679199,-41.716800689697266)
-585	Piritiba	5	2924801	(-11.729999542236328,-40.558700561523438)
-586	Planaltino	5	2924900	(-13.261799812316895,-40.369499206542969)
-587	Planalto	5	2925006	(-14.665399551391602,-40.4718017578125)
-588	Poções	5	2925105	(-14.52340030670166,-40.363399505615234)
-589	Pojuca	5	2925204	(-12.430299758911133,-38.337398529052734)
-590	Ponto Novo	5	2925253	(-10.865300178527832,-40.131099700927734)
-591	Porto Seguro	5	2925303	(-16.443500518798828,-39.064300537109375)
-592	Potiraguá	5	2925402	(-15.594300270080566,-39.863800048828125)
-593	Prado	5	2925501	(-17.336399078369141,-39.222698211669922)
-594	Presidente Dutra	5	2925600	(-11.292300224304199,-41.984298706054688)
-595	Presidente Jânio Quadros	5	2925709	(-14.68850040435791,-41.679798126220703)
-596	Presidente Tancredo Neves	5	2925758	(-13.447099685668945,-39.420299530029297)
-597	Queimadas	5	2925808	(-10.973600387573242,-39.629299163818359)
-598	Quijingue	5	2925907	(-10.750499725341797,-39.213699340820313)
-599	Quixabeira	5	2925931	(-11.40310001373291,-40.119998931884766)
-600	Rafael Jambeiro	5	2925956	(-12.405300140380859,-39.500701904296875)
-601	Remanso	5	2926004	(-9.6194400787353516,-42.084800720214844)
-602	Retirolândia	5	2926103	(-11.483200073242188,-39.42340087890625)
-603	Riachão das Neves	5	2926202	(-11.750800132751465,-44.914299011230469)
-604	Riachão do Jacuípe	5	2926301	(-11.806699752807617,-39.381801605224609)
-605	Riacho de Santana	5	2926400	(-13.605899810791016,-42.939701080322266)
-606	Ribeira do Amparo	5	2926509	(-11.042099952697754,-38.424198150634766)
-607	Ribeira do Pombal	5	2926608	(-10.837300300598145,-38.538200378417969)
-608	Ribeirão do Largo	5	2926657	(-15.450799942016602,-40.744098663330078)
-609	Rio de Contas	5	2926707	(-13.585200309753418,-41.804798126220703)
-610	Rio do Antônio	5	2926806	(-14.407099723815918,-42.072101593017578)
-611	Rio do Pires	5	2926905	(-13.118499755859375,-42.290199279785156)
-612	Rio Real	5	2927002	(-11.481399536132813,-37.933200836181641)
-613	Rodelas	5	2927101	(-8.8502101898193359,-38.779998779296875)
-614	Ruy Barbosa	5	2927200	(-12.281599998474121,-40.493099212646484)
-615	Salinas da Margarida	5	2927309	(-12.873000144958496,-38.756198883056641)
-616	Salvador	5	2927408	(-12.971799850463867,-38.5010986328125)
-617	Santa Bárbara	5	2927507	(-11.951499938964844,-38.968101501464844)
-618	Santa Brígida	5	2927606	(-9.7322702407836914,-38.120899200439453)
-619	Santa Cruz Cabrália	5	2927705	(-16.282499313354492,-39.029499053955078)
-620	Santa Cruz da Vitória	5	2927804	(-14.96399974822998,-39.811500549316406)
-621	Santa Inês	5	2927903	(-13.279299736022949,-39.813999176025391)
-622	Santa Luzia	5	2928059	(-15.434200286865234,-39.328701019287109)
-623	Santa Maria da Vitória	5	2928109	(-13.385899543762207,-44.201099395751953)
-624	Santa Rita de Cássia	5	2928406	(-11.00629997253418,-44.525501251220703)
-625	Santa Teresinha	5	2928505	(-12.769707679748535,-39.521526336669922)
-626	Santaluz	5	2928000	(-11.250800132751465,-39.375)
-627	Santana	5	2928208	(-12.97920036315918,-44.05059814453125)
-628	Santanópolis	5	2928307	(-12.031100273132324,-38.869400024414063)
-629	Santo Amaro	5	2928604	(-12.547200202941895,-38.713699340820312)
-630	Santo Antônio de Jesus	5	2928703	(-12.961400032043457,-39.258399963378906)
-631	Santo Estêvão	5	2928802	(-12.428000450134277,-39.250499725341797)
-632	São Desidério	5	2928901	(-12.357199668884277,-44.976898193359375)
-633	São Domingos	5	2928950	(-11.464900016784668,-39.526798248291016)
-634	São Felipe	5	2929107	(-12.839400291442871,-39.089298248291016)
-635	São Félix	5	2929008	(-12.610400199890137,-38.972698211669922)
-636	São Félix do Coribe	5	2929057	(-13.401900291442871,-44.183700561523438)
-637	São Francisco do Conde	5	2929206	(-12.618300437927246,-38.678600311279297)
-638	São Gabriel	5	2929255	(-11.217499732971191,-41.884300231933594)
-639	São Gonçalo dos Campos	5	2929305	(-12.433099746704102,-38.966300964355469)
-640	São José da Vitória	5	2929354	(-15.078700065612793,-39.343700408935547)
-641	São José do Jacuípe	5	2929370	(-11.413700103759766,-39.866901397705078)
-642	São Miguel das Matas	5	2929404	(-13.043399810791016,-39.457801818847656)
-643	São Sebastião do Passé	5	2929503	(-12.512299537658691,-38.490501403808594)
-644	Sapeaçu	5	2929602	(-12.720800399780273,-39.182399749755859)
-645	Sátiro Dias	5	2929701	(-11.592900276184082,-38.593799591064453)
-646	Saubara	5	2929750	(-12.738699913024902,-38.762500762939453)
-647	Saúde	5	2929800	(-10.94279956817627,-40.415500640869141)
-648	Seabra	5	2929909	(-12.416899681091309,-41.772201538085938)
-649	Sebastião Laranjeiras	5	2930006	(-14.571000099182129,-42.943401336669922)
-650	Senhor do Bonfim	5	2930105	(-10.459400177001953,-40.186500549316406)
-651	Sento Sé	5	2930204	(-9.7413797378540039,-41.87860107421875)
-652	Serra do Ramalho	5	2930154	(-13.565899848937988,-43.592899322509766)
-653	Serra Dourada	5	2930303	(-12.758999824523926,-43.950401306152344)
-654	Serra Preta	5	2930402	(-12.156000137329102,-39.330501556396484)
-655	Serrinha	5	2930501	(-11.65839958190918,-39.009998321533203)
-656	Serrolândia	5	2930600	(-11.408499717712402,-40.298301696777344)
-657	Simões Filho	5	2930709	(-12.786600112915039,-38.402900695800781)
-658	Sítio do Mato	5	2930758	(-13.080100059509277,-43.468898773193359)
-659	Sítio do Quinto	5	2930766	(-10.354499816894531,-38.221298217773438)
-660	Sobradinho	5	2930774	(-9.4502401351928711,-40.814498901367188)
-661	Souto Soares	5	2930808	(-12.088000297546387,-41.6427001953125)
-662	Tabocas do Brejo Velho	5	2930907	(-12.70259952545166,-44.007499694824219)
-663	Tanhaçu	5	2931004	(-14.019700050354004,-41.247299194335938)
-664	Tanque Novo	5	2931053	(-13.548500061035156,-42.493400573730469)
-665	Tanquinho	5	2931103	(-11.968000411987305,-39.103298187255859)
-666	Taperoá	5	2931202	(-13.532099723815918,-39.100898742675781)
-667	Tapiramutá	5	2931301	(-11.847499847412109,-40.792701721191406)
-668	Teixeira de Freitas	5	2931350	(-17.539899826049805,-39.740001678466797)
-669	Teodoro Sampaio	5	2931400	(-12.295000076293945,-38.634700775146484)
-670	Teofilândia	5	2931509	(-11.482700347900391,-38.991298675537109)
-671	Teolândia	5	2931608	(-13.589599609375,-39.484001159667969)
-672	Terra Nova	5	2931707	(-12.388799667358398,-38.623798370361328)
-673	Tremedal	5	2931806	(-14.973600387573242,-41.414199829101563)
-674	Tucano	5	2931905	(-10.958399772644043,-38.789398193359375)
-675	Uauá	5	2932002	(-9.8332500457763672,-39.479400634765625)
-676	Ubaíra	5	2932101	(-13.271400451660156,-39.666000366210937)
-677	Ubaitaba	5	2932200	(-14.303000450134277,-39.322200775146484)
-678	Ubatã	5	2932309	(-14.206299781799316,-39.520698547363281)
-679	Uibaí	5	2932408	(-11.339400291442871,-42.135398864746094)
-1215	Icatu	10	2105104	(-2.7720599174499512,-44.050098419189453)
-680	Umburanas	5	2932457	(-10.73390007019043,-41.323398590087891)
-681	Una	5	2932507	(-15.27910041809082,-39.076499938964844)
-682	Urandi	5	2932606	(-14.767800331115723,-42.649799346923828)
-683	Uruçuca	5	2932705	(-14.59630012512207,-39.285099029541016)
-684	Utinga	5	2932804	(-12.078300476074219,-41.095401763916016)
-685	Valença	5	2932903	(-13.366900444030762,-39.073001861572266)
-686	Valente	5	2933000	(-11.406200408935547,-39.457000732421875)
-687	Várzea da Roça	5	2933059	(-11.600500106811523,-40.132801055908203)
-688	Várzea do Poço	5	2933109	(-11.527299880981445,-40.314899444580078)
-689	Várzea Nova	5	2933158	(-11.25570011138916,-40.943199157714844)
-690	Varzedo	5	2933174	(-12.96720027923584,-39.391899108886719)
-691	Vera Cruz	5	2933208	(-12.95680046081543,-38.615299224853516)
-692	Vereda	5	2933257	(-17.218299865722656,-40.097400665283203)
-693	Vitória da Conquista	5	2933307	(-14.861499786376953,-40.844200134277344)
-694	Wagner	5	2933406	(-12.281900405883789,-41.171501159667969)
-695	Wanderley	5	2933455	(-12.114399909973145,-43.895801544189453)
-696	Wenceslau Guimarães	5	2933505	(-13.690799713134766,-39.476200103759766)
-697	Xique-Xique	5	2933604	(-10.822999954223633,-42.724498748779297)
-698	Abaiara	6	2300101	(-7.3458800315856934,-39.041599273681641)
-699	Acarape	6	2300150	(-4.220829963684082,-38.705501556396484)
-700	Acaraú	6	2300200	(-2.8876900672912598,-40.118301391601563)
-701	Acopiara	6	2300309	(-6.0891098976135254,-39.448001861572266)
-702	Aiuaba	6	2300408	(-6.5712199211120605,-40.117801666259766)
-703	Alcântaras	6	2300507	(-3.5853700637817383,-40.547901153564453)
-704	Altaneira	6	2300606	(-6.9983701705932617,-39.735599517822266)
-705	Alto Santo	6	2300705	(-5.5089402198791504,-38.274299621582031)
-706	Amontada	6	2300754	(-3.3601698875427246,-39.828800201416016)
-707	Antonina do Norte	6	2300804	(-6.7691898345947266,-39.98699951171875)
-708	Apuiarés	6	2300903	(-3.9450600147247314,-39.435901641845703)
-709	Aquiraz	6	2301000	(-3.8992900848388672,-38.389598846435547)
-710	Aracati	6	2301109	(-4.5582599639892578,-37.767898559570313)
-711	Aracoiaba	6	2301208	(-4.3687200546264648,-38.8125)
-712	Ararendá	6	2301257	(-4.7456698417663574,-40.831001281738281)
-713	Araripe	6	2301307	(-7.2131900787353516,-40.135898590087891)
-714	Aratuba	6	2301406	(-4.412290096282959,-39.047100067138672)
-715	Arneiroz	6	2301505	(-6.316500186920166,-40.165298461914063)
-716	Assaré	6	2301604	(-6.8668999671936035,-39.868900299072266)
-717	Aurora	6	2301703	(-6.9334897994995117,-38.974201202392578)
-718	Baixio	6	2301802	(-6.7194499969482422,-38.713401794433594)
-719	Banabuiú	6	2301851	(-5.3045401573181152,-38.913200378417969)
-720	Barbalha	6	2301901	(-7.2982001304626465,-39.302101135253906)
-721	Barreira	6	2301950	(-4.2892098426818848,-38.642898559570313)
-722	Barro	6	2302008	(-7.171879768371582,-38.774101257324219)
-723	Barroquinha	6	2302057	(-3.0205099582672119,-41.135799407958984)
-724	Baturité	6	2302107	(-4.3259801864624023,-38.881198883056641)
-725	Beberibe	6	2302206	(-4.1774101257324219,-38.127101898193359)
-726	Bela Cruz	6	2302305	(-3.0499598979949951,-40.167098999023438)
-727	Boa Viagem	6	2302404	(-5.1125798225402832,-39.733699798583984)
-728	Brejo Santo	6	2302503	(-7.4846901893615723,-38.979900360107422)
-729	Camocim	6	2302602	(-2.9005000591278076,-40.854400634765625)
-730	Campos Sales	6	2302701	(-7.0676097869873047,-40.368698120117188)
-731	Canindé	6	2302800	(-4.3516201972961426,-39.315498352050781)
-732	Capistrano	6	2302909	(-4.4556899070739746,-38.904800415039063)
-733	Caridade	6	2303006	(-4.2251400947570801,-39.191200256347656)
-734	Cariré	6	2303105	(-3.9485800266265869,-40.476001739501953)
-735	Caririaçu	6	2303204	(-7.0280799865722656,-39.282798767089844)
-736	Cariús	6	2303303	(-6.5242800712585449,-39.491600036621094)
-737	Carnaubal	6	2303402	(-4.1598501205444336,-40.941299438476562)
-738	Cascavel	6	2303501	(-4.1296701431274414,-38.241199493408203)
-739	Catarina	6	2303600	(-6.1229100227355957,-39.873600006103516)
-740	Catunda	6	2303659	(-4.6433601379394531,-40.200000762939453)
-741	Caucaia	6	2303709	(-3.7279698848724365,-38.661899566650391)
-742	Cedro	6	2303808	(-6.6003398895263672,-39.060901641845703)
-743	Chaval	6	2303907	(-3.0357100963592529,-41.243499755859375)
-744	Choró	6	2303931	(-4.8390598297119141,-39.1343994140625)
-745	Chorozinho	6	2303956	(-4.2887301445007324,-38.498600006103516)
-746	Coreaú	6	2304004	(-3.5415000915527344,-40.658699035644531)
-747	Crateús	6	2304103	(-5.1676797866821289,-40.653598785400391)
-748	Crato	6	2304202	(-7.2153000831604004,-39.410301208496094)
-749	Croatá	6	2304236	(-4.4048099517822266,-40.902198791503906)
-750	Cruz	6	2304251	(-2.9181299209594727,-40.175998687744141)
-751	Deputado Irapuan Pinheiro	6	2304269	(-5.9148502349853516,-39.256999969482422)
-752	Ererê	6	2304277	(-6.0275101661682129,-38.346099853515625)
-753	Eusébio	6	2304285	(-3.8924999237060547,-38.455898284912109)
-754	Farias Brito	6	2304301	(-6.9214601516723633,-39.565101623535156)
-755	Forquilha	6	2304350	(-3.7994499206542969,-40.263401031494141)
-756	Fortaleza	6	2304400	(-3.7166399955749512,-38.542301177978516)
-757	Fortim	6	2304459	(-4.4512600898742676,-37.798099517822266)
-758	Frecheirinha	6	2304509	(-3.7555699348449707,-40.818000793457031)
-759	General Sampaio	6	2304608	(-4.0435099601745605,-39.453998565673828)
-760	Graça	6	2304657	(-4.044219970703125,-40.749000549316406)
-761	Granja	6	2304707	(-3.1278800964355469,-40.837200164794922)
-762	Granjeiro	6	2304806	(-6.8813400268554687,-39.214401245117188)
-763	Groaíras	6	2304905	(-3.917870044708252,-40.385200500488281)
-764	Guaiúba	6	2304954	(-4.0405697822570801,-38.640399932861328)
-765	Guaraciaba do Norte	6	2305001	(-4.1581401824951172,-40.747600555419922)
-766	Guaramiranga	6	2305100	(-4.2624797821044922,-38.931999206542969)
-767	Hidrolândia	6	2305209	(-4.4095802307128906,-40.405601501464844)
-768	Horizonte	6	2305233	(-4.1209001541137695,-38.470699310302734)
-769	Ibaretama	6	2305266	(-4.8037600517272949,-38.750099182128906)
-770	Ibiapina	6	2305308	(-3.924030065536499,-40.891101837158203)
-771	Ibicuitinga	6	2305332	(-4.9699897766113281,-38.636199951171875)
-772	Icapuí	6	2305357	(-4.7120599746704102,-37.353099822998047)
-773	Icó	6	2305407	(-6.3962697982788086,-38.855400085449219)
-774	Iguatu	6	2305506	(-6.3628101348876953,-39.289199829101563)
-775	Independência	6	2305605	(-5.3878898620605469,-40.308498382568359)
-776	Ipaporanga	6	2305654	(-4.8976402282714844,-40.753700256347656)
-777	Ipaumirim	6	2305704	(-6.7826499938964844,-38.717899322509766)
-778	Ipu	6	2305803	(-4.3174800872802734,-40.705898284912109)
-779	Ipueiras	6	2305902	(-4.538020133972168,-40.711799621582031)
-780	Iracema	6	2306009	(-5.8123998641967773,-38.291900634765625)
-781	Irauçuba	6	2306108	(-3.7473700046539307,-39.7843017578125)
-782	Itaiçaba	6	2306207	(-4.6714601516723633,-37.833000183105469)
-783	Itaitinga	6	2306256	(-3.9657700061798096,-38.529800415039063)
-784	Itapagé	6	2306306	(-3.6831400394439697,-39.585498809814453)
-785	Itapipoca	6	2306405	(-3.4993300437927246,-39.583599090576172)
-786	Itapiúna	6	2306504	(-4.5551600456237793,-38.9281005859375)
-787	Itarema	6	2306553	(-2.924799919128418,-39.916698455810547)
-788	Itatira	6	2306603	(-4.5260801315307617,-39.620201110839844)
-789	Jaguaretama	6	2306702	(-5.605100154876709,-38.763900756835938)
-790	Jaguaribara	6	2306801	(-5.677649974822998,-38.535900115966797)
-791	Jaguaribe	6	2306900	(-5.902130126953125,-38.622699737548828)
-792	Jaguaruana	6	2307007	(-4.831510066986084,-37.780998229980469)
-793	Jardim	6	2307106	(-7.5759902000427246,-39.282600402832031)
-794	Jati	6	2307205	(-7.6796998977661133,-39.002899169921875)
-795	Jijoca de Jericoacoara	6	2307254	(-2.7933099269866943,-40.512699127197266)
-796	Juazeiro do Norte	6	2307304	(-7.1962099075317383,-39.307598114013672)
-797	Jucás	6	2307403	(-6.5152301788330078,-39.518699645996094)
-798	Lavras da Mangabeira	6	2307502	(-6.7448000907897949,-38.970600128173828)
-799	Limoeiro do Norte	6	2307601	(-5.1439199447631836,-38.084701538085937)
-800	Madalena	6	2307635	(-4.8460102081298828,-39.572498321533203)
-801	Maracanaú	6	2307650	(-3.8669900894165039,-38.625900268554688)
-802	Maranguape	6	2307700	(-3.8914299011230469,-38.682899475097656)
-803	Marco	6	2307809	(-3.1284999847412109,-40.158199310302734)
-804	Martinópole	6	2307908	(-3.2251999378204346,-40.689601898193359)
-805	Massapê	6	2308005	(-3.5236399173736572,-40.342300415039063)
-806	Mauriti	6	2308104	(-7.3859701156616211,-38.770801544189453)
-807	Meruoca	6	2308203	(-3.5397400856018066,-40.453098297119141)
-808	Milagres	6	2308302	(-7.297490119934082,-38.937801361083984)
-809	Milhã	6	2308351	(-5.6725201606750488,-39.1875)
-810	Miraíma	6	2308377	(-3.5686700344085693,-39.966300964355469)
-811	Missão Velha	6	2308401	(-7.2352199554443359,-39.143001556396484)
-812	Mombaça	6	2308500	(-5.7384400367736816,-39.630001068115234)
-813	Monsenhor Tabosa	6	2308609	(-4.7910199165344238,-40.064601898193359)
-814	Morada Nova	6	2308708	(-5.0973601341247559,-38.370201110839844)
-815	Moraújo	6	2308807	(-3.4631099700927734,-40.677600860595703)
-816	Morrinhos	6	2308906	(-3.234260082244873,-40.123298645019531)
-817	Mucambo	6	2309003	(-3.9027099609375,-40.745201110839844)
-818	Mulungu	6	2309102	(-4.3029398918151855,-38.995098114013672)
-819	Nova Olinda	6	2309201	(-7.0841498374938965,-39.671298980712891)
-820	Nova Russas	6	2309300	(-4.7058100700378418,-40.562099456787109)
-821	Novo Oriente	6	2309409	(-5.525519847869873,-40.77130126953125)
-822	Ocara	6	2309458	(-4.4852299690246582,-38.593299865722656)
-823	Orós	6	2309508	(-6.2518200874328613,-38.905300140380859)
-824	Pacajus	6	2309607	(-4.1710700988769531,-38.465000152587891)
-825	Pacatuba	6	2309706	(-3.9783999919891357,-38.618301391601563)
-826	Pacoti	6	2309805	(-4.2249197959899902,-38.922000885009766)
-827	Pacujá	6	2309904	(-3.9832699298858643,-40.698898315429688)
-828	Palhano	6	2310001	(-4.736720085144043,-37.965499877929687)
-829	Palmácia	6	2310100	(-4.1383099555969238,-38.844600677490234)
-830	Paracuru	6	2310209	(-3.4143600463867187,-39.029998779296875)
-831	Paraipaba	6	2310258	(-3.4379899501800537,-39.147899627685547)
-832	Parambu	6	2310308	(-6.2076802253723145,-40.690498352050781)
-833	Paramoti	6	2310407	(-4.0881500244140625,-39.24169921875)
-834	Pedra Branca	6	2310506	(-5.4534101486206055,-39.707801818847656)
-835	Penaforte	6	2310605	(-7.8216300010681152,-39.070701599121094)
-836	Pentecoste	6	2310704	(-3.7927401065826416,-39.269199371337891)
-837	Pereiro	6	2310803	(-6.0357599258422852,-38.462398529052734)
-838	Pindoretama	6	2310852	(-4.0158400535583496,-38.306098937988281)
-839	Piquet Carneiro	6	2310902	(-5.8002500534057617,-39.416999816894531)
-840	Pires Ferreira	6	2310951	(-4.239220142364502,-40.644199371337891)
-841	Poranga	6	2311009	(-4.7467198371887207,-40.920501708984375)
-842	Porteiras	6	2311108	(-7.5226497650146484,-39.113998413085938)
-843	Potengi	6	2311207	(-7.0915398597717285,-40.023300170898437)
-844	Potiretama	6	2311231	(-5.7128701210021973,-38.157798767089844)
-845	Quiterianópolis	6	2311264	(-5.8425002098083496,-40.700199127197266)
-846	Quixadá	6	2311306	(-4.9663000106811523,-39.015499114990234)
-847	Quixelô	6	2311355	(-6.2463698387145996,-39.201099395751953)
-848	Quixeramobim	6	2311405	(-5.1906700134277344,-39.288898468017578)
-849	Quixeré	6	2311504	(-5.0714797973632812,-37.980201721191406)
-850	Redenção	6	2311603	(-4.2158699035644531,-38.727699279785156)
-851	Reriutaba	6	2311702	(-4.1419100761413574,-40.575901031494141)
-852	Russas	6	2311801	(-4.9267301559448242,-37.972099304199219)
-853	Saboeiro	6	2311900	(-6.534599781036377,-39.901699066162109)
-854	Salitre	6	2311959	(-7.2839798927307129,-40.450000762939453)
-855	Santa Quitéria	6	2312205	(-4.3260798454284668,-40.152301788330078)
-856	Santana do Acaraú	6	2312007	(-3.4614400863647461,-40.211799621582031)
-857	Santana do Cariri	6	2312106	(-7.1761298179626465,-39.730201721191406)
-858	São Benedito	6	2312304	(-4.0471301078796387,-40.859600067138672)
-859	São Gonçalo do Amarante	6	2312403	(-3.6051499843597412,-38.972599029541016)
-860	São João do Jaguaribe	6	2312502	(-5.2751598358154297,-38.269401550292969)
-861	São Luís do Curu	6	2312601	(-3.66975998878479,-39.239101409912109)
-862	Senador Pompeu	6	2312700	(-5.5824398994445801,-39.370399475097656)
-863	Senador Sá	6	2312809	(-3.3530499935150146,-40.466201782226563)
-864	Sobral	6	2312908	(-3.6891300678253174,-40.348201751708984)
-865	Solonópole	6	2313005	(-5.7189397811889648,-39.010700225830078)
-866	Tabuleiro do Norte	6	2313104	(-5.2435297966003418,-38.128200531005859)
-867	Tamboril	6	2313203	(-4.83135986328125,-40.319599151611328)
-868	Tarrafas	6	2313252	(-6.678380012512207,-39.752998352050781)
-869	Tauá	6	2313302	(-5.9858498573303223,-40.296798706054687)
-870	Tejuçuoca	6	2313351	(-3.9883100986480713,-39.579898834228516)
-871	Tianguá	6	2313401	(-3.7296500205993652,-40.992298126220703)
-872	Trairi	6	2313500	(-3.269320011138916,-39.268100738525391)
-873	Tururu	6	2313559	(-3.5841300487518311,-39.429698944091797)
-874	Ubajara	6	2313609	(-3.8544800281524658,-40.920398712158203)
-875	Umari	6	2313708	(-6.6389298439025879,-38.700801849365234)
-876	Umirim	6	2313757	(-3.6765398979187012,-39.346500396728516)
-877	Uruburetama	6	2313807	(-3.6231598854064941,-39.510700225830078)
-878	Uruoca	6	2313906	(-3.3081901073455811,-40.562801361083984)
-879	Varjota	6	2313955	(-4.1938700675964355,-40.474098205566406)
-880	Várzea Alegre	6	2314003	(-6.7826399803161621,-39.294200897216797)
-881	Viçosa do Ceará	6	2314102	(-3.5666999816894531,-41.091598510742187)
-882	Brasília	7	5300108	(-15.779500007629395,-47.929698944091797)
-883	Abadia de Goiás	9	5200050	(-16.757299423217773,-49.441200256347656)
-884	Abadiânia	9	5200100	(-16.197000503540039,-48.705699920654297)
-885	Acreúna	9	5200134	(-17.395999908447266,-50.374900817871094)
-886	Adelândia	9	5200159	(-16.412700653076172,-50.165699005126953)
-887	Água Fria de Goiás	9	5200175	(-14.977800369262695,-47.782299041748047)
-888	Água Limpa	9	5200209	(-18.07710075378418,-48.760299682617188)
-889	Águas Lindas de Goiás	9	5200258	(-15.761699676513672,-48.281600952148438)
-890	Alexânia	9	5200308	(-16.083400726318359,-48.507598876953125)
-891	Aloândia	9	5200506	(-17.72920036315918,-49.476898193359375)
-892	Alto Horizonte	9	5200555	(-14.197799682617188,-49.337799072265625)
-893	Alto Paraíso de Goiás	9	5200605	(-14.130499839782715,-47.509998321533203)
-894	Alvorada do Norte	9	5200803	(-14.479700088500977,-46.491001129150391)
-895	Amaralina	9	5200829	(-13.923600196838379,-49.296199798583984)
-896	Americano do Brasil	9	5200852	(-16.251399993896484,-49.983100891113281)
-897	Amorinópolis	9	5200902	(-16.615100860595703,-51.091899871826172)
-898	Anápolis	9	5201108	(-16.328100204467773,-48.952999114990234)
-899	Anhanguera	9	5201207	(-18.333900451660156,-48.220401763916016)
-900	Anicuns	9	5201306	(-16.464199066162109,-49.961700439453125)
-901	Aparecida de Goiânia	9	5201405	(-16.819799423217773,-49.246898651123047)
-902	Aparecida do Rio Doce	9	5201454	(-18.294099807739258,-51.151599884033203)
-903	Aporé	9	5201504	(-18.960699081420898,-51.923198699951172)
-904	Araçu	9	5201603	(-16.356300354003906,-49.680400848388672)
-905	Aragarças	9	5201702	(-15.895500183105469,-52.237201690673828)
-906	Aragoiânia	9	5201801	(-16.908700942993164,-49.447601318359375)
-907	Araguapaz	9	5202155	(-15.090900421142578,-50.631500244140625)
-908	Arenópolis	9	5202353	(-16.383699417114258,-51.556301116943359)
-909	Aruanã	9	5202502	(-14.916600227355957,-51.075000762939453)
-910	Aurilândia	9	5202601	(-16.677299499511719,-50.464099884033203)
-911	Avelinópolis	9	5202809	(-16.467199325561523,-49.757900238037109)
-912	Baliza	9	5203104	(-16.196599960327148,-52.539299011230469)
-913	Barro Alto	9	5203203	(-14.965800285339355,-48.908599853515625)
-914	Bela Vista de Goiás	9	5203302	(-16.96929931640625,-48.951301574707031)
-915	Bom Jardim de Goiás	9	5203401	(-16.206300735473633,-52.172798156738281)
-916	Bom Jesus de Goiás	9	5203500	(-18.217300415039063,-49.740001678466797)
-917	Bonfinópolis	9	5203559	(-16.617300033569336,-48.961601257324219)
-918	Bonópolis	9	5203575	(-13.632900238037109,-49.810600280761719)
-919	Brazabrantes	9	5203609	(-16.4281005859375,-49.386299133300781)
-920	Britânia	9	5203807	(-15.242799758911133,-51.160198211669922)
-921	Buriti Alegre	9	5203906	(-18.137800216674805,-49.040401458740234)
-922	Buriti de Goiás	9	5203939	(-16.17919921875,-50.430198669433594)
-923	Buritinópolis	9	5203962	(-14.477199554443359,-46.407600402832031)
-924	Cabeceiras	9	5204003	(-15.799500465393066,-46.926498413085938)
-925	Cachoeira Alta	9	5204102	(-18.761800765991211,-50.943199157714844)
-926	Cachoeira de Goiás	9	5204201	(-16.66349983215332,-50.645999908447266)
-927	Cachoeira Dourada	9	5204250	(-18.48590087890625,-49.476600646972656)
-928	Caçu	9	5204300	(-18.55940055847168,-51.132801055908203)
-929	Caiapônia	9	5204409	(-16.953899383544922,-51.809101104736328)
-930	Caldas Novas	9	5204508	(-17.744100570678711,-48.624599456787109)
-931	Caldazinha	9	5204557	(-16.711700439453125,-49.001300811767578)
-932	Campestre de Goiás	9	5204607	(-16.762399673461914,-49.694999694824219)
-933	Campinaçu	9	5204656	(-13.786999702453613,-48.570400238037109)
-934	Campinorte	9	5204706	(-14.313699722290039,-49.151100158691406)
-935	Campo Alegre de Goiás	9	5204805	(-17.636299133300781,-47.776798248291016)
-936	Campo Limpo de Goiás	9	5204854	(-16.297100067138672,-49.089500427246094)
-937	Campos Belos	9	5204904	(-13.034999847412109,-46.768100738525391)
-938	Campos Verdes	9	5204953	(-14.244199752807617,-49.652801513671875)
-939	Carmo do Rio Verde	9	5205000	(-15.354900360107422,-49.708000183105469)
-940	Castelândia	9	5205059	(-18.092100143432617,-50.202999114990234)
-941	Catalão	9	5205109	(-18.165599822998047,-47.944000244140625)
-942	Caturaí	9	5205208	(-16.444700241088867,-49.493598937988281)
-943	Cavalcante	9	5205307	(-13.797599792480469,-47.456600189208984)
-944	Ceres	9	5205406	(-15.306099891662598,-49.599998474121094)
-945	Cezarina	9	5205455	(-16.971799850463867,-49.775798797607422)
-946	Chapadão do Céu	9	5205471	(-18.40730094909668,-52.548999786376953)
-947	Cidade Ocidental	9	5205497	(-16.076499938964844,-47.925201416015625)
-948	Cocalzinho de Goiás	9	5205513	(-15.791399955749512,-48.774700164794922)
-949	Colinas do Sul	9	5205521	(-14.152799606323242,-48.076000213623047)
-950	Córrego do Ouro	9	5205703	(-16.291799545288086,-50.550300598144531)
-951	Corumbá de Goiás	9	5205802	(-15.924500465393066,-48.811698913574219)
-952	Corumbaíba	9	5205901	(-18.141500473022461,-48.562599182128906)
-953	Cristalina	9	5206206	(-16.767599105834961,-47.61309814453125)
-954	Cristianópolis	9	5206305	(-17.198699951171875,-48.703399658203125)
-955	Crixás	9	5206404	(-14.541199684143066,-49.9739990234375)
-956	Cromínia	9	5206503	(-17.288299560546875,-49.379798889160156)
-957	Cumari	9	5206602	(-18.264400482177734,-48.151100158691406)
-958	Damianópolis	9	5206701	(-14.560400009155273,-46.178001403808594)
-959	Damolândia	9	5206800	(-16.254400253295898,-49.36309814453125)
-960	Davinópolis	9	5206909	(-18.150100708007813,-47.556800842285156)
-961	Diorama	9	5207105	(-16.232900619506836,-51.254299163818359)
-962	Divinópolis de Goiás	9	5208301	(-13.285300254821777,-46.399898529052734)
-963	Doverlândia	9	5207253	(-16.718799591064453,-52.318901062011719)
-964	Edealina	9	5207352	(-17.423900604248047,-49.664398193359375)
-965	Edéia	9	5207402	(-17.340599060058594,-49.929500579833984)
-966	Estrela do Norte	9	5207501	(-13.866499900817871,-49.071601867675781)
-967	Faina	9	5207535	(-15.447299957275391,-50.362201690673828)
-968	Fazenda Nova	9	5207600	(-16.183399200439453,-50.778099060058594)
-969	Firminópolis	9	5207808	(-16.577800750732422,-50.304000854492188)
-970	Flores de Goiás	9	5207907	(-14.445099830627441,-47.041698455810547)
-971	Formosa	9	5208004	(-15.539999961853027,-47.337001800537109)
-972	Formoso	9	5208103	(-13.649900436401367,-48.877498626708984)
-973	Gameleira de Goiás	9	5208152	(-16.485374450683594,-48.645408630371094)
-974	Goianápolis	9	5208400	(-16.509799957275391,-49.023399353027344)
-975	Goiandira	9	5208509	(-18.135200500488281,-48.087501525878906)
-976	Goianésia	9	5208608	(-15.311800003051758,-49.116199493408203)
-977	Goiânia	9	5208707	(-16.686399459838867,-49.264301300048828)
-978	Goianira	9	5208806	(-16.494699478149414,-49.426998138427734)
-979	Goiás	9	5208905	(-15.933300018310547,-50.139999389648438)
-980	Goiatuba	9	5209101	(-18.010499954223633,-49.365798950195313)
-981	Gouvelândia	9	5209150	(-18.623800277709961,-50.080501556396484)
-982	Guapó	9	5209200	(-16.829700469970703,-49.534500122070313)
-983	Guaraíta	9	5209291	(-15.612099647521973,-50.026500701904297)
-984	Guarani de Goiás	9	5209408	(-13.942099571228027,-46.486801147460938)
-985	Guarinos	9	5209457	(-14.72920036315918,-49.700599670410156)
-986	Heitoraí	9	5209606	(-15.718999862670898,-49.826801300048828)
-987	Hidrolândia	9	5209705	(-16.962600708007812,-49.22650146484375)
-988	Hidrolina	9	5209804	(-14.726099967956543,-49.463401794433594)
-989	Iaciara	9	5209903	(-14.101099967956543,-46.633499145507813)
-990	Inaciolândia	9	5209937	(-18.486900329589844,-49.988800048828125)
-991	Indiara	9	5209952	(-17.138700485229492,-49.986198425292969)
-992	Inhumas	9	5210000	(-16.361099243164062,-49.500099182128906)
-993	Ipameri	9	5210109	(-17.721500396728516,-48.158100128173828)
-994	Ipiranga de Goiás	9	5210158	(-15.168880462646484,-49.669460296630859)
-995	Iporá	9	5210208	(-16.439800262451172,-51.118000030517578)
-996	Israelândia	9	5210307	(-16.314399719238281,-50.908699035644531)
-997	Itaberaí	9	5210406	(-16.020599365234375,-49.805999755859375)
-998	Itaguari	9	5210562	(-15.918000221252441,-49.607101440429688)
-999	Itaguaru	9	5210604	(-15.756500244140625,-49.635398864746094)
-1000	Itajá	9	5210802	(-19.067300796508789,-51.54949951171875)
-1001	Itapaci	9	5210901	(-14.952199935913086,-49.551101684570313)
-1002	Itapirapuã	9	5211008	(-15.820500373840332,-50.609401702880859)
-1003	Itapuranga	9	5211206	(-15.560600280761719,-49.949001312255859)
-1004	Itarumã	9	5211305	(-18.76460075378418,-51.348499298095703)
-1005	Itauçu	9	5211404	(-16.202899932861328,-49.61090087890625)
-1006	Itumbiara	9	5211503	(-18.409299850463867,-49.215801239013672)
-1007	Ivolândia	9	5211602	(-16.59950065612793,-50.792098999023438)
-1008	Jandaia	9	5211701	(-17.048099517822266,-50.145301818847656)
-1009	Jaraguá	9	5211800	(-15.752900123596191,-49.334400177001953)
-1010	Jataí	9	5211909	(-17.878400802612305,-51.720401763916016)
-1011	Jaupaci	9	5212006	(-16.177299499511719,-50.950801849365234)
-1012	Jesúpolis	9	5212055	(-15.948399543762207,-49.3739013671875)
-1013	Joviânia	9	5212105	(-17.802000045776367,-49.619701385498047)
-1014	Jussara	9	5212204	(-15.865900039672852,-50.866798400878906)
-1015	Lagoa Santa	9	5212253	(-19.18324089050293,-51.399803161621094)
-1016	Leopoldo de Bulhões	9	5212303	(-16.618999481201172,-48.742801666259766)
-1017	Luziânia	9	5212501	(-16.253000259399414,-47.950000762939453)
-1018	Mairipotaba	9	5212600	(-17.297500610351563,-49.489799499511719)
-1019	Mambaí	9	5212709	(-14.4822998046875,-46.116500854492187)
-1020	Mara Rosa	9	5212808	(-14.014800071716309,-49.177700042724609)
-1021	Marzagão	9	5212907	(-17.982999801635742,-48.641498565673828)
-1022	Matrinchã	9	5212956	(-15.434200286865234,-50.745601654052734)
-1023	Maurilândia	9	5213004	(-17.971900939941406,-50.338798522949219)
-1024	Mimoso de Goiás	9	5213053	(-15.05150032043457,-48.161098480224609)
-1025	Minaçu	9	5213087	(-13.530400276184082,-48.220600128173828)
-1026	Mineiros	9	5213103	(-17.565399169921875,-52.553699493408203)
-1027	Moiporá	9	5213400	(-16.543399810791016,-50.738998413085938)
-1028	Monte Alegre de Goiás	9	5213509	(-13.255200386047363,-46.892799377441406)
-1029	Montes Claros de Goiás	9	5213707	(-16.005899429321289,-51.397899627685547)
-1030	Montividiu	9	5213756	(-17.443899154663086,-51.172798156738281)
-1031	Montividiu do Norte	9	5213772	(-13.34850025177002,-48.685298919677734)
-1032	Morrinhos	9	5213806	(-17.733400344848633,-49.105899810791016)
-1033	Morro Agudo de Goiás	9	5213855	(-15.318400382995605,-50.055301666259766)
-1034	Mossâmedes	9	5213905	(-16.124000549316406,-50.213600158691406)
-1035	Mozarlândia	9	5214002	(-14.745699882507324,-50.571300506591797)
-1036	Mundo Novo	9	5214051	(-13.772899627685547,-50.281398773193359)
-1037	Mutunópolis	9	5214101	(-13.730299949645996,-49.274501800537109)
-1038	Nazário	9	5214408	(-16.580799102783203,-49.881698608398437)
-1039	Nerópolis	9	5214507	(-16.404699325561523,-49.222698211669922)
-1040	Niquelândia	9	5214606	(-14.46619987487793,-48.45989990234375)
-1041	Nova América	9	5214705	(-15.020600318908691,-49.895301818847656)
-1042	Nova Aurora	9	5214804	(-18.059700012207031,-48.255199432373047)
-1043	Nova Crixás	9	5214838	(-14.095700263977051,-50.330001831054687)
-1044	Nova Glória	9	5214861	(-15.145000457763672,-49.573699951171875)
-1045	Nova Iguaçu de Goiás	9	5214879	(-14.286800384521484,-49.387199401855469)
-1046	Nova Roma	9	5214903	(-13.738800048828125,-46.873401641845703)
-1047	Nova Veneza	9	5215009	(-16.369499206542969,-49.316799163818359)
-1048	Novo Brasil	9	5215207	(-16.031299591064453,-50.711299896240234)
-1049	Novo Gama	9	5215231	(-16.059200286865234,-48.041698455810547)
-1050	Novo Planalto	9	5215256	(-13.242400169372559,-49.506000518798828)
-1051	Orizona	9	5215306	(-17.03339958190918,-48.296398162841797)
-1052	Ouro Verde de Goiás	9	5215405	(-16.218099594116211,-49.194198608398437)
-1053	Ouvidor	9	5215504	(-18.227699279785156,-47.835498809814453)
-1054	Padre Bernardo	9	5215603	(-15.160499572753906,-48.283298492431641)
-1055	Palestina de Goiás	9	5215652	(-16.739200592041016,-51.530899047851563)
-1056	Palmeiras de Goiás	9	5215702	(-16.804399490356445,-49.923999786376953)
-1057	Palmelo	9	5215801	(-17.325799942016602,-48.425998687744141)
-1058	Palminópolis	9	5215900	(-16.792400360107422,-50.165199279785156)
-1059	Panamá	9	5216007	(-18.178300857543945,-49.354999542236328)
-1060	Paranaiguara	9	5216304	(-18.914100646972656,-50.653900146484375)
-1061	Paraúna	9	5216403	(-16.946300506591797,-50.448398590087891)
-1062	Perolândia	9	5216452	(-17.525800704956055,-52.064998626708984)
-1063	Petrolina de Goiás	9	5216809	(-16.096799850463867,-49.336399078369141)
-1064	Pilar de Goiás	9	5216908	(-14.760800361633301,-49.578399658203125)
-1065	Piracanjuba	9	5217104	(-17.302000045776367,-49.016998291015625)
-1066	Piranhas	9	5217203	(-16.425800323486328,-51.823501586914063)
-1067	Pirenópolis	9	5217302	(-15.850700378417969,-48.958400726318359)
-1068	Pires do Rio	9	5217401	(-17.301900863647461,-48.276798248291016)
-1069	Planaltina	9	5217609	(-15.451999664306641,-47.608898162841797)
-1070	Pontalina	9	5217708	(-17.522499084472656,-49.448898315429688)
-1071	Porangatu	9	5218003	(-13.43910026550293,-49.150299072265625)
-1072	Porteirão	9	5218052	(-17.814300537109375,-50.165298461914062)
-1073	Portelândia	9	5218102	(-17.355400085449219,-52.679901123046875)
-1074	Posse	9	5218300	(-14.08590030670166,-46.370399475097656)
-1075	Professor Jamil	9	5218391	(-17.249700546264648,-49.243999481201172)
-1076	Quirinópolis	9	5218508	(-18.447200775146484,-50.454700469970703)
-1077	Rialma	9	5218607	(-15.314499855041504,-49.581401824951172)
-1078	Rianápolis	9	5218706	(-15.445599555969238,-49.511398315429688)
-1079	Rio Quente	9	5218789	(-17.77400016784668,-48.772499084472656)
-1080	Rio Verde	9	5218805	(-17.792299270629883,-50.919200897216797)
-1081	Rubiataba	9	5218904	(-15.161700248718262,-49.804798126220703)
-1082	Sanclerlândia	9	5219001	(-16.197000503540039,-50.312400817871094)
-1083	Santa Bárbara de Goiás	9	5219100	(-16.571399688720703,-49.695400238037109)
-1084	Santa Cruz de Goiás	9	5219209	(-17.315500259399414,-48.480899810791016)
-1085	Santa Fé de Goiás	9	5219258	(-15.766400337219238,-51.10369873046875)
-1086	Santa Helena de Goiás	9	5219308	(-17.811500549316406,-50.597698211669922)
-1087	Santa Isabel	9	5219357	(-15.29580020904541,-49.425899505615234)
-1088	Santa Rita do Araguaia	9	5219407	(-17.326900482177734,-53.201198577880859)
-1089	Santa Rita do Novo Destino	9	5219456	(-15.135100364685059,-49.12030029296875)
-1090	Santa Rosa de Goiás	9	5219506	(-16.083999633789063,-49.49530029296875)
-1091	Santa Tereza de Goiás	9	5219605	(-13.713800430297852,-49.014400482177734)
-1092	Santa Terezinha de Goiás	9	5219704	(-14.432600021362305,-49.709098815917969)
-1093	Santo Antônio da Barra	9	5219712	(-17.558500289916992,-50.634498596191406)
-1094	Santo Antônio de Goiás	9	5219738	(-16.481500625610352,-49.309600830078125)
-1095	Santo Antônio do Descoberto	9	5219753	(-15.941200256347656,-48.257801055908203)
-1096	São Domingos	9	5219803	(-13.621035575866699,-46.741481781005859)
-1097	São Francisco de Goiás	9	5219902	(-15.925600051879883,-49.260501861572266)
-1098	São João d`Aliança	9	5220009	(-14.704799652099609,-47.522800445556641)
-1099	São João da Paraúna	9	5220058	(-16.812599182128906,-50.409198760986328)
-1100	São Luís de Montes Belos	9	5220108	(-16.521099090576172,-50.372600555419922)
-1101	São Luíz do Norte	9	5220157	(-14.860799789428711,-49.328498840332031)
-1102	São Miguel do Araguaia	9	5220207	(-13.273099899291992,-50.163398742675781)
-1103	São Miguel do Passa Quatro	9	5220264	(-17.058200836181641,-48.661998748779297)
-1104	São Patrício	9	5220280	(-15.350000381469727,-49.818000793457031)
-1105	São Simão	9	5220405	(-18.996000289916992,-50.547000885009766)
-1106	Senador Canedo	9	5220454	(-16.708400726318359,-49.091400146484375)
-1107	Serranópolis	9	5220504	(-18.306699752807617,-51.958599090576172)
-1108	Silvânia	9	5220603	(-16.659999847412109,-48.608299255371094)
-1109	Simolândia	9	5220686	(-14.464400291442871,-46.484699249267578)
-1110	Sítio d`Abadia	9	5220702	(-14.799200057983398,-46.250598907470703)
-1111	Taquaral de Goiás	9	5221007	(-16.052099227905273,-49.603900909423828)
-1112	Teresina de Goiás	9	5221080	(-13.780099868774414,-47.265899658203125)
-1113	Terezópolis de Goiás	9	5221197	(-16.394500732421875,-49.079700469970703)
-1114	Três Ranchos	9	5221304	(-18.353900909423828,-47.7760009765625)
-1115	Trindade	9	5221403	(-16.651699066162109,-49.492698669433594)
-1116	Trombas	9	5221452	(-13.507900238037109,-48.74169921875)
-1117	Turvânia	9	5221502	(-16.612499237060547,-50.13690185546875)
-1118	Turvelândia	9	5221551	(-17.850200653076172,-50.302398681640625)
-1119	Uirapuru	9	5221577	(-14.283499717712402,-49.920101165771484)
-1120	Uruaçu	9	5221601	(-14.523799896240234,-49.139598846435547)
-1121	Uruana	9	5221700	(-15.499300003051758,-49.686100006103516)
-1122	Urutaí	9	5221809	(-17.465099334716797,-48.201499938964844)
-1123	Valparaíso de Goiás	9	5221858	(-16.065099716186523,-47.975700378417969)
-1124	Varjão	9	5221908	(-17.047100067138672,-49.631198883056641)
-1125	Vianópolis	9	5222005	(-16.740499496459961,-48.515899658203125)
-1126	Vicentinópolis	9	5222054	(-17.732200622558594,-49.804698944091797)
-1127	Vila Boa	9	5222203	(-15.038700103759766,-47.051998138427734)
-1128	Vila Propício	9	5222302	(-15.45419979095459,-48.881900787353516)
-1129	Açailândia	10	2100055	(-4.9471402168273926,-47.500400543212891)
-1130	Afonso Cunha	10	2100105	(-4.1363101005554199,-43.327499389648438)
-1131	Água Doce do Maranhão	10	2100154	(-2.8404800891876221,-42.118900299072266)
-1132	Alcântara	10	2100204	(-2.3957400321960449,-44.406200408935547)
-1133	Aldeias Altas	10	2100303	(-4.6262102127075195,-43.468898773193359)
-1134	Altamira do Maranhão	10	2100402	(-4.1659798622131348,-45.470600128173828)
-1135	Alto Alegre do Maranhão	10	2100436	(-4.2129998207092285,-44.445999145507812)
-1136	Alto Alegre do Pindaré	10	2100477	(-3.6668899059295654,-45.842098236083984)
-1137	Alto Parnaíba	10	2100501	(-9.1027297973632812,-45.930301666259766)
-1138	Amapá do Maranhão	10	2100550	(-1.6752400398254395,-46.002399444580078)
-1139	Amarante do Maranhão	10	2100600	(-5.5691299438476562,-46.747299194335938)
-1140	Anajatuba	10	2100709	(-3.2626900672912598,-44.612598419189453)
-1141	Anapurus	10	2100808	(-3.6757700443267822,-43.101398468017578)
-1142	Apicum-Açu	10	2100832	(-1.4586199522018433,-45.086399078369141)
-1143	Araguanã	10	2100873	(-2.9464399814605713,-45.658901214599609)
-1144	Araioses	10	2100907	(-2.8909099102020264,-41.904998779296875)
-1145	Arame	10	2100956	(-4.8834700584411621,-46.003200531005859)
-1146	Arari	10	2101004	(-3.4521400928497314,-44.766498565673828)
-1147	Axixá	10	2101103	(-2.8393900394439697,-44.062000274658203)
-1148	Bacabal	10	2101202	(-4.2244701385498047,-44.783199310302734)
-1149	Bacabeira	10	2101251	(-2.9645199775695801,-44.316398620605469)
-1150	Bacuri	10	2101301	(-1.6964999437332153,-45.132801055908203)
-1151	Bacurituba	10	2101350	(-2.7100000381469727,-44.732898712158203)
-1152	Balsas	10	2101400	(-7.532139778137207,-46.037200927734375)
-1153	Barão de Grajaú	10	2101509	(-6.7446298599243164,-43.026100158691406)
-1154	Barra do Corda	10	2101608	(-5.4968199729919434,-45.248500823974609)
-1155	Barreirinhas	10	2101707	(-2.7586300373077393,-42.823200225830078)
-1156	Bela Vista do Maranhão	10	2101772	(-3.7261800765991211,-45.307498931884766)
-1157	Belágua	10	2101731	(-3.1548500061035156,-43.512199401855469)
-1158	Benedito Leite	10	2101806	(-7.2103700637817383,-44.557701110839844)
-1159	Bequimão	10	2101905	(-2.4416201114654541,-44.784198760986328)
-1160	Bernardo do Mearim	10	2101939	(-4.6266598701477051,-44.760799407958984)
-1161	Boa Vista do Gurupi	10	2101970	(-1.7761399745941162,-46.300201416015625)
-1162	Bom Jardim	10	2102002	(-3.5412900447845459,-45.605998992919922)
-1163	Bom Jesus das Selvas	10	2102036	(-4.4763798713684082,-46.864101409912109)
-1164	Bom Lugar	10	2102077	(-4.3731098175048828,-45.032600402832031)
-1165	Brejo	10	2102101	(-3.6779599189758301,-42.752700805664062)
-1166	Brejo de Areia	10	2102150	(-4.3340001106262207,-45.581001281738281)
-1167	Buriti	10	2102200	(-3.9416899681091309,-42.917900085449219)
-1168	Buriti Bravo	10	2102309	(-5.8323898315429687,-43.835300445556641)
-1169	Buriticupu	10	2102325	(-4.3237500190734863,-46.440898895263672)
-1170	Buritirana	10	2102358	(-5.5982298851013184,-47.013099670410156)
-1171	Cachoeira Grande	10	2102374	(-2.9307401180267334,-44.052799224853516)
-1172	Cajapió	10	2102408	(-2.8732600212097168,-44.674098968505859)
-1173	Cajari	10	2102507	(-3.3274199962615967,-45.014499664306641)
-1174	Campestre do Maranhão	10	2102556	(-6.1707501411437988,-47.362499237060547)
-1175	Cândido Mendes	10	2102606	(-1.4326499700546265,-45.716098785400391)
-1176	Cantanhede	10	2102705	(-3.6375699043273926,-44.382999420166016)
-1177	Capinzal do Norte	10	2102754	(-4.723599910736084,-44.327999114990234)
-1178	Carolina	10	2102804	(-7.3358402252197266,-47.463401794433594)
-1179	Carutapera	10	2102903	(-1.1969599723815918,-46.008499145507812)
-1180	Caxias	10	2103000	(-4.8650498390197754,-43.361698150634766)
-1181	Cedral	10	2103109	(-2.000269889831543,-44.528099060058594)
-1182	Central do Maranhão	10	2103125	(-2.1983098983764648,-44.825401306152344)
-1183	Centro do Guilherme	10	2103158	(-2.4489099979400635,-46.034500122070313)
-1184	Centro Novo do Maranhão	10	2103174	(-2.1269600391387939,-46.122798919677734)
-1185	Chapadinha	10	2103208	(-3.7387499809265137,-43.353801727294922)
-1186	Cidelândia	10	2103257	(-5.1746501922607422,-47.778099060058594)
-1187	Codó	10	2103307	(-4.4556198120117187,-43.892398834228516)
-1188	Coelho Neto	10	2103406	(-4.2524499893188477,-43.010799407958984)
-1189	Colinas	10	2103505	(-6.0319900512695313,-44.254299163818359)
-1190	Conceição do Lago-Açu	10	2103554	(-3.8514199256896973,-44.889499664306641)
-1191	Coroatá	10	2103604	(-4.1344199180603027,-44.124401092529297)
-1192	Cururupu	10	2103703	(-1.8147499561309814,-44.864398956298828)
-1193	Davinópolis	10	2103752	(-5.5463700294494629,-47.421699523925781)
-1194	Dom Pedro	10	2103802	(-5.0351800918579102,-44.440898895263672)
-1195	Duque Bacelar	10	2103901	(-4.1500201225280762,-42.947700500488281)
-1196	Esperantinópolis	10	2104008	(-4.8793802261352539,-44.692600250244141)
-1197	Estreito	10	2104057	(-6.5607700347900391,-47.443099975585938)
-1198	Feira Nova do Maranhão	10	2104073	(-6.9650797843933105,-46.678600311279297)
-1199	Fernando Falcão	10	2104081	(-6.1620697975158691,-44.897899627685547)
-1200	Formosa da Serra Negra	10	2104099	(-6.4401698112487793,-46.191600799560547)
-1201	Fortaleza dos Nogueiras	10	2104107	(-6.9598298072814941,-46.174900054931641)
-1202	Fortuna	10	2104206	(-5.7279200553894043,-44.156501770019531)
-1203	Godofredo Viana	10	2104305	(-1.4025900363922119,-45.779499053955078)
-1204	Gonçalves Dias	10	2104404	(-5.1475000381469727,-44.301300048828125)
-1205	Governador Archer	10	2104503	(-5.020780086517334,-44.275398254394531)
-1206	Governador Edison Lobão	10	2104552	(-5.749730110168457,-47.364601135253906)
-1207	Governador Eugênio Barros	10	2104602	(-5.3189702033996582,-44.246898651123047)
-1208	Governador Luiz Rocha	10	2104628	(-5.4783501625061035,-44.077400207519531)
-1209	Governador Newton Bello	10	2104651	(-3.4324500560760498,-45.661899566650391)
-1210	Governador Nunes Freire	10	2104677	(-2.1289899349212646,-45.877700805664062)
-1211	Graça Aranha	10	2104701	(-5.4054698944091797,-44.335800170898437)
-1212	Grajaú	10	2104800	(-5.8136701583862305,-46.146198272705078)
-1213	Guimarães	10	2104909	(-2.1275498867034912,-44.602001190185547)
-1214	Humberto de Campos	10	2105005	(-2.5982799530029297,-43.464900970458984)
-1216	Igarapé do Meio	10	2105153	(-3.657710075378418,-45.211399078369141)
-1217	Igarapé Grande	10	2105203	(-4.6624999046325684,-44.855800628662109)
-1218	Imperatriz	10	2105302	(-5.5184698104858398,-47.477699279785156)
-1219	Itaipava do Grajaú	10	2105351	(-5.1425199508666992,-45.787700653076172)
-1220	Itapecuru Mirim	10	2105401	(-3.4020199775695801,-44.350799560546875)
-1221	Itinga do Maranhão	10	2105427	(-4.4529299736022949,-47.52349853515625)
-1222	Jatobá	10	2105450	(-5.8228201866149902,-44.215301513671875)
-1223	Jenipapo dos Vieiras	10	2105476	(-5.3623700141906738,-45.635601043701172)
-1224	João Lisboa	10	2105500	(-5.4436302185058594,-47.406398773193359)
-1225	Joselândia	10	2105609	(-4.9861102104187012,-44.69580078125)
-1226	Junco do Maranhão	10	2105658	(-1.8388799428939819,-46.090000152587891)
-1227	Lago da Pedra	10	2105708	(-4.569739818572998,-45.131900787353516)
-1228	Lago do Junco	10	2105807	(-4.6090002059936523,-45.048999786376953)
-1229	Lago dos Rodrigues	10	2105948	(-4.6117300987243652,-44.979801177978516)
-1230	Lago Verde	10	2105906	(-3.9466099739074707,-44.826000213623047)
-1231	Lagoa do Mato	10	2105922	(-6.0502300262451172,-43.533298492431641)
-1232	Lagoa Grande do Maranhão	10	2105963	(-4.9889302253723145,-45.381599426269531)
-1233	Lajeado Novo	10	2105989	(-6.1853899955749512,-47.029300689697266)
-1234	Lima Campos	10	2106003	(-4.5183701515197754,-44.464599609375)
-1235	Loreto	10	2106102	(-7.0811100006103516,-45.145099639892578)
-1236	Luís Domingues	10	2106201	(-1.2749199867248535,-45.867000579833984)
-1237	Magalhães de Almeida	10	2106300	(-3.392319917678833,-42.211700439453125)
-1238	Maracaçumé	10	2106326	(-2.0491800308227539,-45.958698272705078)
-1239	Marajá do Sena	10	2106359	(-4.6280598640441895,-45.453098297119141)
-1240	Maranhãozinho	10	2106375	(-2.2407801151275635,-45.850700378417969)
-1241	Mata Roma	10	2106409	(-3.6203498840332031,-43.111198425292969)
-1242	Matinha	10	2106508	(-3.0984899997711182,-45.034999847412109)
-1243	Matões	10	2106607	(-5.5135898590087891,-43.201801300048828)
-1244	Matões do Norte	10	2106631	(-3.6243999004364014,-44.546798706054687)
-1245	Milagres do Maranhão	10	2106672	(-3.574429988861084,-42.61309814453125)
-1246	Mirador	10	2106706	(-6.374539852142334,-44.368301391601563)
-1247	Miranda do Norte	10	2106755	(-3.5631299018859863,-44.581401824951172)
-1248	Mirinzal	10	2106805	(-2.0709400177001953,-44.778701782226563)
-1249	Monção	10	2106904	(-3.4812500476837158,-45.249599456787109)
-1250	Montes Altos	10	2107001	(-5.8306698799133301,-47.067298889160156)
-1251	Morros	10	2107100	(-2.8537900447845459,-44.035701751708984)
-1252	Nina Rodrigues	10	2107209	(-3.4678800106048584,-43.913398742675781)
-1253	Nova Colinas	10	2107258	(-7.1226301193237305,-46.260700225830078)
-1254	Nova Iorque	10	2107308	(-6.7304701805114746,-44.047100067138672)
-1255	Nova Olinda do Maranhão	10	2107357	(-2.8422698974609375,-45.695301055908203)
-1256	Olho d`Água das Cunhãs	10	2107407	(-4.1341700553894043,-45.116298675537109)
-1257	Olinda Nova do Maranhão	10	2107456	(-2.9929499626159668,-44.989700317382813)
-1258	Paço do Lumiar	10	2107506	(-2.5165700912475586,-44.101898193359375)
-1259	Palmeirândia	10	2107605	(-2.6443300247192383,-44.893299102783203)
-1260	Paraibano	10	2107704	(-6.4264001846313477,-43.979198455810547)
-1261	Parnarama	10	2107803	(-5.673649787902832,-43.101100921630859)
-1262	Passagem Franca	10	2107902	(-6.1774501800537109,-43.775501251220703)
-1263	Pastos Bons	10	2108009	(-6.6029601097106934,-44.074501037597656)
-1264	Paulino Neves	10	2108058	(-2.720940113067627,-42.525798797607422)
-1265	Paulo Ramos	10	2108108	(-4.444849967956543,-45.239799499511719)
-1266	Pedreiras	10	2108207	(-4.5648198127746582,-44.600601196289063)
-1267	Pedro do Rosário	10	2108256	(-2.9727199077606201,-45.349300384521484)
-1268	Penalva	10	2108306	(-3.2767400741577148,-45.176799774169922)
-1269	Peri Mirim	10	2108405	(-2.5767600536346436,-44.850399017333984)
-1270	Peritoró	10	2108454	(-4.3745899200439453,-44.336898803710937)
-1271	Pindaré-Mirim	10	2108504	(-3.6098499298095703,-45.341999053955078)
-1272	Pinheiro	10	2108603	(-2.5222399234771729,-45.078800201416016)
-1273	Pio XII	10	2108702	(-3.8931500911712646,-45.175899505615234)
-1274	Pirapemas	10	2108801	(-3.7204101085662842,-44.221599578857422)
-1275	Poção de Pedras	10	2108900	(-4.7462601661682129,-44.943199157714844)
-1276	Porto Franco	10	2109007	(-6.3414897918701172,-47.396198272705078)
-1277	Porto Rico do Maranhão	10	2109056	(-1.8592499494552612,-44.584201812744141)
-1278	Presidente Dutra	10	2109106	(-5.2898001670837402,-44.494998931884766)
-1279	Presidente Juscelino	10	2109205	(-2.918720006942749,-44.071498870849609)
-1280	Presidente Médici	10	2109239	(-2.3899099826812744,-45.819999694824219)
-1281	Presidente Sarney	10	2109270	(-2.5879900455474854,-45.359500885009766)
-1282	Presidente Vargas	10	2109304	(-3.4078700542449951,-44.023399353027344)
-1283	Primeira Cruz	10	2109403	(-2.5056800842285156,-43.423198699951172)
-1284	Raposa	10	2109452	(-2.4254000186920166,-44.097301483154297)
-1285	Riachão	10	2109502	(-7.3581900596618652,-46.622501373291016)
-1286	Ribamar Fiquene	10	2109551	(-5.9306697845458984,-47.388801574707031)
-1287	Rosário	10	2109601	(-2.9344398975372314,-44.253101348876953)
-1288	Sambaíba	10	2109700	(-7.1344699859619141,-45.35150146484375)
-1289	Santa Filomena do Maranhão	10	2109759	(-5.4967098236083984,-44.563800811767578)
-1290	Santa Helena	10	2109809	(-2.2442600727081299,-45.290000915527344)
-1291	Santa Inês	10	2109908	(-3.6511199474334717,-45.377399444580078)
-1292	Santa Luzia	10	2110005	(-4.0687298774719238,-45.689998626708984)
-1293	Santa Luzia do Paruá	10	2110039	(-2.5112299919128418,-45.780101776123047)
-1294	Santa Quitéria do Maranhão	10	2110104	(-3.4930799007415771,-42.568801879882813)
-1295	Santa Rita	10	2110203	(-3.1424100399017334,-44.321098327636719)
-1296	Santana do Maranhão	10	2110237	(-3.1089999675750732,-42.406398773193359)
-1297	Santo Amaro do Maranhão	10	2110278	(-2.5006799697875977,-43.237998962402344)
-1298	Santo Antônio dos Lopes	10	2110302	(-4.8661298751831055,-44.365299224853516)
-1299	São Benedito do Rio Preto	10	2110401	(-3.3351500034332275,-43.528701782226562)
-1300	São Bento	10	2110500	(-2.6978099346160889,-44.828899383544922)
-1301	São Bernardo	10	2110609	(-3.372230052947998,-42.419101715087891)
-1302	São Domingos do Azeitão	10	2110658	(-6.8147101402282715,-44.650901794433594)
-1303	São Domingos do Maranhão	10	2110708	(-5.5809497833251953,-44.382198333740234)
-1304	São Félix de Balsas	10	2110807	(-7.0753498077392578,-44.809200286865234)
-1305	São Francisco do Brejão	10	2110856	(-5.1258401870727539,-47.388999938964844)
-1306	São Francisco do Maranhão	10	2110906	(-6.2515897750854492,-42.866798400878906)
-1307	São João Batista	10	2111003	(-2.9539799690246582,-44.795299530029297)
-1308	São João do Carú	10	2111029	(-3.5502998828887939,-46.250701904296875)
-1309	São João do Paraíso	10	2111052	(-6.4563398361206055,-47.059398651123047)
-1310	São João do Soter	10	2111078	(-5.1082100868225098,-43.816299438476562)
-1311	São João dos Patos	10	2111102	(-6.4934000968933105,-43.703601837158203)
-1312	São José de Ribamar	10	2111201	(-2.5470399856567383,-44.059700012207031)
-1313	São José dos Basílios	10	2111250	(-5.0549302101135254,-44.580898284912109)
-1314	São Luís	10	2111300	(-2.5387399196624756,-44.282501220703125)
-1315	São Luís Gonzaga do Maranhão	10	2111409	(-4.3854098320007324,-44.665401458740234)
-1316	São Mateus do Maranhão	10	2111508	(-4.0373601913452148,-44.470699310302734)
-1317	São Pedro da Água Branca	10	2111532	(-5.0847201347351074,-48.429100036621094)
-1318	São Pedro dos Crentes	10	2111573	(-6.823890209197998,-46.531898498535156)
-1319	São Raimundo das Mangabeiras	10	2111607	(-7.0218300819396973,-45.480899810791016)
-1320	São Raimundo do Doca Bezerra	10	2111631	(-5.110529899597168,-45.069599151611328)
-1321	São Roberto	10	2111672	(-5.0230998992919922,-45.000999450683594)
-1322	São Vicente Ferrer	10	2111706	(-2.8948700428009033,-44.868099212646484)
-1323	Satubinha	10	2111722	(-4.0491299629211426,-45.245700836181641)
-1324	Senador Alexandre Costa	10	2111748	(-5.2509598731994629,-44.053298950195313)
-1325	Senador La Rocque	10	2111763	(-5.4461002349853516,-47.2958984375)
-1326	Serrano do Maranhão	10	2111789	(-1.8522900342941284,-45.120700836181641)
-1327	Sítio Novo	10	2111805	(-5.8760099411010742,-46.703300476074219)
-1328	Sucupira do Norte	10	2111904	(-6.4783902168273926,-44.191898345947266)
-1329	Sucupira do Riachão	10	2111953	(-6.4085798263549805,-43.545501708984375)
-1330	Tasso Fragoso	10	2112001	(-8.4661998748779297,-45.75360107421875)
-1331	Timbiras	10	2112100	(-4.2559700012207031,-43.931999206542969)
-1332	Timon	10	2112209	(-5.0976901054382324,-42.832901000976562)
-1333	Trizidela do Vale	10	2112233	(-4.5380001068115234,-44.627998352050781)
-1334	Tufilândia	10	2112274	(-3.6735498905181885,-45.623798370361328)
-1335	Tuntum	10	2112308	(-5.2547597885131836,-44.644401550292969)
-1336	Turiaçu	10	2112407	(-1.6589299440383911,-45.379798889160156)
-1337	Turilândia	10	2112456	(-2.2163798809051514,-45.304401397705078)
-1338	Tutóia	10	2112506	(-2.7614099979400635,-42.275501251220703)
-1339	Urbano Santos	10	2112605	(-3.2064199447631836,-43.387798309326172)
-1340	Vargem Grande	10	2112704	(-3.5363900661468506,-43.916999816894531)
-1341	Viana	10	2112803	(-3.204509973526001,-44.991199493408203)
-1342	Vila Nova dos Martírios	10	2112852	(-5.1888899803161621,-48.133598327636719)
-1343	Vitória do Mearim	10	2112902	(-3.4512500762939453,-44.864299774169922)
-1344	Vitorino Freire	10	2113009	(-4.2818398475646973,-45.250499725341797)
-1345	Zé Doca	10	2114007	(-3.2701399326324463,-45.655300140380859)
-1346	Acorizal	13	5100102	(-15.194000244140625,-56.363201141357422)
-1347	Água Boa	13	5100201	(-14.050999641418457,-52.160099029541016)
-1348	Alta Floresta	13	5100250	(-9.8667402267456055,-56.086700439453125)
-1349	Alto Araguaia	13	5100300	(-17.315299987792969,-53.218101501464844)
-1350	Alto Boa Vista	13	5100359	(-11.673199653625488,-51.388301849365234)
-1351	Alto Garças	13	5100409	(-16.946199417114258,-53.527198791503906)
-1352	Alto Paraguai	13	5100508	(-14.513699531555176,-56.47760009765625)
-1353	Alto Taquari	13	5100607	(-17.824100494384766,-53.279201507568359)
-1354	Apiacás	13	5100805	(-9.5398101806640625,-57.458698272705078)
-1355	Araguaiana	13	5101001	(-15.729100227355957,-51.834098815917969)
-1356	Araguainha	13	5101209	(-16.857000350952148,-53.03179931640625)
-1357	Araputanga	13	5101258	(-15.464099884033203,-58.342498779296875)
-1358	Arenápolis	13	5101308	(-14.447199821472168,-56.843700408935547)
-1359	Aripuanã	13	5101407	(-10.172300338745117,-59.456798553466797)
-1360	Barão de Melgaço	13	5101605	(-16.206699371337891,-55.962299346923828)
-1361	Barra do Bugres	13	5101704	(-15.070199966430664,-57.187801361083984)
-1362	Barra do Garças	13	5101803	(-15.880399703979492,-52.263999938964844)
-1363	Bom Jesus do Araguaia	13	5101852	(-12.170599937438965,-51.503200531005859)
-1364	Brasnorte	13	5101902	(-12.14739990234375,-57.983299255371094)
-1365	Cáceres	13	5102504	(-16.076400756835937,-57.681800842285156)
-1366	Campinápolis	13	5102603	(-14.516200065612793,-52.893001556396484)
-1367	Campo Novo do Parecis	13	5102637	(-13.658699989318848,-57.890701293945313)
-1368	Campo Verde	13	5102678	(-15.545000076293945,-55.162601470947266)
-1369	Campos de Júlio	13	5102686	(-13.724200248718262,-59.285800933837891)
-1370	Canabrava do Norte	13	5102694	(-11.055600166320801,-51.820899963378906)
-1371	Canarana	13	5102702	(-13.55150032043457,-52.270500183105469)
-1372	Carlinda	13	5102793	(-9.9491195678710937,-55.841701507568359)
-1373	Castanheira	13	5102850	(-11.125100135803223,-58.608100891113281)
-1374	Chapada dos Guimarães	13	5103007	(-15.464300155639648,-55.749900817871094)
-1375	Cláudia	13	5103056	(-11.507499694824219,-54.883499145507812)
-1376	Cocalinho	13	5103106	(-14.390299797058105,-51.000099182128906)
-1377	Colíder	13	5103205	(-10.81350040435791,-55.46099853515625)
-1378	Colniza	13	5103254	(-9.4612102508544922,-59.225200653076172)
-1379	Comodoro	13	5103304	(-13.661399841308594,-59.784801483154297)
-1380	Confresa	13	5103353	(-10.643699645996094,-51.569900512695313)
-1381	Conquista d`Oeste	13	5103361	(-14.538117408752441,-59.544376373291016)
-1382	Cotriguaçu	13	5103379	(-9.8565597534179687,-58.419200897216797)
-1383	Cuiabá	13	5103403	(-15.60099983215332,-56.097400665283203)
-1384	Curvelândia	13	5103437	(-15.608400344848633,-57.913299560546875)
-1386	Denise	13	5103452	(-14.732399940490723,-57.058300018310547)
-1387	Diamantino	13	5103502	(-14.40369987487793,-56.436599731445313)
-1388	Dom Aquino	13	5103601	(-15.809900283813477,-54.922298431396484)
-1389	Feliz Natal	13	5103700	(-12.385000228881836,-54.922698974609375)
-1390	Figueirópolis d`Oeste	13	5103809	(-15.443918228149414,-58.739147186279297)
-1391	Gaúcha do Norte	13	5103858	(-13.24429988861084,-53.080898284912109)
-1392	General Carneiro	13	5103908	(-15.709400177001953,-52.757400512695313)
-1393	Glória d`Oeste	13	5103957	(-15.768009185791016,-58.310760498046875)
-1394	Guarantã do Norte	13	5104104	(-9.9621801376342773,-54.912101745605469)
-1395	Guiratinga	13	5104203	(-16.346000671386719,-53.757499694824219)
-1396	Indiavaí	13	5104500	(-15.492099761962891,-58.5802001953125)
-1397	Ipiranga do Norte	13	5104526	(-12.240799903869629,-56.153102874755859)
-1398	Itanhangá	13	5104542	(-12.225945472717285,-56.646251678466797)
-1399	Itaúba	13	5104559	(-11.061400413513184,-55.276599884033203)
-1400	Itiquira	13	5104609	(-17.214700698852539,-54.142200469970703)
-1401	Jaciara	13	5104807	(-15.954799652099609,-54.973300933837891)
-1402	Jangada	13	5104906	(-15.234999656677246,-56.49169921875)
-1403	Jauru	13	5105002	(-15.334199905395508,-58.872299194335938)
-1404	Juara	13	5105101	(-11.263899803161621,-57.524398803710937)
-1405	Juína	13	5105150	(-11.372799873352051,-58.748298645019531)
-1406	Juruena	13	5105176	(-10.31779956817627,-58.359199523925781)
-1407	Juscimeira	13	5105200	(-16.063299179077148,-54.885898590087891)
-1408	Lambari d`Oeste	13	5105234	(-15.318845748901367,-58.004623413085938)
-1409	Lucas do Rio Verde	13	5105259	(-13.058799743652344,-55.904201507568359)
-1410	Luciára	13	5105309	(-11.22189998626709,-50.667598724365234)
-1411	Marcelândia	13	5105580	(-11.046299934387207,-54.437698364257813)
-1412	Matupá	13	5105606	(-10.182100296020508,-54.946701049804688)
-1413	Mirassol d`Oeste	13	5105622	(-15.675947189331055,-58.095138549804688)
-1414	Nobres	13	5105903	(-14.719200134277344,-56.328399658203125)
-1415	Nortelândia	13	5106000	(-14.454000473022461,-56.794498443603516)
-1416	Nossa Senhora do Livramento	13	5106109	(-15.772000312805176,-56.34320068359375)
-1417	Nova Bandeirantes	13	5106158	(-9.8497657775878906,-57.813873291015625)
-1418	Nova Brasilândia	13	5106208	(-14.961199760437012,-54.968498229980469)
-1419	Nova Canaã do Norte	13	5106216	(-10.557999610900879,-55.952999114990234)
-1420	Nova Guarita	13	5108808	(-10.312000274658203,-55.406101226806641)
-1421	Nova Lacerda	13	5106182	(-14.472700119018555,-59.600101470947266)
-1422	Nova Marilândia	13	5108857	(-14.356800079345703,-56.969600677490234)
-1423	Nova Maringá	13	5108907	(-13.01360034942627,-57.090801239013672)
-1424	Nova Monte verde	13	5108956	(-9.9999799728393555,-57.526100158691406)
-1425	Nova Mutum	13	5106224	(-13.837400436401367,-56.074298858642578)
-1426	Nova Olímpia	13	5106232	(-14.788900375366211,-57.288600921630859)
-1427	Nova Santa Helena	13	5106190	(-10.865099906921387,-55.187198638916016)
-1428	Nova Ubiratã	13	5106240	(-12.983400344848633,-55.255599975585938)
-1429	Nova Xavantina	13	5106257	(-14.67710018157959,-52.350200653076172)
-1430	Novo Horizonte do Norte	13	5106273	(-11.408900260925293,-57.348800659179688)
-1431	Novo Mundo	13	5106265	(-9.9561595916748047,-55.202899932861328)
-1432	Novo Santo Antônio	13	5106315	(-12.287500381469727,-50.968601226806641)
-1433	Novo São Joaquim	13	5106281	(-14.905400276184082,-53.019401550292969)
-1434	Paranaíta	13	5106299	(-9.6583499908447266,-56.478599548339844)
-1435	Paranatinga	13	5106307	(-14.42650032043457,-54.052398681640625)
-1436	Pedra Preta	13	5106372	(-16.624500274658203,-54.472198486328125)
-1437	Peixoto de Azevedo	13	5106422	(-10.226200103759766,-54.979400634765625)
-1438	Planalto da Serra	13	5106455	(-14.651800155639648,-54.781898498535156)
-1439	Poconé	13	5106505	(-16.266000747680664,-56.6260986328125)
-1440	Pontal do Araguaia	13	5106653	(-15.927399635314941,-52.327301025390625)
-1441	Ponte Branca	13	5106703	(-16.758399963378906,-52.836898803710937)
-1442	Pontes e Lacerda	13	5106752	(-15.22189998626709,-59.343498229980469)
-1443	Porto Alegre do Norte	13	5106778	(-10.876099586486816,-51.635700225830078)
-1444	Porto dos Gaúchos	13	5106802	(-11.532999992370605,-57.413200378417969)
-1445	Porto Esperidião	13	5106828	(-15.857000350952148,-58.461898803710938)
-1446	Porto Estrela	13	5106851	(-15.32349967956543,-57.220401763916016)
-1447	Poxoréo	13	5107008	(-15.829922676086426,-54.420806884765625)
-1448	Primavera do Leste	13	5107040	(-15.543999671936035,-54.281101226806641)
-1449	Querência	13	5107065	(-12.609299659729004,-52.182098388671875)
-1450	Reserva do Cabaçal	13	5107156	(-15.074299812316895,-58.458499908447266)
-1451	Ribeirão Cascalheira	13	5107180	(-12.936699867248535,-51.82440185546875)
-1452	Ribeirãozinho	13	5107198	(-16.485599517822266,-52.692401885986328)
-1453	Rio Branco	13	5107206	(-15.248299598693848,-58.125900268554687)
-1454	Rondolândia	13	5107578	(-10.837599754333496,-61.469699859619141)
-1455	Rondonópolis	13	5107602	(-16.467300415039063,-54.637199401855469)
-1456	Rosário Oeste	13	5107701	(-14.825900077819824,-56.423599243164062)
-1457	Salto do Céu	13	5107750	(-15.13029956817627,-58.131698608398437)
-1458	Santa Carmem	13	5107248	(-11.912500381469727,-55.226299285888672)
-1459	Santa Cruz do Xingu	13	5107743	(-10.153200149536133,-52.395301818847656)
-1460	Santa Rita do Trivelato	13	5107768	(-13.814599990844727,-55.270599365234375)
-1461	Santa Terezinha	13	5107776	(-10.470399856567383,-50.513999938964844)
-1462	Santo Afonso	13	5107263	(-14.494500160217285,-57.009101867675781)
-1463	Santo Antônio do Leste	13	5107792	(-14.805000305175781,-53.607498168945313)
-1464	Santo Antônio do Leverger	13	5107800	(-15.86318302154541,-56.078811645507813)
-1465	São Félix do Araguaia	13	5107859	(-11.614999771118164,-50.670600891113281)
-1466	São José do Povo	13	5107297	(-16.454900741577148,-54.248699188232422)
-1467	São José do Rio Claro	13	5107305	(-13.439800262451172,-56.7218017578125)
-1468	São José do Xingu	13	5107354	(-10.798199653625488,-52.748600006103516)
-1469	São José dos Quatro Marcos	13	5107107	(-15.627599716186523,-58.177200317382812)
-1470	São Pedro da Cipa	13	5107404	(-16.010900497436523,-54.917598724365234)
-1471	Sapezal	13	5107875	(-12.989199638366699,-58.764499664306641)
-1472	Serra Nova Dourada	13	5107883	(-12.089599609375,-51.402500152587891)
-1473	Sinop	13	5107909	(-11.860400199890137,-55.509101867675781)
-1474	Sorriso	13	5107925	(-12.542499542236328,-55.721099853515625)
-1475	Tabaporã	13	5107941	(-11.300700187683105,-56.831199645996094)
-1476	Tangará da Serra	13	5107958	(-14.622900009155273,-57.493301391601563)
-1477	Tapurah	13	5108006	(-12.694999694824219,-56.517799377441406)
-1478	Terra Nova do Norte	13	5108055	(-10.517000198364258,-55.230998992919922)
-1479	Tesouro	13	5108105	(-16.080900192260742,-53.558998107910156)
-1480	Torixoréu	13	5108204	(-16.200599670410156,-52.557098388671875)
-1481	União do Sul	13	5108303	(-11.530799865722656,-54.361598968505859)
-1482	Vale de São Domingos	13	5108352	(-15.28600025177002,-59.06829833984375)
-1483	Várzea Grande	13	5108402	(-15.64579963684082,-56.132198333740234)
-1484	Vera	13	5108501	(-12.301699638366699,-55.304500579833984)
-1485	Vila Bela da Santíssima Trindade	13	5105507	(-15.006773948669434,-59.950428009033203)
-1486	Vila Rica	13	5108600	(-10.013699531555176,-51.118598937988281)
-1487	Água Clara	12	5000203	(-20.445199966430664,-52.879001617431641)
-1488	Alcinópolis	12	5000252	(-18.32550048828125,-53.704200744628906)
-1489	Amambaí	12	5000609	(-23.105800628662109,-55.225299835205078)
-1490	Anastácio	12	5000708	(-20.4822998046875,-55.810398101806641)
-1491	Anaurilândia	12	5000807	(-22.185199737548828,-52.719100952148438)
-1492	Angélica	12	5000856	(-22.152700424194336,-53.770801544189453)
-1493	Antônio João	12	5000906	(-22.192699432373047,-55.951698303222656)
-1494	Aparecida do Taboado	12	5001003	(-20.087299346923828,-51.096099853515625)
-1495	Aquidauana	12	5001102	(-20.46660041809082,-55.786800384521484)
-1496	Aral Moreira	12	5001243	(-22.938499450683594,-55.633399963378906)
-1497	Bandeirantes	12	5001508	(-19.927499771118164,-54.358501434326172)
-1498	Bataguassu	12	5001904	(-21.715900421142578,-52.422100067138672)
-1500	Bela Vista	12	5002100	(-22.1072998046875,-56.526298522949219)
-1501	Bodoquena	12	5002159	(-20.53700065612793,-56.712699890136719)
-1502	Bonito	12	5002209	(-21.126100540161133,-56.483600616455078)
-1503	Brasilândia	12	5002308	(-21.254400253295898,-52.0364990234375)
-1504	Caarapó	12	5002407	(-22.636800765991211,-54.820899963378906)
-1505	Camapuã	12	5002605	(-19.534700393676758,-54.043098449707031)
-1506	Campo Grande	12	5002704	(-20.448600769042969,-54.629501342773438)
-1507	Caracol	12	5002803	(-22.01099967956543,-57.027698516845703)
-1508	Cassilândia	12	5002902	(-19.117900848388672,-51.731300354003906)
-1509	Chapadão do Sul	12	5002951	(-18.788000106811523,-52.626300811767578)
-1510	Corguinho	12	5003108	(-19.824300765991211,-54.828098297119141)
-1511	Coronel Sapucaia	12	5003157	(-23.27239990234375,-55.527801513671875)
-1512	Corumbá	12	5003207	(-19.007699966430664,-57.6510009765625)
-1513	Costa Rica	12	5003256	(-18.54319953918457,-53.128700256347656)
-1514	Coxim	12	5003306	(-18.501300811767578,-54.750999450683594)
-1515	Deodápolis	12	5003454	(-22.276300430297852,-54.168201446533203)
-1516	Dois Irmãos do Buriti	12	5003488	(-20.684799194335938,-55.291500091552734)
-1517	Douradina	12	5003504	(-22.040500640869141,-54.615798950195312)
-1518	Dourados	12	5003702	(-22.223100662231445,-54.812000274658203)
-1519	Eldorado	12	5003751	(-23.786800384521484,-54.283798217773438)
-1520	Fátima do Sul	12	5003801	(-22.378900527954102,-54.513099670410156)
-1521	Figueirão	12	5003900	(-18.67820930480957,-53.637985229492187)
-1522	Glória de Dourados	12	5004007	(-22.413600921630859,-54.233501434326172)
-1523	Guia Lopes da Laguna	12	5004106	(-21.45829963684082,-56.111698150634766)
-1524	Iguatemi	12	5004304	(-23.673599243164063,-54.563701629638672)
-1525	Inocência	12	5004403	(-19.727699279785156,-51.9281005859375)
-1526	Itaporã	12	5004502	(-22.079999923706055,-54.793399810791016)
-1527	Itaquiraí	12	5004601	(-23.477899551391602,-54.187000274658203)
-1528	Ivinhema	12	5004700	(-22.304599761962891,-53.818401336669922)
-1529	Japorã	12	5004809	(-23.890300750732422,-54.405899047851562)
-1530	Jaraguari	12	5004908	(-20.138599395751953,-54.399600982666016)
-1531	Jardim	12	5005004	(-21.479900360107422,-56.148899078369141)
-1532	Jateí	12	5005103	(-22.480600357055664,-54.307899475097656)
-1533	Juti	12	5005152	(-22.859600067138672,-54.606098175048828)
-1534	Ladário	12	5005202	(-19.008899688720703,-57.597301483154297)
-1535	Laguna Carapã	12	5005251	(-22.5447998046875,-55.150199890136719)
-1536	Maracaju	12	5005400	(-21.610500335693359,-55.167800903320312)
-1537	Miranda	12	5005608	(-20.235500335693359,-56.374599456787109)
-1538	Mundo Novo	12	5005681	(-23.93549919128418,-54.280998229980469)
-1539	Naviraí	12	5005707	(-23.061800003051758,-54.199501037597656)
-1540	Nioaque	12	5005806	(-21.141899108886719,-55.829601287841797)
-1541	Nova Alvorada do Sul	12	5006002	(-21.465700149536133,-54.382499694824219)
-1542	Nova Andradina	12	5006200	(-22.238000869750977,-53.343700408935547)
-1543	Novo Horizonte do Sul	12	5006259	(-22.669300079345703,-53.860099792480469)
-1544	Paranaíba	12	5006309	(-19.674600601196289,-51.190898895263672)
-1545	Paranhos	12	5006358	(-23.89109992980957,-55.429000854492187)
-1546	Pedro Gomes	12	5006408	(-18.099599838256836,-54.550701141357422)
-1547	Ponta Porã	12	5006606	(-22.529600143432617,-55.720298767089844)
-1548	Porto Murtinho	12	5006903	(-21.698099136352539,-57.883598327636719)
-1549	Ribas do Rio Pardo	12	5007109	(-20.444499969482422,-53.758800506591797)
-1550	Rio Brilhante	12	5007208	(-21.803300857543945,-54.542701721191406)
-1551	Rio Negro	12	5007307	(-19.447000503540039,-54.98590087890625)
-1552	Rio Verde de Mato Grosso	12	5007406	(-18.924900054931641,-54.843399047851563)
-1553	Rochedo	12	5007505	(-19.956499099731445,-54.884799957275391)
-1554	Santa Rita do Pardo	12	5007554	(-21.301599502563477,-52.833301544189453)
-1555	São Gabriel do Oeste	12	5007695	(-19.388900756835938,-54.550701141357422)
-1556	Selvíria	12	5007802	(-20.363700866699219,-51.419200897216797)
-1557	Sete Quedas	12	5007703	(-23.970500946044922,-55.039798736572266)
-1558	Sidrolândia	12	5007901	(-20.930200576782227,-54.969200134277344)
-1559	Sonora	12	5007935	(-17.569799423217773,-54.755100250244141)
-1560	Tacuru	12	5007950	(-23.63599967956543,-55.01409912109375)
-1561	Taquarussu	12	5007976	(-22.489799499511719,-53.351898193359375)
-1562	Terenos	12	5008008	(-20.437799453735352,-54.864700317382812)
-1563	Três Lagoas	12	5008305	(-20.784900665283203,-51.700698852539062)
-1564	Vicentina	12	5008404	(-22.409799575805664,-54.441501617431641)
-1565	Abadia dos Dourados	11	3100104	(-18.483100891113281,-47.3916015625)
-1566	Abaeté	11	3100203	(-19.155099868774414,-45.444400787353516)
-1567	Abre Campo	11	3100302	(-20.299600601196289,-42.474300384521484)
-1568	Acaiaca	11	3100401	(-20.358999252319336,-43.143901824951172)
-1569	Açucena	11	3100500	(-19.067100524902344,-42.541900634765625)
-1570	Água Boa	11	3100609	(-17.991399765014648,-42.380599975585938)
-1571	Água Comprida	11	3100708	(-20.057600021362305,-48.106899261474609)
-1572	Aguanil	11	3100807	(-20.943899154663086,-45.391498565673828)
-1573	Águas Formosas	11	3100906	(-17.0802001953125,-40.938400268554687)
-1574	Águas Vermelhas	11	3101003	(-15.743100166320801,-41.457099914550781)
-1575	Aimorés	11	3101102	(-19.500699996948242,-41.074600219726563)
-1576	Aiuruoca	11	3101201	(-21.973600387573242,-44.604198455810547)
-1577	Alagoa	11	3101300	(-22.170999526977539,-44.641300201416016)
-1578	Albertina	11	3101409	(-22.201799392700195,-46.613899230957031)
-1579	Além Paraíba	11	3101508	(-21.87969970703125,-42.717601776123047)
-1580	Alfenas	11	3101607	(-21.425600051879883,-45.947700500488281)
-1581	Alfredo Vasconcelos	11	3101631	(-21.153499603271484,-43.771800994873047)
-1582	Almenara	11	3101706	(-16.178499221801758,-40.694198608398437)
-1583	Alpercata	11	3101805	(-18.974000930786133,-41.970001220703125)
-1584	Alpinópolis	11	3101904	(-20.863100051879883,-46.387798309326172)
-1585	Alterosa	11	3102001	(-21.248800277709961,-46.138698577880859)
-1586	Alto Caparaó	11	3102050	(-20.430999755859375,-41.873798370361328)
-1587	Alto Jequitibá	11	3153509	(-20.420799255371094,-41.966999053955078)
-1588	Alto Rio Doce	11	3102100	(-21.028099060058594,-43.406700134277344)
-1589	Alvarenga	11	3102209	(-19.417400360107422,-41.731700897216797)
-1590	Alvinópolis	11	3102308	(-20.109800338745117,-43.053501129150391)
-1591	Alvorada de Minas	11	3102407	(-18.733400344848633,-43.363800048828125)
-1592	Amparo do Serra	11	3102506	(-20.505100250244141,-42.800899505615234)
-1593	Andradas	11	3102605	(-22.069499969482422,-46.572399139404297)
-1594	Andrelândia	11	3102803	(-21.741100311279297,-44.311698913574219)
-1595	Angelândia	11	3102852	(-17.727899551391602,-42.26409912109375)
-1596	Antônio Carlos	11	3102902	(-21.320999145507813,-43.745098114013672)
-1597	Antônio Dias	11	3103009	(-19.649099349975586,-42.873199462890625)
-1598	Antônio Prado de Minas	11	3103108	(-21.019199371337891,-42.11090087890625)
-1599	Araçaí	11	3103207	(-19.195499420166016,-44.249298095703125)
-1600	Aracitaba	11	3103306	(-21.344600677490234,-43.373600006103516)
-1601	Araçuaí	11	3103405	(-16.852300643920898,-42.063701629638672)
-1602	Araguari	11	3103504	(-18.645599365234375,-48.193401336669922)
-1603	Arantina	11	3103603	(-21.910200119018555,-44.255500793457031)
-1604	Araponga	11	3103702	(-20.668600082397461,-42.517799377441406)
-1605	Araporã	11	3103751	(-18.435699462890625,-49.184700012207031)
-1606	Arapuá	11	3103801	(-19.026800155639648,-46.148399353027344)
-1607	Araújos	11	3103900	(-19.940500259399414,-45.167098999023438)
-1608	Araxá	11	3104007	(-19.590200424194336,-46.943801879882813)
-1609	Arceburgo	11	3104106	(-21.358999252319336,-46.940101623535156)
-1610	Arcos	11	3104205	(-20.286300659179687,-45.537300109863281)
-1611	Areado	11	3104304	(-21.357200622558594,-46.142101287841797)
-1612	Argirita	11	3104403	(-21.608299255371094,-42.829200744628906)
-1613	Aricanduva	11	3104452	(-17.866600036621094,-42.553298950195313)
-1614	Arinos	11	3104502	(-15.918700218200684,-46.104301452636719)
-1615	Astolfo Dutra	11	3104601	(-21.318399429321289,-42.857200622558594)
-1616	Ataléia	11	3104700	(-18.043800354003906,-41.114898681640625)
-1617	Augusto de Lima	11	3104809	(-18.099700927734375,-44.265499114990234)
-1618	Baependi	11	3104908	(-21.957000732421875,-44.887401580810547)
-1619	Baldim	11	3105004	(-19.283199310302734,-43.961299896240234)
-1620	Bambuí	11	3105103	(-20.016599655151367,-45.975399017333984)
-1621	Bandeira	11	3105202	(-15.878299713134766,-40.562198638916016)
-1622	Bandeira do Sul	11	3105301	(-21.730800628662109,-46.38330078125)
-1623	Barão de Cocais	11	3105400	(-19.938899993896484,-43.475498199462891)
-1624	Barão de Monte Alto	11	3105509	(-21.244400024414063,-42.237201690673828)
-1625	Barbacena	11	3105608	(-21.221399307250977,-43.770301818847656)
-1626	Barra Longa	11	3105707	(-20.286899566650391,-43.040199279785156)
-1627	Barroso	11	3105905	(-21.190700531005859,-43.972000122070313)
-1628	Bela Vista de Minas	11	3106002	(-19.8302001953125,-43.092201232910156)
-1629	Belmiro Braga	11	3106101	(-21.944000244140625,-43.408401489257813)
-1630	Belo Horizonte	11	3106200	(-19.910200119018555,-43.926601409912109)
-1631	Belo Oriente	11	3106309	(-19.219900131225586,-42.482799530029297)
-1632	Belo Vale	11	3106408	(-20.407699584960938,-44.027500152587891)
-1633	Berilo	11	3106507	(-16.956699371337891,-42.460601806640625)
-1634	Berizal	11	3106655	(-15.609999656677246,-41.743198394775391)
-1635	Bertópolis	11	3106606	(-17.059000015258789,-40.580001831054687)
-1636	Betim	11	3106705	(-19.966800689697266,-44.200801849365234)
-1637	Bias Fortes	11	3106804	(-21.601999282836914,-43.757400512695312)
-1638	Bicas	11	3106903	(-21.723199844360352,-43.055999755859375)
-1639	Biquinhas	11	3107000	(-18.775400161743164,-45.497398376464844)
-1640	Boa Esperança	11	3107109	(-21.09269905090332,-45.561199188232422)
-1641	Bocaina de Minas	11	3107208	(-22.169700622558594,-44.397201538085938)
-1642	Bocaiúva	11	3107307	(-17.113500595092773,-43.810398101806641)
-1643	Bom Despacho	11	3107406	(-19.73859977722168,-45.262199401855469)
-1644	Bom Jardim de Minas	11	3107505	(-21.947900772094727,-44.188499450683594)
-1645	Bom Jesus da Penha	11	3107604	(-21.014799118041992,-46.517398834228516)
-1646	Bom Jesus do Amparo	11	3107703	(-19.705400466918945,-43.478199005126953)
-1647	Bom Jesus do Galho	11	3107802	(-19.836000442504883,-42.316501617431641)
-1648	Bom Repouso	11	3107901	(-22.467500686645508,-46.144001007080078)
-1649	Bom Sucesso	11	3108008	(-21.032899856567383,-44.753700256347656)
-1650	Bonfim	11	3108107	(-20.3302001953125,-44.236598968505859)
-1651	Bonfinópolis de Minas	11	3108206	(-16.568000793457031,-45.983898162841797)
-1652	Bonito de Minas	11	3108255	(-15.323100090026855,-44.754299163818359)
-1653	Borda da Mata	11	3108305	(-22.270700454711914,-46.165298461914063)
-1654	Botelhos	11	3108404	(-21.641199111938477,-46.390998840332031)
-1655	Botumirim	11	3108503	(-16.865699768066406,-43.008598327636719)
-1656	Brás Pires	11	3108701	(-20.841899871826172,-43.2406005859375)
-1657	Brasilândia de Minas	11	3108552	(-16.999900817871094,-46.008098602294922)
-1658	Brasília de Minas	11	3108602	(-16.210399627685547,-44.429901123046875)
-1659	Brasópolis	11	3108909	(-22.474283218383789,-45.616558074951172)
-1660	Braúnas	11	3108800	(-19.05620002746582,-42.70989990234375)
-1661	Brumadinho	11	3109006	(-20.150999069213867,-44.200698852539063)
-1662	Bueno Brandão	11	3109105	(-22.438299179077148,-46.349098205566406)
-1663	Buenópolis	11	3109204	(-17.874399185180664,-44.177501678466797)
-1664	Bugre	11	3109253	(-19.423099517822266,-42.255199432373047)
-1665	Buritis	11	3109303	(-15.621800422668457,-46.422100067138672)
-1666	Buritizeiro	11	3109402	(-17.3656005859375,-44.960601806640625)
-1667	Cabeceira Grande	11	3109451	(-16.033500671386719,-47.086200714111328)
-1668	Cabo Verde	11	3109501	(-21.469900131225586,-46.391899108886719)
-1669	Cachoeira da Prata	11	3109600	(-19.520999908447266,-44.454399108886719)
-1670	Cachoeira de Minas	11	3109709	(-22.351100921630859,-45.780899047851562)
-1671	Cachoeira de Pajeú	11	3102704	(-15.968799591064453,-41.494800567626953)
-1672	Cachoeira Dourada	11	3109808	(-18.51609992980957,-49.503898620605469)
-1673	Caetanópolis	11	3109907	(-19.297100067138672,-44.418899536132813)
-1674	Caeté	11	3110004	(-19.882600784301758,-43.670398712158203)
-1675	Caiana	11	3110103	(-20.695600509643555,-41.92919921875)
-1676	Cajuri	11	3110202	(-20.790300369262695,-42.792499542236328)
-1677	Caldas	11	3110301	(-21.918300628662109,-46.384300231933594)
-1678	Camacho	11	3110400	(-20.629400253295898,-45.1593017578125)
-1679	Camanducaia	11	3110509	(-22.751499176025391,-46.149398803710937)
-1680	Cambuí	11	3110608	(-22.611499786376953,-46.057201385498047)
-1681	Cambuquira	11	3110707	(-21.854000091552734,-45.289600372314453)
-1682	Campanário	11	3110806	(-18.242700576782227,-41.735500335693359)
-1683	Campanha	11	3110905	(-21.836000442504883,-45.400398254394531)
-1684	Campestre	11	3111002	(-21.70789909362793,-46.23809814453125)
-1685	Campina Verde	11	3111101	(-19.538200378417969,-49.486198425292969)
-1686	Campo Azul	11	3111150	(-16.502799987792969,-44.809600830078125)
-1687	Campo Belo	11	3111200	(-20.893199920654297,-45.269901275634766)
-1688	Campo do Meio	11	3111309	(-21.112699508666992,-45.827301025390625)
-1689	Campo Florido	11	3111408	(-19.763099670410156,-48.571601867675781)
-1690	Campos Altos	11	3111507	(-19.691400527954102,-46.172500610351563)
-1691	Campos Gerais	11	3111606	(-21.23699951171875,-45.756900787353516)
-1692	Cana Verde	11	3111903	(-21.023199081420898,-45.180099487304688)
-1693	Canaã	11	3111705	(-20.686899185180664,-42.61669921875)
-1694	Canápolis	11	3111804	(-18.721200942993164,-49.203498840332031)
-1695	Candeias	11	3112000	(-20.769199371337891,-45.276500701904297)
-1696	Cantagalo	11	3112059	(-18.524799346923828,-42.622299194335938)
-1697	Caparaó	11	3112109	(-20.528900146484375,-41.906101226806641)
-1698	Capela Nova	11	3112208	(-20.917900085449219,-43.622001647949219)
-1699	Capelinha	11	3112307	(-17.688800811767578,-42.514701843261719)
-1700	Capetinga	11	3112406	(-20.616300582885742,-47.057098388671875)
-1701	Capim Branco	11	3112505	(-19.547100067138672,-44.130401611328125)
-1702	Capinópolis	11	3112604	(-18.686199188232422,-49.570598602294922)
-1703	Capitão Andrade	11	3112653	(-19.074800491333008,-41.861400604248047)
-1704	Capitão Enéas	11	3112703	(-16.326499938964844,-43.708400726318359)
-1705	Capitólio	11	3112802	(-20.616399765014648,-46.049301147460938)
-1706	Caputira	11	3112901	(-20.170299530029297,-42.268299102783203)
-1707	Caraí	11	3113008	(-17.186199188232422,-41.700401306152344)
-1708	Caranaíba	11	3113107	(-20.870700836181641,-43.74169921875)
-1709	Carandaí	11	3113206	(-20.956600189208984,-43.811000823974609)
-1710	Carangola	11	3113305	(-20.73430061340332,-42.031299591064453)
-1711	Caratinga	11	3113404	(-19.786800384521484,-42.129199981689453)
-1712	Carbonita	11	3113503	(-17.52549934387207,-43.013698577880859)
-1713	Careaçu	11	3113602	(-22.042400360107422,-45.695999145507813)
-1714	Carlos Chagas	11	3113701	(-17.697299957275391,-40.772300720214844)
-1715	Carmésia	11	3113800	(-19.087699890136719,-43.138198852539063)
-1716	Carmo da Cachoeira	11	3113909	(-21.463300704956055,-45.220100402832031)
-1717	Carmo da Mata	11	3114006	(-20.557500839233398,-44.873500823974609)
-1718	Carmo de Minas	11	3114105	(-22.120399475097656,-45.130699157714844)
-1719	Carmo do Cajuru	11	3114204	(-20.191200256347656,-44.766399383544922)
-1720	Carmo do Paranaíba	11	3114303	(-18.990999221801758,-46.316699981689453)
-1721	Carmo do Rio Claro	11	3114402	(-20.973600387573242,-46.114898681640625)
-1722	Carmópolis de Minas	11	3114501	(-20.539600372314453,-44.633598327636719)
-1723	Carneirinho	11	3114550	(-19.698699951171875,-50.689399719238281)
-1724	Carrancas	11	3114600	(-21.489799499511719,-44.644599914550781)
-1725	Carvalhópolis	11	3114709	(-21.773500442504883,-45.842098236083984)
-1726	Carvalhos	11	3114808	(-22,-44.463199615478516)
-1727	Casa Grande	11	3114907	(-20.792499542236328,-43.934299468994141)
-1728	Cascalho Rico	11	3115003	(-18.577199935913086,-47.871601104736328)
-1729	Cássia	11	3115102	(-20.583099365234375,-46.920101165771484)
-1730	Cataguases	11	3115300	(-21.392400741577148,-42.689601898193359)
-1731	Catas Altas	11	3115359	(-20.073400497436523,-43.406101226806641)
-1732	Catas Altas da Noruega	11	3115409	(-20.690099716186523,-43.493900299072266)
-1733	Catuji	11	3115458	(-17.301799774169922,-41.527599334716797)
-1734	Catuti	11	3115474	(-15.361599922180176,-42.962699890136719)
-1735	Caxambu	11	3115508	(-21.975299835205078,-44.931900024414063)
-1736	Cedro do Abaeté	11	3115607	(-19.14579963684082,-45.712001800537109)
-1737	Central de Minas	11	3115706	(-18.761199951171875,-41.314300537109375)
-1738	Centralina	11	3115805	(-18.585199356079102,-49.201400756835938)
-1739	Chácara	11	3115904	(-21.673299789428711,-43.215000152587891)
-1740	Chalé	11	3116001	(-20.045299530029297,-41.689701080322266)
-1741	Chapada do Norte	11	3116100	(-17.088100433349609,-42.539199829101563)
-1742	Chapada Gaúcha	11	3116159	(-15.301400184631348,-45.611598968505859)
-1743	Chiador	11	3116209	(-21.999599456787109,-43.061698913574219)
-1744	Cipotânea	11	3116308	(-20.902599334716797,-43.362899780273438)
-1745	Claraval	11	3116407	(-20.396999359130859,-47.276798248291016)
-1746	Claro dos Poções	11	3116506	(-17.082000732421875,-44.206100463867188)
-1747	Cláudio	11	3116605	(-20.443700790405273,-44.767299652099609)
-1748	Coimbra	11	3116704	(-20.853500366210937,-42.800800323486328)
-1749	Coluna	11	3116803	(-18.231100082397461,-42.835201263427734)
-1750	Comendador Gomes	11	3116902	(-19.697299957275391,-49.078899383544922)
-1751	Comercinho	11	3117009	(-16.296300888061523,-41.794498443603516)
-1752	Conceição da Aparecida	11	3117108	(-21.096000671386719,-46.204898834228516)
-1753	Conceição da Barra de Minas	11	3115201	(-21.131599426269531,-44.472900390625)
-1754	Conceição das Alagoas	11	3117306	(-19.917200088500977,-48.383899688720703)
-1755	Conceição das Pedras	11	3117207	(-22.157600402832031,-45.456199645996094)
-1756	Conceição de Ipanema	11	3117405	(-19.932600021362305,-41.690799713134766)
-1757	Conceição do Mato Dentro	11	3117504	(-19.034400939941406,-43.422100067138672)
-1758	Conceição do Pará	11	3117603	(-19.745599746704102,-44.894500732421875)
-1759	Conceição do Rio Verde	11	3117702	(-21.877799987792969,-45.087001800537109)
-1760	Conceição dos Ouros	11	3117801	(-22.407800674438477,-45.799598693847656)
-1761	Cônego Marinho	11	3117836	(-15.289199829101563,-44.418098449707031)
-1762	Confins	11	3117876	(-19.628200531005859,-43.993099212646484)
-1763	Congonhal	11	3117900	(-22.148799896240234,-46.042999267578125)
-1764	Congonhas	11	3118007	(-20.495800018310547,-43.851001739501953)
-1765	Congonhas do Norte	11	3118106	(-18.802099227905273,-43.676700592041016)
-1766	Conquista	11	3118205	(-19.93120002746582,-47.549198150634766)
-1767	Conselheiro Lafaiete	11	3118304	(-20.663400650024414,-43.784599304199219)
-1768	Conselheiro Pena	11	3118403	(-19.178899765014648,-41.473598480224609)
-1769	Consolação	11	3118502	(-22.549299240112305,-45.925498962402344)
-1770	Contagem	11	3118601	(-19.932100296020508,-44.053901672363281)
-1771	Coqueiral	11	3118700	(-21.185800552368164,-45.436599731445313)
-1772	Coração de Jesus	11	3118809	(-16.684099197387695,-44.363498687744141)
-1773	Cordisburgo	11	3118908	(-19.122400283813477,-44.322399139404297)
-1774	Cordislândia	11	3119005	(-21.789100646972656,-45.699901580810547)
-1775	Corinto	11	3119104	(-18.368999481201172,-44.454200744628906)
-1776	Coroaci	11	3119203	(-18.6156005859375,-42.279098510742188)
-1777	Coromandel	11	3119302	(-18.473400115966797,-47.19329833984375)
-1778	Coronel Fabriciano	11	3119401	(-19.517900466918945,-42.627601623535156)
-1779	Coronel Murta	11	3119500	(-16.614799499511719,-42.183998107910156)
-1780	Coronel Pacheco	11	3119609	(-21.589799880981445,-43.256000518798828)
-1781	Coronel Xavier Chaves	11	3119708	(-21.027700424194336,-44.220600128173828)
-1782	Córrego Danta	11	3119807	(-19.819799423217773,-45.9031982421875)
-1783	Córrego do Bom Jesus	11	3119906	(-22.626899719238281,-46.024101257324219)
-1784	Córrego Fundo	11	3119955	(-20.447399139404297,-45.561698913574219)
-1785	Córrego Novo	11	3120003	(-19.836099624633789,-42.398799896240234)
-1786	Couto de Magalhães de Minas	11	3120102	(-18.072700500488281,-43.464801788330078)
-1787	Crisólita	11	3120151	(-17.238100051879883,-40.918399810791016)
-1788	Cristais	11	3120201	(-20.873300552368164,-45.516700744628906)
-1789	Cristália	11	3120300	(-16.715999603271484,-42.857101440429688)
-1790	Cristiano Otoni	11	3120409	(-20.832399368286133,-43.816600799560547)
-1791	Cristina	11	3120508	(-22.208000183105469,-45.267299652099609)
-1792	Crucilândia	11	3120607	(-20.392299652099609,-44.333400726318359)
-1793	Cruzeiro da Fortaleza	11	3120706	(-18.944000244140625,-46.666900634765625)
-1794	Cruzília	11	3120805	(-21.840000152587891,-44.80670166015625)
-1795	Cuparaque	11	3120839	(-18.964799880981445,-41.098598480224609)
-1796	Curral de Dentro	11	3120870	(-15.932700157165527,-41.855701446533203)
-1797	Curvelo	11	3120904	(-18.752700805664062,-44.430301666259766)
-1798	Datas	11	3121001	(-18.447799682617188,-43.659099578857422)
-1799	Delfim Moreira	11	3121100	(-22.503599166870117,-45.279201507568359)
-1800	Delfinópolis	11	3121209	(-20.346799850463867,-46.845600128173828)
-1801	Delta	11	3121258	(-19.972099304199219,-47.784099578857422)
-1802	Descoberto	11	3121308	(-21.459999084472656,-42.961799621582031)
-1803	Desterro de Entre Rios	11	3121407	(-20.665000915527344,-44.333400726318359)
-1804	Desterro do Melo	11	3121506	(-21.142999649047852,-43.517799377441406)
-1805	Diamantina	11	3121605	(-18.241300582885742,-43.603099822998047)
-1806	Diogo de Vasconcelos	11	3121704	(-20.487899780273438,-43.195301055908203)
-1807	Dionísio	11	3121803	(-19.843299865722656,-42.770099639892578)
-1808	Divinésia	11	3121902	(-20.99169921875,-43.000301361083984)
-1809	Divino	11	3122009	(-20.613399505615234,-42.143798828125)
-1810	Divino das Laranjeiras	11	3122108	(-18.77549934387207,-41.478099822998047)
-1811	Divinolândia de Minas	11	3122207	(-18.800399780273438,-42.610298156738281)
-1812	Divinópolis	11	3122306	(-20.144599914550781,-44.891201019287109)
-1813	Divisa Alegre	11	3122355	(-15.722100257873535,-41.346298217773438)
-1814	Divisa Nova	11	3122405	(-21.509199142456055,-46.190399169921875)
-1815	Divisópolis	11	3122454	(-15.725399971008301,-40.999698638916016)
-1816	Dom Bosco	11	3122470	(-16.652000427246094,-46.259700775146484)
-1817	Dom Cavati	11	3122504	(-19.373500823974609,-42.112098693847656)
-1818	Dom Joaquim	11	3122603	(-18.961000442504883,-43.254398345947266)
-1819	Dom Silvério	11	3122702	(-20.162700653076172,-42.962699890136719)
-1820	Dom Viçoso	11	3122801	(-22.251100540161133,-45.164299011230469)
-1821	Dona Eusébia	11	3122900	(-21.319000244140625,-42.806999206542969)
-1822	Dores de Campos	11	3123007	(-21.113899230957031,-44.020698547363281)
-1823	Dores de Guanhães	11	3123106	(-19.051599502563477,-42.925399780273438)
-1824	Dores do Indaiá	11	3123205	(-19.462799072265625,-45.592700958251953)
-1825	Dores do Turvo	11	3123304	(-20.978500366210937,-43.183399200439453)
-1826	Doresópolis	11	3123403	(-20.286800384521484,-45.900699615478516)
-1827	Douradoquara	11	3123502	(-18.433799743652344,-47.599300384521484)
-1828	Durandé	11	3123528	(-20.205799102783203,-41.797698974609375)
-1829	Elói Mendes	11	3123601	(-21.608800888061523,-45.569099426269531)
-1830	Engenheiro Caldas	11	3123700	(-19.206499099731445,-42.050300598144531)
-1831	Engenheiro Navarro	11	3123809	(-17.283100128173828,-43.946998596191406)
-1832	Entre Folhas	11	3123858	(-19.621799468994141,-42.230598449707031)
-1833	Entre Rios de Minas	11	3123908	(-20.670600891113281,-44.065399169921875)
-1834	Ervália	11	3124005	(-20.840299606323242,-42.654399871826172)
-1835	Esmeraldas	11	3124104	(-19.763999938964844,-44.306499481201172)
-1836	Espera Feliz	11	3124203	(-20.650800704956055,-41.911899566650391)
-1837	Espinosa	11	3124302	(-14.924900054931641,-42.808998107910156)
-1838	Espírito Santo do Dourado	11	3124401	(-22.045400619506836,-45.954799652099609)
-1839	Estiva	11	3124500	(-22.457700729370117,-46.019100189208984)
-1840	Estrela Dalva	11	3124609	(-21.741199493408203,-42.457401275634766)
-1841	Estrela do Indaiá	11	3124708	(-19.516899108886719,-45.785900115966797)
-1842	Estrela do Sul	11	3124807	(-18.739900588989258,-47.695598602294922)
-1843	Eugenópolis	11	3124906	(-21.100200653076172,-42.187801361083984)
-1844	Ewbank da Câmara	11	3125002	(-21.549800872802734,-43.506801605224609)
-1845	Extrema	11	3125101	(-22.854000091552734,-46.317798614501953)
-1846	Fama	11	3125200	(-21.408899307250977,-45.828601837158203)
-1847	Faria Lemos	11	3125309	(-20.809700012207031,-42.02130126953125)
-1848	Felício dos Santos	11	3125408	(-18.07550048828125,-43.242198944091797)
-1849	Felisburgo	11	3125606	(-16.634799957275391,-40.760501861572266)
-1850	Felixlândia	11	3125705	(-18.750699996948242,-44.900398254394531)
-1851	Fernandes Tourinho	11	3125804	(-19.15410041809082,-42.080299377441406)
-1852	Ferros	11	3125903	(-19.23430061340332,-43.019199371337891)
-1853	Fervedouro	11	3125952	(-20.72599983215332,-42.278999328613281)
-1854	Florestal	11	3126000	(-19.88800048828125,-44.431800842285156)
-1855	Formiga	11	3126109	(-20.461799621582031,-45.426799774169922)
-1856	Formoso	11	3126208	(-14.944600105285645,-46.237098693847656)
-1857	Fortaleza de Minas	11	3126307	(-20.850799560546875,-46.712001800537109)
-1858	Fortuna de Minas	11	3126406	(-19.55780029296875,-44.447200775146484)
-1859	Francisco Badaró	11	3126505	(-16.988300323486328,-42.356800079345703)
-1860	Francisco Dumont	11	3126604	(-17.310699462890625,-44.231700897216797)
-1861	Francisco Sá	11	3126703	(-16.482700347900391,-43.489601135253906)
-1862	Franciscópolis	11	3126752	(-17.957799911499023,-42.0093994140625)
-1863	Frei Gaspar	11	3126802	(-18.070899963378906,-41.432498931884766)
-1864	Frei Inocêncio	11	3126901	(-18.555599212646484,-41.912101745605469)
-1865	Frei Lagonegro	11	3126950	(-18.175100326538086,-42.761699676513672)
-1866	Fronteira	11	3127008	(-20.274799346923828,-49.198398590087891)
-1867	Fronteira dos Vales	11	3127057	(-16.889799118041992,-40.923000335693359)
-1868	Fruta de Leite	11	3127073	(-16.122499465942383,-42.528800964355469)
-1869	Frutal	11	3127107	(-20.025899887084961,-48.935501098632813)
-1870	Funilândia	11	3127206	(-19.366100311279297,-44.061000823974609)
-1871	Galiléia	11	3127305	(-19.000499725341797,-41.538700103759766)
-1872	Gameleiras	11	3127339	(-15.082900047302246,-43.125)
-1873	Glaucilândia	11	3127354	(-16.848100662231445,-43.692001342773438)
-1874	Goiabeira	11	3127370	(-18.98069953918457,-41.223499298095703)
-1875	Goianá	11	3127388	(-21.535999298095703,-43.195701599121094)
-1876	Gonçalves	11	3127404	(-22.654499053955078,-45.855598449707031)
-1877	Gonzaga	11	3127503	(-18.819599151611328,-42.476898193359375)
-1878	Gouveia	11	3127602	(-18.451900482177734,-43.742298126220703)
-1879	Governador Valadares	11	3127701	(-18.854499816894531,-41.955501556396484)
-1880	Grão Mogol	11	3127800	(-16.566200256347656,-42.892299652099609)
-1881	Grupiara	11	3127909	(-18.500299453735352,-47.731800079345703)
-1882	Guanhães	11	3128006	(-18.771299362182617,-42.931198120117188)
-1883	Guapé	11	3128105	(-20.763099670410156,-45.915199279785156)
-1884	Guaraciaba	11	3128204	(-20.571599960327148,-43.0093994140625)
-1885	Guaraciama	11	3128253	(-17.014200210571289,-43.667499542236328)
-1886	Guaranésia	11	3128303	(-21.300899505615234,-46.796398162841797)
-1887	Guarani	11	3128402	(-21.356300354003906,-43.032798767089844)
-1888	Guarará	11	3128501	(-21.730400085449219,-43.033401489257813)
-1889	Guarda-Mor	11	3128600	(-17.767299652099609,-47.099800109863281)
-1890	Guaxupé	11	3128709	(-21.305000305175781,-46.708099365234375)
-1891	Guidoval	11	3128808	(-21.155000686645508,-42.788700103759766)
-1892	Guimarânia	11	3128907	(-18.842500686645508,-46.79010009765625)
-1893	Guiricema	11	3129004	(-21.009799957275391,-42.720699310302734)
-1894	Gurinhatã	11	3129103	(-19.214300155639648,-49.787601470947266)
-1895	Heliodora	11	3129202	(-22.064399719238281,-45.545299530029297)
-1896	Iapu	11	3129301	(-19.438699722290039,-42.214698791503906)
-1897	Ibertioga	11	3129400	(-21.433000564575195,-43.963901519775391)
-1898	Ibiá	11	3129509	(-19.474899291992188,-46.547401428222656)
-1899	Ibiaí	11	3129608	(-16.859100341796875,-44.904598236083984)
-1900	Ibiracatu	11	3129657	(-15.660499572753906,-44.166698455810547)
-1901	Ibiraci	11	3129707	(-20.461099624633789,-47.122200012207031)
-1902	Ibirité	11	3129806	(-20.025199890136719,-44.056900024414063)
-1903	Ibitiúra de Minas	11	3129905	(-22.060400009155273,-46.436798095703125)
-1904	Ibituruna	11	3130002	(-21.15410041809082,-44.747898101806641)
-1905	Icaraí de Minas	11	3130051	(-16.214000701904297,-44.903400421142578)
-1906	Igarapé	11	3130101	(-20.070699691772461,-44.299400329589844)
-1907	Igaratinga	11	3130200	(-19.947599411010742,-44.706298828125)
-1908	Iguatama	11	3130309	(-20.177600860595703,-45.711101531982422)
-1909	Ijaci	11	3130408	(-21.173799514770508,-44.923301696777344)
-1910	Ilicínea	11	3130507	(-20.940200805664063,-45.830799102783203)
-1911	Imbé de Minas	11	3130556	(-19.601699829101563,-41.969501495361328)
-1912	Inconfidentes	11	3130606	(-22.313600540161133,-46.326400756835937)
-1913	Indaiabira	11	3130655	(-15.491100311279297,-42.20050048828125)
-1914	Indianópolis	11	3130705	(-19.034099578857422,-47.915500640869141)
-1915	Ingaí	11	3130804	(-21.402399063110352,-44.915199279785156)
-1916	Inhapim	11	3130903	(-19.547599792480469,-42.114700317382813)
-1917	Inhaúma	11	3131000	(-19.489799499511719,-44.393398284912109)
-1918	Inimutaba	11	3131109	(-18.727100372314453,-44.3583984375)
-1919	Ipaba	11	3131158	(-19.415800094604492,-42.413898468017578)
-1920	Ipanema	11	3131208	(-19.799200057983398,-41.716400146484375)
-1921	Ipatinga	11	3131307	(-19.470300674438477,-42.547599792480469)
-1922	Ipiaçu	11	3131406	(-18.692699432373047,-49.943599700927734)
-1923	Ipuiúna	11	3131505	(-22.101299285888672,-46.191501617431641)
-1924	Iraí de Minas	11	3131604	(-18.981899261474609,-47.46099853515625)
-1925	Itabira	11	3131703	(-19.623899459838867,-43.231201171875)
-1927	Itabirito	11	3131901	(-20.250099182128906,-43.803798675537109)
-1928	Itacambira	11	3132008	(-17.0625,-43.306900024414063)
-1929	Itacarambi	11	3132107	(-15.08899974822998,-44.095001220703125)
-1930	Itaguara	11	3132206	(-20.394699096679688,-44.487499237060547)
-1931	Itaipé	11	3132305	(-17.401399612426758,-41.669700622558594)
-1932	Itajubá	11	3132404	(-22.422500610351563,-45.459800720214844)
-1933	Itamarandiba	11	3132503	(-17.855199813842773,-42.856098175048828)
-1934	Itamarati de Minas	11	3132602	(-21.417900085449219,-42.812999725341797)
-1935	Itambacuri	11	3132701	(-18.034999847412109,-41.682998657226563)
-1936	Itambé do Mato Dentro	11	3132800	(-19.415800094604492,-43.318199157714844)
-1937	Itamogi	11	3132909	(-21.075799942016602,-47.046001434326172)
-1938	Itamonte	11	3133006	(-22.285900115966797,-44.868000030517578)
-1939	Itanhandu	11	3133105	(-22.294200897216797,-44.938201904296875)
-1940	Itanhomi	11	3133204	(-19.173599243164062,-41.862998962402344)
-1941	Itaobim	11	3133303	(-16.557100296020508,-41.501701354980469)
-1942	Itapagipe	11	3133402	(-19.906200408935547,-49.378101348876953)
-1943	Itapecerica	11	3133501	(-20.470399856567383,-45.126998901367188)
-1944	Itapeva	11	3133600	(-22.766500473022461,-46.224098205566406)
-1945	Itatiaiuçu	11	3133709	(-20.198299407958984,-44.421100616455078)
-1946	Itaú de Minas	11	3133758	(-20.737499237060547,-46.752498626708984)
-1947	Itaúna	11	3133808	(-20.08180046081543,-44.580101013183594)
-1948	Itaverava	11	3133907	(-20.676900863647461,-43.614101409912109)
-1949	Itinga	11	3134004	(-16.610000610351563,-41.767200469970703)
-1950	Itueta	11	3134103	(-19.399900436401367,-41.174598693847656)
-1951	Ituiutaba	11	3134202	(-18.977199554443359,-49.463901519775391)
-1952	Itumirim	11	3134301	(-21.317100524902344,-44.872398376464844)
-1953	Iturama	11	3134400	(-19.72760009765625,-50.196601867675781)
-1954	Itutinga	11	3134509	(-21.299999237060547,-44.656700134277344)
-1955	Jaboticatubas	11	3134608	(-19.511899948120117,-43.737300872802734)
-1956	Jacinto	11	3134707	(-16.142799377441406,-40.294998168945313)
-1957	Jacuí	11	3134806	(-21.013700485229492,-46.73590087890625)
-1958	Jacutinga	11	3134905	(-22.285999298095703,-46.616600036621094)
-1959	Jaguaraçu	11	3135001	(-19.646999359130859,-42.749801635742187)
-1960	Jaíba	11	3135050	(-15.343199729919434,-43.668800354003906)
-1961	Jampruca	11	3135076	(-18.461000442504883,-41.808998107910156)
-1962	Janaúba	11	3135100	(-15.802200317382812,-43.313201904296875)
-1963	Januária	11	3135209	(-15.480199813842773,-44.363899230957031)
-1964	Japaraíba	11	3135308	(-20.144199371337891,-45.501499176025391)
-1965	Japonvar	11	3135357	(-15.989100456237793,-44.275798797607422)
-1966	Jeceaba	11	3135407	(-20.533899307250977,-43.989398956298828)
-1967	Jenipapo de Minas	11	3135456	(-17.083099365234375,-42.258899688720703)
-1968	Jequeri	11	3135506	(-20.454200744628906,-42.66510009765625)
-1969	Jequitaí	11	3135605	(-17.229000091552734,-44.437599182128906)
-1970	Jequitibá	11	3135704	(-19.234500885009766,-44.030399322509766)
-1971	Jequitinhonha	11	3135803	(-16.4375,-41.011699676513672)
-1972	Jesuânia	11	3135902	(-21.988700866699219,-45.291099548339844)
-1973	Joaíma	11	3136009	(-16.652200698852539,-41.022899627685547)
-1974	Joanésia	11	3136108	(-19.17289924621582,-42.677501678466797)
-1975	João Monlevade	11	3136207	(-19.812599182128906,-43.173500061035156)
-1976	João Pinheiro	11	3136306	(-17.739799499511719,-46.171501159667969)
-1977	Joaquim Felício	11	3136405	(-17.757999420166016,-44.164299011230469)
-1978	Jordânia	11	3136504	(-15.900899887084961,-40.184101104736328)
-1979	José Gonçalves de Minas	11	3136520	(-16.905300140380859,-42.601398468017578)
-1980	José Raydan	11	3136553	(-18.219499588012695,-42.494598388671875)
-1981	Josenópolis	11	3136579	(-16.54170036315918,-42.515098571777344)
-1982	Juatuba	11	3136652	(-19.944799423217773,-44.345100402832031)
-1983	Juiz de Fora	11	3136702	(-21.759500503540039,-43.339801788330078)
-1984	Juramento	11	3136801	(-16.847299575805664,-43.586498260498047)
-1985	Juruaia	11	3136900	(-21.249300003051758,-46.573501586914063)
-1986	Juvenília	11	3136959	(-14.266200065612793,-44.159698486328125)
-1987	Ladainha	11	3137007	(-17.627899169921875,-41.748798370361328)
-1988	Lagamar	11	3137106	(-18.175899505615234,-46.806301116943359)
-1989	Lagoa da Prata	11	3137205	(-20.023700714111328,-45.54010009765625)
-1990	Lagoa dos Patos	11	3137304	(-16.978000640869141,-44.575401306152344)
-1991	Lagoa Dourada	11	3137403	(-20.913900375366211,-44.079700469970703)
-1992	Lagoa Formosa	11	3137502	(-18.771499633789063,-46.401199340820313)
-1993	Lagoa Grande	11	3137536	(-17.832300186157227,-46.516498565673828)
-1994	Lagoa Santa	11	3137601	(-19.639699935913086,-43.893199920654297)
-1995	Lajinha	11	3137700	(-20.153900146484375,-41.622798919677734)
-1996	Lambari	11	3137809	(-21.967100143432617,-45.349800109863281)
-1997	Lamim	11	3137908	(-20.790000915527344,-43.470600128173828)
-1998	Laranjal	11	3138005	(-21.371500015258789,-42.473201751708984)
-1999	Lassance	11	3138104	(-17.886999130249023,-44.573501586914062)
-2000	Lavras	11	3138203	(-21.24799919128418,-45.000900268554687)
-2001	Leandro Ferreira	11	3138302	(-19.71929931640625,-45.027900695800781)
-2002	Leme do Prado	11	3138351	(-17.079299926757813,-42.693599700927734)
-2003	Leopoldina	11	3138401	(-21.529600143432617,-42.642101287841797)
-2004	Liberdade	11	3138500	(-22.027500152587891,-44.32080078125)
-2005	Lima Duarte	11	3138609	(-21.838600158691406,-43.793399810791016)
-2006	Limeira do Oeste	11	3138625	(-19.551200866699219,-50.581501007080078)
-2007	Lontra	11	3138658	(-15.901300430297852,-44.305999755859375)
-2008	Luisburgo	11	3138674	(-20.446800231933594,-42.097599029541016)
-2009	Luislândia	11	3138682	(-16.109500885009766,-44.588600158691406)
-2010	Luminárias	11	3138708	(-21.514499664306641,-44.903400421142578)
-2011	Luz	11	3138807	(-19.791099548339844,-45.679401397705078)
-2012	Machacalis	11	3138906	(-17.072299957275391,-40.724498748779297)
-2013	Machado	11	3139003	(-21.677799224853516,-45.921901702880859)
-2014	Madre de Deus de Minas	11	3139102	(-21.482999801635742,-44.328701019287109)
-2015	Malacacheta	11	3139201	(-17.845600128173828,-42.076900482177734)
-2016	Mamonas	11	3139250	(-15.047900199890137,-42.9468994140625)
-2017	Manga	11	3139300	(-14.752900123596191,-43.939098358154297)
-2018	Manhuaçu	11	3139409	(-20.257200241088867,-42.027999877929687)
-2019	Manhumirim	11	3139508	(-20.359100341796875,-41.958900451660156)
-2020	Mantena	11	3139607	(-18.776100158691406,-40.987400054931641)
-2021	Mar de Espanha	11	3139805	(-21.870700836181641,-43.006198883056641)
-2022	Maravilhas	11	3139706	(-19.507600784301758,-44.677898406982422)
-2023	Maria da Fé	11	3139904	(-22.304399490356445,-45.377300262451172)
-2024	Mariana	11	3140001	(-20.376499176025391,-43.41400146484375)
-2025	Marilac	11	3140100	(-18.507900238037109,-42.082199096679688)
-2026	Mário Campos	11	3140159	(-20.058200836181641,-44.188301086425781)
-2027	Maripá de Minas	11	3140209	(-21.697900772094727,-42.954601287841797)
-2028	Marliéria	11	3140308	(-19.709600448608398,-42.732700347900391)
-2029	Marmelópolis	11	3140407	(-22.447000503540039,-45.164501190185547)
-2030	Martinho Campos	11	3140506	(-19.330600738525391,-45.243400573730469)
-2031	Martins Soares	11	3140530	(-20.254600524902344,-41.87860107421875)
-2032	Mata Verde	11	3140555	(-15.68690013885498,-40.736598968505859)
-2033	Materlândia	11	3140605	(-18.469900131225586,-43.057899475097656)
-2034	Mateus Leme	11	3140704	(-19.979400634765625,-44.431800842285156)
-2035	Mathias Lobato	11	3171501	(-18.590000152587891,-41.916599273681641)
-2036	Matias Barbosa	11	3140803	(-21.868999481201172,-43.313499450683594)
-2037	Matias Cardoso	11	3140852	(-14.856300354003906,-43.914600372314453)
-2038	Matipó	11	3140902	(-20.287300109863281,-42.340099334716797)
-2039	Mato Verde	11	3141009	(-15.394399642944336,-42.860000610351563)
-2040	Matozinhos	11	3141108	(-19.554300308227539,-44.086799621582031)
-2041	Matutina	11	3141207	(-19.217899322509766,-45.966400146484375)
-2042	Medeiros	11	3141306	(-19.986499786376953,-46.218101501464844)
-2043	Medina	11	3141405	(-16.22450065612793,-41.472801208496094)
-2044	Mendes Pimentel	11	3141504	(-18.66309928894043,-41.405200958251953)
-2045	Mercês	11	3141603	(-21.197599411010742,-43.333698272705078)
-2046	Mesquita	11	3141702	(-19.224000930786133,-42.607898712158203)
-2047	Minas Novas	11	3141801	(-17.215599060058594,-42.588401794433594)
-2048	Minduri	11	3141900	(-21.67970085144043,-44.605098724365234)
-2049	Mirabela	11	3142007	(-16.256000518798828,-44.160198211669922)
-2050	Miradouro	11	3142106	(-20.889900207519531,-42.345798492431641)
-2051	Miraí	11	3142205	(-21.20210075378418,-42.612201690673828)
-2052	Miravânia	11	3142254	(-14.734800338745117,-44.409198760986328)
-2053	Moeda	11	3142304	(-20.339899063110352,-44.050899505615234)
-2054	Moema	11	3142403	(-19.838699340820312,-45.412700653076172)
-2055	Monjolos	11	3142502	(-18.324499130249023,-44.118000030517578)
-2056	Monsenhor Paulo	11	3142601	(-21.757900238037109,-45.539100646972656)
-2057	Montalvânia	11	3142700	(-14.419699668884277,-44.371898651123047)
-2058	Monte Alegre de Minas	11	3142809	(-18.868999481201172,-48.881000518798828)
-2059	Monte Azul	11	3142908	(-15.151399612426758,-42.871799468994141)
-2060	Monte Belo	11	3143005	(-21.32710075378418,-46.363498687744141)
-2061	Monte Carmelo	11	3143104	(-18.730199813842773,-47.491199493408203)
-2062	Monte Formoso	11	3143153	(-16.869100570678711,-41.247299194335938)
-2063	Monte Santo de Minas	11	3143203	(-21.187299728393555,-46.975299835205078)
-2064	Monte Sião	11	3143401	(-22.433500289916992,-46.573001861572266)
-2065	Montes Claros	11	3143302	(-16.728200912475586,-43.857799530029297)
-2066	Montezuma	11	3143450	(-15.170200347900391,-42.494098663330078)
-2067	Morada Nova de Minas	11	3143500	(-18.599800109863281,-45.3583984375)
-2068	Morro da Garça	11	3143609	(-18.535600662231445,-44.601001739501953)
-2069	Morro do Pilar	11	3143708	(-19.223600387573242,-43.379501342773437)
-2070	Munhoz	11	3143807	(-22.609199523925781,-46.36199951171875)
-2071	Muriaé	11	3143906	(-21.129999160766602,-42.369300842285156)
-2072	Mutum	11	3144003	(-19.812099456787109,-41.440700531005859)
-2073	Muzambinho	11	3144102	(-21.369199752807617,-46.52130126953125)
-2074	Nacip Raydan	11	3144201	(-18.454399108886719,-42.248100280761719)
-2075	Nanuque	11	3144300	(-17.848100662231445,-40.353298187255859)
-2076	Naque	11	3144359	(-19.229099273681641,-42.331199645996094)
-2077	Natalândia	11	3144375	(-16.502099990844727,-46.487400054931641)
-2078	Natércia	11	3144409	(-22.115800857543945,-45.512298583984375)
-2079	Nazareno	11	3144508	(-21.216800689697266,-44.613800048828125)
-2080	Nepomuceno	11	3144607	(-21.232400894165039,-45.235000610351563)
-2081	Ninheira	11	3144656	(-15.314800262451172,-41.756401062011719)
-2082	Nova Belém	11	3144672	(-18.492500305175781,-41.110698699951172)
-2083	Nova Era	11	3144706	(-19.757699966430664,-43.033298492431641)
-2084	Nova Lima	11	3144805	(-19.975799560546875,-43.850898742675781)
-2085	Nova Módica	11	3144904	(-18.441699981689453,-41.498401641845703)
-2086	Nova Ponte	11	3145000	(-19.146099090576172,-47.677898406982422)
-2087	Nova Porteirinha	11	3145059	(-15.799300193786621,-43.294101715087891)
-2088	Nova Resende	11	3145109	(-21.128599166870117,-46.415699005126953)
-2089	Nova Serrana	11	3145208	(-19.871299743652344,-44.984699249267578)
-2090	Nova União	11	3136603	(-19.687599182128906,-43.583000183105469)
-2091	Novo Cruzeiro	11	3145307	(-17.465400695800781,-41.882598876953125)
-2092	Novo Oriente de Minas	11	3145356	(-17.408899307250977,-41.219398498535156)
-2093	Novorizonte	11	3145372	(-16.016199111938477,-42.404399871826172)
-2094	Olaria	11	3145406	(-21.859800338745117,-43.935600280761719)
-2095	Olhos-d`Água	11	3145455	(-17.398195266723633,-43.5718994140625)
-2096	Olímpio Noronha	11	3145505	(-22.068500518798828,-45.265701293945313)
-2097	Oliveira	11	3145604	(-20.698200225830078,-44.828998565673828)
-2098	Oliveira Fortes	11	3145703	(-21.340099334716797,-43.449901580810547)
-2099	Onça de Pitangui	11	3145802	(-19.72760009765625,-44.805801391601563)
-2100	Oratórios	11	3145851	(-20.429800033569336,-42.797698974609375)
-2101	Orizânia	11	3145877	(-20.514200210571289,-42.199100494384766)
-2102	Ouro Branco	11	3145901	(-20.526300430297852,-43.696201324462891)
-2103	Ouro Fino	11	3146008	(-22.277900695800781,-46.371601104736328)
-2104	Ouro Preto	11	3146107	(-20.379600524902344,-43.512001037597656)
-2105	Ouro Verde de Minas	11	3146206	(-18.0718994140625,-41.273399353027344)
-2106	Padre Carvalho	11	3146255	(-16.364599227905273,-42.508800506591797)
-2107	Padre Paraíso	11	3146305	(-17.075799942016602,-41.482101440429688)
-2108	Pai Pedro	11	3146552	(-15.527099609375,-43.069999694824219)
-2109	Paineiras	11	3146404	(-18.899299621582031,-45.532100677490234)
-2110	Pains	11	3146503	(-20.370500564575195,-45.662700653076172)
-2111	Paiva	11	3146602	(-21.291299819946289,-43.408798217773438)
-2112	Palma	11	3146701	(-21.374799728393555,-42.312301635742187)
-2113	Palmópolis	11	3146750	(-16.736400604248047,-40.429599761962891)
-2114	Papagaios	11	3146909	(-19.441900253295898,-44.746799468994141)
-2115	Pará de Minas	11	3147105	(-19.853399276733398,-44.611400604248047)
-2116	Paracatu	11	3147006	(-17.225200653076172,-46.871101379394531)
-2117	Paraguaçu	11	3147204	(-21.546499252319336,-45.737400054931641)
-2118	Paraisópolis	11	3147303	(-22.553899765014648,-45.780300140380859)
-2119	Paraopeba	11	3147402	(-19.273199081420898,-44.404399871826172)
-2120	Passa Quatro	11	3147600	(-22.387100219726562,-44.970901489257813)
-2121	Passa Tempo	11	3147709	(-20.653900146484375,-44.492599487304688)
-2122	Passabém	11	3147501	(-19.350900650024414,-43.138301849365234)
-2123	Passa-Vinte	11	3147808	(-22.209722518920898,-44.234443664550781)
-2124	Passos	11	3147907	(-20.71929931640625,-46.609001159667969)
-2125	Patis	11	3147956	(-16.077299118041992,-44.078701019287109)
-2126	Patos de Minas	11	3148004	(-18.569900512695312,-46.501300811767578)
-2127	Patrocínio	11	3148103	(-18.937900543212891,-46.993400573730469)
-2128	Patrocínio do Muriaé	11	3148202	(-21.154399871826172,-42.212501525878906)
-2129	Paula Cândido	11	3148301	(-20.875400543212891,-42.975200653076172)
-2130	Paulistas	11	3148400	(-18.427600860595703,-42.862800598144531)
-2131	Pavão	11	3148509	(-17.426700592041016,-41.003501892089844)
-2132	Peçanha	11	3148608	(-18.544099807739258,-42.558300018310547)
-2133	Pedra Azul	11	3148707	(-16.008600234985352,-41.290901184082031)
-2134	Pedra Bonita	11	3148756	(-20.521900177001953,-42.330398559570313)
-2135	Pedra do Anta	11	3148806	(-20.596799850463867,-42.712299346923828)
-2136	Pedra do Indaiá	11	3148905	(-20.25629997253418,-45.210700988769531)
-2137	Pedra Dourada	11	3149002	(-20.82659912109375,-42.151500701904297)
-2138	Pedralva	11	3149101	(-22.23859977722168,-45.465400695800781)
-2139	Pedras de Maria da Cruz	11	3149150	(-15.60319995880127,-44.390998840332031)
-2140	Pedrinópolis	11	3149200	(-19.224100112915039,-47.457901000976562)
-2141	Pedro Leopoldo	11	3149309	(-19.630800247192383,-44.038299560546875)
-2142	Pedro Teixeira	11	3149408	(-21.707599639892578,-43.743000030517578)
-2143	Pequeri	11	3149507	(-21.834100723266602,-43.114498138427734)
-2144	Pequi	11	3149606	(-19.628400802612305,-44.660400390625)
-2145	Perdigão	11	3149705	(-19.941099166870117,-45.077999114990234)
-2146	Perdizes	11	3149804	(-19.343399047851563,-47.296298980712891)
-2147	Perdões	11	3149903	(-21.09320068359375,-45.089599609375)
-2148	Periquito	11	3149952	(-19.15730094909668,-42.233299255371094)
-2149	Pescador	11	3150000	(-18.357000350952148,-41.600601196289063)
-2150	Piau	11	3150109	(-21.509599685668945,-43.312999725341797)
-2151	Piedade de Caratinga	11	3150158	(-19.759300231933594,-42.075599670410156)
-2152	Piedade de Ponte Nova	11	3150208	(-20.243799209594727,-42.737899780273438)
-2153	Piedade do Rio Grande	11	3150307	(-21.468999862670898,-44.193801879882812)
-2154	Piedade dos Gerais	11	3150406	(-20.471500396728516,-44.224300384521484)
-2155	Pimenta	11	3150505	(-20.482700347900391,-45.804901123046875)
-2156	Pingo-d`Água	11	3150539	(-19.728731155395508,-42.409500122070313)
-2157	Pintópolis	11	3150570	(-16.057199478149414,-45.140201568603516)
-2158	Piracema	11	3150604	(-20.508899688720703,-44.478298187255859)
-2159	Pirajuba	11	3150703	(-19.909200668334961,-48.702701568603516)
-2160	Piranga	11	3150802	(-20.683399200439453,-43.296699523925781)
-2161	Piranguçu	11	3150901	(-22.524900436401367,-45.494499206542969)
-2162	Piranguinho	11	3151008	(-22.395000457763672,-45.532398223876953)
-2163	Pirapetinga	11	3151107	(-21.655399322509766,-42.343399047851563)
-2164	Pirapora	11	3151206	(-17.339199066162109,-44.933998107910156)
-2165	Piraúba	11	3151305	(-21.282499313354492,-43.017200469970703)
-2166	Pitangui	11	3151404	(-19.674100875854492,-44.896400451660156)
-2167	Piumhi	11	3151503	(-20.476200103759766,-45.958900451660156)
-2168	Planura	11	3151602	(-20.137599945068359,-48.700000762939453)
-2169	Poço Fundo	11	3151701	(-21.780000686645508,-45.965801239013672)
-2170	Poços de Caldas	11	3151800	(-21.780000686645508,-46.569198608398438)
-2171	Pocrane	11	3151909	(-19.620800018310547,-41.633399963378906)
-2172	Pompéu	11	3152006	(-19.225700378417969,-45.01409912109375)
-2173	Ponte Nova	11	3152105	(-20.411100387573242,-42.897800445556641)
-2174	Ponto Chique	11	3152131	(-16.628200531005859,-45.058799743652344)
-2175	Ponto dos Volantes	11	3152170	(-16.747299194335938,-41.502498626708984)
-2176	Porteirinha	11	3152204	(-15.740400314331055,-43.028099060058594)
-2177	Porto Firme	11	3152303	(-20.664199829101563,-43.083400726318359)
-2178	Poté	11	3152402	(-17.807699203491211,-41.785999298095703)
-2179	Pouso Alegre	11	3152501	(-22.226600646972656,-45.938899993896484)
-2180	Pouso Alto	11	3152600	(-22.196399688720703,-44.974800109863281)
-2181	Prados	11	3152709	(-21.059700012207031,-44.077800750732422)
-2182	Prata	11	3152808	(-19.308599472045898,-48.927600860595703)
-2183	Pratápolis	11	3152907	(-20.741100311279297,-46.862400054931641)
-2184	Pratinha	11	3153004	(-19.73900032043457,-46.375499725341797)
-2185	Presidente Bernardes	11	3153103	(-20.765600204467773,-43.189498901367188)
-2186	Presidente Juscelino	11	3153202	(-18.640100479125977,-44.060001373291016)
-2187	Presidente Kubitschek	11	3153301	(-18.619300842285156,-43.562801361083984)
-2188	Presidente Olegário	11	3153400	(-18.409599304199219,-46.416500091552734)
-2189	Prudente de Morais	11	3153608	(-19.474199295043945,-44.159099578857422)
-2190	Quartel Geral	11	3153707	(-19.270299911499023,-45.556900024414063)
-2191	Queluzito	11	3153806	(-20.741600036621094,-43.885101318359375)
-2192	Raposos	11	3153905	(-19.963600158691406,-43.807899475097656)
-2193	Raul Soares	11	3154002	(-20.106100082397461,-42.450199127197266)
-2194	Recreio	11	3154101	(-21.528900146484375,-42.467601776123047)
-2195	Reduto	11	3154150	(-20.240100860595703,-41.984798431396484)
-2196	Resende Costa	11	3154200	(-20.91710090637207,-44.240699768066406)
-2197	Resplendor	11	3154309	(-19.319400787353516,-41.246200561523438)
-2198	Ressaquinha	11	3154408	(-21.064199447631836,-43.759799957275391)
-2199	Riachinho	11	3154457	(-16.225799560546875,-45.988800048828125)
-2200	Riacho dos Machados	11	3154507	(-16.009099960327148,-43.048801422119141)
-2201	Ribeirão das Neves	11	3154606	(-19.762100219726563,-44.084400177001953)
-2202	Ribeirão Vermelho	11	3154705	(-21.187900543212891,-45.063701629638672)
-2203	Rio Acima	11	3154804	(-20.087600708007812,-43.787799835205078)
-2204	Rio Casca	11	3154903	(-20.228500366210938,-42.646198272705078)
-2205	Rio do Prado	11	3155108	(-16.605600357055664,-40.571399688720703)
-2206	Rio Doce	11	3155009	(-20.241199493408203,-42.899501800537109)
-2207	Rio Espera	11	3155207	(-20.854999542236328,-43.472099304199219)
-2208	Rio Manso	11	3155306	(-20.266599655151367,-44.306900024414062)
-2209	Rio Novo	11	3155405	(-21.464899063110352,-43.116798400878906)
-2210	Rio Paranaíba	11	3155504	(-19.186100006103516,-46.245498657226563)
-2211	Rio Pardo de Minas	11	3155603	(-15.616000175476074,-42.540500640869141)
-2212	Rio Piracicaba	11	3155702	(-19.928400039672852,-43.182899475097656)
-2213	Rio Pomba	11	3155801	(-21.271200180053711,-43.169601440429687)
-2214	Rio Preto	11	3155900	(-22.086099624633789,-43.829299926757812)
-2215	Rio Vermelho	11	3156007	(-18.292200088500977,-43.001800537109375)
-2216	Ritápolis	11	3156106	(-21.027599334716797,-44.320400238037109)
-2217	Rochedo de Minas	11	3156205	(-21.628400802612305,-43.016498565673828)
-2218	Rodeiro	11	3156304	(-21.203500747680664,-42.858600616455078)
-2219	Romaria	11	3156403	(-18.883800506591797,-47.578201293945313)
-2220	Rosário da Limeira	11	3156452	(-20.981199264526367,-42.511199951171875)
-2221	Rubelita	11	3156502	(-16.405300140380859,-42.261001586914063)
-2222	Rubim	11	3156601	(-16.377500534057617,-40.539699554443359)
-2223	Sabará	11	3156700	(-19.884000778198242,-43.826301574707031)
-2224	Sabinópolis	11	3156809	(-18.665300369262695,-43.075199127197266)
-2225	Sacramento	11	3156908	(-19.862199783325195,-47.450801849365234)
-2226	Salinas	11	3157005	(-16.175300598144531,-42.296398162841797)
-2227	Salto da Divisa	11	3157104	(-16.00629997253418,-39.939098358154297)
-2228	Santa Bárbara	11	3157203	(-19.960399627685547,-43.410099029541016)
-2229	Santa Bárbara do Leste	11	3157252	(-19.975299835205078,-42.145698547363281)
-2230	Santa Bárbara do Monte Verde	11	3157278	(-21.959199905395508,-43.702701568603516)
-2231	Santa Bárbara do Tugúrio	11	3157302	(-21.243099212646484,-43.560699462890625)
-2232	Santa Cruz de Minas	11	3157336	(-21.124099731445313,-44.220199584960938)
-2233	Santa Cruz de Salinas	11	3157377	(-16.096700668334961,-41.741798400878906)
-2234	Santa Cruz do Escalvado	11	3157401	(-20.237199783325195,-42.816898345947266)
-2235	Santa Efigênia de Minas	11	3157500	(-18.82349967956543,-42.438800811767578)
-2236	Santa Fé de Minas	11	3157609	(-16.68589973449707,-45.410198211669922)
-2237	Santa Helena de Minas	11	3157658	(-16.970699310302734,-40.672698974609375)
-2238	Santa Juliana	11	3157708	(-19.310800552368164,-47.532199859619141)
-2239	Santa Luzia	11	3157807	(-19.754800796508789,-43.849700927734375)
-2240	Santa Margarida	11	3157906	(-20.383899688720703,-42.251899719238281)
-2241	Santa Maria de Itabira	11	3158003	(-19.443099975585938,-43.106399536132813)
-2242	Santa Maria do Salto	11	3158102	(-16.247900009155273,-40.151199340820313)
-2243	Santa Maria do Suaçuí	11	3158201	(-18.189599990844727,-42.413898468017578)
-2244	Santa Rita de Caldas	11	3159209	(-22.029199600219727,-46.3385009765625)
-2245	Santa Rita de Ibitipoca	11	3159407	(-21.565799713134766,-43.916301727294922)
-2246	Santa Rita de Jacutinga	11	3159308	(-22.14739990234375,-44.097698211669922)
-2247	Santa Rita de Minas	11	3159357	(-19.875999450683594,-42.136299133300781)
-2248	Santa Rita do Itueto	11	3159506	(-19.357599258422852,-41.382099151611328)
-2249	Santa Rita do Sapucaí	11	3159605	(-22.246099472045898,-45.703399658203125)
-2250	Santa Rosa da Serra	11	3159704	(-19.518600463867188,-45.961101531982422)
-2251	Santa Vitória	11	3159803	(-18.841400146484375,-50.120800018310547)
-2252	Santana da Vargem	11	3158300	(-21.244899749755859,-45.500499725341797)
-2253	Santana de Cataguases	11	3158409	(-21.289300918579102,-42.552398681640625)
-2254	Santana de Pirapama	11	3158508	(-18.996200561523438,-44.040901184082031)
-2255	Santana do Deserto	11	3158607	(-21.951200485229492,-43.158298492431641)
-2256	Santana do Garambéu	11	3158706	(-21.598300933837891,-44.104999542236328)
-2257	Santana do Jacaré	11	3158805	(-20.900699615478516,-45.128501892089844)
-2258	Santana do Manhuaçu	11	3158904	(-20.103099822998047,-41.927799224853516)
-2259	Santana do Paraíso	11	3158953	(-19.366100311279297,-42.544601440429688)
-2260	Santana do Riacho	11	3159001	(-19.166200637817383,-43.722000122070313)
-2261	Santana dos Montes	11	3159100	(-20.786800384521484,-43.694900512695313)
-2262	Santo Antônio do Amparo	11	3159902	(-20.943000793457031,-44.917598724365234)
-2263	Santo Antônio do Aventureiro	11	3160009	(-21.760599136352539,-42.811500549316406)
-2264	Santo Antônio do Grama	11	3160108	(-20.318500518798828,-42.604698181152344)
-2265	Santo Antônio do Itambé	11	3160207	(-18.460899353027344,-43.30059814453125)
-2266	Santo Antônio do Jacinto	11	3160306	(-16.533199310302734,-40.18170166015625)
-2267	Santo Antônio do Monte	11	3160405	(-20.084999084472656,-45.294700622558594)
-2268	Santo Antônio do Retiro	11	3160454	(-15.339300155639648,-42.617099761962891)
-2269	Santo Antônio do Rio Abaixo	11	3160504	(-19.237400054931641,-43.260398864746094)
-2270	Santo Hipólito	11	3160603	(-18.29680061340332,-44.222900390625)
-2271	Santos Dumont	11	3160702	(-21.463399887084961,-43.549900054931641)
-2272	São Bento Abade	11	3160801	(-21.583900451660156,-45.069900512695313)
-2273	São Brás do Suaçuí	11	3160900	(-20.624200820922852,-43.951499938964844)
-2274	São Domingos das Dores	11	3160959	(-19.524599075317383,-42.010601043701172)
-2275	São Domingos do Prata	11	3161007	(-19.867799758911133,-42.971000671386719)
-2276	São Félix de Minas	11	3161056	(-18.59589958190918,-41.488899230957031)
-2277	São Francisco	11	3161106	(-15.951399803161621,-44.859298706054688)
-2278	São Francisco de Paula	11	3161205	(-20.70359992980957,-44.983798980712891)
-2279	São Francisco de Sales	11	3161304	(-19.861099243164063,-49.772701263427734)
-2280	São Francisco do Glória	11	3161403	(-20.792299270629883,-42.267299652099609)
-2281	São Geraldo	11	3161502	(-20.925199508666992,-42.836399078369141)
-2282	São Geraldo da Piedade	11	3161601	(-18.841100692749023,-42.286701202392578)
-2283	São Geraldo do Baixio	11	3161650	(-18.909700393676758,-41.362998962402344)
-2284	São Gonçalo do Abaeté	11	3161700	(-18.331499099731445,-45.826499938964844)
-2285	São Gonçalo do Pará	11	3161809	(-19.982200622558594,-44.859298706054688)
-2286	São Gonçalo do Rio Abaixo	11	3161908	(-19.822099685668945,-43.366001129150391)
-2287	São Gonçalo do Rio Preto	11	3125507	(-18.002500534057617,-43.385398864746094)
-2288	São Gonçalo do Sapucaí	11	3162005	(-21.893199920654297,-45.589298248291016)
-2289	São Gotardo	11	3162104	(-19.308700561523438,-46.046501159667969)
-2290	São João Batista do Glória	11	3162203	(-20.635000228881836,-46.507999420166016)
-2291	São João da Lagoa	11	3162252	(-16.845500946044922,-44.350700378417969)
-2292	São João da Mata	11	3162302	(-21.927999496459961,-45.929698944091797)
-2293	São João da Ponte	11	3162401	(-15.92710018157959,-44.009601593017578)
-2294	São João das Missões	11	3162450	(-14.885899543762207,-44.092201232910156)
-2295	São João del Rei	11	3162500	(-21.131099700927734,-44.252601623535156)
-2296	São João do Manhuaçu	11	3162559	(-20.393299102783203,-42.153301239013672)
-2297	São João do Manteninha	11	3162575	(-18.722999572753906,-41.162799835205078)
-2298	São João do Oriente	11	3162609	(-19.338399887084961,-42.157501220703125)
-2299	São João do Pacuí	11	3162658	(-16.537300109863281,-44.513401031494141)
-2300	São João do Paraíso	11	3162708	(-15.316800117492676,-42.02130126953125)
-2301	São João Evangelista	11	3162807	(-18.548000335693359,-42.765499114990234)
-2302	São João Nepomuceno	11	3162906	(-21.53809928894043,-43.006900787353516)
-2303	São Joaquim de Bicas	11	3162922	(-20.048000335693359,-44.274898529052734)
-2304	São José da Barra	11	3162948	(-20.717800140380859,-46.312999725341797)
-2305	São José da Lapa	11	3162955	(-19.697099685668945,-43.958599090576172)
-2306	São José da Safira	11	3163003	(-18.324300765991211,-42.143100738525391)
-2307	São José da Varginha	11	3163102	(-19.700599670410156,-44.555999755859375)
-2308	São José do Alegre	11	3163201	(-22.324300765991211,-45.525798797607422)
-2309	São José do Divino	11	3163300	(-18.479299545288086,-41.390701293945313)
-2310	São José do Goiabal	11	3163409	(-19.92140007019043,-42.703498840332031)
-2311	São José do Jacuri	11	3163508	(-18.281000137329102,-42.672901153564453)
-2312	São José do Mantimento	11	3163607	(-20.005800247192383,-41.748600006103516)
-2313	São Lourenço	11	3163706	(-22.116600036621094,-45.05059814453125)
-2314	São Miguel do Anta	11	3163805	(-20.706699371337891,-42.717399597167969)
-2315	São Pedro da União	11	3163904	(-21.131000518798828,-46.612300872802734)
-2316	São Pedro do Suaçuí	11	3164100	(-18.36090087890625,-42.598098754882813)
-2317	São Pedro dos Ferros	11	3164001	(-20.173200607299805,-42.525100708007813)
-2318	São Romão	11	3164209	(-16.364099502563477,-45.074901580810547)
-2319	São Roque de Minas	11	3164308	(-20.249000549316406,-46.363899230957031)
-2320	São Sebastião da Bela Vista	11	3164407	(-22.158300399780273,-45.754600524902344)
-2321	São Sebastião da Vargem Alegre	11	3164431	(-19.747671127319336,-43.367919921875)
-2322	São Sebastião do Anta	11	3164472	(-19.506399154663086,-41.985000610351562)
-2323	São Sebastião do Maranhão	11	3164506	(-18.087299346923828,-42.565898895263672)
-2324	São Sebastião do Oeste	11	3164605	(-20.275800704956055,-45.006301879882813)
-2325	São Sebastião do Paraíso	11	3164704	(-20.91670036315918,-46.983699798583984)
-2326	São Sebastião do Rio Preto	11	3164803	(-19.295900344848633,-43.175701141357422)
-2327	São Sebastião do Rio Verde	11	3164902	(-22.218299865722656,-44.976100921630859)
-2328	São Thomé das Letras	11	3165206	(-21.721826553344727,-44.984943389892578)
-2329	São Tiago	11	3165008	(-20.907499313354492,-44.509799957275391)
-2330	São Tomás de Aquino	11	3165107	(-20.77910041809082,-47.096199035644531)
-2331	São Vicente de Minas	11	3165305	(-21.704200744628906,-44.443099975585938)
-2332	Sapucaí-Mirim	11	3165404	(-22.740900039672852,-45.737998962402344)
-2333	Sardoá	11	3165503	(-18.782800674438477,-42.362899780273438)
-2334	Sarzedo	11	3165537	(-20.036699295043945,-44.144599914550781)
-2335	Sem-Peixe	11	3165560	(-20.100799560546875,-42.848300933837891)
-2336	Senador Amaral	11	3165578	(-22.58690071105957,-46.176300048828125)
-2337	Senador Cortes	11	3165602	(-21.798599243164063,-42.942401885986328)
-2338	Senador Firmino	11	3165701	(-20.915800094604492,-43.090400695800781)
-2339	Senador José Bento	11	3165800	(-22.163299560546875,-46.17919921875)
-2340	Senador Modestino Gonçalves	11	3165909	(-17.946500778198242,-43.217201232910156)
-2341	Senhora de Oliveira	11	3166006	(-20.797199249267578,-43.339401245117187)
-2342	Senhora do Porto	11	3166105	(-18.890899658203125,-43.079898834228516)
-2343	Senhora dos Remédios	11	3166204	(-21.035100936889648,-43.581199645996094)
-2344	Sericita	11	3166303	(-20.474800109863281,-42.482799530029297)
-2345	Seritinga	11	3166402	(-21.913400650024414,-44.518001556396484)
-2346	Serra Azul de Minas	11	3166501	(-18.360200881958008,-43.167499542236328)
-2347	Serra da Saudade	11	3166600	(-19.444700241088867,-45.794998168945313)
-2348	Serra do Salitre	11	3166808	(-19.108299255371094,-46.696098327636719)
-2349	Serra dos Aimorés	11	3166709	(-17.787200927734375,-40.24530029296875)
-2350	Serrania	11	3166907	(-21.544099807739258,-46.041698455810547)
-2351	Serranópolis de Minas	11	3166956	(-15.817600250244141,-42.873199462890625)
-2352	Serranos	11	3167004	(-21.885700225830078,-44.512500762939453)
-2353	Serro	11	3167103	(-18.599100112915039,-43.374401092529297)
-2354	Sete Lagoas	11	3167202	(-19.456899642944336,-44.241298675537109)
-2355	Setubinha	11	3165552	(-17.600200653076172,-42.158699035644531)
-2356	Silveirânia	11	3167301	(-21.161500930786133,-43.212799072265625)
-2357	Silvianópolis	11	3167400	(-22.027399063110352,-45.8385009765625)
-2358	Simão Pereira	11	3167509	(-21.964000701904297,-43.308799743652344)
-2359	Simonésia	11	3167608	(-20.134099960327148,-42.009101867675781)
-2360	Sobrália	11	3167707	(-19.234500885009766,-42.099800109863281)
-2361	Soledade de Minas	11	3167806	(-22.055400848388672,-45.046398162841797)
-2362	Tabuleiro	11	3167905	(-21.363199234008789,-43.23809814453125)
-2363	Taiobeiras	11	3168002	(-15.810600280761719,-42.225898742675781)
-2364	Taparuba	11	3168051	(-19.762100219726563,-41.608001708984375)
-2365	Tapira	11	3168101	(-19.916599273681641,-46.826400756835938)
-2366	Tapiraí	11	3168200	(-19.893600463867187,-46.022098541259766)
-2367	Taquaraçu de Minas	11	3168309	(-19.665199279785156,-43.69219970703125)
-2368	Tarumirim	11	3168408	(-19.283500671386719,-42.009700775146484)
-2369	Teixeiras	11	3168507	(-20.656099319458008,-42.856399536132813)
-2370	Teófilo Otoni	11	3168606	(-17.859500885009766,-41.508701324462891)
-2371	Timóteo	11	3168705	(-19.581100463867188,-42.647098541259766)
-2372	Tiradentes	11	3168804	(-21.110200881958008,-44.174400329589844)
-2373	Tiros	11	3168903	(-19.003700256347656,-45.962600708007813)
-2374	Tocantins	11	3169000	(-21.177400588989258,-43.012699127197266)
-2375	Tocos do Moji	11	3169059	(-22.369800567626953,-46.097099304199219)
-2376	Toledo	11	3169109	(-22.742099761962891,-46.372798919677734)
-2377	Tombos	11	3169208	(-20.908599853515625,-42.022800445556641)
-2378	Três Corações	11	3169307	(-21.692100524902344,-45.2510986328125)
-2379	Três Marias	11	3169356	(-18.204799652099609,-45.247299194335938)
-2380	Três Pontas	11	3169406	(-21.369400024414063,-45.510898590087891)
-2381	Tumiritinga	11	3169505	(-18.984399795532227,-41.652698516845703)
-2382	Tupaciguara	11	3169604	(-18.586599349975586,-48.698501586914063)
-2383	Turmalina	11	3169703	(-17.282800674438477,-42.728500366210938)
-2384	Turvolândia	11	3169802	(-21.873300552368164,-45.785900115966797)
-2385	Ubá	11	3169901	(-21.120399475097656,-42.935901641845703)
-2386	Ubaí	11	3170008	(-16.28849983215332,-44.778301239013672)
-2387	Ubaporanga	11	3170057	(-19.635099411010742,-42.105899810791016)
-2388	Uberaba	11	3170107	(-19.747200012207031,-47.938098907470703)
-2389	Uberlândia	11	3170206	(-18.914100646972656,-48.274898529052734)
-2390	Umburatiba	11	3170305	(-17.254800796508789,-40.577899932861328)
-2391	Unaí	11	3170404	(-16.359199523925781,-46.902198791503906)
-2392	União de Minas	11	3170438	(-19.529899597167969,-50.338001251220703)
-2393	Uruana de Minas	11	3170479	(-16.063400268554688,-46.244300842285156)
-2394	Urucânia	11	3170503	(-20.352100372314453,-42.73699951171875)
-2395	Urucuia	11	3170529	(-16.124399185180664,-45.735198974609375)
-2396	Vargem Alegre	11	3170578	(-19.598800659179688,-42.294898986816406)
-2397	Vargem Bonita	11	3170602	(-20.33329963684082,-46.368801116943359)
-2398	Vargem Grande do Rio Pardo	11	3170651	(-15.398699760437012,-42.308498382568359)
-2399	Varginha	11	3170701	(-21.555599212646484,-45.4364013671875)
-2400	Varjão de Minas	11	3170750	(-18.374099731445313,-46.031299591064453)
-2401	Várzea da Palma	11	3170800	(-17.594400405883789,-44.722599029541016)
-2402	Varzelândia	11	3170909	(-15.699199676513672,-44.027801513671875)
-2403	Vazante	11	3171006	(-17.982700347900391,-46.908798217773438)
-2404	Verdelândia	11	3171030	(-15.584500312805176,-43.612098693847656)
-2405	Veredinha	11	3171071	(-17.39739990234375,-42.730701446533203)
-2406	Veríssimo	11	3171105	(-19.665700912475586,-48.311798095703125)
-2407	Vermelho Novo	11	3171154	(-20.040599822998047,-42.268798828125)
-2408	Vespasiano	11	3171204	(-19.688299179077148,-43.923900604248047)
-2409	Viçosa	11	3171303	(-20.755899429321289,-42.874198913574219)
-2410	Vieiras	11	3171402	(-20.867000579833984,-42.240100860595703)
-2411	Virgem da Lapa	11	3171600	(-16.806999206542969,-42.343101501464844)
-2412	Virgínia	11	3171709	(-22.326400756835937,-45.096500396728516)
-2413	Virginópolis	11	3171808	(-18.815399169921875,-42.701499938964844)
-2414	Virgolândia	11	3171907	(-18.473800659179688,-42.30670166015625)
-2415	Visconde do Rio Branco	11	3172004	(-21.012699127197266,-42.836101531982422)
-2416	Volta Grande	11	3172103	(-21.767099380493164,-42.537498474121094)
-2417	Wenceslau Braz	11	3172202	(-22.536800384521484,-45.362598419189453)
-2418	Abaetetuba	14	1500107	(-1.7218300104141235,-48.878799438476563)
-2419	Abel Figueiredo	14	1500131	(-4.9533300399780273,-48.393299102783203)
-2420	Acará	14	1500206	(-1.9538300037384033,-48.198501586914063)
-2421	Afuá	14	1500305	(-0.15487399697303772,-50.386100769042969)
-2422	Água Azul do Norte	14	1500347	(-6.7905302047729492,-50.479099273681641)
-2423	Alenquer	14	1500404	(-1.9462300539016724,-54.738399505615234)
-2424	Almeirim	14	1500503	(-1.5290375947952271,-52.578811645507813)
-2425	Altamira	14	1500602	(-3.2040700912475586,-52.209999084472656)
-2426	Anajás	14	1500701	(-0.99681097269058228,-49.935398101806641)
-2427	Ananindeua	14	1500800	(-1.3639099597930908,-48.374298095703125)
-2428	Anapu	14	1500859	(-3.4698500633239746,-51.200298309326172)
-2429	Augusto Corrêa	14	1500909	(-1.0510866641998291,-46.61468505859375)
-2430	Aurora do Pará	14	1500958	(-2.1489799022674561,-47.567699432373047)
-2431	Aveiro	14	1501006	(-3.6084098815917969,-55.319900512695312)
-2432	Bagre	14	1501105	(-1.9005700349807739,-50.198699951171875)
-2433	Baião	14	1501204	(-2.7902100086212158,-49.669399261474609)
-2434	Bannach	14	1501253	(-7.3477897644042969,-50.395900726318359)
-2435	Barcarena	14	1501303	(-1.5118700265884399,-48.619499206542969)
-2436	Belém	14	1501402	(-1.4553999900817871,-48.489799499511719)
-2437	Belterra	14	1501451	(-2.6360900402069092,-54.937400817871094)
-2438	Benevides	14	1501501	(-1.3618299961090088,-48.243400573730469)
-2439	Bom Jesus do Tocantins	14	1501576	(-5.0423998832702637,-48.604698181152344)
-2440	Bonito	14	1501600	(-1.3674499988555908,-47.306598663330078)
-2441	Bragança	14	1501709	(-1.0612599849700928,-46.782600402832031)
-2442	Brasil Novo	14	1501725	(-3.2979199886322021,-52.534000396728516)
-2443	Brejo Grande do Araguaia	14	1501758	(-5.6982197761535645,-48.410301208496094)
-2444	Breu Branco	14	1501782	(-3.7719099521636963,-49.573501586914063)
-2445	Breves	14	1501808	(-1.680359959602356,-50.479099273681641)
-2446	Bujaru	14	1501907	(-1.5176199674606323,-48.038101196289063)
-2447	Cachoeira do Arari	14	1502004	(-1.0122599601745605,-48.950298309326172)
-2448	Cachoeira do Piriá	14	1501956	(-1.7597399950027466,-46.5458984375)
-2449	Cametá	14	1502103	(-2.2429499626159668,-49.497898101806641)
-2450	Canaã dos Carajás	14	1502152	(-6.4965901374816895,-49.877601623535156)
-2451	Capanema	14	1502202	(-1.2052899599075317,-47.177799224853516)
-2452	Capitão Poço	14	1502301	(-1.7478499412536621,-47.062900543212891)
-2453	Castanhal	14	1502400	(-1.2979700565338135,-47.916698455810547)
-2454	Chaves	14	1502509	(-0.16415399312973022,-49.98699951171875)
-2455	Colares	14	1502608	(-0.93642300367355347,-48.280300140380859)
-2456	Conceição do Araguaia	14	1502707	(-8.2613601684570312,-49.268901824951172)
-2457	Concórdia do Pará	14	1502756	(-1.9923800230026245,-47.94219970703125)
-2458	Cumaru do Norte	14	1502764	(-7.8109698295593262,-50.769798278808594)
-2459	Curionópolis	14	1502772	(-6.0996499061584473,-49.606800079345703)
-2460	Curralinho	14	1502806	(-1.8117899894714355,-49.795200347900391)
-2461	Curuá	14	1502855	(-1.8877500295639038,-55.116798400878906)
-2462	Curuçá	14	1502905	(-0.73321402072906494,-47.85150146484375)
-2463	Dom Eliseu	14	1502939	(-4.1994423866271973,-47.824504852294922)
-2464	Eldorado dos Carajás	14	1502954	(-6.1038899421691895,-49.355300903320313)
-2465	Faro	14	1503002	(-2.1680500507354736,-56.740501403808594)
-2466	Floresta do Araguaia	14	1503044	(-7.5533499717712402,-49.712501525878906)
-2467	Garrafão do Norte	14	1503077	(-1.92985999584198,-47.050498962402344)
-2468	Goianésia do Pará	14	1503093	(-3.8433799743652344,-49.097400665283203)
-2469	Gurupá	14	1503101	(-1.4141199588775635,-51.633800506591797)
-2470	Igarapé-Açu	14	1503200	(-1.1253918409347534,-47.625988006591797)
-2471	Igarapé-Miri	14	1503309	(-1.9753259420394897,-48.957454681396484)
-2472	Inhangapi	14	1503408	(-1.4349000453948975,-47.911399841308594)
-2473	Ipixuna do Pará	14	1503457	(-2.559920072555542,-47.505901336669922)
-2474	Irituia	14	1503507	(-1.7698400020599365,-47.445999145507813)
-2475	Itaituba	14	1503606	(-4.2666997909545898,-55.992599487304688)
-2476	Itupiranga	14	1503705	(-5.1327199935913086,-49.335800170898438)
-2477	Jacareacanga	14	1503754	(-6.2146902084350586,-57.754398345947266)
-2478	Jacundá	14	1503804	(-4.4461698532104492,-49.115299224853516)
-2479	Juruti	14	1503903	(-2.1634700298309326,-56.088901519775391)
-2480	Limoeiro do Ajuru	14	1504000	(-1.8984999656677246,-49.390300750732422)
-2481	Mãe do Rio	14	1504059	(-2.0568299293518066,-47.560100555419922)
-2482	Magalhães Barata	14	1504109	(-0.8033909797668457,-47.601398468017578)
-2483	Marabá	14	1504208	(-5.3807501792907715,-49.132701873779297)
-2484	Maracanã	14	1504307	(-0.77889901399612427,-47.451999664306641)
-2485	Marapanim	14	1504406	(-0.71470201015472412,-47.703399658203125)
-2486	Marituba	14	1504422	(-1.3600200414657593,-48.342098236083984)
-2487	Medicilândia	14	1504455	(-3.4463698863983154,-52.887500762939453)
-2488	Melgaço	14	1504505	(-1.8032000064849854,-50.714900970458984)
-2489	Mocajuba	14	1504604	(-2.5831000804901123,-49.504199981689453)
-2490	Moju	14	1504703	(-1.8899300098419189,-48.766799926757813)
-2491	Monte Alegre	14	1504802	(-1.9976799488067627,-54.072399139404297)
-2492	Muaná	14	1504901	(-1.5393600463867187,-49.222400665283203)
-2493	Nova Esperança do Piriá	14	1504950	(-2.266930103302002,-46.973098754882813)
-2494	Nova Ipixuna	14	1504976	(-4.9162201881408691,-49.082199096679688)
-2495	Nova Timboteua	14	1505007	(-1.2087399959564209,-47.392101287841797)
-2496	Novo Progresso	14	1505031	(-7.1434698104858398,-55.37860107421875)
-2497	Novo Repartimento	14	1505064	(-4.2474899291992187,-49.949901580810547)
-2498	Óbidos	14	1505106	(-1.9010699987411499,-55.520801544189453)
-2499	Oeiras do Pará	14	1505205	(-2.0035800933837891,-49.862800598144531)
-2500	Oriximiná	14	1505304	(-1.7598899602890015,-55.857898712158203)
-2501	Ourém	14	1505403	(-1.5416799783706665,-47.112598419189453)
-2502	Ourilândia do Norte	14	1505437	(-6.7529001235961914,-51.085800170898438)
-2503	Pacajá	14	1505486	(-3.8354194164276123,-50.639923095703125)
-2504	Palestina do Pará	14	1505494	(-5.7402701377868652,-48.318099975585938)
-2505	Paragominas	14	1505502	(-3.0021200180053711,-47.352699279785156)
-2506	Parauapebas	14	1505536	(-6.06781005859375,-49.903701782226563)
-2507	Pau d`Arco	14	1505551	(-1.5977165699005127,-46.926765441894531)
-2508	Peixe-Boi	14	1505601	(-1.1938239336013794,-47.324031829833984)
-2509	Piçarra	14	1505635	(-6.4377799034118652,-48.871601104736328)
-2510	Placas	14	1505650	(-3.8681299686431885,-54.212398529052734)
-2511	Ponta de Pedras	14	1505700	(-1.3958699703216553,-48.866100311279297)
-2512	Portel	14	1505809	(-1.9363900423049927,-50.819400787353516)
-2513	Porto de Moz	14	1505908	(-1.7469099760055542,-52.236099243164062)
-2514	Prainha	14	1506005	(-1.7979999780654907,-53.477901458740234)
-2515	Primavera	14	1506104	(-0.94543898105621338,-47.125301361083984)
-2516	Quatipuru	14	1506112	(-0.89960402250289917,-47.013401031494141)
-2517	Redenção	14	1506138	(-8.0252895355224609,-50.031700134277344)
-2518	Rio Maria	14	1506161	(-7.3123598098754883,-50.037899017333984)
-2519	Rondon do Pará	14	1506187	(-4.7779297828674316,-48.067001342773437)
-2520	Rurópolis	14	1506195	(-4.1002798080444336,-54.909198760986328)
-2521	Salinópolis	14	1506203	(-0.63081502914428711,-47.346500396728516)
-2522	Salvaterra	14	1506302	(-0.75844401121139526,-48.513900756835938)
-2523	Santa Bárbara do Pará	14	1506351	(-1.192192554473877,-48.238033294677734)
-2524	Santa Cruz do Arari	14	1506401	(-0.66101902723312378,-49.177101135253906)
-2525	Santa Isabel do Pará	14	1506500	(-1.2968555688858032,-48.160552978515625)
-2526	Santa Luzia do Pará	14	1506559	(-1.5214699506759644,-46.900798797607422)
-2527	Santa Maria das Barreiras	14	1506583	(-8.8578395843505859,-49.721500396728516)
-2528	Santa Maria do Pará	14	1506609	(-1.3539199829101562,-47.571201324462891)
-2529	Santana do Araguaia	14	1506708	(-9.3281002044677734,-50.349998474121094)
-2530	Santarém	14	1506807	(-2.4384899139404297,-54.699600219726563)
-2531	Santarém Novo	14	1506906	(-0.93097001314163208,-47.385501861572266)
-2532	Santo Antônio do Tauá	14	1507003	(-1.1521999835968018,-48.131401062011719)
-2533	São Caetano de Odivelas	14	1507102	(-0.74729299545288086,-48.024600982666016)
-2534	São Domingos do Araguaia	14	1507151	(-5.5373201370239258,-48.736598968505859)
-2535	São Domingos do Capim	14	1507201	(-1.6876800060272217,-47.766498565673828)
-2536	São Félix do Xingu	14	1507300	(-6.6425399780273437,-51.990398406982422)
-2537	São Francisco do Pará	14	1507409	(-1.1696300506591797,-47.791698455810547)
-2538	São Geraldo do Araguaia	14	1507458	(-6.3947100639343262,-48.559200286865234)
-2539	São João da Ponta	14	1507466	(-0.85788500308990479,-47.917999267578125)
-2540	São João de Pirabas	14	1507474	(-0.78022199869155884,-47.180999755859375)
-2541	São João do Araguaia	14	1507508	(-5.363339900970459,-48.792598724365234)
-2542	São Miguel do Guamá	14	1507607	(-1.613070011138916,-47.478401184082031)
-2543	São Sebastião da Boa Vista	14	1507706	(-1.7159700393676758,-49.524898529052734)
-2544	Sapucaia	14	1507755	(-6.9401798248291016,-49.683399200439453)
-2545	Senador José Porfírio	14	1507805	(-4.3124175071716309,-51.576408386230469)
-2546	Soure	14	1507904	(-0.73031997680664063,-48.501499176025391)
-2547	Tailândia	14	1507953	(-2.9458398818969727,-48.948898315429688)
-2548	Terra Alta	14	1507961	(-1.0296299457550049,-47.900398254394531)
-2549	Terra Santa	14	1507979	(-2.1044299602508545,-56.487701416015625)
-2550	Tomé-Açu	14	1508001	(-2.4130163192749023,-48.141487121582031)
-2551	Tracuateua	14	1508035	(-1.0765336751937866,-46.903083801269531)
-2552	Trairão	14	1508050	(-4.5734701156616211,-55.942901611328125)
-2553	Tucumã	14	1508084	(-6.7468700408935547,-51.162601470947266)
-2554	Tucuruí	14	1508100	(-3.765700101852417,-49.677299499511719)
-2555	Ulianópolis	14	1508126	(-3.7500700950622559,-47.489200592041016)
-2556	Uruará	14	1508159	(-3.7151899337768555,-53.739601135253906)
-2557	Vigia	14	1508209	(-0.86119401454925537,-48.138599395751953)
-2558	Viseu	14	1508308	(-1.1912399530410767,-46.139900207519531)
-2559	Vitória do Xingu	14	1508357	(-2.8792200088500977,-52.008800506591797)
-2560	Xinguara	14	1508407	(-7.0982999801635742,-49.943698883056641)
-2561	Água Branca	15	2500106	(-7.5114398002624512,-37.635700225830078)
-2562	Aguiar	15	2500205	(-7.0918002128601074,-38.168098449707031)
-2563	Alagoa Grande	15	2500304	(-7.0394301414489746,-35.620601654052734)
-2564	Alagoa Nova	15	2500403	(-7.0537700653076172,-35.759101867675781)
-2565	Alagoinha	15	2500502	(-6.9465699195861816,-35.533199310302734)
-2566	Alcantil	15	2500536	(-7.7366800308227539,-36.051101684570313)
-2567	Algodão de Jandaíra	15	2500577	(-6.8929200172424316,-36.012901306152344)
-2568	Alhandra	15	2500601	(-7.4297699928283691,-34.90570068359375)
-2569	Amparo	15	2500734	(-7.5550198554992676,-37.062801361083984)
-2570	Aparecida	15	2500775	(-6.7846598625183105,-38.080299377441406)
-2571	Araçagi	15	2500809	(-6.8437399864196777,-35.373699188232422)
-2572	Arara	15	2500908	(-6.828129768371582,-35.755199432373047)
-2573	Araruna	15	2501005	(-6.5484800338745117,-35.749801635742188)
-2574	Areia	15	2501104	(-6.9639601707458496,-35.697700500488281)
-2575	Areia de Baraúnas	15	2501153	(-7.1170201301574707,-36.940399169921875)
-2576	Areial	15	2501203	(-7.0478901863098145,-35.931301116943359)
-2577	Aroeiras	15	2501302	(-7.5447301864624023,-35.706600189208984)
-2578	Assunção	15	2501351	(-7.0723099708557129,-36.724998474121094)
-2579	Baía da Traição	15	2501401	(-6.6920900344848633,-34.938098907470703)
-2580	Bananeiras	15	2501500	(-6.7477498054504395,-35.624599456787109)
-2581	Baraúna	15	2501534	(-6.6348400115966797,-36.260101318359375)
-2582	Barra de Santa Rosa	15	2501609	(-6.7181601524353027,-36.067100524902344)
-2583	Barra de Santana	15	2501575	(-7.518089771270752,-35.991298675537109)
-2584	Barra de São Miguel	15	2501708	(-7.7460298538208008,-36.320899963378906)
-2585	Bayeux	15	2501807	(-7.1237998008728027,-34.929298400878906)
-2586	Belém	15	2501906	(-6.742609977722168,-35.5166015625)
-2587	Belém do Brejo do Cruz	15	2502003	(-6.185150146484375,-37.534801483154297)
-2588	Bernardino Batista	15	2502052	(-6.4457201957702637,-38.552101135253906)
-2589	Boa Ventura	15	2502102	(-7.4098200798034668,-38.211299896240234)
-2590	Boa Vista	15	2502151	(-7.2636499404907227,-36.235698699951172)
-2591	Bom Jesus	15	2502201	(-6.8160099983215332,-38.645301818847656)
-2592	Bom Sucesso	15	2502300	(-6.4417600631713867,-37.92340087890625)
-2593	Bonito de Santa Fé	15	2502409	(-7.3134098052978516,-38.513301849365234)
-2594	Boqueirão	15	2502508	(-7.4869999885559082,-36.130901336669922)
-2595	Borborema	15	2502706	(-6.8019900321960449,-35.618698120117187)
-2596	Brejo do Cruz	15	2502805	(-6.3418498039245605,-37.494300842285156)
-2597	Brejo dos Santos	15	2502904	(-6.3706498146057129,-37.825298309326172)
-2598	Caaporã	15	2503001	(-7.5135102272033691,-34.905498504638672)
-2599	Cabaceiras	15	2503100	(-7.4889898300170898,-36.286998748779297)
-2600	Cabedelo	15	2503209	(-6.9873099327087402,-34.828399658203125)
-2601	Cachoeira dos Índios	15	2503308	(-6.9135298728942871,-38.675998687744141)
-2602	Cacimba de Areia	15	2503407	(-7.1212801933288574,-37.156299591064453)
-2603	Cacimba de Dentro	15	2503506	(-6.6385998725891113,-35.777801513671875)
-2604	Cacimbas	15	2503555	(-7.2072100639343262,-37.060398101806641)
-2605	Caiçara	15	2503605	(-6.621150016784668,-35.458099365234375)
-2606	Cajazeiras	15	2503704	(-6.880040168762207,-38.557701110839844)
-2607	Cajazeirinhas	15	2503753	(-6.9601597785949707,-37.800899505615234)
-2608	Caldas Brandão	15	2503803	(-7.1024999618530273,-35.327201843261719)
-2609	Camalaú	15	2503902	(-7.8850297927856445,-36.824199676513672)
-2610	Campina Grande	15	2504009	(-7.2219600677490234,-35.873100280761719)
-2611	Campo de Santana	15	2516409	(-6.4875898361206055,-35.636699676513672)
-2612	Capim	15	2504033	(-6.9162402153015137,-35.167301177978516)
-2613	Caraúbas	15	2504074	(-7.7204899787902832,-36.492000579833984)
-2614	Carrapateira	15	2504108	(-7.0341401100158691,-38.339900970458984)
-2615	Casserengue	15	2504157	(-6.7795400619506836,-35.817901611328125)
-2616	Catingueira	15	2504207	(-7.1200799942016602,-37.606399536132812)
-2617	Catolé do Rocha	15	2504306	(-6.3406200408935547,-37.747001647949219)
-2618	Caturité	15	2504355	(-7.4165902137756348,-36.030601501464844)
-2619	Conceição	15	2504405	(-7.5510601997375488,-38.501399993896484)
-2620	Condado	15	2504504	(-6.8983101844787598,-37.605998992919922)
-2621	Conde	15	2504603	(-7.2574601173400879,-34.899898529052734)
-2622	Congo	15	2504702	(-7.7907800674438477,-36.658100128173828)
-2623	Coremas	15	2504801	(-7.0071201324462891,-37.934600830078125)
-2624	Coxixola	15	2504850	(-7.623650074005127,-36.606399536132813)
-2625	Cruz do Espírito Santo	15	2504900	(-7.1390199661254883,-35.085700988769531)
-2626	Cubati	15	2505006	(-6.8668599128723145,-36.361900329589844)
-2627	Cuité	15	2505105	(-6.4764699935913086,-36.151500701904297)
-2628	Cuité de Mamanguape	15	2505238	(-6.9129199981689453,-35.250198364257813)
-2629	Cuitegi	15	2505204	(-6.8905801773071289,-35.521499633789063)
-2630	Curral de Cima	15	2505279	(-6.7232499122619629,-35.263900756835938)
-2631	Curral Velho	15	2505303	(-7.5307497978210449,-38.196201324462891)
-2632	Damião	15	2505352	(-6.6316099166870117,-35.910099029541016)
-2633	Desterro	15	2505402	(-7.2870001792907715,-37.092498779296875)
-2634	Diamante	15	2505600	(-7.4173798561096191,-38.261501312255859)
-2635	Dona Inês	15	2505709	(-6.6156601905822754,-35.620498657226563)
-2636	Duas Estradas	15	2505808	(-6.6849899291992188,-35.417999267578125)
-2637	Emas	15	2505907	(-7.099639892578125,-37.716300964355469)
-2638	Esperança	15	2506004	(-7.0227799415588379,-35.859699249267578)
-2639	Fagundes	15	2506103	(-7.3445401191711426,-35.793098449707031)
-2640	Frei Martinho	15	2506202	(-6.397590160369873,-36.452598571777344)
-2641	Gado Bravo	15	2506251	(-7.5827898979187012,-35.789901733398438)
-2642	Guarabira	15	2506301	(-6.850639820098877,-35.485000610351562)
-2643	Gurinhém	15	2506400	(-7.1233000755310059,-35.422199249267578)
-2644	Gurjão	15	2506509	(-7.2483301162719727,-36.492298126220703)
-2645	Ibiara	15	2506608	(-7.4795699119567871,-38.405899047851562)
-2646	Igaracy	15	2502607	(-7.1718401908874512,-38.147800445556641)
-2647	Imaculada	15	2506707	(-7.3888998031616211,-37.507900238037109)
-2648	Ingá	15	2506806	(-7.2814397811889648,-35.604999542236328)
-2649	Itabaiana	15	2506905	(-7.331669807434082,-35.331699371337891)
-2650	Itaporanga	15	2507002	(-7.3020200729370117,-38.150398254394531)
-2651	Itapororoca	15	2507101	(-6.8237400054931641,-35.2406005859375)
-2652	Itatuba	15	2507200	(-7.3811497688293457,-35.63800048828125)
-2653	Jacaraú	15	2507309	(-6.614530086517334,-35.28900146484375)
-2654	Jericó	15	2507408	(-6.5457701683044434,-37.803600311279297)
-2655	João Pessoa	15	2507507	(-7.1150898933410645,-34.864101409912109)
-2656	Juarez Távora	15	2507606	(-7.171299934387207,-35.568599700927734)
-2657	Juazeirinho	15	2507705	(-7.0609197616577148,-36.579299926757813)
-2658	Junco do Seridó	15	2507804	(-6.9926900863647461,-36.716598510742188)
-2659	Juripiranga	15	2507903	(-7.361760139465332,-35.232101440429688)
-2660	Juru	15	2508000	(-7.5298299789428711,-37.814998626708984)
-2661	Lagoa	15	2508109	(-6.5857200622558594,-37.912700653076172)
-2662	Lagoa de Dentro	15	2508208	(-6.6721301078796387,-35.370601654052734)
-2663	Lagoa Seca	15	2508307	(-7.1553502082824707,-35.849098205566406)
-2664	Lastro	15	2508406	(-6.5060300827026367,-38.174198150634766)
-2665	Livramento	15	2508505	(-7.3711299896240234,-36.949100494384766)
-2666	Logradouro	15	2508554	(-6.6119098663330078,-35.438400268554687)
-2667	Lucena	15	2508604	(-6.9025797843933105,-34.874801635742188)
-2668	Mãe d`Água	15	2508703	(-7.2520098686218262,-37.432201385498047)
-2669	Malta	15	2508802	(-6.8971900939941406,-37.522098541259766)
-2670	Mamanguape	15	2508901	(-6.8337001800537109,-35.121299743652344)
-2671	Manaíra	15	2509008	(-7.7033100128173828,-38.152301788330078)
-2672	Marcação	15	2509057	(-6.7653498649597168,-35.008701324462891)
-2673	Mari	15	2509107	(-7.059420108795166,-35.318000793457031)
-2674	Marizópolis	15	2509156	(-6.8274798393249512,-38.352798461914063)
-2675	Massaranduba	15	2509206	(-7.1899499893188477,-35.784801483154297)
-2676	Mataraca	15	2509305	(-6.5967302322387695,-35.0531005859375)
-2677	Matinhas	15	2509339	(-7.1248598098754883,-35.766899108886719)
-2678	Mato Grosso	15	2509370	(-6.5401802062988281,-37.727901458740234)
-2679	Maturéia	15	2509396	(-7.2618799209594727,-37.351001739501953)
-2680	Mogeiro	15	2509404	(-7.2851700782775879,-35.483200073242188)
-2681	Montadas	15	2509503	(-7.0884799957275391,-35.959201812744141)
-2682	Monte Horebe	15	2509602	(-7.2040200233459473,-38.58380126953125)
-2683	Monteiro	15	2509701	(-7.8836297988891602,-37.118400573730469)
-2684	Mulungu	15	2509800	(-7.0252499580383301,-35.459999084472656)
-2685	Natuba	15	2509909	(-7.6351399421691895,-35.558601379394531)
-2686	Nazarezinho	15	2510006	(-6.9113998413085938,-38.321998596191406)
-2687	Nova Floresta	15	2510105	(-6.4505600929260254,-36.205699920654297)
-2688	Nova Olinda	15	2510204	(-7.4723200798034668,-38.038200378417969)
-2689	Nova Palmeira	15	2510303	(-6.6712198257446289,-36.422000885009766)
-2690	Olho d`Água	15	2510402	(-7.2211799621582031,-37.7406005859375)
-2691	Olivedos	15	2510501	(-6.9843401908874512,-36.241001129150391)
-2692	Ouro Velho	15	2510600	(-7.6160402297973633,-37.151901245117188)
-2693	Parari	15	2510659	(-7.3097500801086426,-36.652198791503906)
-2694	Passagem	15	2510709	(-7.1346697807312012,-37.043300628662109)
-2695	Patos	15	2510808	(-7.0174298286437988,-37.274700164794922)
-2696	Paulista	15	2510907	(-6.5913801193237305,-37.618499755859375)
-2697	Pedra Branca	15	2511004	(-7.4216899871826172,-38.068901062011719)
-2698	Pedra Lavrada	15	2511103	(-6.7499699592590332,-36.475799560546875)
-2699	Pedras de Fogo	15	2511202	(-7.3910698890686035,-35.106498718261719)
-2700	Pedro Régis	15	2512721	(-6.6332302093505859,-35.296600341796875)
-2701	Piancó	15	2511301	(-7.1928200721740723,-37.928901672363281)
-2702	Picuí	15	2511400	(-6.5084500312805176,-36.349700927734375)
-2703	Pilar	15	2511509	(-7.2640299797058105,-35.252300262451172)
-2704	Pilões	15	2511608	(-6.8682699203491211,-35.612998962402344)
-2705	Pilõezinhos	15	2511707	(-6.8427700996398926,-35.530998229980469)
-2706	Pirpirituba	15	2511806	(-6.7792201042175293,-35.4906005859375)
-2707	Pitimbu	15	2511905	(-7.466400146484375,-34.815101623535156)
-2708	Pocinhos	15	2512002	(-7.0665798187255859,-36.066799163818359)
-2709	Poço Dantas	15	2512036	(-6.3987598419189453,-38.490898132324219)
-2710	Poço de José de Moura	15	2512077	(-6.5640101432800293,-38.511100769042969)
-2711	Pombal	15	2512101	(-6.7660598754882813,-37.800300598144531)
-2712	Prata	15	2512200	(-7.6882600784301758,-37.080101013183594)
-2713	Princesa Isabel	15	2512309	(-7.7317500114440918,-37.988601684570313)
-2714	Puxinanã	15	2512408	(-7.154789924621582,-35.954299926757813)
-2715	Queimadas	15	2512507	(-7.3502898216247559,-35.903099060058594)
-2716	Quixabá	15	2512606	(-7.02239990234375,-37.145801544189453)
-2717	Remígio	15	2512705	(-6.9499201774597168,-35.801101684570313)
-2718	Riachão	15	2512747	(-6.5426898002624512,-35.660999298095703)
-2719	Riachão do Bacamarte	15	2512754	(-7.2534699440002441,-35.669300079345703)
-2720	Riachão do Poço	15	2512762	(-7.1417298316955566,-35.291400909423828)
-2721	Riacho de Santo Antônio	15	2512788	(-7.6802301406860352,-36.157001495361328)
-2722	Riacho dos Cavalos	15	2512804	(-6.4406700134277344,-37.648300170898437)
-2723	Rio Tinto	15	2512903	(-6.8038301467895508,-35.077598571777344)
-2724	Salgadinho	15	2513000	(-7.1009798049926758,-36.845798492431641)
-2725	Salgado de São Félix	15	2513109	(-7.353370189666748,-35.430500030517578)
-2726	Santa Cecília	15	2513158	(-7.7389001846313477,-35.876399993896484)
-2727	Santa Cruz	15	2513208	(-6.5237002372741699,-38.061698913574219)
-2728	Santa Helena	15	2513307	(-6.7175998687744141,-38.6427001953125)
-2729	Santa Inês	15	2513356	(-7.620999813079834,-38.554000854492188)
-2730	Santa Luzia	15	2513406	(-6.8609199523925781,-36.917800903320312)
-2731	Santa Rita	15	2513703	(-7.1172399520874023,-34.975299835205078)
-2732	Santa Teresinha	15	2513802	(-7.0796399116516113,-37.443500518798828)
-2733	Santana de Mangueira	15	2513505	(-7.5470499992370605,-38.323600769042969)
-2734	Santana dos Garrotes	15	2513604	(-7.381619930267334,-37.981899261474609)
-2735	Santarém	15	2513653	(-6.4836201667785645,-38.476398468017578)
-2736	Santo André	15	2513851	(-7.2201600074768066,-36.621299743652344)
-2737	São Bentinho	15	2513927	(-6.8859601020812988,-37.724300384521484)
-2738	São Bento	15	2513901	(-6.4852900505065918,-37.448799133300781)
-2739	São Domingos de Pombal	15	2513968	(-6.8031277656555176,-37.948841094970703)
-2740	São Domingos do Cariri	15	2513943	(-7.6327300071716309,-36.437400817871094)
-2741	São Francisco	15	2513984	(-6.6077299118041992,-38.0968017578125)
-2742	São João do Cariri	15	2514008	(-7.3816800117492676,-36.534500122070313)
-2743	São João do Rio do Peixe	15	2500700	(-6.7219500541687012,-38.446800231933594)
-2744	São João do Tigre	15	2514107	(-8.0770301818847656,-36.854698181152344)
-2745	São José da Lagoa Tapada	15	2514206	(-6.936460018157959,-38.162200927734375)
-2746	São José de Caiana	15	2514305	(-7.2463598251342773,-38.298900604248047)
-2747	São José de Espinharas	15	2514404	(-6.8397397994995117,-37.321399688720703)
-2748	São José de Piranhas	15	2514503	(-7.1187000274658203,-38.501998901367188)
-2749	São José de Princesa	15	2514552	(-7.7363300323486328,-38.089401245117188)
-2750	São José do Bonfim	15	2514602	(-7.1606998443603516,-37.303600311279297)
-2751	São José do Brejo do Cruz	15	2514651	(-6.2105398178100586,-37.360099792480469)
-2752	São José do Sabugi	15	2514701	(-6.7629499435424805,-36.797199249267578)
-2753	São José dos Cordeiros	15	2514800	(-7.3877501487731934,-36.808498382568359)
-2754	São José dos Ramos	15	2514453	(-7.2523798942565918,-35.372501373291016)
-2755	São Mamede	15	2514909	(-6.9238600730895996,-37.095401763916016)
-2756	São Miguel de Taipu	15	2515005	(-7.2476401329040527,-35.20159912109375)
-2757	São Sebastião de Lagoa de Roça	15	2515104	(-7.1103401184082031,-35.867801666259766)
-2758	São Sebastião do Umbuzeiro	15	2515203	(-8.1528902053833008,-37.013801574707031)
-2759	Sapé	15	2515302	(-7.0935897827148437,-35.228000640869141)
-2760	Seridó	15	2515401	(-6.8542599678039551,-36.412200927734375)
-2761	Serra Branca	15	2515500	(-7.4803400039672852,-36.666000366210938)
-2762	Serra da Raiz	15	2515609	(-6.685269832611084,-35.437900543212891)
-2763	Serra Grande	15	2515708	(-7.2095699310302734,-38.364700317382812)
-2764	Serra Redonda	15	2515807	(-7.1862201690673828,-35.684200286865234)
-2765	Serraria	15	2515906	(-6.8156900405883789,-35.628200531005859)
-2766	Sertãozinho	15	2515930	(-6.7512698173522949,-35.437198638916016)
-2767	Sobrado	15	2515971	(-7.1442899703979492,-35.235698699951172)
-2768	Solânea	15	2516003	(-6.7516098022460938,-35.663600921630859)
-2769	Soledade	15	2516102	(-7.0582900047302246,-36.366798400878906)
-2770	Sossêgo	15	2516151	(-6.7706699371337891,-36.253799438476562)
-2771	Sousa	15	2516201	(-6.7514801025390625,-38.231098175048828)
-2772	Sumé	15	2516300	(-7.6620597839355469,-36.883998870849609)
-2773	Taperoá	15	2516508	(-7.2062897682189941,-36.824501037597656)
-2774	Tavares	15	2516607	(-7.6269698143005371,-37.871200561523438)
-2775	Teixeira	15	2516706	(-7.2210397720336914,-37.252498626708984)
-2776	Tenório	15	2516755	(-6.9385499954223633,-36.627300262451172)
-2777	Triunfo	15	2516805	(-6.5713000297546387,-38.598598480224609)
-2778	Uiraúna	15	2516904	(-6.5150399208068848,-38.412799835205078)
-2779	Umbuzeiro	15	2517001	(-7.6919898986816406,-35.658199310302734)
-2780	Várzea	15	2517100	(-6.7618899345397949,-36.991298675537109)
-2781	Vieirópolis	15	2517209	(-6.5068402290344238,-38.256698608398437)
-2782	Vista Serrana	15	2505501	(-6.7302999496459961,-37.570400238037109)
-2783	Zabelê	15	2517407	(-8.079010009765625,-37.105701446533203)
-2784	Abatiá	18	4100103	(-23.304899215698242,-50.313301086425781)
-2785	Adrianópolis	18	4100202	(-24.660600662231445,-48.992198944091797)
-2786	Agudos do Sul	18	4100301	(-25.989900588989258,-49.334300994873047)
-2787	Almirante Tamandaré	18	4100400	(-25.31879997253418,-49.303699493408203)
-2788	Altamira do Paraná	18	4100459	(-24.798299789428711,-52.712799072265625)
-2789	Alto Paraíso	18	4128625	(-26.114585876464844,-52.746875762939453)
-2790	Alto Paraná	18	4100608	(-23.131200790405273,-52.318901062011719)
-2791	Alto Piquiri	18	4100707	(-24.02239990234375,-53.439998626708984)
-2792	Altônia	18	4100509	(-23.875900268554688,-53.895801544189453)
-2793	Alvorada do Sul	18	4100806	(-22.781299591064453,-51.229698181152344)
-2794	Amaporã	18	4100905	(-23.09429931640625,-52.786598205566406)
-2795	Ampére	18	4101002	(-25.916799545288086,-53.468601226806641)
-2796	Anahy	18	4101051	(-24.644899368286133,-53.133201599121094)
-2797	Andirá	18	4101101	(-23.053300857543945,-50.230400085449219)
-2798	Ângulo	18	4101150	(-23.194599151611328,-51.915401458740234)
-2799	Antonina	18	4101200	(-25.438600540161133,-48.719100952148438)
-2800	Antônio Olinto	18	4101309	(-25.980400085449219,-50.197200775146484)
-2801	Apucarana	18	4101408	(-23.549999237060547,-51.4635009765625)
-2802	Arapongas	18	4101507	(-23.415300369262695,-51.425899505615234)
-2803	Arapoti	18	4101606	(-24.154800415039063,-49.828498840332031)
-2804	Arapuã	18	4101655	(-24.313199996948242,-51.785598754882813)
-2805	Araruna	18	4101705	(-23.931499481201172,-52.502101898193359)
-2806	Araucária	18	4101804	(-25.585899353027344,-49.404701232910156)
-2807	Ariranha do Ivaí	18	4101853	(-24.385700225830078,-51.583900451660156)
-2808	Assaí	18	4101903	(-23.369699478149414,-50.845901489257813)
-2809	Assis Chateaubriand	18	4102000	(-24.416799545288086,-53.52130126953125)
-2810	Astorga	18	4102109	(-23.231800079345703,-51.666801452636719)
-2811	Atalaia	18	4102208	(-23.151699066162109,-52.055099487304687)
-2812	Balsa Nova	18	4102307	(-25.580400466918945,-49.629100799560547)
-2813	Bandeirantes	18	4102406	(-23.107799530029297,-50.370399475097656)
-2814	Barbosa Ferraz	18	4102505	(-24.03339958190918,-52.004001617431641)
-2815	Barra do Jacaré	18	4102703	(-23.115999221801758,-50.184200286865234)
-2816	Barracão	18	4102604	(-26.250200271606445,-53.632400512695313)
-2817	Bela Vista da Caroba	18	4102752	(-25.884199142456055,-53.672500610351563)
-2818	Bela Vista do Paraíso	18	4102802	(-22.99370002746582,-51.192699432373047)
-2819	Bituruna	18	4102901	(-26.160699844360352,-51.551799774169922)
-2820	Boa Esperança	18	4103008	(-24.246700286865234,-52.787601470947266)
-2821	Boa Esperança do Iguaçu	18	4103024	(-25.632400512695313,-53.210800170898438)
-2822	Boa Ventura de São Roque	18	4103040	(-24.868799209594727,-51.627601623535156)
-2823	Boa Vista da Aparecida	18	4103057	(-25.43079948425293,-53.411701202392578)
-2824	Bocaiúva do Sul	18	4103107	(-25.206600189208984,-49.114101409912109)
-2825	Bom Jesus do Sul	18	4103156	(-26.19580078125,-53.595500946044922)
-2826	Bom Sucesso	18	4103206	(-23.706300735473633,-51.767101287841797)
-2827	Bom Sucesso do Sul	18	4103222	(-26.073099136352539,-52.835300445556641)
-2828	Borrazópolis	18	4103305	(-23.936599731445313,-51.587501525878906)
-2829	Braganey	18	4103354	(-24.817300796508789,-53.121799468994141)
-2830	Brasilândia do Sul	18	4103370	(-24.197799682617188,-53.527500152587891)
-2831	Cafeara	18	4103404	(-22.788999557495117,-51.714199066162109)
-2832	Cafelândia	18	4103453	(-24.618900299072266,-53.320701599121094)
-2833	Cafezal do Sul	18	4103479	(-23.90049934387207,-53.512401580810547)
-2834	Califórnia	18	4103503	(-23.656600952148438,-51.357398986816406)
-2835	Cambará	18	4103602	(-23.042299270629883,-50.075298309326172)
-2836	Cambé	18	4103701	(-23.276599884033203,-51.279800415039063)
-2837	Cambira	18	4103800	(-23.589000701904297,-51.579200744628906)
-2838	Campina da Lagoa	18	4103909	(-24.589300155639648,-52.797599792480469)
-2839	Campina do Simão	18	4103958	(-25.0802001953125,-51.823699951171875)
-2840	Campina Grande do Sul	18	4104006	(-25.304399490356445,-49.055099487304688)
-2841	Campo Bonito	18	4104055	(-25.029399871826172,-52.993900299072266)
-2842	Campo do Tenente	18	4104105	(-25.979999542236328,-49.684398651123047)
-2843	Campo Largo	18	4104204	(-25.452499389648438,-49.528999328613281)
-2844	Campo Magro	18	4104253	(-25.36870002746582,-49.450099945068359)
-2845	Campo Mourão	18	4104303	(-24.046300888061523,-52.377998352050781)
-2846	Cândido de Abreu	18	4104402	(-24.564899444580078,-51.337200164794922)
-2847	Candói	18	4104428	(-25.575799942016602,-52.040901184082031)
-2848	Cantagalo	18	4104451	(-25.37339973449707,-52.119800567626953)
-2849	Capanema	18	4104501	(-25.669099807739258,-53.805500030517578)
-2850	Capitão Leônidas Marques	18	4104600	(-25.481645584106445,-53.611236572265625)
-2851	Carambeí	18	4104659	(-24.915199279785156,-50.098598480224609)
-2852	Carlópolis	18	4104709	(-23.426900863647461,-49.723499298095703)
-2853	Cascavel	18	4104808	(-24.957300186157227,-53.458999633789063)
-2854	Castro	18	4104907	(-24.789100646972656,-50.010799407958984)
-2855	Catanduvas	18	4105003	(-25.204399108886719,-53.154800415039063)
-2856	Centenário do Sul	18	4105102	(-22.81879997253418,-51.597301483154297)
-2857	Cerro Azul	18	4105201	(-26.089061737060547,-52.869102478027344)
-2858	Céu Azul	18	4105300	(-25.148899078369141,-53.841499328613281)
-2859	Chopinzinho	18	4105409	(-25.851499557495117,-52.517299652099609)
-2860	Cianorte	18	4105508	(-23.659900665283203,-52.605400085449219)
-2861	Cidade Gaúcha	18	4105607	(-23.377199172973633,-52.943599700927734)
-2862	Clevelândia	18	4105706	(-26.404300689697266,-52.350799560546875)
-2863	Colombo	18	4105805	(-25.292499542236328,-49.226200103759766)
-2864	Colorado	18	4105904	(-22.837400436401367,-51.974300384521484)
-2865	Congonhinhas	18	4106001	(-23.549299240112305,-50.556900024414063)
-2866	Conselheiro Mairinck	18	4106100	(-23.622997283935547,-50.170677185058594)
-2867	Contenda	18	4106209	(-25.678800582885742,-49.534999847412109)
-2868	Corbélia	18	4106308	(-24.797100067138672,-53.30059814453125)
-2869	Cornélio Procópio	18	4106407	(-23.182899475097656,-50.649799346923828)
-2870	Coronel Domingos Soares	18	4106456	(-26.227699279785156,-52.035598754882813)
-2871	Coronel Vivida	18	4106506	(-25.976699829101563,-52.564098358154297)
-2872	Corumbataí do Sul	18	4106555	(-24.10099983215332,-52.117698669433594)
-2873	Cruz Machado	18	4106803	(-26.016599655151367,-51.342998504638672)
-2874	Cruzeiro do Iguaçu	18	4106571	(-25.619199752807617,-53.128501892089844)
-2875	Cruzeiro do Oeste	18	4106605	(-23.779899597167969,-53.077400207519531)
-2876	Cruzeiro do Sul	18	4106704	(-22.962400436401367,-52.162200927734375)
-2877	Cruzmaltina	18	4106852	(-24.013200759887695,-51.456298828125)
-2878	Curitiba	18	4106902	(-25.419500350952148,-49.264598846435547)
-2879	Curiúva	18	4107009	(-24.036199569702148,-50.457599639892578)
-2880	Diamante d`Oeste	18	4107157	(-24.941900253295898,-54.105201721191406)
-2881	Diamante do Norte	18	4107108	(-22.655000686645508,-52.861698150634766)
-2882	Diamante do Sul	18	4107124	(-25.034999847412109,-52.676799774169922)
-2883	Dois Vizinhos	18	4107207	(-25.740699768066406,-53.056999206542969)
-2884	Douradina	18	4107256	(-23.380699157714844,-53.291801452636719)
-2885	Doutor Camargo	18	4107306	(-23.558200836181641,-52.217800140380859)
-2886	Doutor Ulysses	18	4128633	(-24.566499710083008,-49.421901702880859)
-2887	Enéas Marques	18	4107405	(-25.944499969482422,-53.165901184082031)
-2888	Engenheiro Beltrão	18	4107504	(-23.797000885009766,-52.265899658203125)
-2889	Entre Rios do Oeste	18	4107538	(-24.704200744628906,-54.238498687744141)
-2890	Esperança Nova	18	4107520	(-23.723800659179688,-53.811000823974609)
-2891	Espigão Alto do Iguaçu	18	4107546	(-25.421600341796875,-52.834800720214844)
-2892	Farol	18	4107553	(-24.095800399780273,-52.621700286865234)
-2893	Faxinal	18	4107603	(-24.007699966430664,-51.322700500488281)
-2894	Fazenda Rio Grande	18	4107652	(-25.662399291992188,-49.307300567626953)
-2895	Fênix	18	4107702	(-23.91349983215332,-51.980499267578125)
-2896	Fernandes Pinheiro	18	4107736	(-25.410699844360352,-50.545600891113281)
-2897	Figueira	18	4107751	(-23.845500946044922,-50.403099060058594)
-2898	Flor da Serra do Sul	18	4107850	(-26.252300262451172,-53.309200286865234)
-2899	Floraí	18	4107801	(-23.317800521850586,-52.302898406982422)
-2900	Floresta	18	4107900	(-23.603099822998047,-52.080699920654297)
-2901	Florestópolis	18	4108007	(-22.862300872802734,-51.388198852539062)
-2902	Flórida	18	4108106	(-23.084699630737305,-51.954601287841797)
-2903	Formosa do Oeste	18	4108205	(-24.295099258422852,-53.3114013671875)
-2904	Foz do Iguaçu	18	4108304	(-25.542699813842773,-54.582698822021484)
-2905	Foz do Jordão	18	4108452	(-25.737100601196289,-52.118801116943359)
-2906	Francisco Alves	18	4108320	(-24.066699981689453,-53.846099853515625)
-2907	Francisco Beltrão	18	4108403	(-26.081699371337891,-53.053501129150391)
-2908	General Carneiro	18	4108502	(-26.424999237060547,-51.31719970703125)
-2909	Godoy Moreira	18	4108551	(-24.173000335693359,-51.924598693847656)
-2910	Goioerê	18	4108601	(-24.183500289916992,-53.024799346923828)
-2911	Goioxim	18	4108650	(-25.192699432373047,-51.991100311279297)
-2912	Grandes Rios	18	4108700	(-24.146600723266602,-51.5093994140625)
-2913	Guaíra	18	4108809	(-24.084999084472656,-54.257301330566406)
-2914	Guairaçá	18	4108908	(-22.931999206542969,-52.690601348876953)
-2915	Guamiranga	18	4108957	(-25.191200256347656,-50.802101135253906)
-2916	Guapirama	18	4109005	(-23.520299911499023,-50.040699005126953)
-2917	Guaporema	18	4109104	(-23.340200424194336,-52.778598785400391)
-2918	Guaraci	18	4109203	(-22.969400405883789,-51.650398254394531)
-2919	Guaraniaçu	18	4109302	(-25.096799850463867,-52.875499725341797)
-2920	Guarapuava	18	4109401	(-25.390199661254883,-51.462299346923828)
-2921	Guaraqueçaba	18	4109500	(-25.307100296020508,-48.320400238037109)
-2922	Guaratuba	18	4109609	(-25.88170051574707,-48.575199127197266)
-2923	Honório Serpa	18	4109658	(-26.138999938964844,-52.384799957275391)
-2924	Ibaiti	18	4109708	(-23.847799301147461,-50.193199157714844)
-2925	Ibema	18	4109757	(-25.119291305541992,-53.007194519042969)
-2926	Ibiporã	18	4109807	(-23.265899658203125,-51.052200317382812)
-2927	Icaraíma	18	4109906	(-23.394399642944336,-53.615001678466797)
-2928	Iguaraçu	18	4110003	(-23.194900512695313,-51.825599670410156)
-2929	Iguatu	18	4110052	(-24.715299606323242,-53.082698822021484)
-2930	Imbaú	18	4110078	(-24.447999954223633,-50.753299713134766)
-2931	Imbituva	18	4110102	(-25.228500366210938,-50.598899841308594)
-2932	Inácio Martins	18	4110201	(-25.570400238037109,-51.076900482177734)
-2933	Inajá	18	4110300	(-22.750900268554688,-52.199501037597656)
-2934	Indianópolis	18	4110409	(-23.476200103759766,-52.698898315429688)
-2935	Ipiranga	18	4110508	(-25.023799896240234,-50.579399108886719)
-2936	Iporã	18	4110607	(-24.00830078125,-53.706001281738281)
-2937	Iracema do Oeste	18	4110656	(-24.426200866699219,-53.352798461914063)
-2938	Irati	18	4110706	(-25.469699859619141,-50.649299621582031)
-2939	Iretama	18	4110805	(-24.425300598144531,-52.101200103759766)
-2940	Itaguajé	18	4110904	(-22.618282318115234,-51.967350006103516)
-2941	Itaipulândia	18	4110953	(-25.136600494384766,-54.300098419189453)
-2942	Itambaracá	18	4111001	(-23.018100738525391,-50.409698486328125)
-2943	Itambé	18	4111100	(-23.660100936889648,-51.991199493408203)
-2944	Itapejara d`Oeste	18	4111209	(-25.961885452270508,-52.815216064453125)
-2945	Itaperuçu	18	4111258	(-25.21929931640625,-49.345401763916016)
-2946	Itaúna do Sul	18	4111308	(-22.728900909423828,-52.887401580810547)
-2947	Ivaí	18	4111407	(-25.00670051574707,-50.856998443603516)
-2948	Ivaiporã	18	4111506	(-24.248500823974609,-51.675399780273438)
-2949	Ivaté	18	4111555	(-23.407199859619141,-53.368698120117188)
-2950	Ivatuba	18	4111605	(-23.61870002746582,-52.220298767089844)
-2951	Jaboti	18	4111704	(-23.743499755859375,-50.072898864746094)
-2952	Jacarezinho	18	4111803	(-23.159099578857422,-49.973899841308594)
-2953	Jaguapitã	18	4111902	(-23.11039924621582,-51.534198760986328)
-2954	Jaguariaíva	18	4112009	(-24.243900299072266,-49.706600189208984)
-2955	Jandaia do Sul	18	4112108	(-23.601100921630859,-51.644798278808594)
-2956	Janiópolis	18	4112207	(-24.140100479125977,-52.778400421142578)
-2957	Japira	18	4112306	(-23.814199447631836,-50.142200469970703)
-2958	Japurá	18	4112405	(-23.46929931640625,-52.555698394775391)
-2959	Jardim Alegre	18	4112504	(-24.180900573730469,-51.690200805664062)
-2960	Jardim Olinda	18	4112603	(-22.552299499511719,-52.050300598144531)
-2961	Jataizinho	18	4112702	(-23.25779914855957,-50.977699279785156)
-2962	Jesuítas	18	4112751	(-24.383899688720703,-53.384899139404297)
-2963	Joaquim Távora	18	4112801	(-23.498699188232422,-49.909000396728516)
-2964	Jundiaí do Sul	18	4112900	(-23.435699462890625,-50.249599456787109)
-2965	Juranda	18	4112959	(-24.420900344848633,-52.841300964355469)
-2966	Jussara	18	4113007	(-23.62190055847168,-52.46929931640625)
-2967	Kaloré	18	4113106	(-23.81879997253418,-51.668701171875)
-2968	Lapa	18	4113205	(-25.767099380493164,-49.716800689697266)
-2969	Laranjal	18	4113254	(-24.886199951171875,-52.470001220703125)
-2970	Laranjeiras do Sul	18	4113304	(-25.407699584960937,-52.410900115966797)
-2971	Leópolis	18	4113403	(-23.08180046081543,-50.7510986328125)
-2972	Lidianópolis	18	4113429	(-24.110000610351563,-51.650600433349609)
-2973	Lindoeste	18	4113452	(-25.259599685668945,-53.573299407958984)
-2974	Loanda	18	4113502	(-22.923200607299805,-53.136199951171875)
-2975	Lobato	18	4113601	(-23.005800247192383,-51.952400207519531)
-2976	Londrina	18	4113700	(-23.304000854492188,-51.169101715087891)
-2977	Luiziana	18	4113734	(-24.285299301147461,-52.269001007080078)
-2978	Lunardelli	18	4113759	(-24.082099914550781,-51.736801147460938)
-2979	Lupionópolis	18	4113809	(-22.754999160766602,-51.660099029541016)
-2980	Mallet	18	4113908	(-25.880599975585938,-50.817298889160156)
-2981	Mamborê	18	4114005	(-24.316999435424805,-52.527099609375)
-2982	Mandaguaçu	18	4114104	(-23.345800399780273,-52.094398498535156)
-2983	Mandaguari	18	4114203	(-23.544599533081055,-51.671001434326172)
-2984	Mandirituba	18	4114302	(-25.777000427246094,-49.328201293945313)
-2985	Manfrinópolis	18	4114351	(-26.144073486328125,-53.311336517333984)
-2986	Mangueirinha	18	4114401	(-25.942100524902344,-52.174301147460937)
-2987	Manoel Ribas	18	4114500	(-24.514400482177734,-51.665798187255859)
-2988	Marechal Cândido Rondon	18	4114609	(-24.557046890258789,-54.057144165039062)
-2989	Maria Helena	18	4114708	(-23.615800857543945,-53.205299377441406)
-2990	Marialva	18	4114807	(-23.48430061340332,-51.792800903320313)
-2991	Marilândia do Sul	18	4114906	(-23.742500305175781,-51.313701629638672)
-2992	Marilena	18	4115002	(-22.733600616455078,-53.040199279785156)
-2993	Mariluz	18	4115101	(-24.008899688720703,-53.143199920654297)
-2994	Maringá	18	4115200	(-23.420499801635742,-51.933300018310547)
-2995	Mariópolis	18	4115309	(-26.355001449584961,-52.553165435791016)
-2996	Maripá	18	4115358	(-24.420000076293945,-53.828601837158203)
-2997	Marmeleiro	18	4115408	(-26.147199630737305,-53.026699066162109)
-2998	Marquinho	18	4115457	(-25.11199951171875,-52.249698638916016)
-2999	Marumbi	18	4115507	(-23.705799102783203,-51.640399932861328)
-3000	Matelândia	18	4115606	(-25.249599456787109,-53.993499755859375)
-3001	Matinhos	18	4115705	(-25.823699951171875,-48.548999786376953)
-3002	Mato Rico	18	4115739	(-24.699499130249023,-52.145401000976562)
-3003	Mauá da Serra	18	4115754	(-23.898799896240234,-51.227699279785156)
-3004	Medianeira	18	4115804	(-25.297700881958008,-54.09429931640625)
-3005	Mercedes	18	4115853	(-24.453800201416016,-54.161800384521484)
-3006	Mirador	18	4115903	(-23.254999160766602,-52.776100158691406)
-3007	Miraselva	18	4116000	(-22.965700149536133,-51.484600067138672)
-3008	Missal	18	4116059	(-25.091899871826172,-54.247699737548828)
-3009	Moreira Sales	18	4116109	(-24.050941467285156,-53.010173797607422)
-3010	Morretes	18	4116208	(-25.474399566650391,-48.834499359130859)
-3011	Munhoz de Melo	18	4116307	(-23.148658752441406,-51.773731231689453)
-3012	Nossa Senhora das Graças	18	4116406	(-22.912900924682617,-51.797798156738281)
-3013	Nova Aliança do Ivaí	18	4116505	(-23.176300048828125,-52.603199005126953)
-3014	Nova América da Colina	18	4116604	(-23.330799102783203,-50.716800689697266)
-3015	Nova Aurora	18	4116703	(-24.528900146484375,-53.257499694824219)
-3016	Nova Cantu	18	4116802	(-24.672300338745117,-52.56610107421875)
-3017	Nova Esperança	18	4116901	(-23.181999206542969,-52.203098297119141)
-3018	Nova Esperança do Sudoeste	18	4116950	(-25.90040397644043,-53.261760711669922)
-3019	Nova Fátima	18	4117008	(-23.432399749755859,-50.566501617431641)
-3020	Nova Laranjeiras	18	4117057	(-25.305400848388672,-52.544700622558594)
-3021	Nova Londrina	18	4117107	(-22.763900756835937,-52.986801147460938)
-3022	Nova Olímpia	18	4117206	(-23.470300674438477,-53.089801788330078)
-3023	Nova Prata do Iguaçu	18	4117255	(-25.630899429321289,-53.346900939941406)
-3024	Nova Santa Bárbara	18	4117214	(-23.58650016784668,-50.759799957275391)
-3025	Nova Santa Rosa	18	4117222	(-24.46929931640625,-53.9552001953125)
-3026	Nova Tebas	18	4117271	(-24.437999725341797,-51.945400238037109)
-3027	Novo Itacolomi	18	4117297	(-23.763099670410156,-51.507900238037109)
-3028	Ortigueira	18	4117305	(-24.205799102783203,-50.918498992919922)
-3029	Ourizona	18	4117404	(-23.405300140380859,-52.196399688720703)
-3030	Ouro Verde do Oeste	18	4117453	(-24.793300628662109,-53.904300689697266)
-3031	Paiçandu	18	4117503	(-23.455499649047852,-52.046001434326172)
-3032	Palmas	18	4117602	(-26.48390007019043,-51.988800048828125)
-3033	Palmeira	18	4117701	(-25.425699234008789,-50.006999969482422)
-3034	Palmital	18	4117800	(-24.885299682617188,-52.202899932861328)
-3035	Palotina	18	4117909	(-24.286800384521484,-53.840400695800781)
-3036	Paraíso do Norte	18	4118006	(-23.282400131225586,-52.605400085449219)
-3037	Paranacity	18	4118105	(-22.92970085144043,-52.154899597167969)
-3038	Paranaguá	18	4118204	(-25.51609992980957,-48.522499084472656)
-3039	Paranapoema	18	4118303	(-22.641199111938477,-52.090499877929688)
-3040	Paranavaí	18	4118402	(-23.081600189208984,-52.461700439453125)
-3041	Pato Bragado	18	4118451	(-24.627054214477539,-54.226459503173828)
-3042	Pato Branco	18	4118501	(-26.22920036315918,-52.670600891113281)
-3043	Paula Freitas	18	4118600	(-26.210500717163086,-50.930999755859375)
-3044	Paulo Frontin	18	4118709	(-26.046600341796875,-50.830398559570313)
-3045	Peabiru	18	4118808	(-23.913999557495117,-52.343101501464844)
-3046	Perobal	18	4118857	(-23.894899368286133,-53.409801483154297)
-3047	Pérola	18	4118907	(-23.803899765014648,-53.683399200439453)
-3048	Pérola d`Oeste	18	4119004	(-25.827793121337891,-53.743331909179688)
-3049	Piên	18	4119103	(-26.096500396728516,-49.433601379394531)
-3050	Pinhais	18	4119152	(-25.442899703979492,-49.192699432373047)
-3051	Pinhal de São Bento	18	4119251	(-26.032400131225586,-53.481998443603516)
-3052	Pinhalão	18	4119202	(-23.798200607299805,-50.053600311279297)
-3053	Pinhão	18	4119301	(-25.694400787353516,-51.653598785400391)
-3054	Piraí do Sul	18	4119400	(-24.530599594116211,-49.94329833984375)
-3055	Piraquara	18	4119509	(-25.44219970703125,-49.062400817871094)
-3056	Pitanga	18	4119608	(-24.758800506591797,-51.759601593017578)
-3057	Pitangueiras	18	4119657	(-23.228099822998047,-51.587299346923828)
-3058	Planaltina do Paraná	18	4119707	(-23.010099411010742,-52.91619873046875)
-3059	Planalto	18	4119806	(-25.721099853515625,-53.764198303222656)
-3060	Ponta Grossa	18	4119905	(-25.09160041809082,-50.166801452636719)
-3061	Pontal do Paraná	18	4119954	(-25.673500061035156,-48.511100769042969)
-3062	Porecatu	18	4120002	(-22.753700256347656,-51.379501342773437)
-3063	Porto Amazonas	18	4120101	(-25.540000915527344,-49.894599914550781)
-3064	Porto Barreiro	18	4120150	(-25.547700881958008,-52.406700134277344)
-3065	Porto Rico	18	4120200	(-22.774700164794922,-53.2677001953125)
-3066	Porto Vitória	18	4120309	(-26.167400360107422,-51.230998992919922)
-3067	Prado Ferreira	18	4120333	(-23.035699844360352,-51.442901611328125)
-3068	Pranchita	18	4120358	(-26.020940780639648,-53.739681243896484)
-3069	Presidente Castelo Branco	18	4120408	(-23.278200149536133,-52.153598785400391)
-3070	Primeiro de Maio	18	4120507	(-22.851699829101563,-51.029300689697266)
-3071	Prudentópolis	18	4120606	(-25.211099624633789,-50.975399017333984)
-3072	Quarto Centenário	18	4120655	(-24.277500152587891,-53.075901031494141)
-3073	Quatiguá	18	4120705	(-23.567100524902344,-49.916000366210937)
-3074	Quatro Barras	18	4120804	(-25.367300033569336,-49.076301574707031)
-3075	Quatro Pontes	18	4120853	(-24.575199127197266,-53.975898742675781)
-3076	Quedas do Iguaçu	18	4120903	(-25.449199676513672,-52.910198211669922)
-3077	Querência do Norte	18	4121000	(-23.083799362182617,-53.483001708984375)
-3078	Quinta do Sol	18	4121109	(-23.853300094604492,-52.130901336669922)
-3079	Quitandinha	18	4121208	(-25.87339973449707,-49.497299194335938)
-3080	Ramilândia	18	4121257	(-25.119499206542969,-54.022998809814453)
-3081	Rancho Alegre	18	4121307	(-23.067600250244141,-50.914501190185547)
-3082	Rancho Alegre d`Oeste	18	4121356	(-24.306520462036133,-52.955177307128906)
-3083	Realeza	18	4121406	(-25.771099090576172,-53.5260009765625)
-3084	Rebouças	18	4121505	(-25.623199462890625,-50.687698364257812)
-3085	Renascença	18	4121604	(-26.15880012512207,-52.970298767089844)
-3086	Reserva	18	4121703	(-24.649200439453125,-50.846599578857422)
-3087	Reserva do Iguaçu	18	4121752	(-25.831899642944336,-52.027198791503906)
-3088	Ribeirão Claro	18	4121802	(-23.194099426269531,-49.759700775146484)
-3089	Ribeirão do Pinhal	18	4121901	(-23.409099578857422,-50.360099792480469)
-3090	Rio Azul	18	4122008	(-25.730600357055664,-50.798500061035156)
-3091	Rio Bom	18	4122107	(-23.760599136352539,-51.412200927734375)
-3092	Rio Bonito do Iguaçu	18	4122156	(-25.487400054931641,-52.529201507568359)
-3093	Rio Branco do Ivaí	18	4122172	(-24.324399948120117,-51.318698883056641)
-3094	Rio Branco do Sul	18	4122206	(-25.189199447631836,-49.311500549316406)
-3095	Rio Negro	18	4122305	(-26.094999313354492,-49.798198699951172)
-3096	Rolândia	18	4122404	(-23.310100555419922,-51.365898132324219)
-3097	Roncador	18	4122503	(-24.595800399780273,-52.271598815917969)
-3098	Rondon	18	4122602	(-23.41200065612793,-52.765899658203125)
-3099	Rosário do Ivaí	18	4122651	(-24.268199920654297,-51.271999359130859)
-3100	Sabáudia	18	4122701	(-23.315500259399414,-51.555000305175781)
-3101	Salgado Filho	18	4122800	(-26.177700042724609,-53.36309814453125)
-3102	Salto do Itararé	18	4122909	(-23.607400894165039,-49.635398864746094)
-3103	Salto do Lontra	18	4123006	(-25.781299591064453,-53.313499450683594)
-3104	Santa Amélia	18	4123105	(-23.265399932861328,-50.428798675537109)
-3105	Santa Cecília do Pavão	18	4123204	(-23.520099639892578,-50.783500671386719)
-3106	Santa Cruz de Monte Castelo	18	4123303	(-22.958202362060547,-53.294857025146484)
-3107	Santa Fé	18	4123402	(-23.040000915527344,-51.807998657226562)
-3108	Santa Helena	18	4123501	(-24.858499526977539,-54.33599853515625)
-3109	Santa Inês	18	4123600	(-22.637599945068359,-51.902400970458984)
-3110	Santa Isabel do Ivaí	18	4123709	(-23.002500534057617,-53.198898315429688)
-3111	Santa Izabel do Oeste	18	4123808	(-25.821699142456055,-53.480098724365234)
-3112	Santa Lúcia	18	4123824	(-25.410400390625,-53.563800811767578)
-3113	Santa Maria do Oeste	18	4123857	(-24.937700271606445,-51.869598388671875)
-3114	Santa Mariana	18	4123907	(-23.146499633789063,-50.516700744628906)
-3115	Santa Mônica	18	4123956	(-23.107999801635742,-53.110298156738281)
-3116	Santa Tereza do Oeste	18	4124020	(-25.054300308227539,-53.627399444580078)
-3117	Santa Terezinha de Itaipu	18	4124053	(-25.439081192016602,-54.401988983154297)
-3118	Santana do Itararé	18	4124004	(-23.758699417114258,-49.629299163818359)
-3119	Santo Antônio da Platina	18	4124103	(-23.295900344848633,-50.081501007080078)
-3120	Santo Antônio do Caiuá	18	4124202	(-22.735099792480469,-52.344001770019531)
-3121	Santo Antônio do Paraíso	18	4124301	(-23.49690055847168,-50.645500183105469)
-3122	Santo Antônio do Sudoeste	18	4124400	(-26.073699951171875,-53.725101470947266)
-3123	Santo Inácio	18	4124509	(-22.695699691772461,-51.796901702880859)
-3124	São Carlos do Ivaí	18	4124608	(-23.315799713134766,-52.476100921630859)
-3125	São Jerônimo da Serra	18	4124707	(-23.721799850463867,-50.747501373291016)
-3126	São João	18	4124806	(-25.821399688720703,-52.725200653076172)
-3127	São João do Caiuá	18	4124905	(-22.853500366210937,-52.341098785400391)
-3128	São João do Ivaí	18	4125001	(-23.983299255371094,-51.821498870849609)
-3129	São João do Triunfo	18	4125100	(-25.683000564575195,-50.294898986816406)
-3130	São Jorge d`Oeste	18	4125209	(-25.708484649658203,-52.920360565185547)
-3131	São Jorge do Ivaí	18	4125308	(-23.433599472045898,-52.292900085449219)
-3132	São Jorge do Patrocínio	18	4125357	(-23.764699935913086,-53.882301330566406)
-3133	São José da Boa Vista	18	4125407	(-23.912200927734375,-49.657699584960938)
-3134	São José das Palmeiras	18	4125456	(-24.83690071105957,-54.057201385498047)
-3135	São José dos Pinhais	18	4125506	(-25.531299591064453,-49.203098297119141)
-3136	São Manoel do Paraná	18	4125555	(-23.394100189208984,-52.645401000976562)
-3137	São Mateus do Sul	18	4125605	(-25.867700576782227,-50.383998870849609)
-3138	São Miguel do Iguaçu	18	4125704	(-25.349199295043945,-54.240501403808594)
-3139	São Pedro do Iguaçu	18	4125753	(-24.937299728393555,-53.852100372314453)
-3140	São Pedro do Ivaí	18	4125803	(-23.863399505615234,-51.856800079345703)
-3141	São Pedro do Paraná	18	4125902	(-22.82390022277832,-53.224098205566406)
-3142	São Sebastião da Amoreira	18	4126009	(-23.465599060058594,-50.762500762939453)
-3143	São Tomé	18	4126108	(-23.534900665283203,-52.590099334716797)
-3144	Sapopema	18	4126207	(-23.907800674438477,-50.580101013183594)
-3145	Sarandi	18	4126256	(-23.444099426269531,-51.875999450683594)
-3146	Saudade do Iguaçu	18	4126272	(-25.691699981689453,-52.618400573730469)
-3147	Sengés	18	4126306	(-24.112899780273438,-49.461601257324219)
-3148	Serranópolis do Iguaçu	18	4126355	(-25.379899978637695,-54.051799774169922)
-3149	Sertaneja	18	4126405	(-23.036100387573242,-50.831699371337891)
-3150	Sertanópolis	18	4126504	(-23.057100296020508,-51.039901733398437)
-3151	Siqueira Campos	18	4126603	(-23.6875,-49.830398559570313)
-3152	Sulina	18	4126652	(-25.706600189208984,-52.729900360107422)
-3153	Tamarana	18	4126678	(-23.720399856567383,-51.099098205566406)
-3154	Tamboara	18	4126702	(-23.20359992980957,-52.474300384521484)
-3155	Tapejara	18	4126801	(-23.731500625610352,-52.873500823974609)
-3156	Tapira	18	4126900	(-23.319299697875977,-53.068401336669922)
-3157	Teixeira Soares	18	4127007	(-25.370100021362305,-50.457099914550781)
-3158	Telêmaco Borba	18	4127106	(-24.324499130249023,-50.617599487304688)
-3159	Terra Boa	18	4127205	(-23.768299102783203,-52.446998596191406)
-3160	Terra Rica	18	4127304	(-22.711099624633789,-52.618801116943359)
-3161	Terra Roxa	18	4127403	(-24.157499313354492,-54.098800659179687)
-3162	Tibagi	18	4127502	(-24.515300750732422,-50.417598724365234)
-3163	Tijucas do Sul	18	4127601	(-25.931100845336914,-49.194999694824219)
-3164	Toledo	18	4127700	(-24.724599838256836,-53.741199493408203)
-3165	Tomazina	18	4127809	(-23.779600143432617,-49.949901580810547)
-3166	Três Barras do Paraná	18	4127858	(-25.418500900268555,-53.183300018310547)
-3167	Tunas do Paraná	18	4127882	(-24.973100662231445,-49.087898254394531)
-3168	Tuneiras do Oeste	18	4127908	(-23.864799499511719,-52.876899719238281)
-3169	Tupãssi	18	4127957	(-24.587900161743164,-53.510501861572266)
-3170	Turvo	18	4127965	(-25.043699264526367,-51.5281982421875)
-3171	Ubiratã	18	4128005	(-24.539300918579102,-52.986499786376953)
-3172	Umuarama	18	4128104	(-23.765600204467773,-53.320098876953125)
-3173	União da Vitória	18	4128203	(-26.227300643920898,-51.087299346923828)
-3174	Uniflor	18	4128302	(-23.086799621582031,-52.157299041748047)
-3175	Uraí	18	4128401	(-23.200000762939453,-50.793899536132813)
-3176	Ventania	18	4128534	(-24.245800018310547,-50.237598419189453)
-3177	Vera Cruz do Oeste	18	4128559	(-25.057699203491211,-53.877101898193359)
-3178	Verê	18	4128609	(-25.877199172973633,-52.905101776123047)
-3179	Virmond	18	4128658	(-25.382900238037109,-52.198699951171875)
-3180	Vitorino	18	4128708	(-26.268299102783203,-52.7843017578125)
-3181	Wenceslau Braz	18	4128500	(-23.874200820922852,-49.803199768066406)
-3182	Xambrê	18	4128807	(-23.736400604248047,-53.488399505615234)
-3183	Abreu e Lima	16	2600054	(-7.9007201194763184,-34.898399353027344)
-3184	Afogados da Ingazeira	16	2600104	(-7.7431201934814453,-37.631000518798828)
-3185	Afrânio	16	2600203	(-8.5113601684570312,-41.009498596191406)
-3186	Agrestina	16	2600302	(-8.4596595764160156,-35.944698333740234)
-3187	Água Preta	16	2600401	(-8.706089973449707,-35.526298522949219)
-3188	Águas Belas	16	2600500	(-9.1112499237060547,-37.122600555419922)
-3189	Alagoinha	16	2600609	(-8.4665002822875977,-36.778800964355469)
-3190	Aliança	16	2600708	(-7.6039800643920898,-35.222698211669922)
-3191	Altinho	16	2600807	(-8.4848203659057617,-36.064399719238281)
-3192	Amaraji	16	2600906	(-8.3769102096557617,-35.450099945068359)
-3193	Angelim	16	2601003	(-8.8842897415161133,-36.290199279785156)
-3194	Araçoiaba	16	2601052	(-7.783909797668457,-35.080898284912109)
-3195	Araripina	16	2601102	(-7.5707302093505859,-40.493999481201172)
-3196	Arcoverde	16	2601201	(-8.4151897430419922,-37.057701110839844)
-3197	Barra de Guabiraba	16	2601300	(-8.4207496643066406,-35.658500671386719)
-3198	Barreiros	16	2601409	(-8.8160495758056641,-35.183200836181641)
-3199	Belém de Maria	16	2601508	(-8.6250400543212891,-35.833499908447266)
-3200	Belém de São Francisco	16	2601607	(-8.7504596710205078,-38.962299346923828)
-3201	Belo Jardim	16	2601706	(-8.3312997817993164,-36.425800323486328)
-3202	Betânia	16	2601805	(-8.2678699493408203,-38.034500122070313)
-3203	Bezerros	16	2601904	(-8.2327995300292969,-35.796001434326172)
-3204	Bodocó	16	2602001	(-7.7775897979736328,-39.933799743652344)
-3205	Bom Conselho	16	2602100	(-9.1691904067993164,-36.685699462890625)
-3206	Bom Jardim	16	2602209	(-7.7969498634338379,-35.578399658203125)
-3207	Bonito	16	2602308	(-8.4716300964355469,-35.729198455810547)
-3208	Brejão	16	2602407	(-9.0291500091552734,-36.566001892089844)
-3209	Brejinho	16	2602506	(-7.3469400405883789,-37.2864990234375)
-3210	Brejo da Madre de Deus	16	2602605	(-8.1493301391601562,-36.374099731445313)
-3211	Buenos Aires	16	2602704	(-7.7244901657104492,-35.318199157714844)
-3212	Buíque	16	2602803	(-8.6195402145385742,-37.160598754882812)
-3213	Cabo de Santo Agostinho	16	2602902	(-8.2821798324584961,-35.025299072265625)
-3214	Cabrobó	16	2603009	(-8.5054798126220703,-39.309398651123047)
-3215	Cachoeirinha	16	2603108	(-8.4866800308227539,-36.240200042724609)
-3216	Caetés	16	2603207	(-8.7803001403808594,-36.626800537109375)
-3217	Calçado	16	2603306	(-8.7310800552368164,-36.336601257324219)
-3218	Calumbi	16	2603405	(-7.9355101585388184,-38.148200988769531)
-3219	Camaragibe	16	2603454	(-8.0235099792480469,-34.978199005126953)
-3220	Camocim de São Félix	16	2603504	(-8.3586502075195313,-35.765300750732422)
-3221	Camutanga	16	2603603	(-7.4054498672485352,-35.266399383544922)
-3222	Canhotinho	16	2603702	(-8.8765201568603516,-36.197898864746094)
-3223	Capoeiras	16	2603801	(-8.7342300415039062,-36.630599975585937)
-3224	Carnaíba	16	2603900	(-7.7934198379516602,-37.794601440429687)
-3225	Carnaubeira da Penha	16	2603926	(-8.3179903030395508,-38.751201629638672)
-3226	Carpina	16	2604007	(-7.8456602096557617,-35.251399993896484)
-3227	Caruaru	16	2604106	(-8.2845497131347656,-35.969898223876953)
-3228	Casinhas	16	2604155	(-7.740839958190918,-35.720600128173828)
-3229	Catende	16	2604205	(-8.6750898361206055,-35.702400207519531)
-3230	Cedro	16	2604304	(-7.7117900848388672,-39.236698150634766)
-3231	Chã de Alegria	16	2604403	(-8.0067901611328125,-35.203998565673828)
-3232	Chã Grande	16	2604502	(-8.2382698059082031,-35.457099914550781)
-3233	Condado	16	2604601	(-7.5878701210021973,-35.099899291992187)
-3234	Correntes	16	2604700	(-9.1211700439453125,-36.32440185546875)
-3235	Cortês	16	2604809	(-8.4744300842285156,-35.546798706054687)
-3236	Cumaru	16	2604908	(-8.008270263671875,-35.695701599121094)
-3237	Cupira	16	2605004	(-8.6243200302124023,-35.951801300048828)
-3238	Custódia	16	2605103	(-8.0854597091674805,-37.644298553466797)
-3239	Dormentes	16	2605152	(-8.4411602020263672,-40.766201019287109)
-3240	Escada	16	2605202	(-8.356719970703125,-35.224098205566406)
-3241	Exu	16	2605301	(-7.5036401748657227,-39.723800659179688)
-3242	Feira Nova	16	2605400	(-7.9470400810241699,-35.380100250244141)
-3243	Fernando de Noronha	16	2605459	(-3.8396000862121582,-32.410701751708984)
-3244	Ferreiros	16	2605509	(-7.446660041809082,-35.237300872802734)
-3245	Flores	16	2605608	(-7.8584198951721191,-37.971500396728516)
-3246	Floresta	16	2605707	(-8.6030702590942383,-38.568698883056641)
-3247	Frei Miguelinho	16	2605806	(-7.9391798973083496,-35.911300659179688)
-3248	Gameleira	16	2605905	(-8.5797996520996094,-35.384601593017578)
-3249	Garanhuns	16	2606002	(-8.8824300765991211,-36.496601104736328)
-3250	Glória do Goitá	16	2606101	(-8.0056800842285156,-35.290401458740234)
-3251	Goiana	16	2606200	(-7.5605998039245605,-34.995899200439453)
-3252	Granito	16	2606309	(-7.7071099281311035,-39.615001678466797)
-3253	Gravatá	16	2606408	(-8.2111797332763672,-35.567501068115234)
-3254	Iati	16	2606507	(-9.0455904006958008,-36.849800109863281)
-3255	Ibimirim	16	2606606	(-8.5402603149414062,-37.703201293945313)
-3256	Ibirajuba	16	2606705	(-8.5763301849365234,-36.181198120117188)
-3257	Igarassu	16	2606804	(-7.8288102149963379,-34.901298522949219)
-3258	Iguaraci	16	2606903	(-7.8322200775146484,-37.508201599121094)
-3259	Ilha de Itamaracá	16	2607604	(-7.7476601600646973,-34.830299377441406)
-3260	Inajá	16	2607000	(-8.9020595550537109,-37.835098266601563)
-3261	Ingazeira	16	2607109	(-7.6690897941589355,-37.457599639892578)
-3262	Ipojuca	16	2607208	(-8.3930301666259766,-35.060901641845703)
-3263	Ipubi	16	2607307	(-7.645050048828125,-40.147598266601563)
-3264	Itacuruba	16	2607406	(-8.8223104476928711,-38.697498321533203)
-3265	Itaíba	16	2607505	(-8.9456901550292969,-37.417301177978516)
-3266	Itambé	16	2607653	(-7.4140300750732422,-35.096298217773438)
-3267	Itapetim	16	2607703	(-7.3717799186706543,-37.186298370361328)
-3268	Itapissuma	16	2607752	(-7.7679800987243652,-34.897098541259766)
-3269	Itaquitinga	16	2607802	(-7.6637301445007324,-35.100200653076172)
-3270	Jaboatão dos Guararapes	16	2607901	(-8.1129798889160156,-35.014999389648438)
-3271	Jaqueira	16	2607950	(-8.7261800765991211,-35.794200897216797)
-3272	Jataúba	16	2608008	(-7.976679801940918,-36.494300842285156)
-3273	Jatobá	16	2608057	(-9.1747598648071289,-38.260700225830078)
-3274	João Alfredo	16	2608107	(-7.8656501770019531,-35.578701019287109)
-3275	Joaquim Nabuco	16	2608206	(-8.6228103637695312,-35.528800964355469)
-3276	Jucati	16	2608255	(-8.7019500732421875,-36.487098693847656)
-3277	Jupi	16	2608305	(-8.7090396881103516,-36.412601470947266)
-3278	Jurema	16	2608404	(-8.7071399688720703,-36.134700775146484)
-3279	Lagoa do Carro	16	2608453	(-7.8438301086425781,-35.310798645019531)
-3280	Lagoa do Itaenga	16	2608503	(-7.9300498962402344,-35.287399291992188)
-3281	Lagoa do Ouro	16	2608602	(-9.1256704330444336,-36.458400726318359)
-3282	Lagoa dos Gatos	16	2608701	(-8.6602001190185547,-35.903999328613281)
-3283	Lagoa Grande	16	2608750	(-8.9945201873779297,-40.276699066162109)
-3284	Lajedo	16	2608800	(-8.6579103469848633,-36.329299926757813)
-3285	Limoeiro	16	2608909	(-7.8726000785827637,-35.440200805664063)
-3286	Macaparana	16	2609006	(-7.5556402206420898,-35.442501068115234)
-3287	Machados	16	2609105	(-7.688270092010498,-35.511398315429688)
-3288	Manari	16	2609154	(-8.964900016784668,-37.631301879882813)
-3289	Maraial	16	2609204	(-8.7906198501586914,-35.82659912109375)
-3290	Mirandiba	16	2609303	(-8.1211299896240234,-38.738800048828125)
-3291	Moreilândia	16	2614303	(-7.6193099021911621,-39.546001434326172)
-3292	Moreno	16	2609402	(-8.1087102890014648,-35.083499908447266)
-3293	Nazaré da Mata	16	2609501	(-7.7414898872375488,-35.21929931640625)
-3294	Olinda	16	2609600	(-8.0101699829101562,-34.854499816894531)
-3295	Orobó	16	2609709	(-7.7455301284790039,-35.595600128173828)
-3296	Orocó	16	2609808	(-8.610260009765625,-39.60260009765625)
-3297	Ouricuri	16	2609907	(-7.8791799545288086,-40.080001831054688)
-3298	Palmares	16	2610004	(-8.684229850769043,-35.589000701904297)
-3299	Palmeirina	16	2610103	(-9.010899543762207,-36.324199676513672)
-3300	Panelas	16	2610202	(-8.6612100601196289,-36.012500762939453)
-3301	Paranatama	16	2610301	(-8.9187498092651367,-36.654899597167969)
-3302	Parnamirim	16	2610400	(-8.0872898101806641,-39.579498291015625)
-3303	Passira	16	2610509	(-7.9970998764038086,-35.581298828125)
-3304	Paudalho	16	2610608	(-7.9028701782226563,-35.171600341796875)
-3305	Paulista	16	2610707	(-7.9340100288391113,-34.868400573730469)
-3306	Pedra	16	2610806	(-8.4964103698730469,-36.939998626708984)
-3307	Pesqueira	16	2610905	(-8.3579702377319336,-36.697799682617188)
-3308	Petrolândia	16	2611002	(-9.0686302185058594,-38.302700042724609)
-3309	Petrolina	16	2611101	(-9.3886604309082031,-40.502700805664062)
-3310	Poção	16	2611200	(-8.1872596740722656,-36.711101531982422)
-3311	Pombos	16	2611309	(-8.1398200988769531,-35.396701812744141)
-3312	Primavera	16	2611408	(-8.3299903869628906,-35.354400634765625)
-3313	Quipapá	16	2611507	(-8.8117504119873047,-36.013698577880859)
-3314	Quixaba	16	2611533	(-7.7073397636413574,-37.844600677490234)
-3315	Recife	16	2611606	(-8.0466604232788086,-34.877101898193359)
-3316	Riacho das Almas	16	2611705	(-8.1374197006225586,-35.864799499511719)
-3317	Ribeirão	16	2611804	(-8.5095701217651367,-35.369800567626953)
-3318	Rio Formoso	16	2611903	(-8.6591997146606445,-35.1531982421875)
-3319	Sairé	16	2612000	(-8.3286399841308594,-35.696701049804687)
-3320	Salgadinho	16	2612109	(-7.9268999099731445,-35.650299072265625)
-3321	Salgueiro	16	2612208	(-8.07373046875,-39.124698638916016)
-3322	Saloá	16	2612307	(-8.9722995758056641,-36.691001892089844)
-3323	Sanharó	16	2612406	(-8.3609695434570312,-36.569599151611328)
-3324	Santa Cruz	16	2612455	(-8.2415304183959961,-40.343399047851563)
-3325	Santa Cruz da Baixa Verde	16	2612471	(-7.813389778137207,-38.147598266601562)
-3326	Santa Cruz do Capibaribe	16	2612505	(-7.9480199813842773,-36.206100463867188)
-3327	Santa Filomena	16	2612554	(-8.1668796539306641,-40.607898712158203)
-3328	Santa Maria da Boa Vista	16	2612604	(-8.7976598739624023,-39.824100494384766)
-3329	Santa Maria do Cambucá	16	2612703	(-7.8367600440979004,-35.894100189208984)
-3330	Santa Terezinha	16	2612802	(-7.3769598007202148,-37.47869873046875)
-3331	São Benedito do Sul	16	2612901	(-8.8165998458862305,-35.945301055908203)
-3332	São Bento do Una	16	2613008	(-8.5263700485229492,-36.446498870849609)
-3333	São Caitano	16	2613107	(-8.3376274108886719,-36.286899566650391)
-3334	São João	16	2613206	(-8.8757600784301758,-36.365299224853516)
-4926	Iacanga	26	3519105	(-21.88960075378418,-49.030998229980469)
-3335	São Joaquim do Monte	16	2613305	(-8.4319601058959961,-35.803501129150391)
-3336	São José da Coroa Grande	16	2613404	(-8.8893699645996094,-35.151500701904297)
-3337	São José do Belmonte	16	2613503	(-7.8572301864624023,-38.757701873779297)
-3338	São José do Egito	16	2613602	(-7.4694499969482422,-37.273998260498047)
-3339	São Lourenço da Mata	16	2613701	(-8.0068397521972656,-35.012401580810547)
-3340	São Vicente Ferrer	16	2613800	(-7.5896902084350586,-35.480800628662109)
-3341	Serra Talhada	16	2613909	(-7.9817800521850586,-38.28900146484375)
-3342	Serrita	16	2614006	(-7.9404101371765137,-39.295101165771484)
-3343	Sertânia	16	2614105	(-8.0684700012207031,-37.268398284912109)
-3344	Sirinhaém	16	2614204	(-8.5877799987792969,-35.112598419189453)
-3345	Solidão	16	2614402	(-7.5947198867797852,-37.644500732421875)
-3346	Surubim	16	2614501	(-7.8474597930908203,-35.748100280761719)
-3347	Tabira	16	2614600	(-7.5836601257324219,-37.537700653076172)
-3348	Tacaimbó	16	2614709	(-8.3086700439453125,-36.299999237060547)
-3349	Tacaratu	16	2614808	(-9.0979795455932617,-38.150398254394531)
-3350	Tamandaré	16	2614857	(-8.7566499710083008,-35.103298187255859)
-3351	Taquaritinga do Norte	16	2615003	(-7.8944602012634277,-36.042301177978516)
-3352	Terezinha	16	2615102	(-9.0562095642089844,-36.627201080322266)
-3353	Terra Nova	16	2615201	(-8.2224397659301758,-39.382499694824219)
-3354	Timbaúba	16	2615300	(-7.5048398971557617,-35.311901092529297)
-3355	Toritama	16	2615409	(-8.0095500946044922,-36.063701629638672)
-3356	Tracunhaém	16	2615508	(-7.8022799491882324,-35.231399536132813)
-3357	Trindade	16	2615607	(-7.7589998245239258,-40.264701843261719)
-3358	Triunfo	16	2615706	(-7.8327198028564453,-38.097801208496094)
-3359	Tupanatinga	16	2615805	(-8.7479801177978516,-37.344501495361328)
-3360	Tuparetama	16	2615904	(-7.6002998352050781,-37.316501617431641)
-3361	Venturosa	16	2616001	(-8.5788497924804687,-36.874198913574219)
-3362	Verdejante	16	2616100	(-7.9223499298095703,-38.970100402832031)
-3363	Vertente do Lério	16	2616183	(-7.7708401679992676,-35.849098205566406)
-3364	Vertentes	16	2616209	(-7.9015798568725586,-35.968101501464844)
-3365	Vicência	16	2616308	(-7.6565499305725098,-35.313899993896484)
-3366	Vitória de Santo Antão	16	2616407	(-8.1281900405883789,-35.297599792480469)
-3367	Xexéu	16	2616506	(-8.8045997619628906,-35.621200561523438)
-3368	Acauã	17	2200053	(-8.2195396423339844,-41.083099365234375)
-3369	Agricolândia	17	2200103	(-5.796760082244873,-42.666400909423828)
-3370	Água Branca	17	2200202	(-5.8885598182678223,-42.637001037597656)
-3371	Alagoinha do Piauí	17	2200251	(-7.0003900527954102,-40.928199768066406)
-3372	Alegrete do Piauí	17	2200277	(-7.2419600486755371,-40.856601715087891)
-3373	Alto Longá	17	2200301	(-5.2563400268554687,-42.209598541259766)
-3374	Altos	17	2200400	(-5.0388798713684082,-42.461200714111328)
-3375	Alvorada do Gurguéia	17	2200459	(-8.4241800308227539,-43.777000427246094)
-3376	Amarante	17	2200509	(-6.2430400848388672,-42.843299865722656)
-3377	Angical do Piauí	17	2200608	(-6.087860107421875,-42.740001678466797)
-3378	Anísio de Abreu	17	2200707	(-9.1856403350830078,-43.049400329589844)
-3379	Antônio Almeida	17	2200806	(-7.2127599716186523,-44.188899993896484)
-3380	Aroazes	17	2200905	(-6.1102199554443359,-41.782199859619141)
-3381	Aroeiras do Itaim	17	2200954	(-7.2450180053710937,-41.532463073730469)
-3382	Arraial	17	2201002	(-6.6507501602172852,-42.541801452636719)
-3383	Assunção do Piauí	17	2201051	(-5.8649997711181641,-41.038898468017578)
-3384	Avelino Lopes	17	2201101	(-10.134499549865723,-43.956298828125)
-3385	Baixa Grande do Ribeiro	17	2201150	(-7.8490300178527832,-45.219001770019531)
-3386	Barra d`Alcântara	17	2201176	(-6.5164499282836914,-42.114601135253906)
-3387	Barras	17	2201200	(-4.2446799278259277,-42.292198181152344)
-3388	Barreiras do Piauí	17	2201309	(-9.9295997619628906,-45.470199584960937)
-3389	Barro Duro	17	2201408	(-5.8167300224304199,-42.514701843261719)
-3390	Batalha	17	2201507	(-4.0222997665405273,-42.078701019287109)
-3391	Bela Vista do Piauí	17	2201556	(-7.9880900382995605,-41.867500305175781)
-3392	Belém do Piauí	17	2201572	(-7.3665199279785156,-40.968799591064453)
-3393	Beneditinos	17	2201606	(-5.4567599296569824,-42.363800048828125)
-3394	Bertolínia	17	2201705	(-7.6333799362182617,-43.949798583984375)
-3395	Betânia do Piauí	17	2201739	(-8.1437597274780273,-40.798900604248047)
-3396	Boa Hora	17	2201770	(-4.4140400886535645,-42.135700225830078)
-3397	Bocaina	17	2201804	(-6.9412398338317871,-41.316799163818359)
-3398	Bom Jesus	17	2201903	(-9.0712404251098633,-44.359001159667969)
-3399	Bom Princípio do Piauí	17	2201919	(-3.1963100433349609,-41.640300750732422)
-3400	Bonfim do Piauí	17	2201929	(-9.1604995727539063,-42.886501312255859)
-3401	Boqueirão do Piauí	17	2201945	(-4.4818100929260254,-42.121200561523438)
-3402	Brasileira	17	2201960	(-4.133699893951416,-41.785900115966797)
-3403	Brejo do Piauí	17	2201988	(-8.2031402587890625,-42.822898864746094)
-3404	Buriti dos Lopes	17	2202000	(-3.1825900077819824,-41.869499206542969)
-3405	Buriti dos Montes	17	2202026	(-5.305840015411377,-41.093299865722656)
-3406	Cabeceiras do Piauí	17	2202059	(-4.4773001670837402,-42.306900024414063)
-3407	Cajazeiras do Piauí	17	2202075	(-6.7966699600219727,-42.390300750732422)
-3408	Cajueiro da Praia	17	2202083	(-2.9311099052429199,-41.340801239013672)
-3409	Caldeirão Grande do Piauí	17	2202091	(-7.3313999176025391,-40.636600494384766)
-3410	Campinas do Piauí	17	2202109	(-7.6592998504638672,-41.877498626708984)
-3411	Campo Alegre do Fidalgo	17	2202117	(-8.3823604583740234,-41.834400177001953)
-3412	Campo Grande do Piauí	17	2202133	(-7.128270149230957,-41.031501770019531)
-3413	Campo Largo do Piauí	17	2202174	(-3.8044099807739258,-42.639999389648438)
-3414	Campo Maior	17	2202208	(-4.8217000961303711,-42.164100646972656)
-3415	Canavieira	17	2202251	(-7.6882100105285645,-43.723300933837891)
-3416	Canto do Buriti	17	2202307	(-8.1111001968383789,-42.951698303222656)
-3417	Capitão de Campos	17	2202406	(-4.4569997787475586,-41.944000244140625)
-3418	Capitão Gervásio Oliveira	17	2202455	(-8.4965496063232422,-41.813999176025391)
-3419	Caracol	17	2202505	(-9.2793302536010742,-43.328998565673828)
-3420	Caraúbas do Piauí	17	2202539	(-3.4752500057220459,-41.842498779296875)
-3421	Caridade do Piauí	17	2202554	(-7.7343502044677734,-40.984798431396484)
-3422	Castelo do Piauí	17	2202604	(-5.3186898231506348,-41.549900054931641)
-3423	Caxingó	17	2202653	(-3.4190399646759033,-41.895500183105469)
-3424	Cocal	17	2202703	(-3.472790002822876,-41.554599761962891)
-3425	Cocal de Telha	17	2202711	(-4.5570998191833496,-41.958698272705078)
-3426	Cocal dos Alves	17	2202729	(-3.6204700469970703,-41.440200805664063)
-3427	Coivaras	17	2202737	(-5.0922398567199707,-42.208000183105469)
-3428	Colônia do Gurguéia	17	2202752	(-8.1836996078491211,-43.793998718261719)
-3429	Colônia do Piauí	17	2202778	(-7.2265100479125977,-42.17559814453125)
-3430	Conceição do Canindé	17	2202802	(-7.8763799667358398,-41.594200134277344)
-3431	Coronel José Dias	17	2202851	(-8.813969612121582,-42.523200988769531)
-3432	Corrente	17	2202901	(-10.433300018310547,-45.163299560546875)
-3433	Cristalândia do Piauí	17	2203008	(-10.64430046081543,-45.189300537109375)
-3434	Cristino Castro	17	2203107	(-8.8227300643920898,-44.222999572753906)
-3435	Curimatá	17	2203206	(-10.032600402832031,-44.300201416015625)
-3436	Currais	17	2203230	(-9.0117502212524414,-44.406200408935547)
-3437	Curral Novo do Piauí	17	2203271	(-7.8312997817993164,-40.895698547363281)
-3438	Curralinhos	17	2203255	(-5.6082501411437988,-42.837600708007813)
-3439	Demerval Lobão	17	2203305	(-5.3587498664855957,-42.677600860595703)
-3440	Dirceu Arcoverde	17	2203354	(-9.3393898010253906,-42.434799194335938)
-3441	Dom Expedito Lopes	17	2203404	(-6.9533200263977051,-41.639598846435547)
-3442	Dom Inocêncio	17	2203453	(-9.0051603317260742,-41.969699859619141)
-3443	Domingos Mourão	17	2203420	(-4.2494997978210449,-41.268299102783203)
-3444	Elesbão Veloso	17	2203503	(-6.199470043182373,-42.135501861572266)
-3445	Eliseu Martins	17	2203602	(-8.0962896347045898,-43.670501708984375)
-3446	Esperantina	17	2203701	(-3.8886299133300781,-42.232398986816406)
-3447	Fartura do Piauí	17	2203750	(-9.4834203720092773,-42.79119873046875)
-3448	Flores do Piauí	17	2203800	(-7.7879300117492676,-42.917999267578125)
-3449	Floresta do Piauí	17	2203859	(-7.4668197631835938,-41.788299560546875)
-3450	Floriano	17	2203909	(-6.771820068359375,-43.024101257324219)
-3451	Francinópolis	17	2204006	(-6.3933401107788086,-42.259101867675781)
-3452	Francisco Ayres	17	2204105	(-6.6260600090026855,-42.688098907470703)
-3453	Francisco Macedo	17	2204154	(-7.3309998512268066,-40.787998199462891)
-3454	Francisco Santos	17	2204204	(-6.9949097633361816,-41.128799438476562)
-3455	Fronteiras	17	2204303	(-7.0817298889160156,-40.614601135253906)
-3456	Geminiano	17	2204352	(-7.1547598838806152,-41.340900421142578)
-3457	Gilbués	17	2204402	(-9.8300104141235352,-45.342300415039063)
-3458	Guadalupe	17	2204501	(-6.7828497886657715,-43.559398651123047)
-3459	Guaribas	17	2204550	(-9.386469841003418,-43.694301605224609)
-3460	Hugo Napoleão	17	2204600	(-5.9885997772216797,-42.559799194335938)
-3461	Ilha Grande	17	2204659	(-2.8577399253845215,-41.818599700927734)
-3462	Inhuma	17	2204709	(-6.6649999618530273,-41.7041015625)
-3463	Ipiranga do Piauí	17	2204808	(-6.8242101669311523,-41.73809814453125)
-3464	Isaías Coelho	17	2204907	(-7.7359700202941895,-41.673500061035156)
-3465	Itainópolis	17	2205003	(-7.4433598518371582,-41.468700408935547)
-3466	Itaueira	17	2205102	(-7.5998902320861816,-43.024898529052734)
-3467	Jacobina do Piauí	17	2205151	(-7.9306302070617676,-41.207500457763672)
-3468	Jaicós	17	2205201	(-7.3622899055480957,-41.137100219726563)
-3469	Jardim do Mulato	17	2205250	(-6.0989999771118164,-42.630001068115234)
-3470	Jatobá do Piauí	17	2205276	(-4.7702498435974121,-41.817001342773437)
-3471	Jerumenha	17	2205300	(-7.0912799835205078,-43.503299713134766)
-3472	João Costa	17	2205359	(-8.5073604583740234,-42.426399230957031)
-3473	Joaquim Pires	17	2205409	(-3.5016400814056396,-42.186500549316406)
-3474	Joca Marques	17	2205458	(-3.4804000854492187,-42.425498962402344)
-3475	José de Freitas	17	2205508	(-4.751460075378418,-42.574600219726562)
-3476	Juazeiro do Piauí	17	2205516	(-5.1745901107788086,-41.697601318359375)
-3477	Júlio Borges	17	2205524	(-10.322500228881836,-44.23809814453125)
-3478	Jurema	17	2205532	(-9.2199201583862305,-43.133701324462891)
-3479	Lagoa Alegre	17	2205557	(-4.5153899192810059,-42.630901336669922)
-3480	Lagoa de São Francisco	17	2205573	(-4.3850498199462891,-41.596900939941406)
-3481	Lagoa do Barro do Piauí	17	2205565	(-8.4767303466796875,-41.534198760986328)
-3482	Lagoa do Piauí	17	2205581	(-5.41864013671875,-42.643699645996094)
-3483	Lagoa do Sítio	17	2205599	(-6.507659912109375,-41.565299987792969)
-3484	Lagoinha do Piauí	17	2205540	(-5.8307399749755859,-42.622299194335938)
-3485	Landri Sales	17	2205607	(-7.2592201232910156,-43.9364013671875)
-3486	Luís Correia	17	2205706	(-2.8843801021575928,-41.664100646972656)
-3487	Luzilândia	17	2205805	(-3.4683001041412354,-42.371799468994141)
-3488	Madeiro	17	2205854	(-3.4862399101257324,-42.498100280761719)
-3489	Manoel Emídio	17	2205904	(-8.0123395919799805,-43.875499725341797)
-3490	Marcolândia	17	2205953	(-7.4416899681091309,-40.660198211669922)
-3491	Marcos Parente	17	2206001	(-7.1156501770019531,-43.892601013183594)
-3492	Massapê do Piauí	17	2206050	(-7.4746899604797363,-41.110298156738281)
-3493	Matias Olímpio	17	2206100	(-3.7149200439453125,-42.550701141357422)
-3494	Miguel Alves	17	2206209	(-4.1685700416564941,-42.89630126953125)
-3495	Miguel Leão	17	2206308	(-5.6807699203491211,-42.743598937988281)
-3496	Milton Brandão	17	2206357	(-4.6829500198364258,-41.417301177978516)
-3497	Monsenhor Gil	17	2206407	(-5.5619997978210449,-42.607498168945313)
-3498	Monsenhor Hipólito	17	2206506	(-6.9927501678466797,-41.0260009765625)
-3499	Monte Alegre do Piauí	17	2206605	(-9.7536401748657227,-45.303699493408203)
-3500	Morro Cabeça no Tempo	17	2206654	(-9.7189102172851562,-43.907199859619141)
-3501	Morro do Chapéu do Piauí	17	2206670	(-3.7333700656890869,-42.302398681640625)
-3502	Murici dos Portelas	17	2206696	(-3.3190000057220459,-42.094001770019531)
-3503	Nazaré do Piauí	17	2206704	(-6.9702301025390625,-42.677299499511719)
-3504	Nossa Senhora de Nazaré	17	2206753	(-4.6301898956298828,-42.173000335693359)
-3505	Nossa Senhora dos Remédios	17	2206803	(-3.9757399559020996,-42.618400573730469)
-3506	Nova Santa Rita	17	2207959	(-8.0970697402954102,-42.047100067138672)
-3507	Novo Oriente do Piauí	17	2206902	(-6.449009895324707,-41.926101684570312)
-3508	Novo Santo Antônio	17	2206951	(-5.2874898910522461,-41.932498931884766)
-3509	Oeiras	17	2207009	(-7.0191497802734375,-42.128299713134766)
-3510	Olho d`Água do Piauí	17	2207108	(-5.841249942779541,-42.559398651123047)
-3511	Padre Marcos	17	2207207	(-7.3510098457336426,-40.899700164794922)
-3512	Paes Landim	17	2207306	(-7.773749828338623,-42.247398376464844)
-3513	Pajeú do Piauí	17	2207355	(-7.8550801277160645,-42.824798583984375)
-3514	Palmeira do Piauí	17	2207405	(-8.7307596206665039,-44.246601104736328)
-3515	Palmeirais	17	2207504	(-5.9708600044250488,-43.055999755859375)
-3516	Paquetá	17	2207553	(-7.1030302047729492,-41.700000762939453)
-3517	Parnaguá	17	2207603	(-10.21660041809082,-44.630001068115234)
-3518	Parnaíba	17	2207702	(-2.9058499336242676,-41.775398254394531)
-3519	Passagem Franca do Piauí	17	2207751	(-5.8603601455688477,-42.443599700927734)
-3520	Patos do Piauí	17	2207777	(-7.6723098754882813,-41.240798950195312)
-3521	Pau d`Arco do Piauí	17	2207793	(-5.2607197761535645,-42.390800476074219)
-3522	Paulistana	17	2207801	(-8.1343603134155273,-41.143100738525391)
-3523	Pavussu	17	2207850	(-7.9605898857116699,-43.228401184082031)
-3524	Pedro II	17	2207900	(-4.4258499145507812,-41.448200225830078)
-3525	Pedro Laurentino	17	2207934	(-8.0680704116821289,-42.284698486328125)
-3526	Picos	17	2208007	(-7.0772099494934082,-41.466999053955078)
-3527	Pimenteiras	17	2208106	(-6.2383899688720703,-41.411300659179688)
-3528	Pio IX	17	2208205	(-6.8300199508666992,-40.608299255371094)
-3529	Piracuruca	17	2208304	(-3.9333500862121582,-41.70880126953125)
-3530	Piripiri	17	2208403	(-4.2715702056884766,-41.771598815917969)
-3531	Porto	17	2208502	(-3.8881499767303467,-42.699798583984375)
-3532	Porto Alegre do Piauí	17	2208551	(-6.9642300605773926,-44.183700561523438)
-3533	Prata do Piauí	17	2208601	(-5.6726498603820801,-42.204601287841797)
-3534	Queimada Nova	17	2208650	(-8.5706396102905273,-41.410598754882812)
-3535	Redenção do Gurguéia	17	2208700	(-9.4793701171875,-44.581100463867188)
-3536	Regeneração	17	2208809	(-6.2311501502990723,-42.684200286865234)
-3537	Riacho Frio	17	2208858	(-10.12440013885498,-44.950298309326172)
-3538	Ribeira do Piauí	17	2208874	(-7.6902799606323242,-42.712799072265625)
-3539	Ribeiro Gonçalves	17	2208908	(-7.5565099716186523,-45.244701385498047)
-3540	Rio Grande do Piauí	17	2209005	(-7.7802901268005371,-43.13690185546875)
-3541	Santa Cruz do Piauí	17	2209104	(-7.1785001754760742,-41.760898590087891)
-3542	Santa Cruz dos Milagres	17	2209153	(-5.8058099746704102,-41.950599670410156)
-3543	Santa Filomena	17	2209203	(-9.1122798919677734,-45.911598205566406)
-3544	Santa Luz	17	2209302	(-8.9488000869750977,-44.129600524902344)
-3545	Santa Rosa do Piauí	17	2209377	(-6.7958102226257324,-42.281398773193359)
-3546	Santana do Piauí	17	2209351	(-6.9469599723815918,-41.517799377441406)
-3547	Santo Antônio de Lisboa	17	2209401	(-6.986760139465332,-41.225200653076172)
-3548	Santo Antônio dos Milagres	17	2209450	(-6.0464701652526855,-42.712299346923828)
-3549	Santo Inácio do Piauí	17	2209500	(-7.420720100402832,-41.906299591064453)
-3550	São Braz do Piauí	17	2209559	(-9.0579700469970703,-43.007598876953125)
-3551	São Félix do Piauí	17	2209609	(-5.9348502159118652,-42.117198944091797)
-3552	São Francisco de Assis do Piauí	17	2209658	(-8.2359895706176758,-41.687286376953125)
-3553	São Francisco do Piauí	17	2209708	(-7.246300220489502,-42.541000366210937)
-3554	São Gonçalo do Gurguéia	17	2209757	(-10.031900405883789,-45.309200286865234)
-3555	São Gonçalo do Piauí	17	2209807	(-5.9939298629760742,-42.709499359130859)
-3556	São João da Canabrava	17	2209856	(-6.8120298385620117,-41.341499328613281)
-3557	São João da Fronteira	17	2209872	(-3.9549698829650879,-41.256900787353516)
-3558	São João da Serra	17	2209906	(-5.5108098983764648,-41.892299652099609)
-3559	São João da Varjota	17	2209955	(-6.9408202171325684,-41.888900756835938)
-3560	São João do Arraial	17	2209971	(-3.8185999393463135,-42.445899963378906)
-3561	São João do Piauí	17	2210003	(-8.3546600341796875,-42.255901336669922)
-3562	São José do Divino	17	2210052	(-3.8141100406646729,-41.830799102783203)
-3563	São José do Peixe	17	2210102	(-7.4855399131774902,-42.56719970703125)
-3564	São José do Piauí	17	2210201	(-6.8719401359558105,-41.473098754882813)
-3565	São Julião	17	2210300	(-7.0839099884033203,-40.824600219726563)
-3566	São Lourenço do Piauí	17	2210359	(-9.1646299362182617,-42.549598693847656)
-3567	São Luis do Piauí	17	2210375	(-6.8193597793579102,-41.317501068115234)
-3568	São Miguel da Baixa Grande	17	2210383	(-5.8564600944519043,-42.193401336669922)
-3569	São Miguel do Fidalgo	17	2210391	(-7.5971298217773437,-42.367599487304688)
-3570	São Miguel do Tapuio	17	2210409	(-5.4972901344299316,-41.316501617431641)
-3571	São Pedro do Piauí	17	2210508	(-5.9207801818847656,-42.719200134277344)
-3572	São Raimundo Nonato	17	2210607	(-9.0124101638793945,-42.698699951171875)
-3573	Sebastião Barros	17	2210623	(-10.817000389099121,-44.833698272705078)
-3574	Sebastião Leal	17	2210631	(-7.5680298805236816,-44.060001373291016)
-3575	Sigefredo Pacheco	17	2210656	(-4.9166498184204102,-41.731098175048828)
-3576	Simões	17	2210706	(-7.591090202331543,-40.813701629638672)
-3577	Simplício Mendes	17	2210805	(-7.8529400825500488,-41.907501220703125)
-3578	Socorro do Piauí	17	2210904	(-7.8677301406860352,-42.492198944091797)
-3579	Sussuapara	17	2210938	(-7.036870002746582,-41.376701354980469)
-3580	Tamboril do Piauí	17	2210953	(-8.4093704223632812,-42.921100616455078)
-3581	Tanque do Piauí	17	2210979	(-6.597869873046875,-42.279499053955078)
-3582	Teresina	17	2211001	(-5.0919399261474609,-42.803398132324219)
-3583	União	17	2211100	(-4.5857100486755371,-42.858299255371094)
-3584	Uruçuí	17	2211209	(-7.2394399642944336,-44.557701110839844)
-3585	Valença do Piauí	17	2211308	(-6.4030098915100098,-41.737499237060547)
-3586	Várzea Branca	17	2211357	(-9.2379999160766602,-42.969200134277344)
-3587	Várzea Grande	17	2211407	(-6.5489897727966309,-42.248001098632813)
-3588	Vera Mendes	17	2211506	(-7.5974798202514648,-41.467300415039063)
-3589	Vila Nova do Piauí	17	2211605	(-7.1327199935913086,-40.934501647949219)
-3590	Wall Ferraz	17	2211704	(-7.2315101623535156,-41.904998779296875)
-3591	Angra dos Reis	19	3300100	(-23.001100540161133,-44.319599151611328)
-3592	Aperibé	19	3300159	(-21.625200271606445,-42.101699829101563)
-3593	Araruama	19	3300209	(-22.869699478149414,-42.332599639892578)
-3594	Areal	19	3300225	(-22.228300094604492,-43.111801147460938)
-3595	Armação dos Búzios	19	3300233	(-22.752799987792969,-41.884601593017578)
-3596	Arraial do Cabo	19	3300258	(-22.977399826049805,-42.026699066162109)
-3597	Barra do Piraí	19	3300308	(-22.471500396728516,-43.826900482177734)
-3598	Barra Mansa	19	3300407	(-22.548099517822266,-44.175201416015625)
-3599	Belford Roxo	19	3300456	(-22.763999938964844,-43.399200439453125)
-3600	Bom Jardim	19	3300506	(-22.154499053955078,-42.425098419189453)
-3601	Bom Jesus do Itabapoana	19	3300605	(-21.144899368286133,-41.682201385498047)
-3602	Cabo Frio	19	3300704	(-22.889400482177734,-42.028598785400391)
-3603	Cachoeiras de Macacu	19	3300803	(-22.465799331665039,-42.652301788330078)
-3604	Cambuci	19	3300902	(-21.569099426269531,-41.918701171875)
-3605	Campos dos Goytacazes	19	3301009	(-21.762199401855469,-41.318099975585937)
-3606	Cantagalo	19	3301108	(-21.979700088500977,-42.366401672363281)
-3607	Carapebus	19	3300936	(-22.182100296020508,-41.662998199462891)
-3608	Cardoso Moreira	19	3301157	(-21.484600067138672,-41.616500854492188)
-3609	Carmo	19	3301207	(-21.930999755859375,-42.604598999023438)
-3610	Casimiro de Abreu	19	3301306	(-22.481199264526367,-42.206600189208984)
-3611	Comendador Levy Gasparian	19	3300951	(-22.040399551391602,-43.214000701904297)
-3612	Conceição de Macabu	19	3301405	(-22.083400726318359,-41.871898651123047)
-3613	Cordeiro	19	3301504	(-22.026699066162109,-42.364799499511719)
-3614	Duas Barras	19	3301603	(-22.053600311279297,-42.523200988769531)
-3615	Duque de Caxias	19	3301702	(-22.785800933837891,-43.304901123046875)
-3616	Engenheiro Paulo de Frontin	19	3301801	(-22.549800872802734,-43.682701110839844)
-3617	Guapimirim	19	3301850	(-22.534700393676758,-42.989498138427734)
-3618	Iguaba Grande	19	3301876	(-22.84950065612793,-42.229900360107422)
-3619	Itaboraí	19	3301900	(-22.756500244140625,-42.863899230957031)
-3620	Itaguaí	19	3302007	(-22.86359977722168,-43.779800415039063)
-3621	Italva	19	3302056	(-21.429599761962891,-41.701400756835938)
-3622	Itaocara	19	3302106	(-21.674800872802734,-42.075801849365234)
-3623	Itaperuna	19	3302205	(-21.199699401855469,-41.879901885986328)
-3624	Itatiaia	19	3302254	(-22.489700317382812,-44.567501068115234)
-3625	Japeri	19	3302270	(-22.643499374389648,-43.660198211669922)
-3626	Laje do Muriaé	19	3302304	(-21.209100723266602,-42.127101898193359)
-3627	Macaé	19	3302403	(-22.376800537109375,-41.784801483154297)
-3628	Macuco	19	3302452	(-21.981300354003906,-42.253299713134766)
-3629	Magé	19	3302502	(-22.663200378417969,-43.031501770019531)
-3630	Mangaratiba	19	3302601	(-22.959400177001953,-44.040901184082031)
-3631	Maricá	19	3302700	(-22.935400009155273,-42.824600219726563)
-3632	Mendes	19	3302809	(-22.524499893188477,-43.731201171875)
-3633	Mesquita	19	3302858	(-22.802799224853516,-43.460098266601563)
-3634	Miguel Pereira	19	3302908	(-22.457199096679688,-43.480300903320313)
-3635	Miracema	19	3303005	(-21.414800643920898,-42.193801879882812)
-3636	Natividade	19	3303104	(-21.038999557495117,-41.969699859619141)
-3637	Nilópolis	19	3303203	(-22.805700302124023,-43.423301696777344)
-3638	Niterói	19	3303302	(-22.883199691772461,-43.103401184082031)
-3639	Nova Friburgo	19	3303401	(-22.29319953918457,-42.537700653076172)
-3640	Nova Iguaçu	19	3303500	(-22.755599975585937,-43.460300445556641)
-3641	Paracambi	19	3303609	(-22.607799530029297,-43.710800170898438)
-3642	Paraíba do Sul	19	3303708	(-22.158500671386719,-43.304000854492188)
-3643	Parati	19	3303807	(-23.222112655639648,-44.71746826171875)
-3644	Paty do Alferes	19	3303856	(-22.430900573730469,-43.428501129150391)
-3645	Petrópolis	19	3303906	(-22.520000457763672,-43.192600250244141)
-3646	Pinheiral	19	3303955	(-22.517200469970703,-44.002201080322266)
-3647	Piraí	19	3304003	(-22.621500015258789,-43.908100128173828)
-3648	Porciúncula	19	3304102	(-20.963199615478516,-42.046501159667969)
-3649	Porto Real	19	3304110	(-22.417499542236328,-44.295200347900391)
-3650	Quatis	19	3304128	(-22.404499053955078,-44.259700775146484)
-3651	Queimados	19	3304144	(-22.710199356079102,-43.551799774169922)
-3652	Quissamã	19	3304151	(-22.103099822998047,-41.46929931640625)
-3653	Resende	19	3304201	(-22.470500946044922,-44.450901031494141)
-3654	Rio Bonito	19	3304300	(-22.718099594116211,-42.627601623535156)
-3655	Rio Claro	19	3304409	(-22.719999313354492,-44.141899108886719)
-3656	Rio das Flores	19	3304508	(-22.169200897216797,-43.585601806640625)
-3657	Rio das Ostras	19	3304524	(-22.517400741577148,-41.947498321533203)
-3658	Rio de Janeiro	19	3304557	(-22.912900924682617,-43.200298309326172)
-3659	Santa Maria Madalena	19	3304607	(-21.954700469970703,-42.009799957275391)
-3660	Santo Antônio de Pádua	19	3304706	(-21.541000366210937,-42.183200836181641)
-3661	São Fidélis	19	3304805	(-21.655099868774414,-41.756000518798828)
-3662	São Francisco de Itabapoana	19	3304755	(-21.470199584960937,-41.109100341796875)
-3663	São Gonçalo	19	3304904	(-22.826799392700195,-43.063400268554688)
-3664	São João da Barra	19	3305000	(-21.63800048828125,-41.044601440429688)
-3665	São João de Meriti	19	3305109	(-22.80579948425293,-43.372898101806641)
-3666	São José de Ubá	19	3305133	(-21.366100311279297,-41.951099395751953)
-3667	São José do Vale do Rio Preto	19	3305158	(-22.152500152587891,-42.932701110839844)
-3668	São Pedro da Aldeia	19	3305208	(-22.842899322509766,-42.10260009765625)
-3669	São Sebastião do Alto	19	3305307	(-21.957799911499023,-42.132801055908203)
-3670	Sapucaia	19	3305406	(-21.994899749755859,-42.914199829101563)
-3671	Saquarema	19	3305505	(-22.92919921875,-42.509899139404297)
-3672	Seropédica	19	3305554	(-22.752599716186523,-43.715499877929688)
-3673	Silva Jardim	19	3305604	(-22.657400131225586,-42.396099090576172)
-3674	Sumidouro	19	3305703	(-22.048500061035156,-42.676101684570313)
-3675	Tanguá	19	3305752	(-22.742300033569336,-42.720199584960938)
-3676	Teresópolis	19	3305802	(-22.416500091552734,-42.975200653076172)
-3677	Trajano de Morais	19	3305901	(-22.063810348510742,-42.064281463623047)
-3678	Três Rios	19	3306008	(-22.116500854492187,-43.218498229980469)
-3679	Valença	19	3306107	(-22.244499206542969,-43.712898254394531)
-3680	Varre-Sai	19	3306156	(-20.927600860595703,-41.870098114013672)
-3681	Vassouras	19	3306206	(-22.405899047851563,-43.668598175048828)
-3682	Volta Redonda	19	3306305	(-22.520200729370117,-44.099601745605469)
-3683	Acari	20	2400109	(-6.4281997680664062,-36.634700775146484)
-3684	Açu	20	2400208	(-5.583615779876709,-36.913955688476563)
-3685	Afonso Bezerra	20	2400307	(-5.4922900199890137,-36.507499694824219)
-3686	Água Nova	20	2400406	(-6.2035098075866699,-38.294101715087891)
-3687	Alexandria	20	2400505	(-6.4053301811218262,-38.014198303222656)
-3688	Almino Afonso	20	2400604	(-6.1475000381469727,-37.763599395751953)
-3689	Alto do Rodrigues	20	2400703	(-5.2818598747253418,-36.75)
-3690	Jardim de Angicos	20	2405504	(-5.6499900817871094,-35.971298217773438)
-3691	Antônio Martins	20	2400901	(-6.2136697769165039,-37.883399963378906)
-3692	Apodi	20	2401008	(-5.6534900665283203,-37.794601440429687)
-3693	Areia Branca	20	2401107	(-4.9525399208068848,-37.125198364257813)
-3694	Arês	20	2401206	(-6.1883101463317871,-35.160800933837891)
-3695	Augusto Severo	20	2401305	(-5.862062931060791,-37.313491821289063)
-3696	Baía Formosa	20	2401404	(-6.371610164642334,-35.003299713134766)
-3697	Baraúna	20	2401453	(-5.0697698593139648,-37.612899780273438)
-3698	Barcelona	20	2401503	(-5.9428400993347168,-35.924701690673828)
-3699	Bento Fernandes	20	2401602	(-5.6990599632263184,-35.812999725341797)
-3700	Bodó	20	2401651	(-5.9802699089050293,-36.416698455810547)
-3701	Bom Jesus	20	2401701	(-5.9864802360534668,-35.579200744628906)
-3702	Brejinho	20	2401800	(-6.1856598854064941,-35.359100341796875)
-3703	Caiçara do Norte	20	2401859	(-5.0709099769592285,-36.071701049804688)
-3704	Caiçara do Rio do Vento	20	2401909	(-5.7654099464416504,-35.993801116943359)
-3705	Caicó	20	2402006	(-6.4544100761413574,-37.106700897216797)
-3706	Campo Redondo	20	2402105	(-6.2382898330688477,-36.188800811767578)
-3707	Canguaretama	20	2402204	(-6.3719301223754883,-35.128101348876953)
-3708	Caraúbas	20	2402303	(-5.7838702201843262,-37.558601379394531)
-3709	Carnaúba dos Dantas	20	2402402	(-6.5501499176025391,-36.586799621582031)
-3710	Carnaubais	20	2402501	(-5.3418102264404297,-36.833499908447266)
-3711	Ceará-Mirim	20	2402600	(-5.6432318687438965,-35.424728393554687)
-3712	Cerro Corá	20	2402709	(-6.0350298881530762,-36.350299835205078)
-3713	Coronel Ezequiel	20	2402808	(-6.3748002052307129,-36.222301483154297)
-3714	Coronel João Pessoa	20	2402907	(-6.2497401237487793,-38.444099426269531)
-3715	Cruzeta	20	2403004	(-6.4089398384094238,-36.7781982421875)
-3716	Currais Novos	20	2403103	(-6.2548398971557617,-36.514598846435547)
-3717	Doutor Severiano	20	2403202	(-6.0808200836181641,-38.379398345947266)
-3718	Encanto	20	2403301	(-6.106910228729248,-38.303298950195313)
-3719	Equador	20	2403400	(-6.9383502006530762,-36.716999053955078)
-3720	Espírito Santo	20	2403509	(-6.335629940032959,-35.305198669433594)
-3721	Extremoz	20	2403608	(-5.7014298439025879,-35.304798126220703)
-3722	Felipe Guerra	20	2403707	(-5.5927400588989258,-37.6875)
-3723	Fernando Pedroza	20	2403756	(-5.6909599304199219,-36.5281982421875)
-3724	Florânia	20	2403806	(-6.1226401329040527,-36.822601318359375)
-3725	Francisco Dantas	20	2403905	(-6.0723400115966797,-38.121200561523438)
-3726	Frutuoso Gomes	20	2404002	(-6.1566901206970215,-37.837501525878906)
-3727	Galinhos	20	2404101	(-5.0908999443054199,-36.275398254394531)
-3728	Goianinha	20	2404200	(-6.2648601531982422,-35.194301605224609)
-3729	Governador Dix-Sept Rosado	20	2404309	(-5.4488701820373535,-37.518299102783203)
-3730	Grossos	20	2404408	(-4.980679988861084,-37.162101745605469)
-3731	Guamaré	20	2404507	(-5.1061902046203613,-36.322200775146484)
-3732	Ielmo Marinho	20	2404606	(-5.824470043182373,-35.549999237060547)
-3733	Ipanguaçu	20	2404705	(-5.489840030670166,-36.850101470947266)
-3734	Ipueira	20	2404804	(-6.8059601783752441,-37.204498291015625)
-3735	Itajá	20	2404853	(-5.6389398574829102,-36.871200561523437)
-3736	Itaú	20	2404903	(-5.8362998962402344,-37.991199493408203)
-3737	Jaçanã	20	2405009	(-6.4185600280761719,-36.203098297119141)
-3738	Jandaíra	20	2405108	(-5.3521099090576172,-36.127799987792969)
-3739	Janduís	20	2405207	(-6.014739990234375,-37.404800415039063)
-3740	Januário Cicco	20	2405306	(-6.1656613349914551,-35.621868133544922)
-3741	Japi	20	2405405	(-6.4654397964477539,-35.934600830078125)
-3743	Jardim de Piranhas	20	2405603	(-6.3766498565673828,-37.349601745605469)
-3744	Jardim do Seridó	20	2405702	(-6.580470085144043,-36.773601531982422)
-3745	João Câmara	20	2405801	(-5.5409398078918457,-35.812198638916016)
-3746	João Dias	20	2405900	(-6.2721500396728516,-37.788501739501953)
-3747	José da Penha	20	2406007	(-6.3109498023986816,-38.282299041748047)
-3748	Jucurutu	20	2406106	(-6.0306000709533691,-37.008998870849609)
-3749	Jundiá	20	2406155	(-6.2686600685119629,-35.349498748779297)
-3750	Lagoa d`Anta	20	2406205	(-6.3949298858642578,-35.594898223876953)
-3751	Lagoa de Pedras	20	2406304	(-6.1508197784423828,-35.429901123046875)
-3752	Lagoa de Velhos	20	2406403	(-6.0118999481201172,-35.872898101806641)
-3753	Lagoa Nova	20	2406502	(-6.0933899879455566,-36.470298767089844)
-3754	Lagoa Salgada	20	2406601	(-6.1229500770568848,-35.472400665283203)
-3755	Lajes	20	2406700	(-5.6932201385498047,-36.247001647949219)
-3756	Lajes Pintadas	20	2406809	(-6.1494297981262207,-36.117099761962891)
-3757	Lucrécia	20	2406908	(-6.1052498817443848,-37.813400268554687)
-3758	Luís Gomes	20	2407005	(-6.4058799743652344,-38.389900207519531)
-3759	Macaíba	20	2407104	(-5.852290153503418,-35.355201721191406)
-3760	Macau	20	2407203	(-5.1079502105712891,-36.631801605224609)
-3761	Major Sales	20	2407252	(-6.3994898796081543,-38.324001312255859)
-3762	Marcelino Vieira	20	2407302	(-6.284599781036377,-38.164199829101563)
-3763	Martins	20	2407401	(-6.0827898979187012,-37.908000946044922)
-3764	Maxaranguape	20	2407500	(-5.5218100547790527,-35.263099670410156)
-3765	Messias Targino	20	2407609	(-6.0719399452209473,-37.515800476074219)
-3766	Montanhas	20	2407708	(-6.4852199554443359,-35.284198760986328)
-3767	Monte Alegre	20	2407807	(-6.0706300735473633,-35.325298309326172)
-3768	Monte das Gameleiras	20	2407906	(-6.4369797706604004,-35.783100128173828)
-3769	Mossoró	20	2408003	(-5.1837401390075684,-37.347400665283203)
-3770	Natal	20	2408102	(-5.7935700416564941,-35.198600769042969)
-3771	Nísia Floresta	20	2408201	(-6.093289852142334,-35.199100494384766)
-3772	Nova Cruz	20	2408300	(-6.4751100540161133,-35.428600311279297)
-3773	Olho-d`Água do Borges	20	2408409	(-5.9485998153686523,-37.704700469970703)
-3774	Ouro Branco	20	2408508	(-6.6957998275756836,-36.942798614501953)
-3775	Paraná	20	2408607	(-6.4756498336791992,-38.305698394775391)
-3776	Paraú	20	2408706	(-5.7689299583435059,-37.103199005126953)
-3777	Parazinho	20	2408805	(-5.2227602005004883,-35.839801788330078)
-3778	Parelhas	20	2408904	(-6.6849098205566406,-36.656600952148438)
-3779	Parnamirim	20	2403251	(-5.9111599922180176,-35.270999908447266)
-3780	Passa e Fica	20	2409100	(-6.4301800727844238,-35.644199371337891)
-3781	Passagem	20	2409209	(-6.2726798057556152,-35.369998931884766)
-3782	Patu	20	2409308	(-6.106560230255127,-37.635601043701172)
-3783	Pau dos Ferros	20	2409407	(-6.1049799919128418,-38.207698822021484)
-3784	Pedra Grande	20	2409506	(-5.1498799324035645,-35.875999450683594)
-3785	Pedra Preta	20	2409605	(-5.5735201835632324,-36.1083984375)
-3786	Pedro Avelino	20	2409704	(-5.5160999298095703,-36.386699676513672)
-3787	Pedro Velho	20	2409803	(-6.4355998039245605,-35.219501495361328)
-3788	Pendências	20	2409902	(-5.2564001083374023,-36.709499359130859)
-3789	Pilões	20	2410009	(-6.2636399269104004,-38.046100616455078)
-3790	Poço Branco	20	2410108	(-5.6223301887512207,-35.663501739501953)
-3791	Portalegre	20	2410207	(-6.0206398963928223,-37.986499786376953)
-3792	Porto do Mangue	20	2410256	(-5.0544099807739258,-36.788700103759766)
-3793	Presidente Juscelino	20	2410306	(-6.1047801971435547,-35.711261749267578)
-3794	Pureza	20	2410405	(-5.4639301300048828,-35.555400848388672)
-3795	Rafael Fernandes	20	2410504	(-6.1898698806762695,-38.221099853515625)
-3796	Rafael Godeiro	20	2410603	(-6.0724401473999023,-37.715999603271484)
-3797	Riacho da Cruz	20	2410702	(-5.9265398979187012,-37.949001312255859)
-3798	Riacho de Santana	20	2410801	(-6.2513899803161621,-38.311599731445313)
-3799	Riachuelo	20	2410900	(-5.8215599060058594,-35.821498870849609)
-3800	Rio do Fogo	20	2408953	(-5.2765002250671387,-35.379398345947266)
-3801	Rodolfo Fernandes	20	2411007	(-5.7839298248291016,-38.057899475097656)
-3802	Ruy Barbosa	20	2411106	(-5.8874502182006836,-35.932998657226563)
-3803	Santa Cruz	20	2411205	(-6.2247500419616699,-36.019298553466797)
-3804	Santa Maria	20	2409332	(-5.838019847869873,-35.691398620605469)
-3805	Santana do Matos	20	2411403	(-5.9460501670837402,-36.657798767089844)
-3806	Santana do Seridó	20	2411429	(-6.7664299011230469,-36.731201171875)
-3807	Santo Antônio	20	2411502	(-6.3119502067565918,-35.473899841308594)
-3808	São Bento do Norte	20	2411601	(-5.0925898551940918,-35.958698272705078)
-3809	São Bento do Trairí	20	2411700	(-6.337979793548584,-36.086299896240234)
-3810	São Fernando	20	2411809	(-6.3797497749328613,-37.1864013671875)
-3811	São Francisco do Oeste	20	2411908	(-5.9747200012207031,-38.151901245117188)
-3812	São Gonçalo do Amarante	20	2412005	(-5.790679931640625,-35.325698852539063)
-3813	São João do Sabugi	20	2412104	(-6.7138700485229492,-37.202701568603516)
-3814	São José de Mipibu	20	2412203	(-6.0773000717163086,-35.24169921875)
-3815	São José do Campestre	20	2412302	(-6.3108701705932617,-35.706699371337891)
-3816	São José do Seridó	20	2412401	(-6.4400200843811035,-36.874599456787109)
-3817	São Miguel	20	2412500	(-6.2028298377990723,-38.494701385498047)
-3818	São Miguel do Gostoso	20	2412559	(-5.1230206489562988,-35.635387420654297)
-3819	São Paulo do Potengi	20	2412609	(-5.8994002342224121,-35.764198303222656)
-3820	São Pedro	20	2412708	(-5.9055900573730469,-35.631698608398438)
-3821	São Rafael	20	2412807	(-5.797910213470459,-36.877799987792969)
-3822	São Tomé	20	2412906	(-5.9640398025512695,-36.079799652099609)
-3823	São Vicente	20	2413003	(-6.2189297676086426,-36.682701110839844)
-3824	Senador Elói de Souza	20	2413102	(-6.0333399772644043,-35.697799682617187)
-3825	Senador Georgino Avelino	20	2413201	(-6.157599925994873,-35.129901885986328)
-3826	Serra de São Bento	20	2413300	(-6.4176201820373535,-35.703300476074219)
-3827	Serra do Mel	20	2413359	(-5.1772499084472656,-37.024200439453125)
-3828	Serra Negra do Norte	20	2413409	(-6.6603097915649414,-37.399600982666016)
-3829	Serrinha	20	2413508	(-6.2818098068237305,-35.5)
-3830	Serrinha dos Pintos	20	2413557	(-6.1108698844909668,-37.954799652099609)
-3831	Severiano Melo	20	2413607	(-5.7766599655151367,-37.957000732421875)
-3832	Sítio Novo	20	2413706	(-6.1113200187683105,-35.909000396728516)
-3833	Taboleiro Grande	20	2413805	(-5.9194798469543457,-38.036701202392578)
-3834	Taipu	20	2413904	(-5.630579948425293,-35.591800689697266)
-3835	Tangará	20	2414001	(-6.1964898109436035,-35.798900604248047)
-3836	Tenente Ananias	20	2414100	(-6.4582300186157227,-38.181999206542969)
-3837	Tenente Laurentino Cruz	20	2414159	(-6.1378002166748047,-36.7135009765625)
-3838	Tibau	20	2411056	(-4.8372898101806641,-37.255401611328125)
-3839	Tibau do Sul	20	2414209	(-6.1917600631713867,-35.086601257324219)
-3840	Timbaúba dos Batistas	20	2414308	(-6.4576802253723145,-37.274501800537109)
-3841	Touros	20	2414407	(-5.201819896697998,-35.462100982666016)
-3842	Triunfo Potiguar	20	2414456	(-5.8540802001953125,-37.178600311279297)
-3843	Umarizal	20	2414506	(-5.9823799133300781,-37.818000793457031)
-3844	Upanema	20	2414605	(-5.6376099586486816,-37.263500213623047)
-3845	Várzea	20	2414704	(-6.346409797668457,-35.373199462890625)
-3846	Venha-Ver	20	2414753	(-6.3201632499694824,-38.489604949951172)
-3847	Vera Cruz	20	2414803	(-6.0439901351928711,-35.428001403808594)
-3848	Viçosa	20	2414902	(-5.9825301170349121,-37.946201324462891)
-3849	Vila Flor	20	2415008	(-6.3128700256347656,-35.067001342773437)
-3850	Aceguá	23	4300034	(-31.866500854492188,-54.1614990234375)
-3851	Água Santa	23	4300059	(-28.167200088500977,-52.030998229980469)
-3852	Agudo	23	4300109	(-29.644699096679688,-53.251499176025391)
-3853	Ajuricaba	23	4300208	(-28.234199523925781,-53.775699615478516)
-3854	Alecrim	23	4300307	(-27.657899856567383,-54.764900207519531)
-3855	Alegrete	23	4300406	(-29.790199279785156,-55.794898986816406)
-3856	Alegria	23	4300455	(-27.834499359130859,-54.055698394775391)
-3857	Almirante Tamandaré do Sul	23	4300471	(-28.114900588989258,-52.914199829101563)
-3858	Alpestre	23	4300505	(-27.250200271606445,-53.034099578857422)
-3859	Alto Alegre	23	4300554	(-28.776899337768555,-52.989299774169922)
-3860	Alto Feliz	23	4300570	(-29.391899108886719,-51.312301635742188)
-3861	Alvorada	23	4300604	(-29.991399765014648,-51.080898284912109)
-3862	Amaral Ferrador	23	4300638	(-30.875600814819336,-52.250900268554687)
-3863	Ametista do Sul	23	4300646	(-27.360700607299805,-53.182998657226562)
-3864	André da Rocha	23	4300661	(-28.628299713134766,-51.579700469970703)
-3865	Anta Gorda	23	4300703	(-28.96980094909668,-52.010200500488281)
-3866	Antônio Prado	23	4300802	(-28.856500625610352,-51.288299560546875)
-3867	Arambaré	23	4300851	(-30.909200668334961,-51.504600524902344)
-3868	Araricá	23	4300877	(-29.616800308227539,-50.929100036621094)
-3869	Aratiba	23	4300901	(-27.397800445556641,-52.297500610351562)
-3870	Arroio do Meio	23	4301008	(-29.401399612426758,-51.955699920654297)
-3871	Arroio do Padre	23	4301073	(-31.438899993896484,-52.424598693847656)
-3872	Arroio do Sal	23	4301057	(-29.543899536132813,-49.889499664306641)
-3873	Arroio do Tigre	23	4301206	(-29.334800720214844,-53.096599578857422)
-3874	Arroio dos Ratos	23	4301107	(-30.087499618530273,-51.727500915527344)
-3875	Arroio Grande	23	4301305	(-32.232700347900391,-53.086200714111328)
-3876	Arvorezinha	23	4301404	(-28.873699188232422,-52.1781005859375)
-3877	Augusto Pestana	23	4301503	(-28.517200469970703,-53.988300323486328)
-3878	Áurea	23	4301552	(-27.693599700927734,-52.050498962402344)
-3879	Bagé	23	4301602	(-31.329700469970703,-54.099899291992188)
-3880	Balneário Pinhal	23	4301636	(-30.241899490356445,-50.233699798583984)
-3881	Barão	23	4301651	(-29.372499465942383,-51.494899749755859)
-3882	Barão de Cotegipe	23	4301701	(-27.620800018310547,-52.379798889160156)
-3883	Barão do Triunfo	23	4301750	(-30.38909912109375,-51.738399505615234)
-3884	Barra do Guarita	23	4301859	(-27.192699432373047,-53.710899353027344)
-3885	Barra do Quaraí	23	4301875	(-30.202899932861328,-57.549701690673828)
-3886	Barra do Ribeiro	23	4301909	(-30.293899536132812,-51.301399230957031)
-3887	Barra do Rio Azul	23	4301925	(-27.406900405883789,-52.408401489257813)
-3888	Barra Funda	23	4301958	(-27.920499801635742,-53.039100646972656)
-3889	Barracão	23	4301800	(-27.673900604248047,-51.458499908447266)
-3890	Barros Cassal	23	4302006	(-29.094699859619141,-52.583599090576172)
-3891	Benjamin Constant do Sul	23	4302055	(-27.508600234985352,-52.599498748779297)
-3892	Bento Gonçalves	23	4302105	(-29.166200637817383,-51.516498565673828)
-3893	Boa Vista das Missões	23	4302154	(-27.66710090637207,-53.310199737548828)
-3894	Boa Vista do Buricá	23	4302204	(-27.669300079345703,-54.108200073242188)
-3895	Boa Vista do Cadeado	23	4302220	(-28.579099655151367,-53.810798645019531)
-3896	Boa Vista do Incra	23	4302238	(-28.818500518798828,-53.390998840332031)
-3897	Boa Vista do Sul	23	4302253	(-29.354400634765625,-51.668701171875)
-3898	Bom Jesus	23	4302303	(-28.669700622558594,-50.429500579833984)
-3899	Bom Princípio	23	4302352	(-29.485599517822266,-51.354801177978516)
-3900	Bom Progresso	23	4302378	(-27.539899826049805,-53.871601104736328)
-3901	Bom Retiro do Sul	23	4302402	(-29.607099533081055,-51.945598602294922)
-3902	Boqueirão do Leão	23	4302451	(-29.304599761962891,-52.428398132324219)
-3903	Bossoroca	23	4302501	(-28.729099273681641,-54.903499603271484)
-3904	Bozano	23	4302584	(-28.365900039672852,-53.771999359130859)
-3905	Braga	23	4302600	(-27.617300033569336,-53.740501403808594)
-3906	Brochier	23	4302659	(-29.550100326538086,-51.594501495361328)
-3907	Butiá	23	4302709	(-30.117900848388672,-51.960098266601562)
-3908	Caçapava do Sul	23	4302808	(-30.514400482177734,-53.482700347900391)
-3909	Cacequi	23	4302907	(-29.888299942016602,-54.821998596191406)
-3910	Cachoeira do Sul	23	4303004	(-30.033000946044922,-52.892799377441406)
-3911	Cachoeirinha	23	4303103	(-29.947200775146484,-51.101600646972656)
-3912	Cacique Doble	23	4303202	(-27.767000198364258,-51.659698486328125)
-3913	Caibaté	23	4303301	(-28.290500640869141,-54.645401000976563)
-3914	Caiçara	23	4303400	(-27.27910041809082,-53.425701141357422)
-3915	Camaquã	23	4303509	(-30.848899841308594,-51.804298400878906)
-3916	Camargo	23	4303558	(-28.58799934387207,-52.200298309326172)
-3917	Cambará do Sul	23	4303608	(-29.047399520874023,-50.146499633789062)
-3918	Campestre da Serra	23	4303673	(-28.792600631713867,-51.094100952148438)
-3919	Campina das Missões	23	4303707	(-27.988800048828125,-54.841598510742188)
-3920	Campinas do Sul	23	4303806	(-27.717399597167969,-52.624801635742187)
-3921	Campo Bom	23	4303905	(-29.674699783325195,-51.060600280761719)
-3922	Campo Novo	23	4304002	(-27.67919921875,-53.805198669433594)
-3923	Campos Borges	23	4304101	(-28.887100219726563,-53.000801086425781)
-3924	Candelária	23	4304200	(-29.668399810791016,-52.789501190185547)
-3925	Cândido Godói	23	4304309	(-27.951499938964844,-54.751701354980469)
-3926	Candiota	23	4304358	(-31.551599502563477,-53.677299499511719)
-3927	Canela	23	4304408	(-29.356000900268555,-50.811901092529297)
-3928	Canguçu	23	4304507	(-31.395999908447266,-52.678298950195313)
-3929	Canoas	23	4304606	(-29.912799835205078,-51.185699462890625)
-3930	Canudos do Vale	23	4304614	(-29.32710075378418,-52.237400054931641)
-3931	Capão Bonito do Sul	23	4304622	(-28.125400543212891,-51.396099090576172)
-3932	Capão da Canoa	23	4304630	(-29.764200210571289,-50.0281982421875)
-3933	Capão do Cipó	23	4304655	(-28.93120002746582,-54.555801391601562)
-3934	Capão do Leão	23	4304663	(-31.756500244140625,-52.488899230957031)
-3935	Capela de Santana	23	4304689	(-29.696100234985352,-51.327999114990234)
-3936	Capitão	23	4304697	(-29.267400741577148,-51.985298156738281)
-3937	Capivari do Sul	23	4304671	(-30.138299942016602,-50.515201568603516)
-3938	Caraá	23	4304713	(-29.786899566650391,-50.431598663330078)
-3939	Carazinho	23	4304705	(-28.295799255371094,-52.793300628662109)
-3940	Carlos Barbosa	23	4304804	(-29.296899795532227,-51.502799987792969)
-3941	Carlos Gomes	23	4304853	(-27.716699600219727,-51.912101745605469)
-3942	Casca	23	4304903	(-28.56049919128418,-51.981498718261719)
-3943	Caseiros	23	4304952	(-28.258199691772461,-51.686100006103516)
-3944	Catuípe	23	4305009	(-28.255399703979492,-54.013198852539063)
-3945	Caxias do Sul	23	4305108	(-29.162900924682617,-51.17919921875)
-3946	Centenário	23	4305116	(-27.761499404907227,-51.998401641845703)
-3947	Cerrito	23	4305124	(-31.841899871826172,-52.800399780273437)
-3948	Cerro Branco	23	4305132	(-29.656999588012695,-52.940601348876953)
-3949	Cerro Grande	23	4305157	(-27.610599517822266,-53.167198181152344)
-3950	Cerro Grande do Sul	23	4305173	(-30.590499877929688,-51.741798400878906)
-3951	Cerro Largo	23	4305207	(-28.146299362182617,-54.742801666259766)
-3952	Chapada	23	4305306	(-28.055900573730469,-53.066501617431641)
-3953	Charqueadas	23	4305355	(-29.962499618530273,-51.628898620605469)
-3954	Charrua	23	4305371	(-27.949300765991211,-52.014999389648438)
-3955	Chiapetta	23	4305405	(-27.923000335693359,-53.941898345947266)
-3956	Chuí	23	4305439	(-33.686599731445313,-53.459400177001953)
-3957	Chuvisca	23	4305447	(-30.750400543212891,-51.973701477050781)
-3958	Cidreira	23	4305454	(-30.160400390625,-50.233699798583984)
-3959	Ciríaco	23	4305504	(-28.341899871826172,-51.874099731445313)
-3960	Colinas	23	4305587	(-29.394800186157227,-51.855598449707031)
-3961	Colorado	23	4305603	(-28.525800704956055,-52.992801666259766)
-3962	Condor	23	4305702	(-28.207500457763672,-53.490501403808594)
-3963	Constantina	23	4305801	(-27.732000350952148,-52.993801116943359)
-3964	Coqueiro Baixo	23	4305835	(-29.180200576782227,-52.094200134277344)
-3965	Coqueiros do Sul	23	4305850	(-28.119400024414063,-52.784198760986328)
-3966	Coronel Barros	23	4305871	(-28.392099380493164,-54.068599700927734)
-3967	Coronel Bicaco	23	4305900	(-27.719699859619141,-53.702201843261719)
-3968	Coronel Pilar	23	4305934	(-29.269500732421875,-51.684700012207031)
-3969	Cotiporã	23	4305959	(-28.989099502563477,-51.697101593017578)
-3970	Coxilha	23	4305975	(-28.128000259399414,-52.302299499511719)
-3971	Crissiumal	23	4306007	(-27.499900817871094,-54.099399566650391)
-3972	Cristal	23	4306056	(-31.004600524902344,-52.043598175048828)
-3973	Cristal do Sul	23	4306072	(-27.451999664306641,-53.242198944091797)
-3974	Cruz Alta	23	4306106	(-28.645000457763672,-53.604801177978516)
-3975	Cruzaltense	23	4306130	(-27.667200088500977,-52.652198791503906)
-3976	Cruzeiro do Sul	23	4306205	(-29.514799118041992,-51.992801666259766)
-3977	David Canabarro	23	4306304	(-28.384899139404297,-51.848201751708984)
-3978	Derrubadas	23	4306320	(-27.264200210571289,-53.864498138427734)
-3979	Dezesseis de Novembro	23	4306353	(-28.218999862670898,-55.061698913574219)
-3980	Dilermando de Aguiar	23	4306379	(-29.705400466918945,-54.212200164794922)
-3981	Dois Irmãos	23	4306403	(-29.583599090576172,-51.089801788330078)
-3982	Dois Irmãos das Missões	23	4306429	(-27.662099838256836,-53.530399322509766)
-3983	Dois Lajeados	23	4306452	(-28.982999801635742,-51.839599609375)
-3984	Dom Feliciano	23	4306502	(-30.700399398803711,-52.10260009765625)
-3985	Dom Pedrito	23	4306601	(-30.97559928894043,-54.669399261474609)
-3986	Dom Pedro de Alcântara	23	4306551	(-29.363899230957031,-49.853000640869141)
-3987	Dona Francisca	23	4306700	(-29.619499206542969,-53.361698150634766)
-3988	Doutor Maurício Cardoso	23	4306734	(-27.510299682617188,-54.357700347900391)
-3989	Doutor Ricardo	23	4306759	(-29.083999633789063,-51.997200012207031)
-3990	Eldorado do Sul	23	4306767	(-30.084699630737305,-51.618698120117187)
-3991	Encantado	23	4306809	(-29.235099792480469,-51.87030029296875)
-3992	Encruzilhada do Sul	23	4306908	(-30.542999267578125,-52.520401000976562)
-3993	Engenho Velho	23	4306924	(-27.705999374389648,-52.914501190185547)
-3994	Entre Rios do Sul	23	4306957	(-27.529800415039063,-52.734699249267578)
-3995	Entre-Ijuís	23	4306932	(-28.368600845336914,-54.268600463867188)
-3996	Erebango	23	4306973	(-27.854400634765625,-52.300498962402344)
-3997	Erechim	23	4307005	(-27.63640022277832,-52.269699096679688)
-3998	Ernestina	23	4307054	(-28.497699737548828,-52.583599090576172)
-3999	Erval Grande	23	4307203	(-27.392599105834961,-52.574001312255859)
-4000	Erval Seco	23	4307302	(-27.544300079345703,-53.500499725341797)
-4001	Esmeralda	23	4307401	(-28.051799774169922,-51.19329833984375)
-4002	Esperança do Sul	23	4307450	(-27.360300064086914,-53.989101409912109)
-4003	Espumoso	23	4307500	(-28.728599548339844,-52.846099853515625)
-4004	Estação	23	4307559	(-27.91349983215332,-52.263500213623047)
-4005	Estância Velha	23	4307609	(-29.653499603271484,-51.184299468994141)
-4006	Esteio	23	4307708	(-29.851999282836914,-51.184101104736328)
-4007	Estrela	23	4307807	(-29.500200271606445,-51.949501037597656)
-4008	Estrela Velha	23	4307815	(-29.171300888061523,-53.163898468017578)
-4009	Eugênio de Castro	23	4307831	(-28.531499862670898,-54.150600433349609)
-4010	Fagundes Varela	23	4307864	(-28.879400253295898,-51.701400756835938)
-4011	Farroupilha	23	4307906	(-29.222700119018555,-51.341899871826172)
-4012	Faxinal do Soturno	23	4308003	(-29.578800201416016,-53.448398590087891)
-4013	Faxinalzinho	23	4308052	(-27.423799514770508,-52.678901672363281)
-4014	Fazenda Vilanova	23	4308078	(-29.588499069213867,-51.821701049804688)
-4015	Feliz	23	4308102	(-29.452699661254883,-51.303199768066406)
-4016	Flores da Cunha	23	4308201	(-29.026100158691406,-51.1875)
-4017	Floriano Peixoto	23	4308250	(-27.861400604248047,-52.08380126953125)
-4018	Fontoura Xavier	23	4308300	(-28.981700897216797,-52.344501495361328)
-4019	Formigueiro	23	4308409	(-30.003499984741211,-53.495899200439453)
-4020	Forquetinha	23	4308433	(-29.38279914855957,-52.098098754882812)
-4021	Fortaleza dos Valos	23	4308458	(-28.798599243164063,-53.224899291992188)
-4022	Frederico Westphalen	23	4308508	(-27.358600616455078,-53.395801544189453)
-4023	Garibaldi	23	4308607	(-29.259000778198242,-51.535198211669922)
-4024	Garruchos	23	4308656	(-28.194400787353516,-55.638301849365234)
-4025	Gaurama	23	4308706	(-27.585599899291992,-52.091499328613281)
-4026	General Câmara	23	4308805	(-29.903200149536133,-51.761199951171875)
-4027	Gentil	23	4308854	(-28.431600570678711,-52.033699035644531)
-4028	Getúlio Vargas	23	4308904	(-27.89109992980957,-52.229400634765625)
-4029	Giruá	23	4309001	(-28.029699325561523,-54.351699829101563)
-4030	Glorinha	23	4309050	(-29.879800796508789,-50.773399353027344)
-4031	Gramado	23	4309100	(-29.37339973449707,-50.876201629638672)
-4032	Gramado dos Loureiros	23	4309126	(-27.442899703979492,-52.914901733398438)
-4033	Gramado Xavier	23	4309159	(-29.270599365234375,-52.579498291015625)
-4034	Gravataí	23	4309209	(-29.941299438476563,-50.986900329589844)
-4035	Guabiju	23	4309258	(-28.54210090637207,-51.694801330566406)
-4036	Guaíba	23	4309308	(-30.108600616455078,-51.323299407958984)
-4037	Guaporé	23	4309407	(-28.839899063110352,-51.889499664306641)
-4038	Guarani das Missões	23	4309506	(-28.149099349975586,-54.562900543212891)
-4039	Harmonia	23	4309555	(-29.545600891113281,-51.418498992919922)
-4040	Herval	23	4307104	(-32.023998260498047,-53.394401550292969)
-4041	Herveiras	23	4309571	(-29.4552001953125,-52.655300140380859)
-4042	Horizontina	23	4309605	(-27.628200531005859,-54.305301666259766)
-4043	Hulha Negra	23	4309654	(-31.406700134277344,-53.86669921875)
-4044	Humaitá	23	4309704	(-27.569099426269531,-53.969501495361328)
-4045	Ibarama	23	4309753	(-29.420299530029297,-53.129501342773437)
-4046	Ibiaçá	23	4309803	(-28.056600570678711,-51.859901428222656)
-4047	Ibiraiaras	23	4309902	(-28.374099731445313,-51.637699127197266)
-4048	Ibirapuitã	23	4309951	(-28.624700546264648,-52.515800476074219)
-4049	Ibirubá	23	4310009	(-28.630199432373047,-53.096099853515625)
-4050	Igrejinha	23	4310108	(-29.569299697875977,-50.791900634765625)
-4051	Ijuí	23	4310207	(-28.38800048828125,-53.919998168945312)
-4052	Ilópolis	23	4310306	(-28.928199768066406,-52.125801086425781)
-4053	Imbé	23	4310330	(-29.975299835205078,-50.128101348876953)
-4054	Imigrante	23	4310363	(-29.350799560546875,-51.774799346923828)
-4055	Independência	23	4310405	(-27.835399627685547,-54.1885986328125)
-4056	Inhacorá	23	4310413	(-27.875200271606445,-54.014999389648438)
-4057	Ipê	23	4310439	(-28.817100524902344,-51.285900115966797)
-4058	Ipiranga do Sul	23	4310462	(-27.940399169921875,-52.427101135253906)
-4059	Iraí	23	4310504	(-27.195100784301758,-53.254299163818359)
-4060	Itaara	23	4310538	(-29.601299285888672,-53.772499084472656)
-4061	Itacurubi	23	4310553	(-28.791299819946289,-55.244701385498047)
-4062	Itapuca	23	4310579	(-28.776800155639648,-52.169300079345703)
-4063	Itaqui	23	4310603	(-29.131099700927734,-56.551498413085938)
-4064	Itati	23	4310652	(-29.497400283813477,-50.101600646972656)
-4065	Itatiba do Sul	23	4310702	(-27.384599685668945,-52.453800201416016)
-4066	Ivorá	23	4310751	(-29.523199081420898,-53.584201812744141)
-4067	Ivoti	23	4310801	(-29.59950065612793,-51.153301239013672)
-4068	Jaboticaba	23	4310850	(-27.634700775146484,-53.276199340820313)
-4069	Jacuizinho	23	4310876	(-29.04010009765625,-53.065700531005859)
-4070	Jacutinga	23	4310900	(-27.729099273681641,-52.537200927734375)
-4071	Jaguarão	23	4311007	(-32.560398101806641,-53.376998901367188)
-4072	Jaguari	23	4311106	(-29.493600845336914,-54.702999114990234)
-4073	Jaquirana	23	4311122	(-28.881099700927734,-50.363700866699219)
-4074	Jari	23	4311130	(-29.292200088500977,-54.223701477050781)
-4075	Jóia	23	4311155	(-28.643499374389648,-54.114101409912109)
-4076	Júlio de Castilhos	23	4311205	(-29.229900360107422,-53.677200317382812)
-4077	Lagoa Bonita do Sul	23	4311239	(-29.493900299072266,-53.016998291015625)
-4078	Lagoa dos Três Cantos	23	4311270	(-28.567600250244141,-52.861801147460937)
-4079	Lagoa Vermelha	23	4311304	(-28.209299087524414,-51.524799346923828)
-4080	Lagoão	23	4311254	(-29.234800338745117,-52.799701690673828)
-4081	Lajeado	23	4311403	(-29.459100723266602,-51.964401245117187)
-4082	Lajeado do Bugre	23	4311429	(-27.691299438476563,-53.181800842285156)
-4083	Lavras do Sul	23	4311502	(-30.807100296020508,-53.893100738525391)
-4084	Liberato Salzano	23	4311601	(-27.60099983215332,-53.075298309326172)
-4085	Lindolfo Collor	23	4311627	(-29.585899353027344,-51.214099884033203)
-4086	Linha Nova	23	4311643	(-29.467899322509766,-51.200298309326172)
-4087	Maçambara	23	4311718	(-29.144500732421875,-56.067401885986328)
-4088	Machadinho	23	4311700	(-27.566699981689453,-51.666801452636719)
-4089	Mampituba	23	4311734	(-29.213600158691406,-49.931098937988281)
-4090	Manoel Viana	23	4311759	(-29.585899353027344,-55.484100341796875)
-4091	Maquiné	23	4311775	(-29.679800033569336,-50.207901000976563)
-4092	Maratá	23	4311791	(-29.545700073242187,-51.557300567626953)
-4093	Marau	23	4311809	(-28.449800491333008,-52.198600769042969)
-4094	Marcelino Ramos	23	4311908	(-27.467599868774414,-51.909500122070313)
-4095	Mariana Pimentel	23	4311981	(-30.353000640869141,-51.580299377441406)
-4096	Mariano Moro	23	4312005	(-27.356800079345703,-52.146701812744141)
-4097	Marques de Souza	23	4312054	(-29.331100463867188,-52.097301483154297)
-4098	Mata	23	4312104	(-29.564899444580078,-54.464099884033203)
-4099	Mato Castelhano	23	4312138	(-28.280000686645508,-52.193199157714844)
-4100	Mato Leitão	23	4312153	(-29.528499603271484,-52.127799987792969)
-4101	Mato Queimado	23	4312179	(-28.25200080871582,-54.615898132324219)
-4102	Maximiliano de Almeida	23	4312203	(-27.632499694824219,-51.801998138427734)
-4103	Minas do Leão	23	4312252	(-30.134599685668945,-52.042301177978516)
-4104	Miraguaí	23	4312302	(-27.496999740600586,-53.689098358154297)
-4105	Montauri	23	4312351	(-28.646200180053711,-52.076698303222656)
-4106	Monte Alegre dos Campos	23	4312377	(-28.680500030517578,-50.783401489257813)
-4107	Monte Belo do Sul	23	4312385	(-29.160699844360352,-51.63330078125)
-4108	Montenegro	23	4312401	(-29.682399749755859,-51.467899322509766)
-4109	Mormaço	23	4312427	(-28.696800231933594,-52.699901580810547)
-4110	Morrinhos do Sul	23	4312443	(-29.357799530029297,-49.93280029296875)
-4111	Morro Redondo	23	4312450	(-31.588699340820312,-52.6260986328125)
-4112	Morro Reuter	23	4312476	(-29.537900924682617,-51.081100463867187)
-4113	Mostardas	23	4312500	(-31.105400085449219,-50.916698455810547)
-4114	Muçum	23	4312609	(-29.163000106811523,-51.87139892578125)
-4115	Muitos Capões	23	4312617	(-28.313199996948242,-51.183601379394531)
-4116	Muliterno	23	4312625	(-28.325300216674805,-51.769699096679688)
-4117	Não-Me-Toque	23	4312658	(-28.454799652099609,-52.818199157714844)
-4118	Nicolau Vergueiro	23	4312674	(-28.529800415039063,-52.467601776123047)
-4119	Nonoai	23	4312708	(-27.368900299072266,-52.775600433349609)
-4120	Nova Alvorada	23	4312757	(-28.682199478149414,-52.163101196289063)
-4121	Nova Araçá	23	4312807	(-28.65369987487793,-51.745800018310547)
-4122	Nova Bassano	23	4312906	(-28.729099273681641,-51.707199096679688)
-4123	Nova Boa Vista	23	4312955	(-27.992599487304687,-52.978401184082031)
-4124	Nova Bréscia	23	4313003	(-29.21820068359375,-52.031898498535156)
-4125	Nova Candelária	23	4313011	(-27.613700866699219,-54.107398986816406)
-4126	Nova Esperança do Sul	23	4313037	(-29.406600952148437,-54.829299926757813)
-4127	Nova Hartz	23	4313060	(-29.580799102783203,-50.905101776123047)
-4128	Nova Pádua	23	4313086	(-29.027500152587891,-51.309799194335937)
-4129	Nova Palma	23	4313102	(-29.471000671386719,-53.468898773193359)
-4130	Nova Petrópolis	23	4313201	(-29.374099731445313,-51.113601684570313)
-4131	Nova Prata	23	4313300	(-28.779899597167969,-51.611301422119141)
-4132	Nova Ramada	23	4313334	(-28.066699981689453,-53.699199676513672)
-4133	Nova Roma do Sul	23	4313359	(-28.988199234008789,-51.409500122070313)
-4134	Nova Santa Rita	23	4313375	(-29.852500915527344,-51.283699035644531)
-4135	Novo Barreiro	23	4313490	(-27.907699584960938,-53.110298156738281)
-4136	Novo Cabrais	23	4313391	(-29.733800888061523,-52.948898315429688)
-4137	Novo Hamburgo	23	4313409	(-29.6875,-51.132801055908203)
-4138	Novo Machado	23	4313425	(-27.576499938964844,-54.50360107421875)
-4139	Novo Tiradentes	23	4313441	(-27.564899444580078,-53.183700561523438)
-4140	Novo Xingu	23	4313466	(-27.749000549316406,-53.063899993896484)
-4141	Osório	23	4313508	(-29.888099670410156,-50.266700744628906)
-4142	Paim Filho	23	4313607	(-27.707500457763672,-51.76300048828125)
-4143	Palmares do Sul	23	4313656	(-30.253499984741211,-50.510299682617188)
-4144	Palmeira das Missões	23	4313706	(-27.900699615478516,-53.313400268554688)
-4145	Palmitinho	23	4313805	(-27.359600067138672,-53.557998657226563)
-4146	Panambi	23	4313904	(-28.283300399780273,-53.502300262451172)
-4147	Pantano Grande	23	4313953	(-30.190200805664063,-52.372898101806641)
-4148	Paraí	23	4314001	(-28.596399307250977,-51.789600372314453)
-4149	Paraíso do Sul	23	4314027	(-29.671699523925781,-53.144001007080078)
-4150	Pareci Novo	23	4314035	(-29.636499404907227,-51.39739990234375)
-4151	Parobé	23	4314050	(-29.624300003051758,-50.831199645996094)
-4152	Passa Sete	23	4314068	(-29.457700729370117,-52.95989990234375)
-4153	Passo do Sobrado	23	4314076	(-29.74799919128418,-52.274799346923828)
-4154	Passo Fundo	23	4314100	(-28.257600784301758,-52.409099578857422)
-4155	Paulo Bento	23	4314134	(-27.705099105834961,-52.416900634765625)
-4156	Paverama	23	4314159	(-29.548599243164062,-51.733898162841797)
-4157	Pedras Altas	23	4314175	(-31.736499786376953,-53.581401824951172)
-4158	Pedro Osório	23	4314209	(-31.864200592041016,-52.818401336669922)
-4159	Pejuçara	23	4314308	(-28.428300857543945,-53.657901763916016)
-4160	Pelotas	23	4314407	(-31.764900207519531,-52.337100982666016)
-4161	Picada Café	23	4314423	(-29.446399688720703,-51.136699676513672)
-4162	Pinhal	23	4314456	(-27.507999420166016,-53.208198547363281)
-4163	Pinhal da Serra	23	4314464	(-27.875099182128906,-51.167301177978516)
-4164	Pinhal Grande	23	4314472	(-29.344999313354492,-53.320598602294922)
-4165	Pinheirinho do Vale	23	4314498	(-27.210899353027344,-53.608001708984375)
-4166	Pinheiro Machado	23	4314506	(-31.579399108886719,-53.379798889160156)
-4167	Pirapó	23	4314555	(-28.043899536132812,-55.200099945068359)
-4168	Piratini	23	4314605	(-31.447299957275391,-53.097301483154297)
-4169	Planalto	23	4314704	(-27.329700469970703,-53.057498931884766)
-4170	Poço das Antas	23	4314753	(-29.448099136352539,-51.671901702880859)
-4171	Pontão	23	4314779	(-28.058500289916992,-52.679100036621094)
-4172	Ponte Preta	23	4314787	(-27.658700942993164,-52.484798431396484)
-4173	Portão	23	4314803	(-29.701499938964844,-51.242900848388672)
-4174	Porto Alegre	23	4314902	(-30.03179931640625,-51.206501007080078)
-4175	Porto Lucena	23	4315008	(-27.856899261474609,-55.009998321533203)
-4176	Porto Mauá	23	4315057	(-27.579599380493164,-54.665699005126953)
-4177	Porto Vera Cruz	23	4315073	(-27.740499496459961,-54.899398803710938)
-4178	Porto Xavier	23	4315107	(-27.908199310302734,-55.137901306152344)
-4179	Pouso Novo	23	4315131	(-29.173799514770508,-52.213600158691406)
-4180	Presidente Lucena	23	4315149	(-29.517499923706055,-51.179798126220703)
-4181	Progresso	23	4315156	(-29.244100570678711,-52.319698333740234)
-4182	Protásio Alves	23	4315172	(-28.757200241088867,-51.475700378417969)
-4183	Putinga	23	4315206	(-29.004499435424805,-52.156898498535156)
-4184	Quaraí	23	4315305	(-30.384000778198242,-56.448299407958984)
-4185	Quatro Irmãos	23	4315313	(-27.825700759887695,-52.442401885986328)
-4186	Quevedos	23	4315321	(-29.350400924682617,-54.078899383544922)
-4187	Quinze de Novembro	23	4315354	(-28.746599197387695,-53.101100921630859)
-4188	Redentora	23	4315404	(-27.663999557495117,-53.640701293945313)
-4189	Relvado	23	4315453	(-29.116399765014648,-52.077800750732422)
-4190	Restinga Seca	23	4315503	(-29.81879997253418,-53.380699157714844)
-4191	Rio dos Índios	23	4315552	(-27.297300338745117,-52.841701507568359)
-4192	Rio Grande	23	4315602	(-32.034900665283203,-52.107101440429688)
-4193	Rio Pardo	23	4315701	(-29.988000869750977,-52.371101379394531)
-4194	Riozinho	23	4315750	(-29.638999938964844,-50.448799133300781)
-4195	Roca Sales	23	4315800	(-29.288400650024414,-51.865798950195312)
-4196	Rodeio Bonito	23	4315909	(-27.474199295043945,-53.170600891113281)
-4197	Rolador	23	4315958	(-28.256599426269531,-54.818599700927734)
-4198	Rolante	23	4316006	(-29.646200180053711,-50.581901550292969)
-4199	Ronda Alta	23	4316105	(-27.775800704956055,-52.805599212646484)
-4200	Rondinha	23	4316204	(-27.831499099731445,-52.908100128173828)
-4201	Roque Gonzales	23	4316303	(-28.12969970703125,-55.026599884033203)
-4202	Rosário do Sul	23	4316402	(-30.251499176025391,-54.922100067138672)
-4203	Sagrada Família	23	4316428	(-27.708499908447266,-53.135101318359375)
-4204	Saldanha Marinho	23	4316436	(-28.394100189208984,-53.097000122070313)
-4205	Salto do Jacuí	23	4316451	(-29.095100402832031,-53.213298797607422)
-4206	Salvador das Missões	23	4316477	(-28.123300552368164,-54.837299346923828)
-4207	Salvador do Sul	23	4316501	(-29.438600540161133,-51.507701873779297)
-4208	Sananduva	23	4316600	(-27.947000503540039,-51.807899475097656)
-4209	Santa Bárbara do Sul	23	4316709	(-28.365299224853516,-53.250999450683594)
-4210	Santa Cecília do Sul	23	4316733	(-28.160900115966797,-51.927898406982422)
-4211	Santa Clara do Sul	23	4316758	(-29.474700927734375,-52.084300994873047)
-4212	Santa Cruz do Sul	23	4316808	(-29.722000122070313,-52.434299468994141)
-4213	Santa Margarida do Sul	23	4316972	(-30.339300155639648,-54.081699371337891)
-4214	Santa Maria	23	4316907	(-29.686800003051758,-53.814899444580078)
-4215	Santa Maria do Herval	23	4316956	(-29.490200042724609,-50.991901397705078)
-4216	Santa Rosa	23	4317202	(-27.870199203491211,-54.479598999023438)
-4217	Santa Tereza	23	4317251	(-29.165500640869141,-51.735099792480469)
-4218	Santa Vitória do Palmar	23	4317301	(-33.525001525878906,-53.371700286865234)
-4219	Santana da Boa Vista	23	4317004	(-30.869699478149414,-53.110000610351563)
-4220	Santana do Livramento	23	4317103	(-30.877300262451172,-55.539199829101563)
-4221	Santiago	23	4317400	(-29.189699172973633,-54.866600036621094)
-4222	Santo Ângelo	23	4317509	(-28.300100326538086,-54.266799926757813)
-4223	Santo Antônio da Patrulha	23	4317608	(-29.826799392700195,-50.517501831054687)
-4224	Santo Antônio das Missões	23	4317707	(-28.513999938964844,-55.225101470947266)
-4225	Santo Antônio do Palma	23	4317558	(-28.495599746704102,-52.026699066162109)
-4226	Santo Antônio do Planalto	23	4317756	(-28.402999877929687,-52.699199676513672)
-4227	Santo Augusto	23	4317806	(-27.85260009765625,-53.777599334716797)
-4228	Santo Cristo	23	4317905	(-27.826299667358398,-54.661998748779297)
-4229	Santo Expedito do Sul	23	4317954	(-27.907400131225586,-51.643398284912109)
-4230	São Borja	23	4318002	(-28.657800674438477,-56.00360107421875)
-4231	São Domingos do Sul	23	4318051	(-28.531200408935547,-51.886001586914062)
-4232	São Francisco de Assis	23	4318101	(-29.55470085144043,-55.125301361083984)
-4233	São Francisco de Paula	23	4318200	(-29.440399169921875,-50.582801818847656)
-4234	São Gabriel	23	4318309	(-30.333700180053711,-54.321701049804688)
-4235	São Jerônimo	23	4318408	(-29.971599578857422,-51.725101470947266)
-4236	São João da Urtiga	23	4318424	(-27.819499969482422,-51.825698852539063)
-4237	São João do Polêsine	23	4318432	(-29.619400024414063,-53.443901062011719)
-4238	São Jorge	23	4318440	(-28.49839973449707,-51.706401824951172)
-4239	São José das Missões	23	4318457	(-27.778900146484375,-53.122600555419922)
-4240	São José do Herval	23	4318465	(-29.052000045776367,-52.294998168945313)
-4241	São José do Hortêncio	23	4318481	(-29.527999877929687,-51.244998931884766)
-4242	São José do Inhacorá	23	4318499	(-27.725099563598633,-54.127498626708984)
-4243	São José do Norte	23	4318507	(-32.015098571777344,-52.033100128173828)
-4244	São José do Ouro	23	4318606	(-27.770700454711914,-51.596599578857422)
-4245	São José do Sul	23	4318614	(-29.5447998046875,-51.482101440429688)
-4246	São José dos Ausentes	23	4318622	(-28.747600555419922,-50.067699432373047)
-4247	São Leopoldo	23	4318705	(-29.754499435424805,-51.149799346923828)
-4248	São Lourenço do Sul	23	4318804	(-31.356399536132812,-51.971500396728516)
-4249	São Luiz Gonzaga	23	4318903	(-28.41200065612793,-54.955898284912109)
-4250	São Marcos	23	4319000	(-28.96769905090332,-51.069599151611328)
-4251	São Martinho	23	4319109	(-27.711200714111328,-53.969898223876953)
-4252	São Martinho da Serra	23	4319125	(-29.539699554443359,-53.859001159667969)
-4253	São Miguel das Missões	23	4319158	(-28.555999755859375,-54.555900573730469)
-4254	São Nicolau	23	4319208	(-28.183399200439453,-55.265399932861328)
-4255	São Paulo das Missões	23	4319307	(-28.019500732421875,-54.940399169921875)
-4256	São Pedro da Serra	23	4319356	(-29.419300079345703,-51.513401031494141)
-4257	São Pedro das Missões	23	4319364	(-27.770599365234375,-53.251300811767578)
-4258	São Pedro do Butiá	23	4319372	(-28.124300003051758,-54.892601013183594)
-4259	São Pedro do Sul	23	4319406	(-29.620199203491211,-54.185501098632812)
-4260	São Sebastião do Caí	23	4319505	(-29.588499069213867,-51.374900817871094)
-4261	São Sepé	23	4319604	(-30.164300918579102,-53.560298919677734)
-4262	São Valentim	23	4319703	(-27.558300018310547,-52.523700714111328)
-4263	São Valentim do Sul	23	4319711	(-29.045099258422852,-51.768398284912109)
-4264	São Valério do Sul	23	4319737	(-27.790599822998047,-53.936798095703125)
-4265	São Vendelino	23	4319752	(-29.372900009155273,-51.367500305175781)
-4266	São Vicente do Sul	23	4319802	(-29.688199996948242,-54.682598114013672)
-4267	Sapiranga	23	4319901	(-29.634899139404297,-51.006401062011719)
-4268	Sapucaia do Sul	23	4320008	(-29.827600479125977,-51.145000457763672)
-4269	Sarandi	23	4320107	(-27.941999435424805,-52.923099517822266)
-4270	Seberi	23	4320206	(-27.482900619506836,-53.402599334716797)
-4271	Sede Nova	23	4320230	(-27.636699676513672,-53.949298858642578)
-4272	Segredo	23	4320263	(-29.352300643920898,-52.976699829101563)
-4273	Selbach	23	4320305	(-28.629400253295898,-52.949798583984375)
-4274	Senador Salgado Filho	23	4320321	(-28.024999618530273,-54.550701141357422)
-4275	Sentinela do Sul	23	4320354	(-30.610700607299805,-51.586200714111328)
-4276	Serafina Corrêa	23	4320404	(-28.712600708007813,-51.935199737548828)
-4277	Sério	23	4320453	(-29.390399932861328,-52.268501281738281)
-4278	Sertão	23	4320503	(-27.979799270629883,-52.258800506591797)
-4279	Sertão Santana	23	4320552	(-30.456199645996094,-51.601699829101562)
-4927	Iacri	26	3519204	(-21.857200622558594,-50.693199157714844)
-4280	Sete de Setembro	23	4320578	(-28.136199951171875,-54.463699340820312)
-4281	Severiano de Almeida	23	4320602	(-27.436199188232422,-52.121700286865234)
-4282	Silveira Martins	23	4320651	(-29.646699905395508,-53.590999603271484)
-4283	Sinimbu	23	4320677	(-29.535699844360352,-52.530399322509766)
-4284	Sobradinho	23	4320701	(-29.419399261474609,-53.032600402832031)
-4285	Soledade	23	4320800	(-28.830600738525391,-52.513099670410156)
-4286	Tabaí	23	4320859	(-29.642999649047852,-51.682300567626953)
-4287	Tapejara	23	4320909	(-28.065200805664063,-52.009700775146484)
-4288	Tapera	23	4321006	(-28.627700805664063,-52.861301422119141)
-4289	Tapes	23	4321105	(-30.668300628662109,-51.399101257324219)
-4290	Taquara	23	4321204	(-29.65049934387207,-50.775299072265625)
-4291	Taquari	23	4321303	(-29.794300079345703,-51.865299224853516)
-4292	Taquaruçu do Sul	23	4321329	(-27.40049934387207,-53.470199584960938)
-4293	Tavares	23	4321352	(-31.284299850463867,-51.088001251220703)
-4294	Tenente Portela	23	4321402	(-27.371099472045898,-53.758499145507813)
-4295	Terra de Areia	23	4321436	(-29.57819938659668,-50.064399719238281)
-4296	Teutônia	23	4321451	(-29.448200225830078,-51.804401397705078)
-4297	Tio Hugo	23	4321469	(-28.571199417114258,-52.595500946044922)
-4298	Tiradentes do Sul	23	4321477	(-27.402200698852539,-54.081401824951172)
-4299	Toropi	23	4321493	(-29.478200912475586,-54.224399566650391)
-4300	Torres	23	4321501	(-29.333400726318359,-49.733299255371094)
-4301	Tramandaí	23	4321600	(-29.984100341796875,-50.132198333740234)
-4302	Travesseiro	23	4321626	(-29.297700881958008,-52.053199768066406)
-4303	Três Arroios	23	4321634	(-27.500299453735352,-52.144798278808594)
-4304	Três Cachoeiras	23	4321667	(-29.448699951171875,-49.927501678466797)
-4305	Três Coroas	23	4321709	(-29.513700485229492,-50.773899078369141)
-4306	Três de Maio	23	4321808	(-27.780000686645508,-54.235698699951172)
-4307	Três Forquilhas	23	4321832	(-29.538400650024414,-50.07080078125)
-4308	Três Palmeiras	23	4321857	(-27.613899230957031,-52.843700408935547)
-4309	Três Passos	23	4321907	(-27.455499649047852,-53.929599761962891)
-4310	Trindade do Sul	23	4321956	(-27.523899078369141,-52.895599365234375)
-4311	Triunfo	23	4322004	(-29.929100036621094,-51.707500457763672)
-4312	Tucunduva	23	4322103	(-27.65730094909668,-54.443901062011719)
-4313	Tunas	23	4322152	(-29.103900909423828,-52.953800201416016)
-4314	Tupanci do Sul	23	4322186	(-27.924100875854492,-51.538299560546875)
-4315	Tupanciretã	23	4322202	(-29.085800170898438,-53.844501495361328)
-4316	Tupandi	23	4322251	(-29.477199554443359,-51.417400360107422)
-4317	Tuparendi	23	4322301	(-27.759799957275391,-54.481399536132813)
-4318	Turuçu	23	4322327	(-31.417299270629883,-52.170600891113281)
-4319	Ubiretama	23	4322343	(-28.040399551391602,-54.686000823974609)
-4320	União da Serra	23	4322350	(-28.783300399780273,-52.023799896240234)
-4321	Unistalda	23	4322376	(-29.040000915527344,-55.151699066162109)
-4322	Uruguaiana	23	4322400	(-29.76140022277832,-57.085300445556641)
-4323	Vacaria	23	4322509	(-28.507900238037109,-50.941799163818359)
-4324	Vale do Sol	23	4322533	(-29.596700668334961,-52.68389892578125)
-4325	Vale Real	23	4322541	(-29.391899108886719,-51.255901336669922)
-4326	Vale Verde	23	4322525	(-29.786399841308594,-52.185699462890625)
-4327	Vanini	23	4322558	(-28.475799560546875,-51.844699859619141)
-4328	Venâncio Aires	23	4322608	(-29.614299774169922,-52.193199157714844)
-4329	Vera Cruz	23	4322707	(-29.718399047851563,-52.515201568603516)
-4330	Veranópolis	23	4322806	(-28.93120002746582,-51.551601409912109)
-4331	Vespasiano Correa	23	4322855	(-29.065500259399414,-51.862499237060547)
-4332	Viadutos	23	4322905	(-27.571599960327148,-52.021099090576172)
-4333	Viamão	23	4323002	(-30.081899642944336,-51.019401550292969)
-4334	Vicente Dutra	23	4323101	(-27.160699844360352,-53.402198791503906)
-4335	Victor Graeff	23	4323200	(-28.563199996948242,-52.749500274658203)
-4336	Vila Flores	23	4323309	(-28.859800338745117,-51.550399780273437)
-4337	Vila Lângaro	23	4323358	(-28.106199264526367,-52.143798828125)
-4338	Vila Maria	23	4323408	(-28.535900115966797,-52.148601531982422)
-4339	Vila Nova do Sul	23	4323457	(-30.346099853515625,-53.875999450683594)
-4340	Vista Alegre	23	4323507	(-27.368600845336914,-53.491901397705078)
-4341	Vista Alegre do Prata	23	4323606	(-28.805200576782227,-51.794700622558594)
-4342	Vista Gaúcha	23	4323705	(-27.290199279785156,-53.697399139404297)
-4343	Vitória das Missões	23	4323754	(-28.351600646972656,-54.504001617431641)
-4344	Westfália	23	4323770	(-29.426300048828125,-51.764499664306641)
-4345	Xangri-lá	23	4323804	(-29.806499481201172,-50.051898956298828)
-4346	Alta Floresta d`Oeste	21	1100015	(-11.928299903869629,-61.99530029296875)
-4347	Alto Alegre dos Parecis	21	1100379	(-12.131999969482422,-61.834999084472656)
-4348	Alto Paraíso	21	1100403	(-9.714289665222168,-63.318801879882813)
-4349	Alvorada d`Oeste	21	1100346	(-11.34630012512207,-62.284698486328125)
-4350	Ariquemes	21	1100023	(-9.9057102203369141,-63.032501220703125)
-4351	Buritis	21	1100452	(-10.194299697875977,-63.832401275634766)
-4352	Cabixi	21	1100031	(-13.494500160217285,-60.551998138427734)
-4353	Cacaulândia	21	1100601	(-10.348999977111816,-62.904300689697266)
-4354	Cacoal	21	1100049	(-11.434300422668457,-61.456199645996094)
-4355	Campo Novo de Rondônia	21	1100700	(-10.571200370788574,-63.626598358154297)
-4356	Candeias do Jamari	21	1100809	(-8.7906999588012695,-63.70050048828125)
-4357	Castanheiras	21	1100908	(-11.425299644470215,-61.948200225830078)
-4358	Cerejeiras	21	1100056	(-13.187000274658203,-60.816799163818359)
-4359	Chupinguaia	21	1100924	(-12.561100006103516,-60.887699127197266)
-4360	Colorado do Oeste	21	1100064	(-13.117400169372559,-60.545398712158203)
-4361	Corumbiara	21	1100072	(-12.955100059509277,-60.894699096679688)
-4362	Costa Marques	21	1100080	(-12.436699867248535,-64.227996826171875)
-4363	Cujubim	21	1100940	(-9.3606500625610352,-62.584598541259766)
-4364	Espigão d`Oeste	21	1100098	(-11.526599884033203,-61.025199890136719)
-4365	Governador Jorge Teixeira	21	1101005	(-10.609999656677246,-62.737098693847656)
-4366	Guajará-Mirim	21	1100106	(-10.788900375366211,-65.329597473144531)
-4367	Itapuã do Oeste	21	1101104	(-9.1968698501586914,-63.180900573730469)
-4368	Jaru	21	1100114	(-10.43179988861084,-62.478801727294922)
-4369	Ji-Paraná	21	1100122	(-10.877699851989746,-61.932201385498047)
-4370	Machadinho d`Oeste	21	1100130	(-9.4436302185058594,-61.981800079345703)
-4371	Ministro Andreazza	21	1101203	(-11.196000099182129,-61.517398834228516)
-4372	Mirante da Serra	21	1101302	(-11.029000282287598,-62.669601440429688)
-4373	Monte Negro	21	1101401	(-10.245800018310547,-63.290000915527344)
-4374	Nova Brasilândia d`Oeste	21	1100148	(-11.724699974060059,-62.312698364257813)
-4375	Nova Mamoré	21	1100338	(-10.407699584960937,-65.334602355957031)
-4376	Nova União	21	1101435	(-10.906800270080566,-62.556400299072266)
-4377	Novo Horizonte do Oeste	21	1100502	(-11.696100234985352,-61.995098114013672)
-4378	Ouro Preto do Oeste	21	1100155	(-10.716699600219727,-62.256500244140625)
-4379	Parecis	21	1101450	(-12.175399780273438,-61.603199005126953)
-4380	Pimenta Bueno	21	1100189	(-11.671999931335449,-61.198001861572266)
-4381	Pimenteiras do Oeste	21	1101468	(-13.4822998046875,-61.047100067138672)
-4382	Porto Velho	21	1100205	(-8.7607698440551758,-63.899898529052734)
-4383	Presidente Médici	21	1100254	(-11.168999671936035,-61.898601531982422)
-4384	Primavera de Rondônia	21	1101476	(-11.829500198364258,-61.315299987792969)
-4385	Rio Crespo	21	1100262	(-9.6996498107910156,-62.901100158691406)
-4386	Rolim de Moura	21	1100288	(-11.727100372314453,-61.771400451660156)
-4387	Santa Luzia d`Oeste	21	1100296	(-11.907400131225586,-61.777698516845703)
-4388	São Felipe d`Oeste	21	1101484	(-11.902299880981445,-61.502601623535156)
-4389	São Francisco do Guaporé	21	1101492	(-12.052000045776367,-63.568000793457031)
-4390	São Miguel do Guaporé	21	1100320	(-11.695300102233887,-62.719200134277344)
-4391	Seringueiras	21	1101500	(-11.805500030517578,-63.018199920654297)
-4392	Teixeirópolis	21	1101559	(-10.905599594116211,-62.242000579833984)
-4393	Theobroma	21	1101609	(-10.248299598693848,-62.353801727294922)
-4394	Urupá	21	1101708	(-11.126099586486816,-62.363899230957031)
-4395	Vale do Anari	21	1101757	(-9.8621501922607422,-62.187599182128906)
-4396	Vale do Paraíso	21	1101807	(-10.446499824523926,-62.135200500488281)
-4397	Vilhena	21	1100304	(-12.750200271606445,-60.148799896240234)
-4398	Alto Alegre	22	1400050	(2.9885799884796143,-61.307201385498047)
-4399	Amajari	22	1400027	(3.6457099914550781,-61.36920166015625)
-4400	Boa Vista	22	1400100	(2.8238399028778076,-60.675300598144531)
-4401	Bonfim	22	1400159	(3.361609935760498,-59.833301544189453)
-4402	Cantá	22	1400175	(2.6099400520324707,-60.605800628662109)
-4403	Caracaraí	22	1400209	(1.8276599645614624,-61.130401611328125)
-4404	Caroebe	22	1400233	(0.88420301675796509,-59.695899963378906)
-4405	Iracema	22	1400282	(2.1830499172210693,-61.041500091552734)
-4406	Mucajaí	22	1400308	(2.4399800300598145,-60.909599304199219)
-4407	Normandia	22	1400407	(3.8852999210357666,-59.620399475097656)
-4408	Pacaraima	22	1400456	(4.4798998832702637,-61.147701263427734)
-4409	Rorainópolis	22	1400472	(0.93995600938796997,-60.438899993896484)
-4410	São João da Baliza	22	1400506	(0.95165902376174927,-59.913299560546875)
-4411	São Luiz	22	1400605	(1.0101900100708008,-60.041900634765625)
-4412	Uiramutã	22	1400704	(4.6031398773193359,-60.181499481201172)
-4413	Abdon Batista	24	4200051	(-27.612600326538086,-51.023300170898437)
-4414	Abelardo Luz	24	4200101	(-26.571599960327148,-52.322898864746094)
-4415	Agrolândia	24	4200200	(-27.408700942993164,-49.821998596191406)
-4416	Agronômica	24	4200309	(-27.266199111938477,-49.708000183105469)
-4417	Água Doce	24	4200408	(-26.998500823974609,-51.552799224853516)
-4418	Águas de Chapecó	24	4200507	(-27.075399398803711,-52.980800628662109)
-4419	Águas Frias	24	4200556	(-26.879400253295898,-52.856800079345703)
-4420	Águas Mornas	24	4200606	(-27.696300506591797,-48.824298858642578)
-4421	Alfredo Wagner	24	4200705	(-27.700099945068359,-49.327301025390625)
-4422	Alto Bela Vista	24	4200754	(-27.433300018310547,-51.904399871826172)
-4423	Anchieta	24	4200804	(-26.538200378417969,-53.331901550292969)
-4424	Angelina	24	4200903	(-27.570400238037109,-48.987899780273438)
-4425	Anita Garibaldi	24	4201000	(-27.689699172973633,-51.127101898193359)
-4426	Anitápolis	24	4201109	(-27.901199340820313,-49.131599426269531)
-4427	Antônio Carlos	24	4201208	(-27.519100189208984,-48.765998840332031)
-4428	Apiúna	24	4201257	(-27.037500381469727,-49.388500213623047)
-4429	Arabutã	24	4201273	(-27.158700942993164,-52.142299652099609)
-4430	Araquari	24	4201307	(-26.375400543212891,-48.718799591064453)
-4431	Araranguá	24	4201406	(-28.935600280761719,-49.491798400878906)
-4432	Armazém	24	4201505	(-28.244800567626953,-49.021499633789063)
-4433	Arroio Trinta	24	4201604	(-26.925699234008789,-51.3406982421875)
-4434	Arvoredo	24	4201653	(-27.074800491333008,-52.454299926757812)
-4435	Ascurra	24	4201703	(-26.954799652099609,-49.378299713134766)
-4436	Atalanta	24	4201802	(-27.421899795532227,-49.778900146484375)
-4437	Aurora	24	4201901	(-27.309799194335938,-49.629501342773437)
-4438	Balneário Arroio do Silva	24	4201950	(-28.980600357055664,-49.423698425292969)
-4439	Balneário Barra do Sul	24	4202057	(-26.459699630737305,-48.612300872802734)
-4440	Balneário Camboriú	24	4202008	(-26.992599487304688,-48.635200500488281)
-4441	Balneário Gaivota	24	4202073	(-29.152700424194336,-49.584098815917969)
-4442	Bandeirante	24	4202081	(-26.770500183105469,-53.641300201416016)
-4443	Barra Bonita	24	4202099	(-26.653999328613281,-53.439998626708984)
-4444	Barra Velha	24	4202107	(-26.636999130249023,-48.69329833984375)
-4445	Bela Vista do Toldo	24	4202131	(-26.274599075317383,-50.466400146484375)
-4446	Belmonte	24	4202156	(-26.843000411987305,-53.575801849365234)
-4447	Benedito Novo	24	4202206	(-26.781000137329102,-49.359298706054688)
-4448	Biguaçu	24	4202305	(-27.496000289916992,-48.659801483154297)
-4449	Blumenau	24	4202404	(-26.915500640869141,-49.070899963378906)
-4450	Bocaina do Sul	24	4202438	(-27.745500564575195,-49.942298889160156)
-4451	Bom Jardim da Serra	24	4202503	(-28.337699890136719,-49.637298583984375)
-4452	Bom Jesus	24	4202537	(-26.732599258422852,-52.391899108886719)
-4453	Bom Jesus do Oeste	24	4202578	(-26.692699432373047,-53.096698760986328)
-4454	Bom Retiro	24	4202602	(-27.798999786376953,-49.48699951171875)
-4455	Bombinhas	24	4202453	(-27.138200759887695,-48.514598846435547)
-4456	Botuverá	24	4202701	(-27.200700759887695,-49.068901062011719)
-4457	Braço do Norte	24	4202800	(-28.268100738525391,-49.170101165771484)
-4458	Braço do Trombudo	24	4202859	(-27.358600616455078,-49.882099151611328)
-4459	Brunópolis	24	4202875	(-27.30579948425293,-50.868400573730469)
-4460	Brusque	24	4202909	(-27.097700119018555,-48.910701751708984)
-4461	Caçador	24	4203006	(-26.775699615478516,-51.012001037597656)
-4462	Caibi	24	4203105	(-27.074100494384766,-53.245800018310547)
-4463	Calmon	24	4203154	(-26.594200134277344,-51.095001220703125)
-4464	Camboriú	24	4203204	(-27.024099349975586,-48.650299072265625)
-4465	Campo Alegre	24	4203303	(-26.194999694824219,-49.267601013183594)
-4466	Campo Belo do Sul	24	4203402	(-27.897499084472656,-50.759498596191406)
-4467	Campo Erê	24	4203501	(-26.393100738525391,-53.085601806640625)
-4468	Campos Novos	24	4203600	(-27.400199890136719,-51.22760009765625)
-4469	Canelinha	24	4203709	(-27.261600494384766,-48.765800476074219)
-4470	Canoinhas	24	4203808	(-26.176599502563477,-50.395000457763672)
-4471	Capão Alto	24	4203253	(-27.938899993896484,-50.509799957275391)
-4472	Capinzal	24	4203907	(-27.347299575805664,-51.605701446533203)
-4473	Capivari de Baixo	24	4203956	(-28.449800491333008,-48.963100433349609)
-4474	Catanduvas	24	4204004	(-27.069000244140625,-51.660198211669922)
-4475	Caxambu do Sul	24	4204103	(-27.162399291992188,-52.880699157714844)
-4476	Celso Ramos	24	4204152	(-27.632699966430664,-51.334999084472656)
-4477	Cerro Negro	24	4204178	(-27.794200897216797,-50.867298126220703)
-4478	Chapadão do Lageado	24	4204194	(-27.590499877929688,-49.553901672363281)
-4479	Chapecó	24	4204202	(-27.100400924682617,-52.615200042724609)
-4480	Cocal do Sul	24	4204251	(-28.598600387573242,-49.333499908447266)
-4481	Concórdia	24	4204301	(-27.233499526977539,-52.0260009765625)
-4482	Cordilheira Alta	24	4204350	(-26.984399795532227,-52.605598449707031)
-4483	Coronel Freitas	24	4204400	(-26.90570068359375,-52.701099395751953)
-4484	Coronel Martins	24	4204459	(-26.51099967956543,-52.669399261474609)
-4485	Correia Pinto	24	4204558	(-27.587699890136719,-50.361400604248047)
-4486	Corupá	24	4204509	(-26.424600601196289,-49.245998382568359)
-4487	Criciúma	24	4204608	(-28.672300338745117,-49.372898101806641)
-4488	Cunha Porã	24	4204707	(-26.895000457763672,-53.16619873046875)
-4489	Cunhataí	24	4204756	(-26.97089958190918,-53.089500427246094)
-4490	Curitibanos	24	4204806	(-27.282400131225586,-50.581600189208984)
-4491	Descanso	24	4204905	(-26.826999664306641,-53.503398895263672)
-4492	Dionísio Cerqueira	24	4205001	(-26.264799118041992,-53.635101318359375)
-4493	Dona Emma	24	4205100	(-26.981000900268555,-49.726100921630859)
-4494	Doutor Pedrinho	24	4205159	(-26.717399597167969,-49.479499816894531)
-4495	Entre Rios	24	4205175	(-26.722499847412109,-52.558498382568359)
-4496	Ermo	24	4205191	(-28.986900329589844,-49.643001556396484)
-4497	Erval Velho	24	4205209	(-27.274299621582031,-51.443000793457031)
-4498	Faxinal dos Guedes	24	4205308	(-26.845100402832031,-52.259601593017578)
-4499	Flor do Sertão	24	4205357	(-26.781099319458008,-53.350498199462891)
-4500	Florianópolis	24	4205407	(-27.594499588012695,-48.547698974609375)
-4501	Formosa do Sul	24	4205431	(-26.645299911499023,-52.794601440429688)
-4502	Forquilhinha	24	4205456	(-28.745399475097656,-49.478500366210937)
-4503	Fraiburgo	24	4205506	(-27.023300170898438,-50.919998168945313)
-4504	Frei Rogério	24	4205555	(-27.174999237060547,-50.807598114013672)
-4505	Galvão	24	4205605	(-26.454900741577148,-52.6875)
-4506	Garopaba	24	4205704	(-28.02747917175293,-48.619098663330078)
-4507	Garuva	24	4205803	(-26.029199600219727,-48.852001190185547)
-4508	Gaspar	24	4205902	(-26.933599472045898,-48.953399658203125)
-4509	Governador Celso Ramos	24	4206009	(-27.31719970703125,-48.557598114013672)
-4510	Grão Pará	24	4206108	(-28.180900573730469,-49.225200653076172)
-4511	Gravatal	24	4206207	(-28.32080078125,-49.042701721191406)
-4512	Guabiruba	24	4206306	(-27.080799102783203,-48.980400085449219)
-4513	Guaraciaba	24	4206405	(-26.60420036315918,-53.524299621582031)
-4514	Guaramirim	24	4206504	(-26.468799591064453,-49.002601623535156)
-4515	Guarujá do Sul	24	4206603	(-26.385799407958984,-53.529598236083984)
-4516	Guatambú	24	4206652	(-27.134099960327148,-52.788700103759766)
-4517	Herval d`Oeste	24	4206702	(-27.190299987792969,-51.49169921875)
-4518	Ibiam	24	4206751	(-27.184700012207031,-51.235198974609375)
-4519	Ibicaré	24	4206801	(-27.088100433349609,-51.368099212646484)
-4520	Ibirama	24	4206900	(-27.05470085144043,-49.519298553466797)
-4521	Içara	24	4207007	(-28.713199615478516,-49.308700561523438)
-4522	Ilhota	24	4207106	(-26.902299880981445,-48.825099945068359)
-4523	Imaruí	24	4207205	(-28.333900451660156,-48.817001342773438)
-4524	Imbituba	24	4207304	(-28.228399276733398,-48.665901184082031)
-4525	Imbuia	24	4207403	(-27.490800857543945,-49.421798706054687)
-4526	Indaial	24	4207502	(-26.899200439453125,-49.235401153564453)
-4527	Iomerê	24	4207577	(-27.001899719238281,-51.24420166015625)
-4528	Ipira	24	4207601	(-27.403799057006836,-51.775798797607422)
-4529	Iporã do Oeste	24	4207650	(-26.98539924621582,-53.535499572753906)
-4530	Ipuaçu	24	4207684	(-26.634986877441406,-52.455593109130859)
-4531	Ipumirim	24	4207700	(-27.077199935913086,-52.128898620605469)
-4532	Iraceminha	24	4207759	(-26.821500778198242,-53.276699066162109)
-4533	Irani	24	4207809	(-27.02869987487793,-51.901199340820313)
-4534	Irati	24	4207858	(-26.653900146484375,-52.895500183105469)
-4535	Irineópolis	24	4207908	(-26.242000579833984,-50.795700073242188)
-4536	Itá	24	4208005	(-27.290700912475586,-52.321201324462891)
-4537	Itaiópolis	24	4208104	(-26.339000701904297,-49.909198760986328)
-4538	Itajaí	24	4208203	(-26.910100936889648,-48.670501708984375)
-4539	Itapema	24	4208302	(-27.086099624633789,-48.616001129150391)
-4540	Itapiranga	24	4208401	(-27.165899276733398,-53.716598510742187)
-4541	Itapoá	24	4208450	(-26.115800857543945,-48.618198394775391)
-4542	Ituporanga	24	4208500	(-27.410100936889648,-49.596298217773438)
-4543	Jaborá	24	4208609	(-27.178199768066406,-51.727901458740234)
-4544	Jacinto Machado	24	4208708	(-28.996099472045898,-49.762298583984375)
-4545	Jaguaruna	24	4208807	(-28.614599227905273,-49.029598236083984)
-4546	Jaraguá do Sul	24	4208906	(-26.485099792480469,-49.071300506591797)
-4547	Jardinópolis	24	4208955	(-26.719100952148437,-52.862499237060547)
-4548	Joaçaba	24	4209003	(-27.172100067138672,-51.510799407958984)
-4549	Joinville	24	4209102	(-26.304500579833984,-48.848701477050781)
-4550	José Boiteux	24	4209151	(-26.956600189208984,-49.62860107421875)
-4551	Jupiá	24	4209177	(-26.395000457763672,-52.729801177978516)
-4552	Lacerdópolis	24	4209201	(-27.257900238037109,-51.557701110839844)
-4553	Lages	24	4209300	(-27.815000534057617,-50.325901031494141)
-4554	Laguna	24	4209409	(-28.48430061340332,-48.777198791503906)
-4555	Lajeado Grande	24	4209458	(-26.857599258422852,-52.564800262451172)
-4556	Laurentino	24	4209508	(-27.217300415039062,-49.733100891113281)
-4557	Lauro Muller	24	4209607	(-28.385900497436523,-49.403499603271484)
-4558	Lebon Régis	24	4209706	(-26.927999496459961,-50.692100524902344)
-4559	Leoberto Leal	24	4209805	(-27.508100509643555,-49.278900146484375)
-4560	Lindóia do Sul	24	4209854	(-27.054500579833984,-52.069000244140625)
-4561	Lontras	24	4209904	(-27.168399810791016,-49.534999847412109)
-4562	Luiz Alves	24	4210001	(-26.715099334716797,-48.932201385498047)
-4563	Luzerna	24	4210035	(-27.130399703979492,-51.46820068359375)
-4564	Macieira	24	4210050	(-26.855199813842773,-51.370498657226563)
-4565	Mafra	24	4210100	(-26.115900039672852,-49.808601379394531)
-4566	Major Gercino	24	4210209	(-27.419200897216797,-48.948799133300781)
-4567	Major Vieira	24	4210308	(-26.370899200439453,-50.32659912109375)
-4568	Maracajá	24	4210407	(-28.84630012512207,-49.460498809814453)
-4569	Maravilha	24	4210506	(-26.766500473022461,-53.173698425292969)
-4570	Marema	24	4210555	(-26.802400588989258,-52.626399993896484)
-4571	Massaranduba	24	4210605	(-26.61090087890625,-49.005401611328125)
-4572	Matos Costa	24	4210704	(-26.47089958190918,-51.150100708007813)
-4573	Meleiro	24	4210803	(-28.824399948120117,-49.637798309326172)
-4574	Mirim Doce	24	4210852	(-27.197000503540039,-50.078601837158203)
-4575	Modelo	24	4210902	(-26.772899627685547,-53.040000915527344)
-4576	Mondaí	24	4211009	(-27.100799560546875,-53.4031982421875)
-4577	Monte Carlo	24	4211058	(-27.223899841308594,-50.980800628662109)
-4578	Monte Castelo	24	4211108	(-26.461000442504883,-50.232700347900391)
-4579	Morro da Fumaça	24	4211207	(-28.651100158691406,-49.216899871826172)
-4580	Morro Grande	24	4211256	(-28.800600051879883,-49.721401214599609)
-4581	Navegantes	24	4211306	(-26.89430046081543,-48.654598236083984)
-4582	Nova Erechim	24	4211405	(-26.898199081420898,-52.906600952148438)
-4583	Nova Itaberaba	24	4211454	(-26.942800521850586,-52.814098358154297)
-4584	Nova Trento	24	4211504	(-27.277999877929687,-48.929798126220703)
-4585	Nova Veneza	24	4211603	(-28.633800506591797,-49.505500793457031)
-4586	Novo Horizonte	24	4211652	(-26.44420051574707,-52.828098297119141)
-4587	Orleans	24	4211702	(-28.348699569702148,-49.298599243164063)
-4588	Otacílio Costa	24	4211751	(-27.478900909423828,-50.123100280761719)
-4589	Ouro	24	4211801	(-27.337900161743164,-51.619400024414063)
-4590	Ouro Verde	24	4211850	(-26.691999435424805,-52.310798645019531)
-4591	Paial	24	4211876	(-27.254100799560547,-52.497501373291016)
-4592	Painel	24	4211892	(-27.92340087890625,-50.097198486328125)
-4593	Palhoça	24	4211900	(-27.645500183105469,-48.669700622558594)
-4594	Palma Sola	24	4212007	(-26.347099304199219,-53.277099609375)
-4595	Palmeira	24	4212056	(-27.583000183105469,-50.157699584960938)
-4596	Palmitos	24	4212106	(-27.070199966430664,-53.158599853515625)
-4597	Papanduva	24	4212205	(-26.377700805664063,-50.141899108886719)
-4598	Paraíso	24	4212239	(-26.620000839233398,-53.671600341796875)
-4599	Passo de Torres	24	4212254	(-29.309900283813477,-49.722000122070313)
-4600	Passos Maia	24	4212270	(-26.782899856567383,-52.056800842285156)
-4601	Paulo Lopes	24	4212304	(-27.960699081420898,-48.6864013671875)
-4602	Pedras Grandes	24	4212403	(-28.433900833129883,-49.194900512695313)
-4603	Penha	24	4212502	(-26.775400161743164,-48.646499633789063)
-4604	Peritiba	24	4212601	(-27.375400543212891,-51.901798248291016)
-4605	Petrolândia	24	4212700	(-27.534599304199219,-49.693698883056641)
-4606	Balneário Piçarras	24	4212809	(-26.763889312744141,-48.671665191650391)
-4607	Pinhalzinho	24	4212908	(-26.84950065612793,-52.991298675537109)
-4608	Pinheiro Preto	24	4213005	(-27.048299789428711,-51.224300384521484)
-4609	Piratuba	24	4213104	(-27.424200057983398,-51.766799926757812)
-4610	Planalto Alegre	24	4213153	(-27.070400238037109,-52.867000579833984)
-4611	Pomerode	24	4213203	(-26.738399505615234,-49.178501129150391)
-4612	Ponte Alta	24	4213302	(-27.483499526977539,-50.376399993896484)
-4613	Ponte Alta do Norte	24	4213351	(-27.159099578857422,-50.465900421142578)
-4614	Ponte Serrada	24	4213401	(-26.873300552368164,-52.011199951171875)
-4615	Porto Belo	24	4213500	(-27.158599853515625,-48.546901702880859)
-4616	Porto União	24	4213609	(-26.245100021362305,-51.075901031494141)
-4617	Pouso Redondo	24	4213708	(-27.25670051574707,-49.930099487304687)
-4618	Praia Grande	24	4213807	(-29.191799163818359,-49.952499389648438)
-4620	Presidente Getúlio	24	4214003	(-27.047399520874023,-49.624599456787109)
-4621	Presidente Nereu	24	4214102	(-27.276800155639648,-49.388900756835938)
-4622	Princesa	24	4214151	(-26.444099426269531,-53.599399566650391)
-4623	Quilombo	24	4214201	(-26.726400375366211,-52.7239990234375)
-4624	Rancho Queimado	24	4214300	(-27.672700881958008,-49.019100189208984)
-4625	Rio das Antas	24	4214409	(-26.894599914550781,-51.067401885986328)
-4626	Rio do Campo	24	4214508	(-26.945199966430664,-50.136001586914062)
-4627	Rio do Oeste	24	4214607	(-27.195199966430664,-49.798900604248047)
-4628	Rio do Sul	24	4214805	(-27.215599060058594,-49.643001556396484)
-4629	Rio dos Cedros	24	4214706	(-26.739799499511719,-49.271800994873047)
-4630	Rio Fortuna	24	4214904	(-28.124399185180664,-49.106800079345703)
-4631	Rio Negrinho	24	4215000	(-26.259099960327148,-49.5177001953125)
-4632	Rio Rufino	24	4215059	(-27.859199523925781,-49.775398254394531)
-4633	Riqueza	24	4215075	(-27.065299987792969,-53.326499938964844)
-4634	Rodeio	24	4215109	(-26.924299240112305,-49.364898681640625)
-4635	Romelândia	24	4215208	(-26.680900573730469,-53.31719970703125)
-4636	Salete	24	4215307	(-26.979799270629883,-49.998798370361328)
-4637	Saltinho	24	4215356	(-26.604900360107422,-53.05780029296875)
-4638	Salto Veloso	24	4215406	(-26.902999877929688,-51.404300689697266)
-4639	Sangão	24	4215455	(-28.632600784301758,-49.132198333740234)
-4640	Santa Cecília	24	4215505	(-26.959199905395508,-50.425201416015625)
-4641	Santa Helena	24	4215554	(-26.937000274658203,-53.62139892578125)
-4642	Santa Rosa de Lima	24	4215604	(-28.033100128173828,-49.132999420166016)
-4643	Santa Rosa do Sul	24	4215653	(-29.13129997253418,-49.710899353027344)
-4644	Santa Terezinha	24	4215679	(-26.781299591064453,-50.008998870849609)
-4645	Santa Terezinha do Progresso	24	4215687	(-26.638799667358398,-52.679901123046875)
-4646	Santiago do Sul	24	4215695	(-26.624000549316406,-53.199699401855469)
-4647	Santo Amaro da Imperatriz	24	4215703	(-27.685199737548828,-48.781299591064453)
-4648	São Bento do Sul	24	4215802	(-26.249500274658203,-49.383098602294922)
-4649	São Bernardino	24	4215752	(-26.473899841308594,-52.968700408935547)
-4650	São Bonifácio	24	4215901	(-27.900899887084961,-48.932598114013672)
-4651	São Carlos	24	4216008	(-27.079799652099609,-53.003700256347656)
-4652	São Cristovão do Sul	24	4216057	(-27.266599655151367,-50.438800811767578)
-4653	São Domingos	24	4216107	(-26.554800033569336,-52.531299591064453)
-4654	São Francisco do Sul	24	4216206	(-26.257900238037109,-48.6343994140625)
-4655	São João Batista	24	4216305	(-27.277200698852539,-48.847400665283203)
-4656	São João do Itaperiú	24	4216354	(-26.621299743652344,-48.768299102783203)
-4657	São João do Oeste	24	4216255	(-27.098400115966797,-53.597698211669922)
-4658	São João do Sul	24	4216404	(-29.215400695800781,-49.809398651123047)
-4659	São Joaquim	24	4216503	(-28.288700103759766,-49.945701599121094)
-4660	São José	24	4216602	(-27.61359977722168,-48.636600494384766)
-4661	São José do Cedro	24	4216701	(-26.456100463867188,-53.495498657226563)
-4662	São José do Cerrito	24	4216800	(-27.660200119018555,-50.573299407958984)
-4663	São Lourenço do Oeste	24	4216909	(-26.355659484863281,-52.849838256835938)
-4664	São Ludgero	24	4217006	(-28.314399719238281,-49.180599212646484)
-4665	São Martinho	24	4217105	(-28.160900115966797,-48.986698150634766)
-4666	São Miguel da Boa Vista	24	4217154	(-26.687000274658203,-53.2510986328125)
-4667	São Miguel do Oeste	24	4217204	(-26.724199295043945,-53.516300201416016)
-4668	São Pedro de Alcântara	24	4217253	(-27.566499710083008,-48.804798126220703)
-4669	Saudades	24	4217303	(-26.931699752807617,-53.002101898193359)
-4670	Schroeder	24	4217402	(-26.411600112915039,-49.074001312255859)
-4671	Seara	24	4217501	(-27.156400680541992,-52.298999786376953)
-4672	Serra Alta	24	4217550	(-26.722900390625,-53.040901184082031)
-4673	Siderópolis	24	4217600	(-28.595500946044922,-49.431400299072266)
-4674	Sombrio	24	4217709	(-29.107999801635742,-49.632801055908203)
-4675	Sul Brasil	24	4217758	(-26.735099792480469,-52.964000701904297)
-4676	Taió	24	4217808	(-27.121000289916992,-49.99420166015625)
-4677	Tangará	24	4217907	(-27.099599838256836,-51.247299194335938)
-4678	Tigrinhos	24	4217956	(-26.687599182128906,-53.154499053955078)
-4679	Tijucas	24	4218004	(-27.23539924621582,-48.632198333740234)
-4680	Timbé do Sul	24	4218103	(-28.828699111938477,-49.841999053955078)
-4681	Timbó	24	4218202	(-26.824600219726563,-49.269001007080078)
-4682	Timbó Grande	24	4218251	(-26.612699508666992,-50.660701751708984)
-4683	Três Barras	24	4218301	(-26.105600357055664,-50.319698333740234)
-4684	Treviso	24	4218350	(-28.509700775146484,-49.463401794433594)
-4685	Treze de Maio	24	4218400	(-28.553699493408203,-49.156501770019531)
-4686	Treze Tílias	24	4218509	(-27.002599716186523,-51.408401489257812)
-4687	Trombudo Central	24	4218608	(-27.303300857543945,-49.792999267578125)
-4688	Tubarão	24	4218707	(-28.47130012512207,-49.014400482177734)
-4689	Tunápolis	24	4218756	(-26.968099594116211,-53.641700744628906)
-4690	Turvo	24	4218806	(-28.927200317382812,-49.683101654052734)
-4691	União do Oeste	24	4218855	(-26.761999130249023,-52.854099273681641)
-4692	Urubici	24	4218905	(-28.01569938659668,-49.592498779296875)
-4693	Urupema	24	4218954	(-27.955699920654297,-49.872898101806641)
-4694	Urussanga	24	4219002	(-28.517999649047852,-49.323799133300781)
-4695	Vargeão	24	4219101	(-26.862100601196289,-52.154899597167969)
-4696	Vargem	24	4219150	(-27.486700057983398,-50.972400665283203)
-4697	Vargem Bonita	24	4219176	(-27.005500793457031,-51.740200042724609)
-4698	Vidal Ramos	24	4219200	(-27.388599395751953,-49.359298706054688)
-4699	Videira	24	4219309	(-27.008600234985352,-51.154300689697266)
-4700	Vitor Meireles	24	4219358	(-26.878200531005859,-49.832801818847656)
-4701	Witmarsum	24	4219408	(-26.927499771118164,-49.794700622558594)
-4702	Xanxerê	24	4219507	(-26.874700546264648,-52.403598785400391)
-4703	Xavantina	24	4219606	(-27.066699981689453,-52.342998504638672)
-4704	Xaxim	24	4219705	(-26.959600448608398,-52.537399291992188)
-4705	Zortéa	24	4219853	(-27.45210075378418,-51.551998138427734)
-4706	Adamantina	26	3500105	(-21.681999206542969,-51.073699951171875)
-4707	Adolfo	26	3500204	(-21.232500076293945,-49.645099639892578)
-4708	Aguaí	26	3500303	(-22.057199478149414,-46.973499298095703)
-4709	Águas da Prata	26	3500402	(-21.931900024414063,-46.717601776123047)
-4710	Águas de Lindóia	26	3500501	(-22.473300933837891,-46.631401062011719)
-4711	Águas de Santa Bárbara	26	3500550	(-22.881200790405273,-49.242099761962891)
-4712	Águas de São Pedro	26	3500600	(-22.597700119018555,-47.873401641845703)
-4713	Agudos	26	3500709	(-22.469400405883789,-48.986301422119141)
-4714	Alambari	26	3500758	(-23.550300598144531,-47.897998809814453)
-4715	Alfredo Marcondes	26	3500808	(-21.952699661254883,-51.41400146484375)
-4716	Altair	26	3500907	(-20.524200439453125,-49.057098388671875)
-4717	Altinópolis	26	3501004	(-21.021400451660156,-47.371200561523438)
-4718	Alto Alegre	26	3501103	(-21.581100463867188,-50.167999267578125)
-4719	Alumínio	26	3501152	(-23.530599594116211,-47.254600524902344)
-4720	Álvares Florence	26	3501202	(-20.32029914855957,-49.914100646972656)
-4721	Álvares Machado	26	3501301	(-22.076400756835938,-51.472198486328125)
-4722	Álvaro de Carvalho	26	3501400	(-22.084100723266602,-49.719001770019531)
-4723	Alvinlândia	26	3501509	(-22.443500518798828,-49.762298583984375)
-4724	Americana	26	3501608	(-22.737400054931641,-47.333099365234375)
-4725	Américo Brasiliense	26	3501707	(-21.728799819946289,-48.114700317382813)
-4726	Américo de Campos	26	3501806	(-20.298500061035156,-49.73590087890625)
-4727	Amparo	26	3501905	(-22.708799362182617,-46.771999359130859)
-4728	Analândia	26	3502002	(-22.128900527954102,-47.661899566650391)
-4729	Andradina	26	3502101	(-20.894800186157227,-51.37860107421875)
-4730	Angatuba	26	3502200	(-23.49169921875,-48.413898468017578)
-4731	Anhembi	26	3502309	(-22.792999267578125,-48.133598327636719)
-4732	Anhumas	26	3502408	(-22.293399810791016,-51.389499664306641)
-4733	Aparecida	26	3502507	(-22.84950065612793,-45.232498168945313)
-4734	Aparecida d`Oeste	26	3502606	(-20.448699951171875,-50.883499145507812)
-4735	Apiaí	26	3502705	(-24.510799407958984,-48.84429931640625)
-4736	Araçariguama	26	3502754	(-23.436599731445313,-47.060798645019531)
-4737	Araçatuba	26	3502804	(-21.207599639892578,-50.440101623535156)
-4738	Araçoiaba da Serra	26	3502903	(-23.502899169921875,-47.616600036621094)
-4739	Aramina	26	3503000	(-20.088199615478516,-47.787300109863281)
-4740	Arandu	26	3503109	(-23.138599395751953,-49.048698425292969)
-4741	Arapeí	26	3503158	(-22.671699523925781,-44.444099426269531)
-4742	Araraquara	26	3503208	(-21.784500122070312,-48.178001403808594)
-4743	Araras	26	3503307	(-22.357200622558594,-47.384201049804688)
-4744	Arco-Íris	26	3503356	(-21.772800445556641,-50.465999603271484)
-4745	Arealva	26	3503406	(-22.031000137329102,-48.913501739501953)
-4746	Areias	26	3503505	(-22.57859992980957,-44.699199676513672)
-4747	Areiópolis	26	3503604	(-22.667200088500977,-48.668098449707031)
-4748	Ariranha	26	3503703	(-21.187200546264648,-48.790401458740234)
-4749	Artur Nogueira	26	3503802	(-22.572700500488281,-47.172698974609375)
-4750	Arujá	26	3503901	(-23.396499633789063,-46.319999694824219)
-4751	Aspásia	26	3503950	(-20.159999847412109,-50.728000640869141)
-4752	Assis	26	3504008	(-22.659999847412109,-50.418300628662109)
-4753	Atibaia	26	3504107	(-23.117099761962891,-46.556301116943359)
-4754	Auriflama	26	3504206	(-20.683599472045898,-50.557201385498047)
-4755	Avaí	26	3504305	(-22.151399612426758,-49.335601806640625)
-4756	Avanhandava	26	3504404	(-21.458400726318359,-49.950901031494141)
-4757	Avaré	26	3504503	(-23.106700897216797,-48.925098419189453)
-4758	Bady Bassitt	26	3504602	(-20.919700622558594,-49.438499450683594)
-4759	Balbinos	26	3504701	(-21.896299362182617,-49.361900329589844)
-4760	Bálsamo	26	3504800	(-20.734800338745117,-49.586498260498047)
-4761	Bananal	26	3504909	(-22.681900024414063,-44.328098297119141)
-4762	Barão de Antonina	26	3505005	(-23.628400802612305,-49.563400268554688)
-4763	Barbosa	26	3505104	(-21.26569938659668,-49.951801300048828)
-4764	Bariri	26	3505203	(-22.072999954223633,-48.743801116943359)
-4765	Barra Bonita	26	3505302	(-22.490900039672852,-48.558300018310547)
-4766	Barra do Chapéu	26	3505351	(-24.472200393676758,-49.023799896240234)
-4767	Barra do Turvo	26	3505401	(-24.759000778198242,-48.501300811767578)
-4768	Barretos	26	3505500	(-20.5531005859375,-48.569801330566406)
-4769	Barrinha	26	3505609	(-21.186399459838867,-48.163600921630859)
-4770	Barueri	26	3505708	(-23.505699157714844,-46.879001617431641)
-4771	Bastos	26	3505807	(-21.920999526977539,-50.735698699951172)
-4772	Batatais	26	3505906	(-20.892900466918945,-47.592098236083984)
-4773	Bauru	26	3506003	(-22.324600219726563,-49.087100982666016)
-4774	Bebedouro	26	3506102	(-20.949100494384766,-48.479099273681641)
-4775	Bento de Abreu	26	3506201	(-21.268600463867188,-50.813999176025391)
-4776	Bernardino de Campos	26	3506300	(-23.016399383544922,-49.467899322509766)
-4777	Bertioga	26	3506359	(-23.848600387573242,-46.139598846435547)
-4778	Bilac	26	3506409	(-21.403999328613281,-50.474601745605469)
-4779	Birigui	26	3506508	(-21.291000366210937,-50.34320068359375)
-4780	Biritiba-Mirim	26	3506607	(-23.569799423217773,-46.040699005126953)
-4781	Boa Esperança do Sul	26	3506706	(-21.991800308227539,-48.390598297119141)
-4782	Bocaina	26	3506805	(-22.136499404907227,-48.522998809814453)
-4783	Bofete	26	3506904	(-23.105499267578125,-48.258201599121094)
-4784	Boituva	26	3507001	(-23.285499572753906,-47.678600311279297)
-4785	Bom Jesus dos Perdões	26	3507100	(-23.135599136352539,-46.467498779296875)
-4786	Bom Sucesso de Itararé	26	3507159	(-24.315500259399414,-49.145099639892578)
-4787	Borá	26	3507209	(-22.269599914550781,-50.540901184082031)
-4788	Boracéia	26	3507308	(-22.192600250244141,-48.780799865722656)
-4789	Borborema	26	3507407	(-21.621400833129883,-49.074100494384766)
-4790	Borebi	26	3507456	(-22.572799682617188,-48.970699310302734)
-4791	Botucatu	26	3507506	(-22.883699417114258,-48.443698883056641)
-4792	Bragança Paulista	26	3507605	(-22.952699661254883,-46.541900634765625)
-4793	Braúna	26	3507704	(-21.499000549316406,-50.317501068115234)
-4794	Brejo Alegre	26	3507753	(-21.16510009765625,-50.186100006103516)
-4795	Brodowski	26	3507803	(-20.984500885009766,-47.657199859619141)
-4796	Brotas	26	3507902	(-22.279499053955078,-48.125099182128906)
-4797	Buri	26	3508009	(-23.797700881958008,-48.595798492431641)
-4798	Buritama	26	3508108	(-21.066099166870117,-50.147499084472656)
-4799	Buritizal	26	3508207	(-20.191099166870117,-47.709598541259766)
-4800	Cabrália Paulista	26	3508306	(-22.457599639892578,-49.339298248291016)
-4801	Cabreúva	26	3508405	(-23.305299758911133,-47.136199951171875)
-4802	Caçapava	26	3508504	(-23.099199295043945,-45.707599639892578)
-4803	Cachoeira Paulista	26	3508603	(-22.666500091552734,-45.015399932861328)
-4804	Caconde	26	3508702	(-21.527999877929688,-46.643699645996094)
-4805	Cafelândia	26	3508801	(-21.8031005859375,-49.609199523925781)
-4806	Caiabu	26	3508900	(-22.012699127197266,-51.239398956298828)
-4807	Caieiras	26	3509007	(-23.360700607299805,-46.739700317382813)
-4808	Caiuá	26	3509106	(-21.832199096679688,-51.996898651123047)
-4809	Cajamar	26	3509205	(-23.354999542236328,-46.878101348876953)
-4810	Cajati	26	3509254	(-24.732400894165039,-48.122299194335938)
-4811	Cajobi	26	3509304	(-20.877300262451172,-48.806301116943359)
-4812	Cajuru	26	3509403	(-21.274900436401367,-47.303001403808594)
-4813	Campina do Monte Alegre	26	3509452	(-23.589500427246094,-48.475799560546875)
-4814	Campinas	26	3509502	(-22.905300140380859,-47.065898895263672)
-4815	Campo Limpo Paulista	26	3509601	(-23.207799911499023,-46.788898468017578)
-4816	Campos do Jordão	26	3509700	(-22.72960090637207,-45.583301544189453)
-4817	Campos Novos Paulista	26	3509809	(-22.601999282836914,-49.998699188232422)
-4818	Cananéia	26	3509908	(-25.014400482177734,-47.934101104736328)
-4819	Canas	26	3509957	(-22.700300216674805,-45.052101135253906)
-4820	Cândido Mota	26	3510005	(-22.747100830078125,-50.387298583984375)
-4821	Cândido Rodrigues	26	3510104	(-21.327499389648437,-48.632701873779297)
-4822	Canitar	26	3510153	(-23.003999710083008,-49.783901214599609)
-4823	Capão Bonito	26	3510203	(-24.011299133300781,-48.348201751708984)
-4824	Capela do Alto	26	3510302	(-23.468500137329102,-47.738800048828125)
-4825	Capivari	26	3510401	(-22.995100021362305,-47.507099151611328)
-4826	Caraguatatuba	26	3510500	(-23.612499237060547,-45.412498474121094)
-4827	Carapicuíba	26	3510609	(-23.523500442504883,-46.8406982421875)
-4828	Cardoso	26	3510708	(-20.079999923706055,-49.918300628662109)
-4829	Casa Branca	26	3510807	(-21.77079963684082,-47.085201263427734)
-4830	Cássia dos Coqueiros	26	3510906	(-21.280099868774414,-47.164299011230469)
-4831	Castilho	26	3511003	(-20.868900299072266,-51.488399505615234)
-4832	Catanduva	26	3511102	(-21.131399154663086,-48.977001190185547)
-4833	Catiguá	26	3511201	(-21.051900863647461,-49.061599731445313)
-4834	Cedral	26	3511300	(-20.900899887084961,-49.266399383544922)
-4835	Cerqueira César	26	3511409	(-23.038000106811523,-49.165500640869141)
-4836	Cerquilho	26	3511508	(-23.166500091552734,-47.745899200439453)
-4837	Cesário Lange	26	3511607	(-23.22599983215332,-47.954498291015625)
-4838	Charqueada	26	3511706	(-22.509599685668945,-47.775501251220703)
-4839	Chavantes	26	3557204	(-23.036600112915039,-49.709598541259766)
-4840	Clementina	26	3511904	(-21.560400009155273,-50.452499389648438)
-4841	Colina	26	3512001	(-20.711399078369141,-48.538700103759766)
-4842	Colômbia	26	3512100	(-20.176799774169922,-48.686500549316406)
-4843	Conchal	26	3512209	(-22.337499618530273,-47.172901153564453)
-4844	Conchas	26	3512308	(-23.015399932861328,-48.013401031494141)
-4845	Cordeirópolis	26	3512407	(-22.477800369262695,-47.451900482177734)
-4846	Coroados	26	3512506	(-21.352100372314453,-50.285900115966797)
-4847	Coronel Macedo	26	3512605	(-23.626100540161133,-49.310001373291016)
-4848	Corumbataí	26	3512704	(-22.22130012512207,-47.621498107910156)
-4849	Cosmópolis	26	3512803	(-22.641899108886719,-47.192600250244141)
-4850	Cosmorama	26	3512902	(-20.475500106811523,-49.782699584960938)
-4851	Cotia	26	3513009	(-23.602199554443359,-46.918998718261719)
-4852	Cravinhos	26	3513108	(-21.33799934387207,-47.732398986816406)
-4853	Cristais Paulista	26	3513207	(-20.403600692749023,-47.4208984375)
-4854	Cruzália	26	3513306	(-22.737300872802734,-50.790901184082031)
-4855	Cruzeiro	26	3513405	(-22.572799682617188,-44.969001770019531)
-4856	Cubatão	26	3513504	(-23.89109992980957,-46.423999786376953)
-4857	Cunha	26	3513603	(-23.073099136352539,-44.957599639892578)
-4858	Descalvado	26	3513702	(-21.900199890136719,-47.618099212646484)
-4859	Diadema	26	3513801	(-23.681299209594727,-46.620498657226563)
-4860	Dirce Reis	26	3513850	(-20.464199066162109,-50.6072998046875)
-4861	Divinolândia	26	3513900	(-21.663700103759766,-46.736099243164062)
-4862	Dobrada	26	3514007	(-21.515499114990234,-48.393501281738281)
-4863	Dois Córregos	26	3514106	(-22.367300033569336,-48.381900787353516)
-4864	Dolcinópolis	26	3514205	(-20.124000549316406,-50.514900207519531)
-4865	Dourado	26	3514304	(-22.104400634765625,-48.317798614501953)
-4866	Dracena	26	3514403	(-21.48430061340332,-51.534999847412109)
-4867	Duartina	26	3514502	(-22.414600372314453,-49.408401489257813)
-4868	Dumont	26	3514601	(-21.232400894165039,-47.975601196289063)
-4869	Echaporã	26	3514700	(-22.432600021362305,-50.203800201416016)
-4870	Eldorado	26	3514809	(-24.528099060058594,-48.114101409912109)
-4871	Elias Fausto	26	3514908	(-23.042800903320312,-47.368198394775391)
-4872	Elisiário	26	3514924	(-21.167800903320313,-49.114601135253906)
-4873	Embaúba	26	3514957	(-20.97960090637207,-48.832500457763672)
-4874	Embu	26	3515004	(-23.643699645996094,-46.857898712158203)
-4875	Embu-Guaçu	26	3515103	(-23.829700469970703,-46.8135986328125)
-4876	Emilianópolis	26	3515129	(-21.831399917602539,-51.483200073242188)
-4877	Engenheiro Coelho	26	3515152	(-22.483600616455078,-47.21099853515625)
-4878	Espírito Santo do Pinhal	26	3515186	(-22.190900802612305,-46.747699737548828)
-4879	Espírito Santo do Turvo	26	3515194	(-22.692499160766602,-49.434101104736328)
-4880	Estiva Gerbi	26	3557303	(-22.271299362182617,-46.948101043701172)
-4881	Estrela d`Oeste	26	3515202	(-20.287500381469727,-50.404899597167969)
-4882	Estrela do Norte	26	3515301	(-22.48590087890625,-51.663200378417969)
-4883	Euclides da Cunha Paulista	26	3515350	(-22.554500579833984,-52.592800140380859)
-4884	Fartura	26	3515400	(-23.391599655151367,-49.512401580810547)
-4885	Fernando Prestes	26	3515608	(-21.26609992980957,-48.687400817871094)
-4886	Fernandópolis	26	3515509	(-20.280599594116211,-50.247100830078125)
-4887	Fernão	26	3515657	(-22.360700607299805,-49.518699645996094)
-4888	Ferraz de Vasconcelos	26	3515707	(-23.541055679321289,-46.3709716796875)
-4889	Flora Rica	26	3515806	(-21.672700881958008,-51.382099151611328)
-4890	Floreal	26	3515905	(-20.675199508666992,-50.151298522949219)
-4891	Flórida Paulista	26	3516002	(-21.612699508666992,-51.172401428222656)
-4892	Florínia	26	3516101	(-22.868000030517578,-50.681373596191406)
-4893	Franca	26	3516200	(-20.535200119018555,-47.403900146484375)
-4894	Francisco Morato	26	3516309	(-23.279199600219727,-46.744800567626953)
-4895	Franco da Rocha	26	3516408	(-23.322900772094727,-46.729000091552734)
-4896	Gabriel Monteiro	26	3516507	(-21.529399871826172,-50.557300567626953)
-4897	Gália	26	3516606	(-22.291799545288086,-49.550399780273437)
-4898	Garça	26	3516705	(-22.212499618530273,-49.654598236083984)
-4899	Gastão Vidigal	26	3516804	(-20.7947998046875,-50.191200256347656)
-4900	Gavião Peixoto	26	3516853	(-21.836700439453125,-48.495700836181641)
-4901	General Salgado	26	3516903	(-20.648500442504883,-50.363998413085938)
-4902	Getulina	26	3517000	(-21.796100616455078,-49.931198120117187)
-4903	Glicério	26	3517109	(-21.381200790405273,-50.212299346923828)
-4904	Guaiçara	26	3517208	(-21.619499206542969,-49.801300048828125)
-4905	Guaimbê	26	3517307	(-21.909099578857422,-49.898601531982422)
-4906	Guaíra	26	3517406	(-20.319599151611328,-48.312000274658203)
-4907	Guapiaçu	26	3517505	(-20.795900344848633,-49.217201232910156)
-4908	Guapiara	26	3517604	(-24.189199447631836,-48.529499053955078)
-4909	Guará	26	3517703	(-20.430200576782227,-47.823600769042969)
-4910	Guaraçaí	26	3517802	(-21.029199600219727,-51.211898803710938)
-4911	Guaraci	26	3517901	(-20.497699737548828,-48.939098358154297)
-4912	Guarani d`Oeste	26	3518008	(-20.074600219726563,-50.341098785400391)
-4913	Guarantã	26	3518107	(-21.894199371337891,-49.591400146484375)
-4914	Guararapes	26	3518206	(-21.254400253295898,-50.645301818847656)
-4915	Guararema	26	3518305	(-23.411199569702148,-46.036899566650391)
-4916	Guaratinguetá	26	3518404	(-22.807500839233398,-45.193801879882813)
-4917	Guareí	26	3518503	(-23.371400833129883,-48.183700561523438)
-4918	Guariba	26	3518602	(-21.359399795532227,-48.231601715087891)
-4919	Guarujá	26	3518701	(-23.988800048828125,-46.257999420166016)
-4920	Guarulhos	26	3518800	(-23.453800201416016,-46.533298492431641)
-4921	Guatapará	26	3518859	(-21.494400024414063,-48.035598754882813)
-4922	Guzolândia	26	3518909	(-20.646699905395508,-50.664501190185547)
-4923	Herculândia	26	3519006	(-22.003799438476562,-50.390701293945313)
-4924	Holambra	26	3519055	(-22.640499114990234,-47.048698425292969)
-4925	Hortolândia	26	3519071	(-22.852899551391602,-47.214298248291016)
-4928	Iaras	26	3519253	(-22.868200302124023,-49.163398742675781)
-4929	Ibaté	26	3519303	(-21.958400726318359,-47.988201141357422)
-4930	Ibirá	26	3519402	(-21.083000183105469,-49.244800567626953)
-4931	Ibirarema	26	3519501	(-22.818500518798828,-50.073898315429688)
-4932	Ibitinga	26	3519600	(-21.756200790405273,-48.831901550292969)
-4933	Ibiúna	26	3519709	(-23.659599304199219,-47.222999572753906)
-4934	Icém	26	3519808	(-20.339099884033203,-49.191501617431641)
-4935	Iepê	26	3519907	(-22.660200119018555,-51.077899932861328)
-4936	Igaraçu do Tietê	26	3520004	(-22.509000778198242,-48.559700012207031)
-4937	Igarapava	26	3520103	(-20.040700912475586,-47.746601104736328)
-4938	Igaratá	26	3520202	(-23.203699111938477,-46.157001495361328)
-4939	Iguape	26	3520301	(-24.698999404907227,-47.553699493408203)
-4940	Ilha Comprida	26	3520426	(-24.73069953918457,-47.538299560546875)
-4941	Ilha Solteira	26	3520442	(-20.432600021362305,-51.342601776123047)
-4942	Ilhabela	26	3520400	(-23.778499603271484,-45.355201721191406)
-4943	Indaiatuba	26	3520509	(-23.081600189208984,-47.210098266601563)
-4944	Indiana	26	3520608	(-22.173799514770508,-51.255500793457031)
-4945	Indiaporã	26	3520707	(-19.979000091552734,-50.290901184082031)
-4946	Inúbia Paulista	26	3520806	(-21.769500732421875,-50.963298797607422)
-4947	Ipaussu	26	3520905	(-23.057500839233398,-49.627899169921875)
-4948	Iperó	26	3521002	(-23.351299285888672,-47.692699432373047)
-4949	Ipeúna	26	3521101	(-22.43549919128418,-47.715099334716797)
-4950	Ipiguá	26	3521150	(-20.65570068359375,-49.384201049804688)
-4951	Iporanga	26	3521200	(-24.584699630737305,-48.597099304199219)
-4952	Ipuã	26	3521309	(-20.44379997253418,-48.012901306152344)
-4953	Iracemápolis	26	3521408	(-22.583200454711914,-47.522998809814453)
-4954	Irapuã	26	3521507	(-21.276800155639648,-49.416400909423828)
-4955	Irapuru	26	3521606	(-21.568399429321289,-51.347198486328125)
-4956	Itaberá	26	3521705	(-23.863800048828125,-49.139999389648438)
-4957	Itaí	26	3521804	(-23.421300888061523,-49.091999053955078)
-4958	Itajobi	26	3521903	(-21.312299728393555,-49.062900543212891)
-4959	Itaju	26	3522000	(-21.985700607299805,-48.811599731445313)
-4960	Itanhaém	26	3522109	(-24.173599243164063,-46.787998199462891)
-4961	Itaóca	26	3522158	(-24.639299392700195,-48.841300964355469)
-4962	Itapecerica da Serra	26	3522208	(-23.716100692749023,-46.857200622558594)
-4963	Itapetininga	26	3522307	(-23.588600158691406,-48.048301696777344)
-4964	Itapeva	26	3522406	(-23.978799819946289,-48.876399993896484)
-4965	Itapevi	26	3522505	(-23.548799514770508,-46.932701110839844)
-4966	Itapira	26	3522604	(-22.435699462890625,-46.822399139404297)
-4967	Itapirapuã Paulista	26	3522653	(-24.572000503540039,-49.166099548339844)
-4968	Itápolis	26	3522703	(-21.594200134277344,-48.814899444580078)
-4969	Itaporanga	26	3522802	(-23.704299926757813,-49.481899261474609)
-4970	Itapuí	26	3522901	(-22.232400894165039,-48.719699859619141)
-4971	Itapura	26	3523008	(-20.641899108886719,-51.506301879882813)
-4972	Itaquaquecetuba	26	3523107	(-23.483499526977539,-46.345699310302734)
-4973	Itararé	26	3523206	(-24.108499526977539,-49.335201263427734)
-4974	Itariri	26	3523305	(-24.28339958190918,-47.173599243164062)
-4975	Itatiba	26	3523404	(-23.003499984741211,-46.846401214599609)
-4976	Itatinga	26	3523503	(-23.104700088500977,-48.615699768066406)
-4977	Itirapina	26	3523602	(-22.256200790405273,-47.816600799560547)
-4978	Itirapuã	26	3523701	(-20.641599655151367,-47.219398498535156)
-4979	Itobi	26	3523800	(-21.730899810791016,-46.974300384521484)
-4980	Itu	26	3523909	(-23.254400253295898,-47.292701721191406)
-4981	Itupeva	26	3524006	(-23.152599334716797,-47.059299468994141)
-4982	Ituverava	26	3524105	(-20.335500717163086,-47.790199279785156)
-4983	Jaborandi	26	3524204	(-20.688400268554687,-48.411201477050781)
-4984	Jaboticabal	26	3524303	(-21.25200080871582,-48.325199127197266)
-4985	Jacareí	26	3524402	(-23.298299789428711,-45.965801239013672)
-4986	Jaci	26	3524501	(-20.880500793457031,-49.579700469970703)
-4987	Jacupiranga	26	3524600	(-24.696300506591797,-48.006401062011719)
-4988	Jaguariúna	26	3524709	(-22.703699111938477,-46.985099792480469)
-4989	Jales	26	3524808	(-20.267200469970703,-50.549400329589844)
-4990	Jambeiro	26	3524907	(-23.252199172973633,-45.694198608398438)
-4991	Jandira	26	3525003	(-23.527500152587891,-46.902301788330078)
-4992	Jardinópolis	26	3525102	(-21.017599105834961,-47.760601043701172)
-4993	Jarinu	26	3525201	(-23.103900909423828,-46.728000640869141)
-4994	Jaú	26	3525300	(-22.293600082397461,-48.559200286865234)
-4995	Jeriquara	26	3525409	(-20.311599731445313,-47.591800689697266)
-4996	Joanópolis	26	3525508	(-22.927000045776367,-46.274101257324219)
-4997	João Ramalho	26	3525607	(-22.247299194335938,-50.769401550292969)
-4998	José Bonifácio	26	3525706	(-21.055099487304688,-49.689201354980469)
-4999	Júlio Mesquita	26	3525805	(-22.011199951171875,-49.787300109863281)
-5000	Jumirim	26	3525854	(-23.088399887084961,-47.786800384521484)
-5001	Jundiaí	26	3525904	(-23.185199737548828,-46.89739990234375)
-5002	Junqueirópolis	26	3526001	(-21.510299682617188,-51.434200286865234)
-5003	Juquiá	26	3526100	(-24.310100555419922,-47.642601013183594)
-5004	Juquitiba	26	3526209	(-23.924400329589844,-47.065299987792969)
-5005	Lagoinha	26	3526308	(-23.084600448608398,-45.194400787353516)
-5006	Laranjal Paulista	26	3526407	(-23.050600051879883,-47.837501525878906)
-5007	Lavínia	26	3526506	(-21.163900375366211,-51.04119873046875)
-5008	Lavrinhas	26	3526605	(-22.569999694824219,-44.902400970458984)
-5009	Leme	26	3526704	(-22.180900573730469,-47.384101867675781)
-5010	Lençóis Paulista	26	3526803	(-22.602699279785156,-48.803699493408203)
-5011	Limeira	26	3526902	(-22.565999984741211,-47.396999359130859)
-5012	Lindóia	26	3527009	(-22.522600173950195,-46.650001525878906)
-5013	Lins	26	3527108	(-21.67180061340332,-49.752601623535156)
-5014	Lorena	26	3527207	(-22.733400344848633,-45.119701385498047)
-5015	Lourdes	26	3527256	(-20.965999603271484,-50.226299285888672)
-5016	Louveira	26	3527306	(-23.085599899291992,-46.948398590087891)
-5017	Lucélia	26	3527405	(-21.71820068359375,-51.021499633789062)
-5018	Lucianópolis	26	3527504	(-22.429399490356445,-49.521999359130859)
-5019	Luís Antônio	26	3527603	(-21.549999237060547,-47.780082702636719)
-5020	Luiziânia	26	3527702	(-21.673700332641602,-50.329399108886719)
-5021	Lupércio	26	3527801	(-22.414600372314453,-49.818000793457031)
-5022	Lutécia	26	3527900	(-22.338399887084961,-50.394001007080078)
-5023	Macatuba	26	3528007	(-22.500200271606445,-48.710201263427734)
-5024	Macaubal	26	3528106	(-20.802200317382813,-49.968700408935547)
-5025	Macedônia	26	3528205	(-20.144399642944336,-50.197299957275391)
-5026	Magda	26	3528304	(-20.644500732421875,-50.230499267578125)
-5027	Mairinque	26	3528403	(-23.539800643920898,-47.185001373291016)
-5028	Mairiporã	26	3528502	(-23.317100524902344,-46.589698791503906)
-5029	Manduri	26	3528601	(-23.005599975585938,-49.320201873779297)
-5030	Marabá Paulista	26	3528700	(-22.106800079345703,-51.961700439453125)
-5031	Maracaí	26	3528809	(-22.614900588989258,-50.671298980712891)
-5032	Marapoama	26	3528858	(-21.258699417114258,-49.130001068115234)
-5033	Mariápolis	26	3528908	(-21.795900344848633,-51.182399749755859)
-5034	Marília	26	3529005	(-22.217100143432617,-49.950099945068359)
-5035	Marinópolis	26	3529104	(-20.438899993896484,-50.825401306152344)
-5036	Martinópolis	26	3529203	(-22.146200180053711,-51.1708984375)
-5037	Matão	26	3529302	(-21.602500915527344,-48.363998413085938)
-5038	Mauá	26	3529401	(-23.667699813842773,-46.461299896240234)
-5039	Mendonça	26	3529500	(-21.175699234008789,-49.5791015625)
-5040	Meridiano	26	3529609	(-20.357900619506836,-50.181098937988281)
-5041	Mesópolis	26	3529658	(-19.968399047851563,-50.632598876953125)
-5042	Miguelópolis	26	3529708	(-20.179599761962891,-48.030998229980469)
-5043	Mineiros do Tietê	26	3529807	(-22.41200065612793,-48.451000213623047)
-5044	Mira Estrela	26	3530003	(-19.978900909423828,-50.138999938964844)
-5045	Miracatu	26	3529906	(-24.276599884033203,-47.462501525878906)
-5046	Mirandópolis	26	3530102	(-21.13129997253418,-51.103500366210937)
-5047	Mirante do Paranapanema	26	3530201	(-22.290399551391602,-51.908401489257812)
-5048	Mirassol	26	3530300	(-20.816900253295898,-49.520599365234375)
-5049	Mirassolândia	26	3530409	(-20.617900848388672,-49.461700439453125)
-5050	Mococa	26	3530508	(-21.464700698852539,-47.002399444580078)
-5051	Mogi das Cruzes	26	3530607	(-23.52079963684082,-46.185398101806641)
-5052	Mogi Guaçu	26	3530706	(-22.367500305175781,-46.942798614501953)
-5053	Mogi Mirim	26	3530805	(-22.433210372924805,-46.9532470703125)
-5054	Mombuca	26	3530904	(-22.928499221801758,-47.558998107910156)
-5055	Monções	26	3531001	(-20.850900650024414,-50.097499847412109)
-5056	Mongaguá	26	3531100	(-24.080900192260742,-46.626499176025391)
-5057	Monte Alegre do Sul	26	3531209	(-22.681699752807617,-46.680999755859375)
-5058	Monte Alto	26	3531308	(-21.265499114990234,-48.497100830078125)
-5059	Monte Aprazível	26	3531407	(-20.767999649047852,-49.718399047851563)
-5060	Monte Azul Paulista	26	3531506	(-20.906499862670898,-48.638698577880859)
-5061	Monte Castelo	26	3531605	(-21.298099517822266,-51.567901611328125)
-5062	Monte Mor	26	3531803	(-22.944999694824219,-47.312198638916016)
-5063	Monteiro Lobato	26	3531704	(-22.954399108886719,-45.8406982421875)
-5064	Morro Agudo	26	3531902	(-20.728799819946289,-48.058101654052734)
-5065	Morungaba	26	3532009	(-22.881099700927734,-46.789600372314453)
-5066	Motuca	26	3532058	(-21.510299682617188,-48.153800964355469)
-5067	Murutinga do Sul	26	3532108	(-20.990800857543945,-51.277400970458984)
-5068	Nantes	26	3532157	(-22.6156005859375,-51.240001678466797)
-5069	Narandiba	26	3532207	(-22.40570068359375,-51.527400970458984)
-5070	Natividade da Serra	26	3532306	(-23.370700836181641,-45.446800231933594)
-5071	Nazaré Paulista	26	3532405	(-23.174699783325195,-46.398300170898438)
-5072	Neves Paulista	26	3532504	(-20.843000411987305,-49.635799407958984)
-5073	Nhandeara	26	3532603	(-20.694499969482422,-50.043598175048828)
-5074	Nipoã	26	3532702	(-20.911399841308594,-49.783298492431641)
-5075	Nova Aliança	26	3532801	(-21.015600204467773,-49.498600006103516)
-5076	Nova Campina	26	3532827	(-24.122400283813477,-48.902198791503906)
-5077	Nova Canaã Paulista	26	3532843	(-20.383600234985352,-50.948299407958984)
-5078	Nova Castilho	26	3532868	(-20.761499404907227,-50.347698211669922)
-5079	Nova Europa	26	3532900	(-21.776500701904297,-48.570499420166016)
-5080	Nova Granada	26	3533007	(-20.532100677490234,-49.312301635742188)
-5081	Nova Guataporanga	26	3533106	(-21.332000732421875,-51.644699096679688)
-5082	Nova Independência	26	3533205	(-21.10260009765625,-51.490501403808594)
-5083	Nova Luzitânia	26	3533304	(-20.856000900268555,-50.261699676513672)
-5084	Nova Odessa	26	3533403	(-22.783199310302734,-47.294101715087891)
-5085	Novais	26	3533254	(-20.989299774169922,-48.914100646972656)
-5086	Novo Horizonte	26	3533502	(-21.465099334716797,-49.223400115966797)
-5087	Nuporanga	26	3533601	(-20.72960090637207,-47.742900848388672)
-5088	Ocauçu	26	3533700	(-22.437999725341797,-49.922000885009766)
-5089	Óleo	26	3533809	(-22.943500518798828,-49.341899871826172)
-5090	Olímpia	26	3533908	(-20.736600875854492,-48.910598754882813)
-5091	Onda Verde	26	3534005	(-20.60420036315918,-49.292900085449219)
-5092	Oriente	26	3534104	(-22.154899597167969,-50.097099304199219)
-5093	Orindiúva	26	3534203	(-20.186100006103516,-49.346401214599609)
-5094	Orlândia	26	3534302	(-20.716899871826172,-47.885200500488281)
-5095	Osasco	26	3534401	(-23.532400131225586,-46.791599273681641)
-5096	Oscar Bressane	26	3534500	(-22.314899444580078,-50.281101226806641)
-5097	Osvaldo Cruz	26	3534609	(-21.79680061340332,-50.879299163818359)
-5098	Ourinhos	26	3534708	(-22.979700088500977,-49.869701385498047)
-5099	Ouro Verde	26	3534807	(-21.487199783325195,-51.702400207519531)
-5100	Ouroeste	26	3534757	(-20.006099700927734,-50.376800537109375)
-5101	Pacaembu	26	3534906	(-21.562700271606445,-51.265399932861328)
-5102	Palestina	26	3535002	(-20.389999389648438,-49.430900573730469)
-5103	Palmares Paulista	26	3535101	(-21.085399627685547,-48.803699493408203)
-5104	Palmeira d`Oeste	26	3535200	(-20.414800643920898,-50.763198852539063)
-5105	Palmital	26	3535309	(-22.785800933837891,-50.217998504638672)
-5106	Panorama	26	3535408	(-21.354000091552734,-51.856201171875)
-5107	Paraguaçu Paulista	26	3535507	(-22.411399841308594,-50.573200225830078)
-5108	Paraibuna	26	3535606	(-23.387199401855469,-45.663898468017578)
-5109	Paraíso	26	3535705	(-21.015899658203125,-48.776100158691406)
-5110	Paranapanema	26	3535804	(-23.386199951171875,-48.721401214599609)
-5111	Paranapuã	26	3535903	(-20.104799270629883,-50.588600158691406)
-5112	Parapuã	26	3536000	(-21.779199600219727,-50.794898986816406)
-5113	Pardinho	26	3536109	(-23.084100723266602,-48.367900848388672)
-5114	Pariquera-Açu	26	3536208	(-24.714700698852539,-47.874198913574219)
-5115	Parisi	26	3536257	(-20.303400039672852,-50.016300201416016)
-5116	Patrocínio Paulista	26	3536307	(-20.638399124145508,-47.280101776123047)
-5117	Paulicéia	26	3536406	(-21.315299987792969,-51.832099914550781)
-5118	Paulínia	26	3536505	(-22.754199981689453,-47.148799896240234)
-5119	Paulistânia	26	3536570	(-22.576799392700195,-49.400798797607422)
-5120	Paulo de Faria	26	3536604	(-20.029600143432617,-49.400001525878906)
-5121	Pederneiras	26	3536703	(-22.351100921630859,-48.778099060058594)
-5122	Pedra Bela	26	3536802	(-22.790199279785156,-46.445499420166016)
-5123	Pedranópolis	26	3536901	(-20.247400283813477,-50.112899780273438)
-5124	Pedregulho	26	3537008	(-20.253499984741211,-47.477500915527344)
-5125	Pedreira	26	3537107	(-22.741300582885742,-46.894798278808594)
-5126	Pedrinhas Paulista	26	3537156	(-22.817399978637695,-50.793300628662109)
-5127	Pedro de Toledo	26	3537206	(-24.276399612426758,-47.235401153564453)
-5128	Penápolis	26	3537305	(-21.414800643920898,-50.076900482177734)
-5129	Pereira Barreto	26	3537404	(-20.636800765991211,-51.112300872802734)
-5130	Pereiras	26	3537503	(-23.080400466918945,-47.972000122070313)
-5131	Peruíbe	26	3537602	(-24.312000274658203,-47.001201629638672)
-5132	Piacatu	26	3537701	(-21.592100143432617,-50.600299835205078)
-5133	Piedade	26	3537800	(-23.713899612426758,-47.42559814453125)
-5134	Pilar do Sul	26	3537909	(-23.807699203491211,-47.722198486328125)
-5135	Pindamonhangaba	26	3538006	(-22.924600601196289,-45.461299896240234)
-5136	Pindorama	26	3538105	(-21.185300827026367,-48.908599853515625)
-5137	Pinhalzinho	26	3538204	(-22.781099319458008,-46.589698791503906)
-5138	Piquerobi	26	3538303	(-21.874700546264648,-51.728199005126953)
-5139	Piquete	26	3538501	(-22.606899261474609,-45.186901092529297)
-5140	Piracaia	26	3538600	(-23.052499771118164,-46.359401702880859)
-5141	Piracicaba	26	3538709	(-22.733800888061523,-47.647598266601563)
-5142	Piraju	26	3538808	(-23.198099136352539,-49.380298614501953)
-5143	Pirajuí	26	3538907	(-21.999000549316406,-49.460800170898437)
-5144	Pirangi	26	3539004	(-21.088600158691406,-48.660701751708984)
-5145	Pirapora do Bom Jesus	26	3539103	(-23.396499633789063,-46.999099731445313)
-5146	Pirapozinho	26	3539202	(-22.271099090576172,-51.497600555419922)
-5147	Pirassununga	26	3539301	(-21.996000289916992,-47.425701141357422)
-5148	Piratininga	26	3539400	(-22.414199829101563,-49.133899688720703)
-5149	Pitangueiras	26	3539509	(-21.013200759887695,-48.221000671386719)
-5150	Planalto	26	3539608	(-21.034200668334961,-49.932998657226563)
-5151	Platina	26	3539707	(-22.637100219726563,-50.210399627685547)
-5152	Poá	26	3539806	(-23.533300399780273,-46.347301483154297)
-5153	Poloni	26	3539905	(-20.782899856567383,-49.825801849365234)
-5154	Pompéia	26	3540002	(-22.107000350952148,-50.175998687744141)
-5155	Pongaí	26	3540101	(-21.739599227905273,-49.360401153564453)
-5156	Pontal	26	3540200	(-21.021600723266602,-48.042301177978516)
-5157	Pontalinda	26	3540259	(-20.439599990844727,-50.525798797607422)
-5158	Pontes Gestal	26	3540309	(-20.172700881958008,-49.706401824951172)
-5159	Populina	26	3540408	(-19.94529914855957,-50.537998199462891)
-5160	Porangaba	26	3540507	(-23.17609977722168,-48.119499206542969)
-5161	Porto Feliz	26	3540606	(-23.209299087524414,-47.525100708007813)
-5162	Porto Ferreira	26	3540705	(-21.849800109863281,-47.48699951171875)
-5163	Potim	26	3540754	(-22.834299087524414,-45.255199432373047)
-5164	Potirendaba	26	3540804	(-21.042800903320312,-49.381500244140625)
-5165	Pracinha	26	3540853	(-21.849599838256836,-51.086799621582031)
-5166	Pradópolis	26	3540903	(-21.362600326538086,-48.067901611328125)
-5167	Praia Grande	26	3541000	(-24.008399963378906,-46.412101745605469)
-5168	Pratânia	26	3541059	(-22.811199188232422,-48.663600921630859)
-5169	Presidente Alves	26	3541109	(-22.099899291992188,-49.438098907470703)
-5170	Presidente Bernardes	26	3541208	(-22.008199691772461,-51.556499481201172)
-5171	Presidente Epitácio	26	3541307	(-21.765100479125977,-52.111099243164063)
-5172	Presidente Prudente	26	3541406	(-22.120700836181641,-51.392501831054688)
-5173	Presidente Venceslau	26	3541505	(-21.873199462890625,-51.844699859619141)
-5174	Promissão	26	3541604	(-21.535600662231445,-49.859901428222656)
-5175	Quadra	26	3541653	(-23.299299240112305,-48.054698944091797)
-5176	Quatá	26	3541703	(-22.245599746704102,-50.696601867675781)
-5177	Queiroz	26	3541802	(-21.796899795532227,-50.241500854492188)
-5178	Queluz	26	3541901	(-22.531200408935547,-44.778099060058594)
-5179	Quintana	26	3542008	(-22.06920051574707,-50.306999206542969)
-5180	Rafard	26	3542107	(-23.010499954223633,-47.53179931640625)
-5181	Rancharia	26	3542206	(-22.226900100708008,-50.893001556396484)
-5182	Redenção da Serra	26	3542305	(-23.263799667358398,-45.542198181152344)
-5183	Regente Feijó	26	3542404	(-22.218099594116211,-51.305500030517578)
-5184	Reginópolis	26	3542503	(-21.891399383544922,-49.226799011230469)
-5185	Registro	26	3542602	(-24.497900009155273,-47.844898223876953)
-5186	Restinga	26	3542701	(-20.605600357055664,-47.483299255371094)
-5187	Ribeira	26	3542800	(-24.651699066162109,-49.004398345947266)
-5188	Ribeirão Bonito	26	3542909	(-22.068500518798828,-48.181999206542969)
-5189	Ribeirão Branco	26	3543006	(-24.220600128173828,-48.763500213623047)
-5190	Ribeirão Corrente	26	3543105	(-20.45789909362793,-47.590400695800781)
-5191	Ribeirão do Sul	26	3543204	(-22.788999557495117,-49.932998657226563)
-5192	Ribeirão dos Índios	26	3543238	(-21.838199615478516,-51.610298156738281)
-5193	Ribeirão Grande	26	3543253	(-24.101100921630859,-48.367900848388672)
-5194	Ribeirão Pires	26	3543303	(-23.706699371337891,-46.405799865722656)
-5195	Ribeirão Preto	26	3543402	(-21.169900894165039,-47.809898376464844)
-5196	Rifaina	26	3543600	(-20.080299377441406,-47.429100036621094)
-5197	Rincão	26	3543709	(-21.589399337768555,-48.072799682617188)
-5198	Rinópolis	26	3543808	(-21.728399276733398,-50.723899841308594)
-5199	Rio Claro	26	3543907	(-22.398399353027344,-47.554599761962891)
-5200	Rio das Pedras	26	3544004	(-22.841699600219727,-47.604698181152344)
-5201	Rio Grande da Serra	26	3544103	(-23.74370002746582,-46.397098541259766)
-5202	Riolândia	26	3544202	(-19.986799240112305,-49.683601379394531)
-5203	Riversul	26	3543501	(-23.829000473022461,-49.429000854492188)
-5204	Rosana	26	3544251	(-22.57819938659668,-53.060298919677734)
-5205	Roseira	26	3544301	(-22.893800735473633,-45.306999206542969)
-5206	Rubiácea	26	3544400	(-21.300600051879883,-50.729598999023438)
-5207	Rubinéia	26	3544509	(-20.175899505615234,-51.006999969482422)
-5208	Sabino	26	3544608	(-21.459299087524414,-49.57550048828125)
-5209	Sagres	26	3544707	(-21.882299423217773,-50.959400177001953)
-5210	Sales	26	3544806	(-21.34269905090332,-49.489700317382813)
-5211	Sales Oliveira	26	3544905	(-20.769599914550781,-47.836898803710938)
-5212	Salesópolis	26	3545001	(-23.528799057006836,-45.846500396728516)
-5213	Salmourão	26	3545100	(-21.626699447631836,-50.861400604248047)
-5214	Saltinho	26	3545159	(-22.844200134277344,-47.675399780273438)
-5215	Salto	26	3545209	(-23.199600219726563,-47.293098449707031)
-5216	Salto de Pirapora	26	3545308	(-23.64739990234375,-47.574298858642578)
-5217	Salto Grande	26	3545407	(-22.889400482177734,-49.983100891113281)
-5218	Sandovalina	26	3545506	(-22.455099105834961,-51.764801025390625)
-5219	Santa Adélia	26	3545605	(-21.242700576782227,-48.806301116943359)
-5220	Santa Albertina	26	3545704	(-20.031099319458008,-50.729698181152344)
-5221	Santa Bárbara d`Oeste	26	3545803	(-22.755300521850586,-47.414299011230469)
-5222	Santa Branca	26	3546009	(-23.393299102783203,-45.887500762939453)
-5223	Santa Clara d`Oeste	26	3546108	(-20.090000152587891,-50.949100494384766)
-5224	Santa Cruz da Conceição	26	3546207	(-22.140499114990234,-47.451198577880859)
-5225	Santa Cruz da Esperança	26	3546256	(-21.295099258422852,-47.430400848388672)
-5226	Santa Cruz das Palmeiras	26	3546306	(-21.82349967956543,-47.248001098632812)
-5227	Santa Cruz do Rio Pardo	26	3546405	(-22.898799896240234,-49.635398864746094)
-5228	Santa Ernestina	26	3546504	(-21.461799621582031,-48.395301818847656)
-5229	Santa Fé do Sul	26	3546603	(-20.20829963684082,-50.931999206542969)
-5230	Santa Gertrudes	26	3546702	(-22.457199096679688,-47.527198791503906)
-5231	Santa Isabel	26	3546801	(-23.31719970703125,-46.223701477050781)
-5232	Santa Lúcia	26	3546900	(-21.684999465942383,-48.0885009765625)
-5233	Santa Maria da Serra	26	3547007	(-22.566099166870117,-48.1593017578125)
-5234	Santa Mercedes	26	3547106	(-21.34950065612793,-51.756401062011719)
-5235	Santa Rita d`Oeste	26	3547403	(-20.141399383544922,-50.835800170898438)
-5236	Santa Rita do Passa Quatro	26	3547502	(-21.70829963684082,-47.478000640869141)
-5237	Santa Rosa de Viterbo	26	3547601	(-21.47760009765625,-47.362201690673828)
-5238	Santa Salete	26	3547650	(-20.242900848388672,-50.688701629638672)
-5239	Santana da Ponte Pensa	26	3547205	(-20.252300262451172,-50.801399230957031)
-5240	Santana de Parnaíba	26	3547304	(-23.443889617919922,-46.917778015136719)
-5241	Santo Anastácio	26	3547700	(-21.974700927734375,-51.652698516845703)
-5242	Santo André	26	3547809	(-23.673700332641602,-46.543201446533203)
-5243	Santo Antônio da Alegria	26	3547908	(-21.086399078369141,-47.146400451660156)
-5244	Santo Antônio de Posse	26	3548005	(-22.602899551391602,-46.919200897216797)
-5245	Santo Antônio do Aracanguá	26	3548054	(-20.933099746704102,-50.498001098632813)
-5246	Santo Antônio do Jardim	26	3548104	(-22.112100601196289,-46.684501647949219)
-5247	Santo Antônio do Pinhal	26	3548203	(-22.826999664306641,-45.662998199462891)
-5248	Santo Expedito	26	3548302	(-21.846700668334961,-51.392898559570313)
-5249	Santópolis do Aguapeí	26	3548401	(-21.637599945068359,-50.504398345947266)
-5250	Santos	26	3548500	(-23.953500747680664,-46.334999084472656)
-5251	São Bento do Sapucaí	26	3548609	(-22.683700561523438,-45.72869873046875)
-5252	São Bernardo do Campo	26	3548708	(-23.691400527954102,-46.564601898193359)
-5253	São Caetano do Sul	26	3548807	(-23.622900009155273,-46.554798126220703)
-5254	São Carlos	26	3548906	(-22.017400741577148,-47.886001586914063)
-5255	São Francisco	26	3549003	(-20.362300872802734,-50.695201873779297)
-5256	São João da Boa Vista	26	3549102	(-21.970699310302734,-46.794399261474609)
-5257	São João das Duas Pontes	26	3549201	(-20.387899398803711,-50.379199981689453)
-5258	São João de Iracema	26	3549250	(-20.511100769042969,-50.356098175048828)
-5259	São João do Pau d`Alho	26	3549300	(-21.266199111938477,-51.667198181152344)
-5260	São Joaquim da Barra	26	3549409	(-20.581199645996094,-47.859298706054687)
-5261	São José da Bela Vista	26	3549508	(-20.593500137329102,-47.642398834228516)
-5262	São José do Barreiro	26	3549607	(-22.641399383544922,-44.577400207519531)
-5263	São José do Rio Pardo	26	3549706	(-21.595300674438477,-46.887298583984375)
-5264	São José do Rio Preto	26	3549805	(-20.811300277709961,-49.375801086425781)
-5265	São José dos Campos	26	3549904	(-23.189599990844727,-45.884101867675781)
-5266	São Lourenço da Serra	26	3549953	(-23.849100112915039,-46.943199157714844)
-5267	São Luís do Paraitinga	26	3550001	(-23.221994400024414,-45.310882568359375)
-5268	São Manuel	26	3550100	(-22.732099533081055,-48.572299957275391)
-5269	São Miguel Arcanjo	26	3550209	(-23.878200531005859,-47.993499755859375)
-5270	São Paulo	26	3550308	(-23.532899856567383,-46.639499664306641)
-5271	São Pedro	26	3550407	(-22.548299789428711,-47.909599304199219)
-5272	São Pedro do Turvo	26	3550506	(-22.74530029296875,-49.742801666259766)
-5273	São Roque	26	3550605	(-23.522600173950195,-47.135700225830078)
-5274	São Sebastião	26	3550704	(-23.795099258422852,-45.414299011230469)
-5275	São Sebastião da Grama	26	3550803	(-21.704099655151367,-46.82080078125)
-5276	São Simão	26	3550902	(-21.473199844360352,-47.551799774169922)
-5277	São Vicente	26	3551009	(-23.957399368286133,-46.388301849365234)
-5278	Sarapuí	26	3551108	(-23.639699935913086,-47.824901580810547)
-5279	Sarutaiá	26	3551207	(-23.272100448608398,-49.476299285888672)
-5280	Sebastianópolis do Sul	26	3551306	(-20.652299880981445,-49.924999237060547)
-5281	Serra Azul	26	3551405	(-21.307399749755859,-47.560199737548828)
-5282	Serra Negra	26	3551603	(-22.613899230957031,-46.703300476074219)
-5283	Serrana	26	3551504	(-21.204299926757813,-47.595199584960938)
-5284	Sertãozinho	26	3551702	(-21.131599426269531,-47.987499237060547)
-5285	Sete Barras	26	3551801	(-24.381999969482422,-47.927898406982422)
-5286	Severínia	26	3551900	(-20.810800552368164,-48.805400848388672)
-5287	Silveiras	26	3552007	(-22.663799285888672,-44.852199554443359)
-5288	Socorro	26	3552106	(-22.590299606323242,-46.525100708007812)
-5289	Sorocaba	26	3552205	(-23.49690055847168,-47.445098876953125)
-5290	Sud Mennucci	26	3552304	(-20.687200546264648,-50.923801422119141)
-5291	Sumaré	26	3552403	(-22.820400238037109,-47.272800445556641)
-5292	Suzanápolis	26	3552551	(-20.498100280761719,-51.026798248291016)
-5293	Suzano	26	3552502	(-23.5447998046875,-46.311199188232422)
-5294	Tabapuã	26	3552601	(-20.960199356079102,-49.03070068359375)
-5295	Tabatinga	26	3552700	(-21.723899841308594,-48.689601898193359)
-5296	Taboão da Serra	26	3552809	(-23.601900100708008,-46.752601623535156)
-5297	Taciba	26	3552908	(-22.386600494384766,-51.288200378417969)
-5298	Taguaí	26	3553005	(-23.445199966430664,-49.402400970458984)
-5299	Taiaçu	26	3553104	(-21.143100738525391,-48.511199951171875)
-5300	Taiúva	26	3553203	(-21.122299194335938,-48.452800750732422)
-5301	Tambaú	26	3553302	(-21.702899932861328,-47.270301818847656)
-5302	Tanabi	26	3553401	(-20.622800827026367,-49.656299591064453)
-5303	Tapiraí	26	3553500	(-23.961200714111328,-47.506198883056641)
-5304	Tapiratiba	26	3553609	(-21.47130012512207,-46.744800567626953)
-5305	Taquaral	26	3553658	(-21.073699951171875,-48.412601470947266)
-5306	Taquaritinga	26	3553708	(-21.404899597167969,-48.510299682617188)
-5307	Taquarituba	26	3553807	(-23.53070068359375,-49.241001129150391)
-5308	Taquarivaí	26	3553856	(-23.921100616455078,-48.694801330566406)
-5309	Tarabai	26	3553906	(-22.301599502563477,-51.562099456787109)
-5310	Tarumã	26	3553955	(-22.742900848388672,-50.578601837158203)
-5311	Tatuí	26	3554003	(-23.348699569702148,-47.846099853515625)
-5312	Taubaté	26	3554102	(-23.010400772094727,-45.559299468994141)
-5313	Tejupá	26	3554201	(-23.342500686645508,-49.372200012207031)
-5314	Teodoro Sampaio	26	3554300	(-22.529899597167969,-52.168201446533203)
-5315	Terra Roxa	26	3554409	(-20.78700065612793,-48.331401824951172)
-5316	Tietê	26	3554508	(-23.110099792480469,-47.716400146484375)
-5317	Timburi	26	3554607	(-23.205699920654297,-49.609600067138672)
-5318	Torre de Pedra	26	3554656	(-23.246200561523438,-48.195499420166016)
-5319	Torrinha	26	3554706	(-22.423700332641602,-48.173099517822266)
-5320	Trabiju	26	3554755	(-22.038799285888672,-48.334201812744141)
-5321	Tremembé	26	3554805	(-22.957099914550781,-45.547500610351563)
-5322	Três Fronteiras	26	3554904	(-20.234399795532227,-50.890499114990234)
-5323	Tuiuti	26	3554953	(-22.819299697875977,-46.693698883056641)
-5324	Tupã	26	3555000	(-21.933500289916992,-50.519100189208984)
-5325	Tupi Paulista	26	3555109	(-21.382499694824219,-51.575000762939453)
-5326	Turiúba	26	3555208	(-20.942800521850586,-50.113498687744141)
-5327	Turmalina	26	3555307	(-20.048599243164062,-50.479198455810547)
-5328	Ubarana	26	3555356	(-21.165000915527344,-49.719799041748047)
-5329	Ubatuba	26	3555406	(-23.433200836181641,-45.083400726318359)
-5330	Ubirajara	26	3555505	(-22.527200698852539,-49.661300659179688)
-5331	Uchoa	26	3555604	(-20.951099395751953,-49.171298980712891)
-5332	União Paulista	26	3555703	(-20.886199951171875,-49.902500152587891)
-5333	Urânia	26	3555802	(-20.245500564575195,-50.645500183105469)
-5334	Uru	26	3555901	(-21.786600112915039,-49.284801483154297)
-5335	Urupês	26	3556008	(-21.20319938659668,-49.293098449707031)
-5336	Valentim Gentil	26	3556107	(-20.421699523925781,-50.088901519775391)
-5337	Valinhos	26	3556206	(-22.96980094909668,-46.997398376464844)
-5338	Valparaíso	26	3556305	(-21.222900390625,-50.869899749755859)
-5339	Vargem	26	3556354	(-22.886999130249023,-46.412399291992188)
-5340	Vargem Grande do Sul	26	3556404	(-21.832199096679688,-46.891300201416016)
-5341	Vargem Grande Paulista	26	3556453	(-23.599300384521484,-47.021999359130859)
-5342	Várzea Paulista	26	3556503	(-23.213600158691406,-46.823398590087891)
-5343	Vera Cruz	26	3556602	(-22.218299865722656,-49.820701599121094)
-5344	Vinhedo	26	3556701	(-23.03019905090332,-46.983299255371094)
-5345	Viradouro	26	3556800	(-20.87339973449707,-48.292999267578125)
-5346	Vista Alegre do Alto	26	3556909	(-21.169200897216797,-48.628398895263672)
-5347	Vitória Brasil	26	3556958	(-20.195600509643555,-50.487499237060547)
-5348	Votorantim	26	3557006	(-23.544599533081055,-47.438800811767578)
-5349	Votuporanga	26	3557105	(-20.423700332641602,-49.978099822998047)
-5350	Zacarias	26	3557154	(-21.050600051879883,-50.055198669433594)
-5351	Amparo de São Francisco	25	2800100	(-10.134799957275391,-36.935001373291016)
-5352	Aquidabã	25	2800209	(-10.277999877929687,-37.014801025390625)
-5353	Aracaju	25	2800308	(-10.909099578857422,-37.067699432373047)
-5354	Arauá	25	2800407	(-11.26140022277832,-37.620098114013672)
-5355	Areia Branca	25	2800506	(-10.758000373840332,-37.325099945068359)
-5356	Barra dos Coqueiros	25	2800605	(-10.899600028991699,-37.032299041748047)
-5357	Boquim	25	2800670	(-11.139699935913086,-37.619499206542969)
-5358	Brejo Grande	25	2800704	(-10.429699897766113,-36.461101531982422)
-5359	Campo do Brito	25	2801009	(-10.739199638366699,-37.495399475097656)
-5360	Canhoba	25	2801108	(-10.136500358581543,-36.980598449707031)
-5361	Canindé de São Francisco	25	2801207	(-9.6488199234008789,-37.792301177978516)
-5362	Capela	25	2801306	(-10.506899833679199,-37.062801361083984)
-5363	Carira	25	2801405	(-10.352399826049805,-37.700199127197266)
-5364	Carmópolis	25	2801504	(-10.644900321960449,-36.988700866699219)
-5365	Cedro de São João	25	2801603	(-10.253399848937988,-36.885601043701172)
-5366	Cristinápolis	25	2801702	(-11.466799736022949,-37.758499145507812)
-5367	Cumbe	25	2801900	(-10.35200023651123,-37.184600830078125)
-5368	Divina Pastora	25	2802007	(-10.678199768066406,-37.150600433349609)
-5369	Estância	25	2802106	(-11.265899658203125,-37.448398590087891)
-5370	Feira Nova	25	2802205	(-10.261599540710449,-37.314701080322266)
-5371	Frei Paulo	25	2802304	(-10.551300048828125,-37.527900695800781)
-5372	Gararu	25	2802403	(-9.9722003936767578,-37.086898803710938)
-5373	General Maynard	25	2802502	(-10.683500289916992,-36.983798980712891)
-5374	Gracho Cardoso	25	2802601	(-10.225199699401855,-37.200599670410156)
-5375	Ilha das Flores	25	2802700	(-10.442500114440918,-36.547901153564453)
-5376	Indiaroba	25	2802809	(-11.515700340270996,-37.514999389648438)
-5377	Itabaiana	25	2802908	(-10.682600021362305,-37.427299499511719)
-5378	Itabaianinha	25	2803005	(-11.26930046081543,-37.787498474121094)
-5379	Itabi	25	2803104	(-10.124799728393555,-37.105598449707031)
-5380	Itaporanga d`Ajuda	25	2803203	(-10.989999771118164,-37.30780029296875)
-5381	Japaratuba	25	2803302	(-10.58489990234375,-36.941799163818359)
-5382	Japoatã	25	2803401	(-10.347700119018555,-36.804500579833984)
-5383	Lagarto	25	2803500	(-10.913599967956543,-37.668899536132812)
-5384	Laranjeiras	25	2803609	(-10.798100471496582,-37.173099517822266)
-5385	Macambira	25	2803708	(-10.661899566650391,-37.541301727294922)
-5386	Malhada dos Bois	25	2803807	(-10.341799736022949,-36.925201416015625)
-5387	Malhador	25	2803906	(-10.664899826049805,-37.300399780273437)
-5388	Maruim	25	2804003	(-10.730799674987793,-37.085601806640625)
-5389	Moita Bonita	25	2804102	(-10.576899528503418,-37.351200103759766)
-5390	Monte Alegre de Sergipe	25	2804201	(-10.025600433349609,-37.561599731445313)
-5391	Muribeca	25	2804300	(-10.42710018157959,-36.95880126953125)
-5392	Neópolis	25	2804409	(-10.321499824523926,-36.584999084472656)
-5393	Nossa Senhora Aparecida	25	2804458	(-10.394399642944336,-37.451698303222656)
-5394	Nossa Senhora da Glória	25	2804508	(-10.215800285339355,-37.421100616455078)
-5395	Nossa Senhora das Dores	25	2804607	(-10.485400199890137,-37.196300506591797)
-5396	Nossa Senhora de Lourdes	25	2804706	(-10.077199935913086,-37.061500549316406)
-5397	Nossa Senhora do Socorro	25	2804805	(-10.846799850463867,-37.123100280761719)
-5398	Pacatuba	25	2804904	(-10.453800201416016,-36.653099060058594)
-5399	Pedra Mole	25	2805000	(-10.613400459289551,-37.69219970703125)
-5400	Pedrinhas	25	2805109	(-11.190199851989746,-37.677501678466797)
-5401	Pinhão	25	2805208	(-10.567700386047363,-37.724201202392578)
-5402	Pirambu	25	2805307	(-10.721500396728516,-36.854400634765625)
-5403	Poço Redondo	25	2805406	(-9.8061599731445313,-37.683300018310547)
-5404	Poço Verde	25	2805505	(-10.715100288391113,-38.181301116943359)
-5405	Porto da Folha	25	2805604	(-9.916259765625,-37.284198760986328)
-5406	Propriá	25	2805703	(-10.213800430297852,-36.844200134277344)
-5407	Riachão do Dantas	25	2805802	(-11.07289981842041,-37.730998992919922)
-5408	Riachuelo	25	2805901	(-10.734999656677246,-37.196601867675781)
-5409	Ribeirópolis	25	2806008	(-10.535699844360352,-37.437999725341797)
-5410	Rosário do Catete	25	2806107	(-10.690400123596191,-37.035701751708984)
-5411	Salgado	25	2806206	(-11.028800010681152,-37.480400085449219)
-5412	Santa Luzia do Itanhy	25	2806305	(-11.353599548339844,-37.458599090576172)
-5413	Santa Rosa de Lima	25	2806503	(-10.643400192260742,-37.193099975585938)
-5414	Santana do São Francisco	25	2806404	(-10.292200088500977,-36.610500335693359)
-5415	Santo Amaro das Brotas	25	2806602	(-10.789199829101563,-37.056400299072266)
-5416	São Cristóvão	25	2806701	(-11.008399963378906,-37.204399108886719)
-5417	São Domingos	25	2806800	(-10.791600227355957,-37.568500518798828)
-5418	São Francisco	25	2806909	(-10.344200134277344,-36.88690185546875)
-5419	São Miguel do Aleixo	25	2807006	(-10.384699821472168,-37.383598327636719)
-5420	Simão Dias	25	2807105	(-10.738699913024902,-37.809700012207031)
-5421	Siriri	25	2807204	(-10.596500396728516,-37.11309814453125)
-5422	Telha	25	2807303	(-10.206399917602539,-36.881801605224609)
-5423	Tobias Barreto	25	2807402	(-11.179800033569336,-37.999500274658203)
-5424	Tomar do Geru	25	2807501	(-11.369400024414063,-37.843299865722656)
-5425	Umbaúba	25	2807600	(-11.380900382995605,-37.662300109863281)
-5426	Abreulândia	27	1700251	(-9.6210098266601562,-49.151798248291016)
-5427	Aguiarnópolis	27	1700301	(-6.5540900230407715,-47.470199584960938)
-5428	Aliança do Tocantins	27	1700350	(-11.305600166320801,-48.936100006103516)
-5429	Almas	27	1700400	(-11.570599555969238,-47.17919921875)
-5430	Alvorada	27	1700707	(-12.478500366210938,-49.124900817871094)
-5431	Ananás	27	1701002	(-6.3643698692321777,-48.073501586914063)
-5432	Angico	27	1701051	(-6.3917899131774902,-47.861099243164063)
-5433	Aparecida do Rio Negro	27	1701101	(-9.9413900375366211,-47.963798522949219)
-5434	Aragominas	27	1701309	(-7.1600499153137207,-48.529098510742188)
-5435	Araguacema	27	1701903	(-8.8075504302978516,-49.556900024414063)
-5436	Araguaçu	27	1702000	(-12.928899765014648,-49.823101043701172)
-5437	Araguaína	27	1702109	(-7.1923799514770508,-48.204399108886719)
-5438	Araguanã	27	1702158	(-6.5822501182556152,-48.639499664306641)
-5439	Araguatins	27	1702208	(-5.6465902328491211,-48.123199462890625)
-5440	Arapoema	27	1702307	(-7.654630184173584,-49.063701629638672)
-5441	Arraias	27	1702406	(-12.92870044708252,-46.935901641845703)
-5442	Augustinópolis	27	1702554	(-5.4686298370361328,-47.886299133300781)
-5443	Aurora do Tocantins	27	1702703	(-12.71049976348877,-46.407600402832031)
-5444	Axixá do Tocantins	27	1702901	(-5.6127500534057617,-47.770099639892578)
-5445	Babaçulândia	27	1703008	(-7.2092299461364746,-47.761299133300781)
-5446	Bandeirantes do Tocantins	27	1703057	(-7.7561202049255371,-48.583599090576172)
-5447	Barra do Ouro	27	1703073	(-7.695930004119873,-47.677600860595703)
-5448	Barrolândia	27	1703107	(-9.8340396881103516,-48.725200653076172)
-5449	Bernardo Sayão	27	1703206	(-7.8748102188110352,-48.889301300048828)
-5450	Bom Jesus do Tocantins	27	1703305	(-8.9630603790283203,-48.165000915527344)
-5451	Brasilândia do Tocantins	27	1703602	(-8.3891801834106445,-48.482200622558594)
-5452	Brejinho de Nazaré	27	1703701	(-11.005800247192383,-48.56829833984375)
-5453	Buriti do Tocantins	27	1703800	(-5.3144798278808594,-48.227100372314453)
-5454	Cachoeirinha	27	1703826	(-6.1156001091003418,-47.92340087890625)
-5455	Campos Lindos	27	1703842	(-7.9895601272583008,-46.864498138427734)
-5456	Cariri do Tocantins	27	1703867	(-11.888099670410156,-49.160900115966797)
-5457	Carmolândia	27	1703883	(-7.0326199531555176,-48.397800445556641)
-5458	Carrasco Bonito	27	1703891	(-5.3141498565673828,-48.031398773193359)
-5459	Caseara	27	1703909	(-9.2761201858520508,-49.952098846435547)
-5460	Centenário	27	1704105	(-8.9610300064086914,-47.330398559570313)
-5461	Chapada da Natividade	27	1705102	(-11.617500305175781,-47.748600006103516)
-5462	Chapada de Areia	27	1704600	(-10.141900062561035,-49.140300750732422)
-5463	Colinas do Tocantins	27	1705508	(-8.0576400756835938,-48.475700378417969)
-5464	Colméia	27	1716703	(-8.7246303558349609,-48.763801574707031)
-5465	Combinado	27	1705557	(-12.79170036315918,-46.538799285888672)
-5466	Conceição do Tocantins	27	1705607	(-12.22089958190918,-47.295101165771484)
-5467	Couto de Magalhães	27	1706001	(-8.2841062545776367,-49.247261047363281)
-5468	Cristalândia	27	1706100	(-10.59850025177002,-49.194198608398437)
-5469	Crixás do Tocantins	27	1706258	(-11.099399566650391,-48.915199279785156)
-5470	Darcinópolis	27	1706506	(-6.7159099578857422,-47.759700775146484)
-5471	Dianópolis	27	1707009	(-11.62399959564209,-46.819801330566406)
-5472	Divinópolis do Tocantins	27	1707108	(-9.8001804351806641,-49.216899871826172)
-5473	Dois Irmãos do Tocantins	27	1707207	(-9.2553396224975586,-49.063800811767578)
-5474	Dueré	27	1707306	(-11.34160041809082,-49.271598815917969)
-5475	Esperantina	27	1707405	(-5.3659300804138184,-48.537799835205078)
-5476	Fátima	27	1707553	(-10.760299682617188,-48.907600402832031)
-5477	Figueirópolis	27	1707652	(-12.131199836730957,-49.174800872802734)
-5478	Filadélfia	27	1707702	(-7.3350100517272949,-47.495399475097656)
-5479	Formoso do Araguaia	27	1708205	(-11.797599792480469,-49.531600952148438)
-5480	Fortaleza do Tabocão	27	1708254	(-9.0561103820800781,-48.520599365234375)
-5481	Goianorte	27	1708304	(-8.7741298675537109,-48.931301116943359)
-5482	Goiatins	27	1709005	(-7.7147798538208008,-47.325199127197266)
-5483	Guaraí	27	1709302	(-8.8354301452636719,-48.511398315429688)
-5484	Gurupi	27	1709500	(-11.727899551391602,-49.068000793457031)
-5485	Ipueiras	27	1709807	(-11.23289966583252,-48.459999084472656)
-5486	Itacajá	27	1710508	(-8.3929300308227539,-47.772598266601563)
-5487	Itaguatins	27	1710706	(-5.772669792175293,-47.486400604248047)
-5488	Itapiratins	27	1710904	(-8.3798198699951172,-48.107200622558594)
-5489	Itaporã do Tocantins	27	1711100	(-8.5717201232910156,-48.689498901367188)
-5490	Jaú do Tocantins	27	1711506	(-12.650899887084961,-48.589000701904297)
-5491	Juarina	27	1711803	(-8.1195096969604492,-49.064300537109375)
-5492	Lagoa da Confusão	27	1711902	(-10.790599822998047,-49.619899749755859)
-5493	Lagoa do Tocantins	27	1711951	(-10.368000030517578,-47.537998199462891)
-5494	Lajeado	27	1712009	(-9.7499599456787109,-48.356498718261719)
-5495	Lavandeira	27	1712157	(-12.784700393676758,-46.509899139404297)
-5496	Lizarda	27	1712405	(-9.5900201797485352,-46.673801422119141)
-5497	Luzinópolis	27	1712454	(-6.1779398918151855,-47.858200073242187)
-5498	Marianópolis do Tocantins	27	1712504	(-9.7937698364257812,-49.655300140380859)
-5499	Mateiros	27	1712702	(-10.54640007019043,-46.416801452636719)
-5500	Maurilândia do Tocantins	27	1712801	(-5.9516901969909668,-47.512500762939453)
-5501	Miracema do Tocantins	27	1713205	(-9.5655603408813477,-48.393001556396484)
-5502	Miranorte	27	1713304	(-9.5290699005126953,-48.592201232910156)
-5503	Monte do Carmo	27	1713601	(-10.761099815368652,-48.111400604248047)
-5504	Monte Santo do Tocantins	27	1713700	(-10.007499694824219,-48.994098663330078)
-5505	Muricilândia	27	1713957	(-7.1466898918151855,-48.609100341796875)
-5506	Natividade	27	1714203	(-11.703399658203125,-47.722301483154297)
-5507	Nazaré	27	1714302	(-6.3749599456787109,-47.664299011230469)
-5508	Nova Olinda	27	1714880	(-7.6317100524902344,-48.425201416015625)
-5509	Nova Rosalândia	27	1715002	(-10.565099716186523,-48.912498474121094)
-5510	Novo Acordo	27	1715101	(-9.9706296920776367,-47.678501129150391)
-5511	Novo Alegre	27	1715150	(-12.921699523925781,-46.571300506591797)
-5512	Novo Jardim	27	1715259	(-11.826000213623047,-46.632499694824219)
-5513	Oliveira de Fátima	27	1715507	(-10.706999778747559,-48.908599853515625)
-5514	Palmas	27	1721000	(-10.239999771118164,-48.355800628662109)
-5515	Palmeirante	27	1715705	(-7.8478598594665527,-47.924198150634766)
-5516	Palmeiras do Tocantins	27	1713809	(-6.6165800094604492,-47.546398162841797)
-5517	Palmeirópolis	27	1715754	(-13.044699668884277,-48.402599334716797)
-5518	Paraíso do Tocantins	27	1716109	(-10.175000190734863,-48.882301330566406)
-5519	Paranã	27	1716208	(-12.616700172424316,-47.873401641845703)
-5520	Pau d`Arco	27	1716307	(-7.5391898155212402,-49.367000579833984)
-5521	Pedro Afonso	27	1716505	(-8.9703397750854492,-48.172901153564453)
-5522	Peixe	27	1716604	(-12.025400161743164,-48.539501190185547)
-5523	Pequizeiro	27	1716653	(-8.5931997299194336,-48.932701110839844)
-5524	Pindorama do Tocantins	27	1717008	(-11.131099700927734,-47.572601318359375)
-5525	Piraquê	27	1717206	(-6.7730197906494141,-48.295799255371094)
-5526	Pium	27	1717503	(-10.442000389099121,-49.187599182128906)
-5527	Ponte Alta do Bom Jesus	27	1717800	(-12.085300445556641,-46.482498168945313)
-5528	Ponte Alta do Tocantins	27	1717909	(-10.748100280761719,-47.527599334716797)
-5529	Porto Alegre do Tocantins	27	1718006	(-11.618000030517578,-47.062099456787109)
-5530	Porto Nacional	27	1718204	(-10.702699661254883,-48.408000946044922)
-5531	Praia Norte	27	1718303	(-5.3928098678588867,-47.811100006103516)
-5532	Presidente Kennedy	27	1718402	(-8.5405998229980469,-48.506198883056641)
-5533	Pugmil	27	1718451	(-10.423999786376953,-48.895698547363281)
-5534	Recursolândia	27	1718501	(-8.7227001190185547,-47.242099761962891)
-5535	Riachinho	27	1718550	(-6.4400501251220703,-48.137100219726563)
-5536	Rio da Conceição	27	1718659	(-11.394900321960449,-46.884700775146484)
-5537	Rio dos Bois	27	1718709	(-9.3442497253417969,-48.524501800537109)
-5538	Rio Sono	27	1718758	(-9.3500204086303711,-47.88800048828125)
-5539	Sampaio	27	1718808	(-5.3542299270629883,-47.878200531005859)
-5540	Sandolândia	27	1718840	(-12.538000106811523,-49.924198150634766)
-5541	Santa Fé do Araguaia	27	1718865	(-7.1580300331115723,-48.716499328613281)
-5542	Santa Maria do Tocantins	27	1718881	(-8.8045997619628906,-47.788700103759766)
-5543	Santa Rita do Tocantins	27	1718899	(-10.861700057983398,-48.916099548339844)
-5544	Santa Rosa do Tocantins	27	1718907	(-11.447400093078613,-48.121601104736328)
-5545	Santa Tereza do Tocantins	27	1719004	(-10.274600028991699,-47.803298950195313)
-5546	Santa Terezinha do Tocantins	27	1720002	(-6.4443798065185547,-47.668399810791016)
-5547	São Bento do Tocantins	27	1720101	(-6.0258002281188965,-47.901199340820313)
-5548	São Félix do Tocantins	27	1720150	(-10.161499977111816,-46.661800384521484)
-5549	São Miguel do Tocantins	27	1720200	(-5.5630497932434082,-47.574298858642578)
-5550	São Salvador do Tocantins	27	1720259	(-12.745800018310547,-48.235198974609375)
-5551	São Sebastião do Tocantins	27	1720309	(-5.2613101005554199,-48.202098846435547)
-5552	São Valério da Natividade	27	1720499	(-11.97431468963623,-48.235313415527344)
-5553	Silvanópolis	27	1720655	(-11.147100448608398,-48.169399261474609)
-5554	Sítio Novo do Tocantins	27	1720804	(-5.6012001037597656,-47.638099670410156)
-5555	Sucupira	27	1720853	(-11.993000030517578,-48.968498229980469)
-5556	Taguatinga	27	1720903	(-12.402600288391113,-46.437000274658203)
-5557	Taipas do Tocantins	27	1720937	(-12.187299728393555,-46.979698181152344)
-5558	Talismã	27	1720978	(-12.794899940490723,-49.089599609375)
-5559	Tocantínia	27	1721109	(-9.5631999969482422,-48.374099731445313)
-5560	Tocantinópolis	27	1721208	(-6.324470043182373,-47.422401428222656)
-5561	Tupirama	27	1721257	(-8.9716796875,-48.188301086425781)
-5562	Tupiratins	27	1721307	(-8.3938798904418945,-48.127700805664062)
-5563	Wanderlândia	27	1722081	(-6.8527398109436035,-47.960098266601563)
-5564	Xambioá	27	1722107	(-6.414100170135498,-48.532001495361328)
-5575	Gama	7	5300108	(-15.779500007629395,-47.929698944091797)
-5576	Taguatinga	7	5300108	(-15.779500007629395,-47.929698944091797)
-5577	Brazlândia	7	5300108	(-15.779500007629395,-47.929698944091797)
-5578	Sobradinho	7	5300108	(-15.779500007629395,-47.929698944091797)
-5579	Planaltina	7	5300108	(-15.779500007629395,-47.929698944091797)
-5580	Paranoá	7	5300108	(-15.779500007629395,-47.929698944091797)
-5581	Núcleo Bandeirante	7	5300108	(-15.779500007629395,-47.929698944091797)
-5582	Ceilândia	7	5300108	(-15.779500007629395,-47.929698944091797)
-5583	Guará	7	5300108	(-15.779500007629395,-47.929698944091797)
-5584	Cruzeiro	7	5300108	(-15.779500007629395,-47.929698944091797)
-5585	Samambaia	7	5300108	(-15.779500007629395,-47.929698944091797)
-5586	Santa Maria	7	5300108	(-15.779500007629395,-47.929698944091797)
-5587	São Sebastião	7	5300108	(-15.779500007629395,-47.929698944091797)
-5589	Lago Sul	7	5300108	(-15.779500007629395,-47.929698944091797)
-5590	Riacho Fundo	7	5300108	(-15.779500007629395,-47.929698944091797)
-5591	Lago Norte	7	5300108	(-15.779500007629395,-47.929698944091797)
-5592	Candangolândia	7	5300108	(-15.779500007629395,-47.929698944091797)
-5593	Águas Claras	7	5300108	(-15.779500007629395,-47.929698944091797)
-5594	Riacho Fundo II	7	5300108	(-15.779500007629395,-47.929698944091797)
-5595	Sudoeste/Octogonal	7	5300108	(-15.779500007629395,-47.929698944091797)
-5596	Varjão	7	5300108	(-15.779500007629395,-47.929698944091797)
-5597	Park Way	7	5300108	(-15.779500007629395,-47.929698944091797)
-5598	SCIA	7	5300108	(-15.779500007629395,-47.929698944091797)
-5599	Sobradinho II	7	5300108	(-15.779500007629395,-47.929698944091797)
-5601	Itapoã	7	5300108	(-15.779500007629395,-47.929698944091797)
-5602	SIA	7	5300108	(-15.779500007629395,-47.929698944091797)
-5603	Vicente Pires	7	5300108	(-15.779500007629395,-47.929698944091797)
-5604	Fercal	7	5300108	(-15.779500007629395,-47.929698944091797)
-5574	Recanto das Emas	7	5300108	(-15.779500007629395,-47.929698944091797)
-5600	Jardim Botânico	7	5300108	(-15.779500007629395,-47.929698944091797)
-5605	Nazária	17	2206720	(-5.3512849807739258,-42.815280914306641)
-5606	Paraíso das Águas	12	5006275	(-19.021600723266602,-53.011600494384766)
-5607	Pinto Bandeira	23	4314548	(-29.097499847412109,-51.450298309326172)
-5608	Balneário Rincão	24	4220000	(-28.831399917602539,-49.235198974609375)
-5609	Pescaria Brava	24	4212650	(-28.396600723266602,-48.886398315429687)
-5610	Exterior	99	9999999	\N
-\.
-
-
---
--- Name: cidade_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('cidade_id_seq', 5611, false);
 
 CREATE TABLE pessoa (
   id SERIAL PRIMARY KEY,
   nome VARCHAR(60) NOT NULL,
   sobrenome VARCHAR NOT NULL,
   endereco VARCHAR,
-  id_cidade INTEGER REFERENCES cidade(id),
-  id_estado INTEGER REFERENCES estado(id),
-  id_pais INTEGER REFERENCES pais(id)
+  cod_cidade INTEGER REFERENCES cidade(codigo_ibge),
+  cod_estado INTEGER REFERENCES estado(codigo_uf)
 );
 
 CREATE TABLE usuario (
@@ -6027,9 +5639,8 @@ CREATE TABLE cliente (
   nomefantasia VARCHAR,
   razaosocial VARCHAR,
   cnpj INTEGER UNIQUE,
-  id_pais INTEGER REFERENCES pais(id),
-  id_estado INTEGER REFERENCES estado(id),
-  id_cidade INTEGER REFERENCES cidade(id),
+  cod_cidade INTEGER REFERENCES cidade(codigo_ibge),
+  cod_estado INTEGER REFERENCES estado(codigo_uf),
   endereco VARCHAR
 );
 
@@ -6049,13 +5660,13 @@ CREATE TABLE email (
 
 CREATE TABLE telefone (
   id SERIAL PRIMARY KEY,
-  ddd integer(2),
+  ddd INTEGER,
   numero INTEGER NOT NULL UNIQUE,
   id_pessoa INTEGER REFERENCES pessoa(id),
   id_cliente INTEGER REFERENCES cliente(id)
 );
 
-INSERT INTO "pessoa" (nome, sobrenome, endereco, id_cidade, id_estado, id_pais) VALUES ('administrador','administrador','NULL',5610,99,1);
+INSERT INTO "pessoa" (nome, sobrenome, endereco, cod_cidade, cod_estado) VALUES ('administrador','administrador','NULL',4219853,42);
 INSERT INTO "email" (email, id_pessoa) VALUES ('admin@system.com',1);
 INSERT INTO "telefone" (ddd, numero, id_pessoa) VALUES (42,984060911,1);
 INSERT INTO "usuario" (login, password, id_pessoa) VALUES ('admin','21232f297a57a5a743894a0e4a801fc3',1);
