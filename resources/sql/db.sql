@@ -6053,4 +6053,9 @@ CREATE TABLE telefone (
   numero INTEGER NOT NULL UNIQUE,
   id_pessoa INTEGER REFERENCES pessoa(id),
   id_cliente INTEGER REFERENCES cliente(id)
-)
+);
+
+INSERT INTO "pessoa" (nome, sobrenome, endereco, id_cidade, id_estado, id_pais) VALUES ('administrador','administrador','NULL',5610,99,1);
+INSERT INTO "email" (email, id_pessoa) VALUES ('admin@system.com',1);
+INSERT INTO "telefone" (ddd, numero, id_pessoa) VALUES (42,984060911,1);
+INSERT INTO "usuario" (login, password, id_pessoa) VALUES ('admin','21232f297a57a5a743894a0e4a801fc3',1);
