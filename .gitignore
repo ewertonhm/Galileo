@@ -25,3 +25,7 @@
 /main/.idea/*
 /resources/.idea/*
 /resources/sql/.idea/*
+/.idea/
+/main/.idea/
+/resources/.idea/
+/resources/sql/.idea/
