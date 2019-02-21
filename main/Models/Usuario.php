@@ -38,6 +38,8 @@ class Usuario
         $this->setLogin($dados->login);
         $this->setPassword($dados->password);
         $this->setIdPessoa($dados->id_pessoa);
+        $this->pessoa = new Pessoa();
+        $this->pessoa->lerPessoa($this->getIdPessoa());
     }
 
     private function lerUsuarioByLogin()
@@ -50,6 +52,8 @@ class Usuario
         $this->setId($dados->id);
         $this->setPassword($dados->password);
         $this->setIdPessoa($dados->id_pessoa);
+        $this->pessoa = new Pessoa();
+        $this->pessoa->lerPessoa($this->getIdPessoa());
     }
 
 
