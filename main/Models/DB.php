@@ -7,11 +7,12 @@
 
 class DB{
     private static $_instance = null;
-    private $_pdo, $_query, $_error = false, $_results, $_count = 0, $_lastInsertID = 'NULL';
+    private $_pdo, $_query, $_error = false, $_results, $_count = 0, $_lastInsertID = 'NULL', $configs;
     
     private function __construct() {
         try{
-            $this->_pdo = new PDO('pgsql:host=127.0.0.1;port=5432;dbname=galileo','postgres','postgres');
+            $configs = explode('|',file_get_contents($_SERVER['DOCUMENT_ROOT'].'/Galileo/main/config/files/db.cfg',FILE_BINARY));
+            $this->_pdo = new PDO("pgsql:host=$configs[0];port=$configs[1];dbname=$configs[2]",$configs[3],$configs[4]);
             //$this->_pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             die($e->getMessage());
