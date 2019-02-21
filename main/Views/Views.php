@@ -46,7 +46,7 @@ TAG;
     public function navbar($username){
         echo <<<TAG
 <nav class='navbar navbar-expand-lg navbar-light bg-light'>
-  <a class='navbar-brand' href='index.html'><img src='assets/img/logog.png' width='30' height='32'></a>
+  <a class='navbar-brand' href='index.php'><img src='assets/img/logog.png' width='30' height='32'></a>
   <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
     <span class='navbar-toggler-icon'></span>
   </button>
@@ -64,14 +64,19 @@ TAG;
       </li>
     </ul>
       <ul class='nav navbar-nav navbar-right'>
-          <li class='nav-item'><a class='nav-link disabled' href='#'>Logado como:&nbsp
+          <li class='nav-item'>
+            <a class='nav-link disabled' href='#'>Logado como:&nbsp
 TAG;
         echo $username;
         echo <<<TAG
-&nbsp</a></li>
-          <li class='nav-item'><a href='#'>      <button class='btn btn-outline-primary btn-sm' type='submit'>Sair</button></a></li>
-
-      </ul>
+            &nbsp</a>
+           </li>
+        <li class='nav-item'>
+            <a href='logout.php'>      
+                <button class='btn btn-outline-primary btn-sm' type='submit' name="btn-logout">Sair</button>
+            </a>
+        </li>
+        </ul>
 
   </div>
 </nav>
@@ -171,9 +176,11 @@ TAG;
         <form method="post">
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration"><i class="fa fa-lock" style="color:rgb(71,161,244);"></i></div>
-            <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Login" autofocus=""></div>
+            <div class="form-group"><input class="form-control" type="text" name="login" placeholder="Login" autofocus=""></div>
             <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Senha"></div>
-            <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color:rgb(71,161,244);">Entrar</button></div><a href="#" class="forgot">Esqueceu seu login ou senha?</a></form>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit" name="btn-login" style="background-color:rgb(71,161,244);">Entrar</button></div>
+            <a href="#" class="forgot">Esqueceu seu login ou senha?</a>
+        </form>
     </div>
 TAG;
 
