@@ -19,3 +19,9 @@
 /fuel/app/logs/*/*/*
 /fuel/app/cache/*/*
 /fuel/app/config/crypt.php
+
+# the IDEA folders
+/.idea/*
+/main/.idea/*
+/resources/.idea/*
+/resources/sql/.idea/*
