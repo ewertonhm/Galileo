@@ -102,63 +102,63 @@ TAG;
         <div class='container'>
             <div class='row justify-content-center features'>
                 <div class='col-sm-6 col-md-5 col-lg-4 item'>
-                    <a href=''#'>
+                    <a href='cadcli.php'>
                         <div data-bs-hover-animate='pulse' class='box'><i class='fa fa-user-plus icon'></i>
                             <h3 class='name'>Cadastrar clientes</h3>
                         </div>
                     </a>
                 </div>
                 <div class='col-sm-6 col-md-5 col-lg-4 item'>
-                    <a href=''#'>
+                    <a href='cadcob.php'>
                         <div data-bs-hover-animate='pulse' class='box'><i class='fa fa-money icon'></i>
                             <h3 class='name'>Cadastrar cobrança</h3>
                         </div>
                     </a>
                 </div>
                 <div class='col-sm-6 col-md-5 col-lg-4 item'>
-                    <a href=''#'>
+                    <a href='confpag.php'>
                         <div data-bs-hover-animate='pulse' class='box'><i class='fa fa-check-square-o icon'></i>
                             <h3 class='name'>Confirmar pagamentos</h3>
                         </div>
                     </a>
                 </div>
                 <div class='col-sm-6 col-md-5 col-lg-4 item'>
-                    <a href=''#'>
+                    <a href='listaclit.php'>
                         <div data-bs-hover-animate='pulse' class='box'><i class='fa fa-users icon'></i>
                             <h3 class='name'>Listar clientes</h3>
                         </div>
                     </a>
                 </div>
                 <div class='col-sm-6 col-md-5 col-lg-4 item'>
-                    <a href=''#'>
+                    <a href='calendario.php'>
                         <div data-bs-hover-animate='pulse' class='box'><i class='fa fa-calendar icon'></i>
                             <h3 class='name'>Calendário de cobranças</h3>
                         </div>
                     </a>
                 </div>
                 <div class='col-sm-6 col-md-5 col-lg-4 item'>
-                    <a href=''#'>
+                    <a href='cobli.php'>
                         <div data-bs-hover-animate='pulse' class='box'><i class='fa fa-list-alt icon'></i>
                             <h3 class='name'>Listar cobranças</h3>
                         </div>
                     </a>
                 </div>
                 <div class='col-sm-6 col-md-5 col-lg-4 item'>
-                    <a href=''#'>
+                    <a href='delcli.php'>
                         <div data-bs-hover-animate='pulse' class='box'><i class='fa fa-user-times icon'></i>
                             <h3 class='name'>Deletar clientes</h3>
                         </div>
                     </a>
                 </div>
                 <div class='col-sm-6 col-md-5 col-lg-4 item'>
-                    <a href=''#'>
+                    <a href='delcob.php'>
                         <div data-bs-hover-animate='pulse' class='box'><i class='fa fa-remove icon'></i>
                             <h3 class='name'>Deletar cobranças</h3>
                         </div>
                     </a>
                 </div>
                 <div class='col-sm-6 col-md-5 col-lg-4 item'>
-                    <a href=''#'>
+                    <a href='agenda.php'>
                         <div data-bs-hover-animate='pulse' class='box'><i class='fa fa-phone icon'></i>
                             <h3 class='name'>Agenda telefônica</h3>
                         </div>
