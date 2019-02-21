@@ -15,16 +15,20 @@ class Usuario
     protected $dbUsuario, $pessoa;
     static private $tabelaUsuario = 'usuario';
 
-    public function __construct($id = NULL)
+    public function __construct($id = NULL, $login = NULL)
     {
         $this->dbUsuario = DB::get_instance();
         if ($id != NULL){
             $this->setId($id);
-            $this->lerUsuario();
+            $this->lerUsuarioById();
+        }
+        else if ($login != NULL){
+            $this->setLogin($login);
+            $this->lerUsuarioByLogin();
         }
     }
 
-    private function lerUsuario()
+    private function lerUsuarioById()
     {
         $params = [
             'conditions' => ['id = ?'],
@@ -32,6 +36,18 @@ class Usuario
         ];
         $dados = $this->dbUsuario->findFirst($this::$tabelaUsuario,$params);
         $this->setLogin($dados->login);
+        $this->setPassword($dados->password);
+        $this->setIdPessoa($dados->id_pessoa);
+    }
+
+    private function lerUsuarioByLogin()
+    {
+        $params = [
+            'conditions' => ['login = ?'],
+            'bind' => [$this->getLogin()]
+        ];
+        $dados = $this->dbUsuario->findFirst($this::$tabelaUsuario,$params);
+        $this->setId($dados->id);
         $this->setPassword($dados->password);
         $this->setIdPessoa($dados->id_pessoa);
     }
