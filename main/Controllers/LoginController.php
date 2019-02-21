@@ -6,8 +6,13 @@
  * Time: 01:31
  */
 
+require_once $_SERVER['DOCUMENT_ROOT'].'/Galileo/main/Models/Usuario.php';
+
 class LoginController
 {
+    private $usuario;
+
+
     /**
      * LoginController constructor.
      */
@@ -30,12 +35,22 @@ class LoginController
         }
     }
 
-    public function login(){
-        $_SESSION['logado'] = true;
+    public function login($login,$password){
+        $this->usuario = new Usuario(NULL,$login);
+        if(md5($password) == $this->usuario->getPassword()){
+            $_SESSION['logado'] = true;
+            $_SESSION['user_id'] = $this->usuario->getId();
+            return true;
+        }
+        else {
+            $_SESSION['logado'] = false;
+            return false;
+        }
     }
 
     public function logout(){
-        $_SESSION['logado'] = false;
+        session_unset();
+        session_destroy();
         $this->goToLogin();
     }
 
