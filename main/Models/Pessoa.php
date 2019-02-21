@@ -8,8 +8,8 @@
 
 require_once 'DB.php';
 require_once 'Cidade.php';
-require_once 'TelefonePessoa.php';
-require_once 'EmailPessoa.php';
+require_once 'Telefone.php';
+require_once 'Email.php';
 
 class Pessoa
 {
@@ -20,9 +20,25 @@ class Pessoa
     public function __construct()
     {
         $this->dbPessoa = DB::get_instance();
+        $this->telefones = [];
+        $this->emails = [];
+
     }
 
-
+    public function lerPessoa($id){
+        $this->setId($id);
+        $params = [
+            'conditions' => ['id = ?'],
+            'bind' => [$this->getId()]
+        ];
+        $dados = $this->dbPessoa->findFirst($this::$tabelaPessoa,$params);
+        $this->setNome($dados['nome']);
+        $this->setSobrenome($dados['sobrenome']);
+        $this->setEndereco($dados['endereco']);
+        $this->cidade = new Cidade($dados['cod_cidade']);
+        $this->telefones[] = new Telefone(NULL, $this->getId(), NULL);
+        $this->emails[] = new Email(NULL, $this->getId(), NULL);
+    }
 
 
 
