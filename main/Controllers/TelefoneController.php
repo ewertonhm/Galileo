@@ -10,7 +10,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/Galileo/main/Models/Telefone.php';
 
 class TelefoneController
 {
-    public $telefones, $telefoneModel;
+    private $telefones, $telefoneModel;
 
     public function __construct()
     {
