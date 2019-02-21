@@ -36,9 +36,9 @@ class Telefone
             'conditions' => ['id_cliente = ?'],
             'bind' => [$this->getIdCliente()]
         ];
-        $arrayTelefones = [];
-        $telefones = $this->dbTelefone->find($this::$tabelaTelefone,$params);
-        if(!is_bool($telefones)){
+        //$arrayTelefones = [];
+        return $telefones = $this->dbTelefone->find($this::$tabelaTelefone,$params);
+        /*if(!is_bool($telefones)){
             foreach ($telefones as $telefone){
                 $t = new Telefone(NULL,NULL,$telefone['id']);
                 $arrayTelefones[] = $t;
@@ -46,7 +46,7 @@ class Telefone
             return $arrayTelefones;
         } else {
             return false;
-        }
+        }*/
     }
 
     public function lerTelefonePessoa(){
@@ -54,9 +54,9 @@ class Telefone
             'conditions' => ['id_pessoa = ?'],
             'bind' => [$this->getIdPessoa()]
         ];
-        $arrayTelefones = [];
-        $telefones = $this->dbTelefone->find($this::$tabelaTelefone,$params);
-        if(!is_bool($telefones)){
+        //$arrayTelefones = [];
+        return $telefones = $this->dbTelefone->find($this::$tabelaTelefone,$params);
+        /*if(!is_bool($telefones)){
             foreach ($telefones as $telefone){
                 $t = new Telefone(NULL,NULL,$telefone['id']);
                 $arrayTelefones[] = $t;
@@ -64,7 +64,7 @@ class Telefone
             return $arrayTelefones;
         } else {
             return false;
-        }
+        }*/
     }
 
     public function lerTelefone(){
