@@ -4,7 +4,7 @@
     $loginController = new LoginController();
 
     if($loginController->isLogged()){
-        $website = new WebsiteCompiler('Galileo controle financeiro', 'Usuário', 'index');
+        $website = new WebsiteCompiler('Galileo controle financeiro','index');
     } else {
         $loginController->goToLogin();
     }
