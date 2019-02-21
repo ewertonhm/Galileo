@@ -17,7 +17,7 @@ class Cidade
 
     public function __construct($codigo_ibge)
     {
-        $this->codigo_ibge = $codigo_ibge;
+        $this->setCodigoIbge($codigo_ibge);
         $this->dbCidade = DB::get_instance();
         $this->lerCidade();
         $this->estado = new Estado($this->getCodigoUfEstado());
