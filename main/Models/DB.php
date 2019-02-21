@@ -5,15 +5,13 @@
  * @author Ewerton
  */
 
-require_once 'dbControl.php';
-
-class DB implements dbControl{
+class DB{
     private static $_instance = null;
     private $_pdo, $_query, $_error = false, $_results, $_count = 0, $_lastInsertID = 'NULL';
     
     private function __construct() {
         try{
-            $this->_pdo = new PDO('pgsql:host=35.202.123.83;port=5432;dbname=database','postgres','k#c+wiv@');
+            $this->_pdo = new PDO('pgsql:host=127.0.0.1;port=5432;dbname=galileo','postgres','postgres');
             //$this->_pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             die($e->getMessage());
@@ -107,6 +105,7 @@ class DB implements dbControl{
         $bind = [];
         $order = '';
         $limit = '';
+        $innerJoin = '';
         
         
         
@@ -159,7 +158,7 @@ class DB implements dbControl{
         }
         
         $sql = "SELECT * FROM {$table}{$innerJoin}{$conditionString}{$order}{$limit}";
-        var_dump($sql);
+        //var_dump($sql);
 
         //  se o query rodar mas não tiver resultados vai retornar false
         // se o query tiver sucesso e tiver resultados vai retornar true
