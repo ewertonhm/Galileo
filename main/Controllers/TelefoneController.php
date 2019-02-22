@@ -27,6 +27,7 @@ class TelefoneController
             }
         }
     }
+
     public function telefonePessoa($idPessoa)
     {
         $telefones = $this->telefoneModel = new Telefone($idPessoa);
@@ -38,9 +39,8 @@ class TelefoneController
         }
     }
 
-    public function getTelefones(){
+    public function getTelefones()
+    {
         return $this->telefones;
     }
-
-
 }
