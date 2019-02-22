@@ -22,7 +22,7 @@ class TelefoneController
         $telefones = $this->telefoneModel = new Telefone($idCliente);
         if (!is_bool($telefones)) {
             foreach ($telefones as $telefone) {
-                $t = new Telefone(NULL, NULL, $telefone['id']);
+                $t = new Telefone($telefone['id']);
                 $this->telefones[] = $t;
             }
         }
@@ -32,7 +32,7 @@ class TelefoneController
         $telefones = $this->telefoneModel = new Telefone($idPessoa);
         if (!is_bool($telefones)) {
             foreach ($telefones as $telefone) {
-                $t = new Telefone(NULL, NULL, $telefone['id']);
+                $t = new Telefone( NULL, $telefone['id']);
                 $this->telefones[] = $t;
             }
         }
