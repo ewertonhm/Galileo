@@ -17,7 +17,8 @@ class EmailController
         $this->emails = [];
     }
 
-    public function emailCliente($idCliente){
+    public function emailCliente($idCliente)
+    {
         $emails = $this->emailModel = new Email($idCliente);
         if (!id_bool($emails)){
             foreach ($emails as $email) {
@@ -27,7 +28,8 @@ class EmailController
         }
     }
 
-    public function emailPessoa($idPessoa){
+    public function emailPessoa($idPessoa)
+    {
         $emails = $this->emailModel = new Email($idPessoa);
         if (!id_bool($emails)){
             foreach ($emails as $email) {
@@ -37,7 +39,8 @@ class EmailController
         }
     }
 
-    public function getEmails(){
+    public function getEmails()
+    {
         return $this->emails;
     }
 }
