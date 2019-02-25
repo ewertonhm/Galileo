@@ -7,7 +7,9 @@
  */
 
 use PHPUnit\Framework\TestCase;
-require_once __DIR__ . '\..\Models\Cidade.php';
+require_once __DIR__ . '\..\vendor\autoload.php';
+
+use App\Models\Cidade;
 
 class CidadeTest extends TestCase
 {

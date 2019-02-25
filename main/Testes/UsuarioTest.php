@@ -7,6 +7,8 @@
  */
 
 use PHPUnit\Framework\TestCase;
+require_once __DIR__ . '\..\vendor\autoload.php';
+use App\Models\Usuario;
 
 class UsuarioTest extends TestCase
 {
