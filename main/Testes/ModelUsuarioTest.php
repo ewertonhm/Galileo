@@ -13,34 +13,18 @@ use App\Models\Usuario;
 
 class ModelUsuarioTest extends TestCase
 {
-
-    public function testSetLogin()
-    {
-
+    public function testLerUsuarioById(){
+        $u = new Usuario(1);
+        $this->assertEquals('admin', $u->getLogin());
     }
 
-    public function testSetPassword()
-    {
-
+    public function testLerUsuarioByLogin(){
+        $u = new Usuario(NULL, 'admin');
+        $this->assertEquals(1, $u->getId());
     }
 
-    public function testGetId()
-    {
-
-    }
-
-    public function testGetLogin()
-    {
-
-    }
-
-    public function testGetPassword()
-    {
-
-    }
-
-    public function testGetIdPessoa()
-    {
-
+    public function testLerPessoa(){
+        $u = new Usuario(1);
+        $this->assertEquals(1, $u->getIdPessoa());
     }
 }
