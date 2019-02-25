@@ -58,7 +58,7 @@ class Email
         $emails = $this->dbEmail->find($this::$tabelaEmail,$params);
         if(!is_bool($emails)){
             foreach ($emails as $email){
-                $e = new Email(NULL,NULL,$email['id']);
+                $e = new Email(NULL,NULL,$email->id);
                 $arrayEmails[] = $e;
             }
             return $arrayEmails;
@@ -73,9 +73,9 @@ class Email
             'bind' => [$this->getIdEmail()]
         ];
         $emails = $this->dbEmail->findFirst($this::$tabelaEmail,$params);
-        $this->setIdPessoa($emails['id_pessoa']);
-        $this->setIdCliente($emails['id_cliente']);
-        $this->setEmail($emails['email']);
+        $this->setIdPessoa($emails->id_pessoa);
+        $this->setIdCliente($emails->id_cliente);
+        $this->setEmail($emails->email);
     }
 
     public function criarEmail(){
