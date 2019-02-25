@@ -32,10 +32,10 @@ class Pessoa
             'bind' => [$this->getId()]
         ];
         $dados = $this->dbPessoa->findFirst($this::$tabelaPessoa,$params);
-        $this->setNome($dados['nome']);
-        $this->setSobrenome($dados['sobrenome']);
-        $this->setEndereco($dados['endereco']);
-        $this->cidade = new Cidade($dados['cod_cidade']);
+        $this->setNome($dados->nome);
+        $this->setSobrenome($dados->sobrenome);
+        $this->setEndereco($dados->endereco);
+        $this->cidade = new Cidade($dados->cod_cidade);
         $this->telefones[] = new Telefone(NULL, $this->getId(), NULL);
         $this->emails[] = new Email(NULL, $this->getId(), NULL);
     }
