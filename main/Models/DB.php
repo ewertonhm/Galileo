@@ -11,7 +11,7 @@ class DB{
     
     private function __construct() {
         try{
-            $configs = explode('|',file_get_contents($_SERVER['DOCUMENT_ROOT'].'/Galileo/main/config/files/db.cfg',FILE_BINARY));
+            $configs = explode('|',file_get_contents(__DIR__.'\..\config\files\db.cfg',FILE_BINARY));
             $this->_pdo = new PDO("pgsql:host=$configs[0];port=$configs[1];dbname=$configs[2]",$configs[3],$configs[4]);
             //$this->_pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
