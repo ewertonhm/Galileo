@@ -6,5 +6,7 @@
  * Time: 21:48
  */
 
-require_once 'Controllers/Login.phpontroller = new LoginController();
+require_once 'vendor/autoload.php';
+
+$loginController = new \App\Controllers\Login();
 $loginController->logout();
