@@ -11,7 +11,7 @@ require_once __DIR__ . '\..\vendor\autoload.php';
 
 use App\Models\Cidade;
 
-class CidadeTest extends TestCase
+class ModelCidadeTest extends TestCase
 {
 
     public function testGetCodigoIbge()

@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 require_once __DIR__ . '\..\vendor\autoload.php';
 use App\Models\Estado;
 
-class EstadoTest extends TestCase
+class ModelEstadoTest extends TestCase
 {
 
     public function testGetCodigoUf()
