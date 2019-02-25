@@ -136,4 +136,8 @@ class Cidade
         $this->codigoUfEstado = $codigoUfEstado;
     }
 
+    public function getNomeEstado(){
+        return $this->estado->getNome();
+    }
+
 }
