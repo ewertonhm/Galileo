@@ -6,10 +6,7 @@
  * Time: 20:00
  */
 
-require_once 'DB.php';
-require_once 'Cidade.php';
-require_once 'Telefone.php';
-require_once 'Email.php';
+namespace App\Models;
 
 class Pessoa
 {

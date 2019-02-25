@@ -6,8 +6,10 @@
  * Time: 00:41
  */
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/Galileo/main/Views/Views.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/Galileo/main/Models/Usuario.php';
+namespace App\Controllers;
+
+use App\Models\Usuario;
+use App\Views\Views;
 
 class WebsiteCompiler
 {

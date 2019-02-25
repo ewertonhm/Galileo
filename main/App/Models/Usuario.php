@@ -6,8 +6,7 @@
  * Time: 19:44
  */
 
-require_once 'DB.php';
-require_once 'Pessoa.php';
+namespace App\Models;
 
 class Usuario
 {

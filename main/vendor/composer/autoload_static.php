@@ -6,27 +6,25 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitb0c0a7f74b43beed818dec454c7e1c6c
 {
-    public static $classMap = array (
-        'Cidade' => __DIR__ . '/../..' . '/Models/Cidade.php',
-        'Cliente' => __DIR__ . '/../..' . '/Models/Cliente.php',
-        'DB' => __DIR__ . '/../..' . '/Models/DB.php',
-        'Divida' => __DIR__ . '/../..' . '/Models/Divida.php',
-        'Email' => __DIR__ . '/../..' . '/Models/Email.php',
-        'EmailController' => __DIR__ . '/../..' . '/Controllers/EmailController.php',
-        'Estado' => __DIR__ . '/../..' . '/Models/Estado.php',
-        'LoginController' => __DIR__ . '/../..' . '/Controllers/LoginController.php',
-        'Pessoa' => __DIR__ . '/../..' . '/Models/Pessoa.php',
-        'Telefone' => __DIR__ . '/../..' . '/Models/Telefone.php',
-        'TelefoneController' => __DIR__ . '/../..' . '/Controllers/TelefoneController.php',
-        'Usuario' => __DIR__ . '/../..' . '/Models/Usuario.php',
-        'Views' => __DIR__ . '/../..' . '/Views/Views.php',
-        'WebsiteCompiler' => __DIR__ . '/../..' . '/Controllers/WebsiteCompiler.php',
+    public static $prefixLengthsPsr4 = array (
+        'A' => 
+        array (
+            'App\\' => 4,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App',
+        ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitb0c0a7f74b43beed818dec454c7e1c6c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb0c0a7f74b43beed818dec454c7e1c6c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb0c0a7f74b43beed818dec454c7e1c6c::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

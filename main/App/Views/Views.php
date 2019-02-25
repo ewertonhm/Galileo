@@ -6,6 +6,8 @@
  * Time: 23:49
  */
 
+namespace App\Views;
+
 class Views
 {
     public function header($pagename){

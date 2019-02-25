@@ -5,14 +5,16 @@
  * @author Ewerton
  */
 
+namespace App\Models;
+
 class DB{
     private static $_instance = null;
     private $_pdo, $_query, $_error = false, $_results, $_count = 0, $_lastInsertID = 'NULL', $configs;
     
     private function __construct() {
         try{
-            $configs = explode('|',file_get_contents(__DIR__.'\..\config\files\db.cfg',FILE_BINARY));
-            $this->_pdo = new PDO("pgsql:host=$configs[0];port=$configs[1];dbname=$configs[2]",$configs[3],$configs[4]);
+            $configs = explode('|',file_get_contents(__DIR__ . '\..\..\config\files\db.cfg',FILE_BINARY));
+            $this->_pdo = new \PDO("pgsql:host=$configs[0];port=$configs[1];dbname=$configs[2]",$configs[3],$configs[4]);
             //$this->_pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             die($e->getMessage());
@@ -39,7 +41,7 @@ class DB{
             }
             
             if($this->_query->execute()){
-                $this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
+                $this->_results = $this->_query->fetchAll(\PDO::FETCH_OBJ);
                 $this->_count = $this->_query->rowCount();
                 if(NULL !== $this->_pdo->lastInsertId()){
                     $this->_lastInsertID = $this->_pdo->lastInsertId();

@@ -6,7 +6,7 @@
  * Time: 20:01
  */
 
-require_once 'DB.php';
+namespace App\Models;
 
 class Estado
 {

@@ -6,8 +6,7 @@
  * Time: 20:01
  */
 
-require_once 'DB.php';
-require_once 'Estado.php';
+namespace App\Models;
 
 class Cidade
 {

@@ -6,9 +6,9 @@
  * Time: 19:57
  */
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/Galileo/main/Models/Email.php';
+namespace App\Controllers;
 
-class EmailController
+class Email
 {
     private $emails, $emailModel;
 
@@ -19,10 +19,10 @@ class EmailController
 
     public function emailCliente($idCliente)
     {
-        $emails = $this->emailModel = new Email($idCliente);
-        if (!id_bool($emails)){
+        $emails = $this->emailModel = new \App\Models\Email($idCliente);
+        if (!is_bool($emails)){
             foreach ($emails as $email) {
-                $e = new Email($email['id']);
+                $e = new \App\Models\Email($email['id']);
                     $this->emails[] = $e;
             }
         }
@@ -30,10 +30,10 @@ class EmailController
 
     public function emailPessoa($idPessoa)
     {
-        $emails = $this->emailModel = new Email($idPessoa);
-        if (!id_bool($emails)){
+        $emails = $this->emailModel = new \App\Models\Email($idPessoa);
+        if (!is_bool($emails)){
             foreach ($emails as $email) {
-                $e = new Email(NULL, $email['id']);
+                $e = new \App\Models\Email(NULL, $email['id']);
                     $this->emails[] = $e;
             }
         }

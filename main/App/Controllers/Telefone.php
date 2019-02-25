@@ -6,9 +6,11 @@
  * Time: 12:27
  */
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/Galileo/main/Models/Telefone.php';
+namespace App\Controllers;
 
-class TelefoneController
+use App\Models\Telefone as TelefoneModel;
+
+class Telefone
 {
     private $telefones, $telefoneModel;
 
@@ -19,10 +21,10 @@ class TelefoneController
 
     public function telefoneCliente($idCliente)
     {
-        $telefones = $this->telefoneModel = new Telefone($idCliente);
+        $telefones = $this->telefoneModel = new TelefoneModel($idCliente);
         if (!is_bool($telefones)) {
             foreach ($telefones as $telefone) {
-                $t = new Telefone($telefone['id']);
+                $t = new TelefoneModel($telefone['id']);
                 $this->telefones[] = $t;
             }
         }
@@ -30,10 +32,10 @@ class TelefoneController
 
     public function telefonePessoa($idPessoa)
     {
-        $telefones = $this->telefoneModel = new Telefone($idPessoa);
+        $telefones = $this->telefoneModel = new TelefoneModel($idPessoa);
         if (!is_bool($telefones)) {
             foreach ($telefones as $telefone) {
-                $t = new Telefone( NULL, $telefone['id']);
+                $t = new TelefoneModel( NULL, $telefone['id']);
                 $this->telefones[] = $t;
             }
         }

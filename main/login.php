@@ -6,14 +6,13 @@
  * Time: 01:16
  */
 
-    require_once 'Controllers/WebsiteCompiler.php';
-    require_once 'Controllers/LoginController.php';
+    require_once 'vendor/autoload.php';
 
-    $loginController = new LoginController();
+    $loginController = new \App\Controllers\Login();
     if($loginController->isLogged()){
         header('location: index.php');
     } else {
-        $website = new WebsiteCompiler('Galileo Login', 'login');
+        $website = new \App\Controllers\WebsiteCompiler('Galileo Login', 'login');
         if(isset($_POST['btn-login'])){
             if($loginController->login($_POST['login'],$_POST['password'])){
                 header('location: index.php');

@@ -6,6 +6,5 @@
  * Time: 21:48
  */
 
-require_once 'Controllers/LoginController.php';
-$loginController = new LoginController();
+require_once 'Controllers/Login.phpontroller = new LoginController();
 $loginController->logout();

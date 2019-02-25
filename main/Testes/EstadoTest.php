@@ -7,7 +7,7 @@
  */
 
 use PHPUnit\Framework\TestCase;
-require_once __DIR__.'\..\Models\Estado.php';
+require_once __DIR__ . '\..\Models\Estado.php';
 
 class EstadoTest extends TestCase
 {

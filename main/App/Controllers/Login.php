@@ -6,15 +6,17 @@
  * Time: 01:31
  */
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/Galileo/main/Models/Usuario.php';
+namespace App\Controllers;
 
-class LoginController
+use App\Models\Usuario;
+
+class Login
 {
     private $usuario;
 
 
     /**
-     * LoginController constructor.
+     * Login constructor.
      */
     public function __construct(){
         if(!isset($_SESSION)){

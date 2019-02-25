@@ -1,10 +1,10 @@
 <?php
-    require_once 'Controllers/Controllers.php';
+    require_once 'vendor/autoload.php';
 
-    $loginController = new LoginController();
+    $loginController = new \App\Controllers\Login();
 
     if($loginController->isLogged()){
-        $website = new WebsiteCompiler('Galileo controle financeiro','index');
+        $website = new \App\Controllers\WebsiteCompiler('Galileo controle financeiro','index');
     } else {
         $loginController->goToLogin();
     }

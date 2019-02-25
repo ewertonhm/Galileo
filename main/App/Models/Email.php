@@ -5,7 +5,8 @@
  * Date: 20/02/2019
  * Time: 20:01
  */
-require_once 'DB.php';
+
+namespace App\Models;
 
 class Email
 {
