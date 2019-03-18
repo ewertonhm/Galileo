@@ -19,7 +19,7 @@ class Cliente
         $this->dbCliente = DB::get_instance();
     }
 
-    public function carregarDados($nomeFantasia = NULL, $razaoSocial = NULL, $cidadeId = NULL, $endereco = NULL, $cnpj = NULL, $email, $telefones)
+    public function carregarDados($nomeFantasia = NULL, $razaoSocial = NULL, $cidadeId = NULL, $endereco = NULL, $cnpj = NULL, $email = NULL, $telefones = NULL)
     {
         if ($nomeFantasia != NULL) {
             $this->setNomeFantasia($nomeFantasia);
@@ -41,6 +41,20 @@ class Cliente
 
     public function criarCliente()
     {
+        $params = [
+            'nomefantasia' => $this->getNomeFantasia(),
+            'razaosocial' => $this->getRazaoSocial(),
+            'cnpj' => $this->getCnpj(),
+            'cod_cidade' => $this->getCidadeId(),
+            'cod_estado' => $this->cidade->getCodigoUfEstado(),
+            'endereco' => $this->getEndereco()
+        ];
+        if($this->dbCliente->insert($this::$tabelaCliente,$params)){
+            $this->setIdCliente($this->dbCliente->get_lastInsertID());
+            return true;
+        } else {
+            return false;
+        }
 
     }
     public function editarCliente()
@@ -49,7 +63,11 @@ class Cliente
     }
     public function deletarCliente()
     {
-
+        if($this->dbCliente->delete($this::$tabelaCliente,$this->getIdCliente())){
+            return true;
+        } else {
+            return false;
+        }
     }
     public function lerCliente()
     {
