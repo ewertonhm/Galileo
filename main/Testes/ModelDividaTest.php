@@ -22,7 +22,7 @@ class DividaTest extends TestCase
 
     public function testEditarDivida()
     {
-        $d = new Divida(2);
+        $d = new Divida(1);
         $d->setValor(rand());
         $this->assertTrue($d->editarDivida());
     }
